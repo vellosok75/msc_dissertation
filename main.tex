@@ -31,27 +31,32 @@
 % This work consists of the files ifgw.cls and main.tex.
 %
 \documentclass{ifgw}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 \usepackage{cite}
-\usepackage{fourier}
+% \usepackage{fourier}
+\usepackage{caption}
+\usepackage{lmodern}
 \usepackage{lipsum}
 \usepackage{pdfpages}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{microtype}
 
-\author{Anakin Skywalker}
-\city{Tatooine}
-\cosupervisor[Coorientador]{Obi-Wan Kenobi}
+\author{Matheus Melo Santos Velloso}
+\city{Campinas}
+\cosupervisor[Coorientador]{Antonio Rubens de Castro Britto}
 \logo[align=left]{Images/unicamp.png}
-\supervisor[Orientador]{Master Yoda}
+\supervisor[Orientador]{Liu Lin}
 
 \title{
-    english={Star Wars},
-    portuguese={Guerra nas estrelas},
+    english={Online Optimization of SIRIUS Dynamic Aperture},
+    portuguese={Otimização Online da Abertura Dinâmica do SIRIUS},
 }
 
-\subtitle{
-    english={May the Force be with you},
-    portuguese={Que a Força esteja com você},
-}
+% \subtitle{
+%     english={May the Force be with you},
+%     portuguese={Que a Força esteja com você},
+% }
 
 \institute{
     english={Gleb Wataghin Institute of Physics},
@@ -65,14 +70,14 @@
 
 \backcover{
     portuguese declaration={
-        Tese apresentada ao \theinstitute~da \theuniversity~como
+        Dissertação apresentada ao \theinstitute~da \theuniversity~como
         parte dos requisitos exigidos para a obtenção do título de
-        \uppercase{Doutor em Ciências}, na Área de \uppercase{Física}.
+        \uppercase{Mestre em Física}, na Área de \uppercase{Física}.
     },
     english declaration={
         Thesis presented to the \theinstitute[e]~of the \theuniversity[e]~in
         partial fulfillment of the requirements for the de\-gree of
-        \uppercase{Doctor of Science}, in the area of \uppercase{Physics}.
+        \uppercase{Master in Physics}, in the area of \uppercase{Physics}.
     },
     version={
         Es\-te tra\-ba\-lho cor\-res\-pon\-de à ver\-são fi\-nal da
@@ -81,17 +86,15 @@
     },
     language=english,
 }
-
 \begin{document}
 
 \maketitle
 \makebackcover
-
 \includepdf[pages=-]{PDFs/ficha_catalografica}
 \includepdf[pages=-]{PDFs/folha_de_aprovacao}
 
-\dedication{To my son, Luke Skywalker.}
-\epigraph{Master Yoda}{May the Force be with you!}
+% \dedication{To my son, Luke Skywalker.}
+% \epigraph{Master Yoda}{May the Force be with you!}
 
 \include{Chapters/agradecimentos}
 \include{Chapters/resumo}
