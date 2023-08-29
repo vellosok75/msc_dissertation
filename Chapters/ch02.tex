@@ -1,13 +1,13 @@
 \chapter{Theoretical Background}
 \section{Single-particle dynamics in electron storage rings}
-For the proper understanding of the experiments carried out during the reported period, a brief theoretical background section is provided.
+Justify modelling assumptions.
 \subsection{Motion of charged particles in magnetic fields}
-An electron with charge $e$ and momentum $p$ follows a circular orbit of radius $\rho$ when under the influence of an uniform and constant magnetic field with magnitude $B$, perpendicular to the ortbit plane. In such conditions, Lorentz force law predicts that
+An electron with charge $e$ and momentum $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$, perpendicular to the ortbit plane. In such conditions, Lorentz force law predicts that
 \begin{equation}
     B\rho = \frac{p}{e}.
 \end{equation}
 
-For an electron traveling along a curve parametrized by the arclength $s$ and under the influence of fields $B_x(x,y,s)$  and $B_y(x,y,s)$, perpendicular to its direction of motion, the deflection angles in the transverse planes normal and bi-normal to the trajcetory are given by
+Consider now an electron traveling along a curve parametrized by the arclength $s$ with respect to an arbitrary reference point. The interaction with fields $B_x(x,y,s)$  and $B_y(x,y,s)$, both perpendicular to the electron's motion, results in deflections of the trajectory. The deflection angles are given by
     \begin{equation}
     \dd{\theta_x} = \frac{\dd{s}}{\rho_x(s)} = \frac{e}{p}B_y(x,y,s)\dd s = \frac{1}{B\rho}B_y(x,y,s)\dd s,
     \end{equation}
@@ -15,6 +15,9 @@ For an electron traveling along a curve parametrized by the arclength $s$ and un
         \dd{\theta_y} = \frac{\dd{s}}{\rho_y(s)} = \frac{e}{p}B_x(x,y,s)\dd s = \frac{1}{B\rho}B_y(x,y,s)\dd s.
     \end{equation}
 Where eq. (1) has been used to replace the $p/e$ ratio by the \textit{magnetic rigity} $B\rho$, which is defined as the product of the uniform field strength needed for a beam with momentum $p$ and charge $e$ to perform circular orbit with radius $\rho$. The rigidity depends solely on the electron's momentum/energy and gives the appropriate normalization to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
+
+\todo[inline]{Add deflection figures}
+
 \subsection{Storage rings}
 \begin{figure}[htb]
     \centering
@@ -22,11 +25,13 @@ Where eq. (1) has been used to replace the $p/e$ ratio by the \textit{magnetic r
     \caption{Storage ring typycal configuration. From \cite{sands}}
     \label{sr}
 \end{figure}
-Figure~\ref{sr} sketches the typical design of a storage ring. For the porpose of storing a beam of electrons in closed orbits, magnetic fields defining a closed orbit is necessary. The angular deflections should add up to $2\pi$, so the specification of the beam's operating energy will determine the integrated field required for such deflections. Magnets specifying the curvature radius and the reference orbit are sectionally uniform and provided by dipole magnets.
+\todo[inline]{draw my onw figure}
+Figure~\ref{sr} sketches the typical design of a storage ring. For the porpose of storing a beam of electrons in closed orbits, magnetic fields defining a closed orbit are necessary. The angular deflections should add up to $2\pi$, and the specification of the beam's operating energy determines the integrated field required for causing the closed orbit deflections.
 
-Focusing towards the reference closed orbit is also needed, and can be attained with the introduction of gradient field with strengths depending linearly with tranverse excursions from the reference orbit. Such fields are provided by quadrupole magnets, which are physically realized by specifying  magnetic poles with the shape of truncated hyperbolas.
+For providing stability, focusing towards the reference closed orbit is also needed, and can be attained with the introduction of gradient fields whose strengths depend linearly on the tranverse excursions from the reference orbit. Such fields are provided mainly by quadrupole magnets, which are physically realized by specifying  magnetic poles with the shape of truncated hyperbolas.
 
 Sextupole mangets are also usually included in the design of storage rings. The fields they produce is quadratic with transverse displacement and are needed for correction of chromatic errors in the dynamics.
+\todo[inline]{add magnets and field profile figures}
 
 \subsection{The coordinate system}
 \begin{figure}[htb]
@@ -35,17 +40,17 @@ Sextupole mangets are also usually included in the design of storage rings. The 
     \caption{The Frenet-Serret coordinate system. From \cite{huang2019beam}.}
     \label{frenetserret}
 \end{figure}
-To conveniently decribe the dynamics in storge rings, our reference frame should be able to capture the deviations from the nonimal reference orbit and the beam design parameters. This can be attained by imagining a reference particle traveling along a curve drawn by the tip of the vector $\vb{r}_0$, as Fig.~\ref{frenetserret} shows. The particle travels a distance $s$ along the ring, which can be used to parametrize the motion. The reference frame triad of direction vectors consists of a vector $\vu{s}$, tangent to the trajectory, a vector $\vu{x}$ normal to it, pointing in the direction at which $\vu{s}$ changes and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame.
+A convinient coordinate frame to decribe the dynamics in storge rings can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{frenetserret} shows. The particle travels a distance $s$ along the ring, which can be used to parametrize the motion. The triad of direction vectors consists of a vector $\vu{s}$, tangent to the trajectory, a vector $\vu{x}$ normal to it, pointing in the direction at which $\vu{s}$ changes and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame.
 
-Assuming no curvature in the $y$ plane, i.e. that the accelerator defines a curve whose plane is parallel to the ground, the Frent-Serret frame is defined by \cite{lee}
+Assuming no curvature in the $y$ plane, i.e. that the accelerator defines a curve whose plane is parallel to the ground, then the unit vectors defining the frame can be calculated by\cite{lee}
 \begin{equation}
 \vu{s}=\dv{\vb{r}_{0}}{s}, \quad \vu{x}=-\rho\dv{\vu{s}}{s}, \quad \vu{y} =  \vu{x}\times\vu{s},
 \end{equation}
-    and evolve along $s$ as prescribed by the Frenet-Serret equations:
+where $\rho(s) = \norm{\dv*{\vu{s}}{s}}^{-1}$ is the local curvature radius\footnote{For a circular trajectory, $\vb{r}_0 = (R\cos(s/R), R\sin(s/R), 0)$, $ 0\leq s \leq L$ (check), in the cartesian laboratory frame. $\vu{s}=(-\sin(s/R), \cos(s/R), 0)$, $\dv*{\vu{s}}{s} = -R^{-1}(\cos(s/R),\sin(s/R), 0 )$ and $\rho(s)=R$}. The vectors evolve along $s$ as prescribed by the Frenet-Serret equations:
 \begin{equation}
 \dv{\vu{s}}{s}=-\frac{1}{\rho(s)}\vu{x}, \quad\dv{\vu{x}}{s}=\frac{1}{\rho(s)}\vu{s}, \quad \dv{\vu{y}}{s}=0,
 \end{equation}
-where $\rho(s)$ is the local curvature radius. The frame thus depends solely on the geometry of the specified path. Since the curvature is defined by the magnetic lattice, if the storage ring is composed of dipole fields $B_0(s)$ in the $y$ direction, then, eq. (1) leads to
+The frame thus depends solely on the geometry of the specified path. Since the curvature is defined by the dipolar fields $B_0(s)$ in the $y$ direction, then, eq. (1) leads to
     \begin{equation}
         G(s) \equiv \frac{1}{\rho(s)} = \frac{B_0}{B\rho}.
         \label{G}
