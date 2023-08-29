@@ -200,7 +200,61 @@ The focusing errors due to energy errors cause phase advance errors and conseque
     \Delta \nu_u = \xi_u \delta,
 \end{equation}
 where the tune-shift per energy deviation $\xi_u$ is the chromaticity, which depends linearly on quadrupoles and sextupoles strengths. This linear dependence allows for the correction of chromaticity and control of the focusing for off-energy particles.
-\subsection{Nonlinear Dynamics}
+\todo[inline]{Improve: more details on the tune-shifts due to errors and the derivations on chromaticity}
+\subsection{Chromaticity}
+As for the higher order effect on the focusing, also known as chromatic effect, we consider the motion in a straight section under a gradient, so that there is no non-homogeneous term in the horizontal equation. The equation of motion considering $x\delta $ terms reads
+\begin{equation}
+    x^{\prime\prime}+(K_x+\Delta K_x)x=0
+\end{equation}
+\begin{equation}
+    y^{\prime\prime}+(K_y+\Delta K_y)y=0
+\end{equation}
+where $K_x=h^2+K_1$, e $K_y=-K_1$ and
+\begin{equation}
+    \Delta K_x = -(K_1+2G^2)\delta \approx K_x\delta
+\end{equation}
+\begin{equation}
+    \Delta K_y = K_1\delta = -K_y\delta
+\end{equation}
+The result is that an off-momentum partcile sees a different optics along the ring: different beta function and different phase advance. Thus, it deviates from nominal operation conditions, specially in the tunes, inducing the tune-shifts
+\begin{equation}
+    \Delta \nu _i \approx -\frac{1}{4\pi}\oint\beta K_i \delta \dd{s}
+\end{equation}
+with $i=x,y$. We can define the \textit{linear chromaticity} in the $i=x,y$ direction as the tune variation $\Delta \nu_i$ per energy deviation $\delta$ around $\delta = 0$
+\begin{equation}
+    \xi_i=\dv{\nu_i}{\delta}.
+\end{equation}
+This uncorrected chromaticity is also called natural chromaticity.
+\begin{equation}
+C_{\text {nat }} \approx-\frac{1}{4 \pi} \oint K \beta d s
+\end{equation}
+To correct this chromatic effect,  we need to introduce sextupolar fields in the lattice, specifically in the dispersive regions. At dispersive regions, off-energy particles should have the deviation from the design closed orbit given by $\Delta x=\eta \delta$. Since sextupolar fields are of the form
+$$B_{x}=B_{2} x y, \quad B_{y}=B_{2} \frac{x^{2}-y^{2}}{2}$$
+then the off-momentum particles ``see" the fields
+$$B_{x}=B_{2}(x_\beta y + \eta \delta y), \quad B_{y}=\frac{B_{2}}{2}({x_\beta^{2}-y^{2}})+B_2 x_\beta \eta \delta + \frac{B_2}{2}(\eta \delta)^2$$
+and feel the feed-down quadrupolar error
+$$\Delta K_{x,y}(\delta)=\pm S\eta \delta$$
+$$S=B_2/B\rho$$
+The chromaticity then is
+\begin{equation*}
+    \xi_{x,y}=\mp \frac{1}{4\pi}\oint\beta_{x,y}(K_{x,y}- S\eta)\dd s
+\end{equation*}
+
+Thus they see, at leading order, a quadrupole field $\Delta K_i(\delta)=\pm S\eta \delta$, with $i=x,y$, $+$ for $x$ and $-$ para $y$, where the normalized sextupole gradient is $S=B_2/B\rho$, $B_2=\pdv*[2]{B_y}{s}$. The other effects are of the second order on $\delta$ and on $x, y$. Chromaticity can then be corrected by tuning $S$
+\begin{equation}
+    \xi_j=-\frac{1}{4\pi}\oint\beta_j(K_j\pm S\eta)\dd s
+\end{equation}
+with $j=x,y$.
+
+More broadly speaking, the energy deviations induce the beam to see a completely different optics. The contributions to the changes can be of any order. For instance
+\begin{equation}
+    \Delta \nu = \xi^{(1)} \delta + \xi^{(2)}\delta ^2+ \dots
+\end{equation}
+similarly
+\begin{equation}
+    \Delta \beta(s, \delta) = \beta^{(1)}(s) \delta + \beta^{(2)}(s) \delta^2 + \dots
+\end{equation}
+\subsection{Nonlinear Dynamics and Perturbations}
 \subsubsection{Action Angle Variables}
 Betatron motion (Hill's equations) can be obtained from the Hamiltonian
 \begin{equation}
