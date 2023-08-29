@@ -256,11 +256,11 @@ similarly
 \end{equation}
 \subsection{Nonlinear Dynamics and Perturbations}
 \subsubsection{Action Angle Variables}
-Betatron motion (Hill's equations) can be obtained from the Hamiltonian
+Betatron motion of equation~\eqref{eq:Hill} can be obtained as Hamilton's equations for the effective Hamiltonian
 \begin{equation}
     \mathcal{H}=\frac{1}{2}u^{\prime2}+\frac{1}{2}K_u(s)u^2.
 \end{equation}
-The transformation $(u,u^\prime)\to(\psi, J)$ to Action-angle variables is implicitly implemented by the generating function
+A transformation $(u,u^\prime)\to(\psi, J)$ to Action-angle variables is implicitly implemented by the generating function
 \begin{equation}
     F_1(u,\phi_u)=\int{u}^\prime\dd{{u}}=\frac{u^2}{2\beta_u}\qty(\tan \phi_u-\frac{\beta_u^\prime}{2}).
 \end{equation}
@@ -269,9 +269,9 @@ The action variable reads
     J_u=-\pdv{F_1}{\phi_u} = \frac{u}{2\beta_u}\sec^2\phi_u = \frac{1}{2\beta_u}[u^2 + (\beta_u u^\prime + \alpha_u u^2)],
     \label{eq:action}
 \end{equation}
-and we recover the pseudo-harmonic form $u=\sqrt{2\beta J_u}\cos(\phi_u(s)+\phi_0)$, which has been conveniently defined so one of the constants to be detemined, $J_u$, corresponds to the action variable.
+from which we recover the pseudo-harmonic form $u=\sqrt{2\beta_u J_u}\cos(\phi_u(s)+\phi_0)$. This justifies our choice for the amplitude constant in the pseudo-harmonic description.
 
-in the $J,\phi$ variables, the new hamiltonian is $H_0(\phi, J)$,  given by
+In the $J,\phi$ variables, the new hamiltonian is $H_0(\phi, J)$,  given by
 \begin{equation}
     H_0=\mathcal{H}+\pdv{F_1}{s} = \frac{J}{\beta}.
 \end{equation}
@@ -279,22 +279,24 @@ Performing the change to action-angle variable in both the horizontal and vertic
 \begin{equation}
     H_0= \frac{J_x}{\beta_x} +  \frac{J_y}{\beta_y},
 \end{equation}
-and Hamilton's equations are
+and Hamilton's equations read
 \begin{equation}
     \phi_u^\prime = \frac{1}{\beta_u(s)},\qquad J_u^\prime=0.
 \end{equation}
 \subsubsection{Perturbations and tune-shifts}
 Linear motion is integrable, since it can be written in terms of the action variable only (angle-independent Hamiltonian). This leads to the action variable being a constant of motion, and the phase advance behaving just as the pseudo-harmonic motion anticipated.
 
-Linear motion, though, is only a useful first approximation. In reality, in an storage ring we have higher order multipole magnets, such as sextupole magnets, and also multipole, alignement and excitation errors, all acting as perturbations to linear motion. Generically refering to perturbations as $V(J, \phi)$, we have the perturbed motion Hamiltonian
+Linear motion, though, is only a useful first approximation. In reality, in an storage ring, there are higher order multipole magnets, such as sextupole magnets, and also multipole, alignement and excitation errors, all acting as perturbations to linear motion. Generically referring to perturbations as $V(J, \phi)$, we can write the perturbed motion Hamiltonian
 \begin{equation}
-    H(J,\phi) =H_0 + V(J,\phi),
+    H(J,\phi) =H_0 + V(J,\phi).
 \end{equation}
-and hamilton's equations
+Hamilton's equations read
 \begin{equation}
 \phi_u^\prime = \frac{1}{\beta_u(s)}+\pdv{V(J,\phi)}{J_u}, \quad J_u^\prime = \pdv{V(J,\phi)}{\phi_u}.
 \end{equation}
-Since the tunes consist on the phase advance per revolution, we immediately see that the presence of perturbations lead to tune-shifts. Generically, the tunes can be expressed in terms of the tune-shifts as
+Since the tunes consist on the phase advance per revolution, we immediately see that the presence of perturbations leads to tune-shifts.
+
+Generically, the tunes can be expressed in terms of the tune-shifts as
 $$\nu_0 = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v$$
 where $\xi_u$ represents the momentum-dependent tune-shifts (higher order chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
 \subsubsection{Field Errors}
@@ -364,12 +366,12 @@ The condition for sufficiently rational tunes can be expressed as
     Nonlinear dynamics can become sensitive to initial conditions when the amplitudes are large. Because of the tune-shfits, specially the amplitude-dependent tune shifts, the tunes can wander in tune space, eventually crossing resonance conditions that may lead to instabilities, chatotic motion and beam loss. The dynamics can impose limitations to the maximum transverse deviations in which the beam can oscillate while displaying regular and bounded motion. This is a dynamic restriction to the motion known as the \textit{dynamic aperture}.
 
     Exceeding the dynamic aperture eventually leads to beam loss. During injection of the beam, if the transverse offsets are larger than the dynamic aperture, the beam is not captured into the storage ring. This is specially important for off-axis injection, such as in the case for SIRIUS.
-
+\section{The need for online optimization}
 \subsection{Injection scheme for acummulation at SIRIUS storage ring}
 Beam acummulation into the storage ring occurs in the off-axis scheme. The beam is delivered at $x\approx-8~\unit{mm}$, and receives the kick from the nonlinear kicker field. The field profile is nonlinear, with zero field and gradient at the center of the axis, so that it does not disturbs the stored beam.
 In the off-axis scheme, a sufficiently large dynamic aperture is desired to allow the beam to be captured into the storage ring. The predicted efficiency for SIRIUS setup, considering a dynamic aperture reaching $x=-9~\unit{mm}$, was nearly $100\%$. What was observed during 2022 was an injection efficiency of about $88\pm8\%$.
 \lipsum[1-10]
-
+\subsection{New working points}
 \section{Online Optimization}
 This sction describes the experimental methods and analysis employed for optimizing the nonlinear dynamics and evaluating the quality of the configurations found.
 \subsection{Dynamic Aperture Optimization}
