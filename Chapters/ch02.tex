@@ -161,6 +161,14 @@ In the $u, u^\prime$ phase space, the quasi-periodic motion traces out ellipses.
      \end{equation}
 
 The ellipse properties are defined by the $\beta, \alpha$ and $\gamma$ functions, also known as Courant-Snyder or Twiss parameters. These parameters are functions of the position $s$, so at each point along the accelerator the Poincaré Section $u, u^\prime$ displays a different ellipse.
+Sampling the transverse motion at a fixed $s=s_0$ position reveals a harmonic displacement $x(t)$. Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$, and thus
+\begin{equation}
+    x_j(s_0)=\sqrt{2\beta_0 J}\cos(2\pi\nu j+\phi_0).
+\end{equation}
+Time of flight during a complete turn is $L/c$ so, for $j$ turns, $t_j=\frac{L}{c} j$. With a revolution frequency of $\omega_r=2\pi/(L/c)$, we see that $2\pi j= \omega_r t_j$. As a function of the time elapsed over the $j$ turns, the displacements reads
+\begin{equation}
+    x_j=\sqrt{2\beta_0J}\cos(\omega_r\nu t_j+\phi_0).
+\end{equation}
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/ellipse}
