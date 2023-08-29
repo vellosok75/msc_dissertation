@@ -149,9 +149,16 @@ The analysis of perturbations and nonlinearities shows that the tunes are a crit
 
 SIRIUS ring has tunes $(\nu_x, \nu_y)=(49.08, 14.14)$ which are very close to integers. It is desired to increase the tunes fractional parts to reduce orbit amplification factors. This is the reason why injection efficiency optimzation runs have also been carried in different machine tunes.
 \subsubsection{Turn-by-turn data}
-In the $u, u^\prime$ phase space, the quasi-periodic motion traces out ellipses. This can be verified by calculating the derivative $u^\prime$, defining $\alpha_u = \frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satify the quadratic form
-        $$2J_u=\gamma u^{2}+2\alpha u u^{\prime}+\beta u^{\prime2}$$
-The ellipse properties are defined by the $\beta, \alpha$ and $\gamma$ functions, also known as Courant-Snyder Parameters or Twiss Parameters. These are functions of the position $s$, so at each point along the accelerator the Poincaré Section $u, u^\prime$ displays a different ellipse, with shape dictated by the Twiss parameters.
+In the $u, u^\prime$ phase space, the quasi-periodic motion traces out ellipses. This can be verified by calculating the derivative
+    \begin{equation}
+        u^{\prime}(s) = - \sqrt{\frac{2J_u}{\beta_u}}\qty[\sin(\phi_u(s) + \phi_0) + \frac{1}{2}\beta_u^\prime(s)\cos(\phi_u(s) + \phi_0)],
+    \end{equation}
+    defining $\alpha_u = \frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satify the quadratic form
+    \begin{equation}
+        2J_u=\gamma_u u^{2}+2\alpha_u u u^{\prime}+\beta_u u^{\prime2}.
+     \end{equation}
+
+The ellipse properties are defined by the $\beta, \alpha$ and $\gamma$ functions, also known as Courant-Snyder or Twiss parameters. These parameters are functions of the position $s$, so at each point along the accelerator the Poincaré Section $u, u^\prime$ displays a different ellipse.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/ellipse}
