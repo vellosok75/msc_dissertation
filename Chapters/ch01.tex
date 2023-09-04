@@ -1,16 +1,28 @@
 \chapter{Introduction}
+This dissertation describes the optimization work performed at the SIRIUS storage ring with the objective to improve the ring's Dynamic Aperture and injection efficiency.
+SIRIUS is the 4th generation storage ring-based synchrotron light source. It was designed, built and it operated by the Brazilian Synchrotron Light Laboratory, at the campus of the Center of Resarch in Energy and Materials (CNPEM), at Campinas, Brazil. At the time of writing, SIRIUS in one of the three machines of its kind operating in the world. This chapter is dedicated to introducing synchrotron light sources, the SIRIUS light source facility and the problem adressed throughout this master's project.
+
+This dissertation is arranged as follows:
+\begin{itemize}
+    \item Chapter 1 introduces syncrhotron light sources and the SIRIUS project
+    \item Chapter 2 introduces the theoretical and scientific background of the dynamics of particles in particle accelerators
+    \item Chapter 3 reviews optimization algorithms, introduces online optimization and the Robust Conjugate Direction Search (RCDS) algorithm and presents an overview of its applications
+    \item Chapter 4 describes the experimental methods and experiments setup at the SIRIUS storage ring, as well as the results and analysis.
+\end{itemize}
+
 \section{Storage ring-based synchrotron light sources}
-Rebel spaceships, striking from a hidden base, have won
-their first victory against the evil Galactic Empire.
-During the battle, Rebel spies managed to steal secret
-plans to the Empire's ultimate weapon, the DEATH STAR,
-an armored space station with enough power to destroy
-an entire planet. Pursued by the Empire's sinister
-agents, Princess Leia races home aboard her starship,
-custodian of the stolen plans that can save her people
-and restore freedom to the galaxy \cite{bib_skywalker77, bib_vader77, bib_kenobi77}.
-\footnote{\lipsum[1]}
-\lipsum[1-3]
+
+Synchrotron ratiation (SR) refers to electromagnetic radiation emitted by charged relativistic particles upon acceleration. The phenomenon was theoretically formalized in the early 1900's by Wiechart and Larmor and first observed experimentally at a General Electric's $70~\unit{Mev}$ synchrotron\footnote{The term ``synchrotron" refers to the accelerator  technology based on the synchonicity of the charged particles period of revolution and the frequency of the electromagnetic fields exerting work on it to achieve and mantain high-energies.} accelerator. It was named \textit{synchrotron radiation} for this reason.
+
+Syncrhotron radiation was in fact a negative side-effect of achievieng high-energy particles for studying nuclear and particle physics. But since it is emitted in a narrow angular aperture and can cover a big spectrum from infrared to hard X-rays, its potential for imaging techiniques in condensed matter physics, materials science, molecular biology and chemistry was soon realized.
+
+The community interested in SR first revolved around big high-energy and nuclear physics machines. Those were the so-called 1st generation of synchrotron light sources, in which SR is obtained parasistically. The 2nd generation consists on machines built with the specific goal or being sources of SR. In thses machines, the radiation was emitted when the electrons beams had their trajectories bent at the dipole magnets. In the 1990's, there was a rise in the application of \textit{insertion devices} (IDs) such as \textit{wigglers} and \textit{undulators}. These components were added to straight sections in the machines to introduce additional transverse accelerations for the generation of SR. The 4th generation of light sources was ignaugurated with the start of the comisioning of the MAX IV machine, in Lund, Sweden. The main advances with respect to the previous generatioin is the reduction by one to two orders of magnitude in the figure of merit for SR sources: the emmittance.
+
+Low emmittance is important for achieving a high-brightnes. Brightness is defined by
+\begin{equation}
+    B(\omega) = \frac{F(\omega)}{\Omega_{xx^\prime}\Omega_{yy^\prime}\frac{\Delta \omega}{\omega}}
+\end{equation}
+where $F(\omega)$ is the photon flux at energy $E=\hbar\omega$, $\Omega_{uu^\prime}$ is the the $(u,u^\prime)$ photon phase-space volumes, which depends on both the electron-beam and photon-beam distribution; and $\Delta\omega/\omega$ is the frquency bandwith. High-brightness is achieved by achieving higher electron-beam current to yield higher fluxes, while minimizing the emittances.
 
 \section{The SIRIUS project}
 \lipsum[1-3]
