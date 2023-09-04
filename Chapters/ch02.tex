@@ -1,8 +1,32 @@
 \chapter{Theoretical Background}
 
 \section{Single-particle dynamics in electron storage rings}
-Justify modelling assumptions.
+Ultra-relativistic beams of electrons are injected into the SIRIUS storage ring with the nominal operating energy of $3~\unit{G eV}$. The beam is injected in the form of electron bunches, with characteristic length, width and size.
 
+The storage ring is designed to confine the bunches and steer them along a reference closed orbit. This is achieved by specifying dipolar magnetic fields along the orbit such that the integrated effect is an angular deviation of $2\pi$ in the beam's trajectory. Additionally, to keep electrons close to the closed orbit, it is also necessary to specify gradient magnetic fields with strengths proportional the the beam's transverse deviations. These fields provide alterating focusing and defocusing of the beam in such a manner that their overall effect is to restore the beam towards the design orbit.
+
+To correct chromatic aberrations in the beam's motion, i.e. a dependence of focusing with the beam's energy, and guarantee correct focusing despite energy deviations from the nominal value, sextupolar magnetic fields are also introduced, providing fields depending qudratically on the deviations from the nominal orbit. These fields introduce strong nonlinearities in the dynamics.
+
+When having its trajectory bent at the dipoles and insertion devices\footnote{Insertion devices (IDs) consist on arrays of magnetic blocks arranged to provide additional deflection of the beam's trajectory for the production of synchrotron radiation. IDs allow for fine-tuning of the fields and as consequence of the characteristics of the emitted readiation, such as the energy and polarization.}, the beam loses energy in the form of synchrotron radiation. To mantain the beam stored, the energy lost must be replenished. To this aim, radio-frequency (RF) cavities are placed along the ring to provide oscilating electric fields parallel to the longitudinal direction. The work done in the beam by the fields restore its energy.
+
+The radiated photons are emitted in a narrow cone with angular aperture of $1/\gamma$, $\gamma$ being the relativistic Lorentz factor ($\sim 6000$ at SIRIUS storage ring). The photons carry away a fraction of the beam's energy and momentum, in both the longitudinal and transverse directions, but when passing through RF cavities, only momentum in the longitudinal direction is replenished. This leads to an overall damping of transverse amplitudes.
+
+On the other hand, the quantum nature of the emitted radiation leads to the excitation of transverse oscillations, which is known as quantum excitation. When a photon carries away energy, it depletes the electrons energy by the same amount. It thus changes the reference orbit of the electron in certain regions of the ring (dispersive regions), inducing oscillations. Eventually, equillibrium between radiative damping and quantum excitation is achieved, leading the rms values of each electron's amplitudes to reach a stationary regime.
+
+Each one of the beam's degrees of freedom defines an acceptance: limits that when exceeded can lead to instabilities and eventually beam losses. The most obvious acceptance is the transverse acceptance: the beam motion is bounded by a vacuum chamber and collisions with the chamber's physical apperture leads to losses. Additionally, the beam also has an energy acceptance: a tolerance for energy deviations from the nominal value that when exceeded can lead  to a suboptimal energetic balance, deviations from the nominal orbit and eventually collisions with the vacuum chamber.
+
+The beam is also subject to elastic and inelastic collisions with residual gas molecules within the chamber and also the collisions between electrons within the same bunch, and other kinds of interactions with wake-fields from other bunches. The losses and their ocurrence rates define the characteristic time scale at which a given electron current survives in the ring. This is the beam lifetime and determines the rate at which injections into the storage ring are required.
+
+Because of the nonlinearities introduced by the sextupole magnets, the transverse acceptances can be limited not by the physical aperture but rather by the amplitudes above which motion is irregular, unstable and unbounded. This limiting amplitude is known as the dynamic aperture (DA), a term that can be used to refer to amplitudes in the transverse space $x,y$ or to the phase space coordinates $x, p_x$ and $y, p_y$.
+
+Despite the complicated physics involving the transverse oscilations as  well as the energy oscillations, the damping and the excitation of amplitudes, the collective effects and the instabilities, for the purpose of this dissertation, it is sufficient to model the motion of a single electron , negletcting radiation losses and any other collective interactions. This single-particle travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space. We neglect also coupling between the dynamics of these planes. The transverse dynamics thus consists on a quasi-periodic motion of two independent oscillators. These simplfications are justified because
+\begin{itemize}
+    \item the amplitudes are ultimately damped and reach a regime equillibrium. Estimating maximum amplitudes accomodated by the dynamics neglecting radiative damping corresponds to an upper boundary
+    \item \todo{justify the neglecting of interactions}
+    \item This simplified dynamics will correspond to a linear dynamics which is used as building block upon which perturbation theory can be applied to generalize to a nonlinear, perturbated dynamics.
+\end{itemize}
+
+Next, the single-particle dynamics is presented with the aim of defining quantitavely the dynamic aperture and the characteristics of the dynamics in electron strorage rings. Throghout the modelling, optical functions and parameter for the SIRIUS storage rings are also presented.
 \subsection{Motion of charged particles in magnetic fields}
 An electron with charge $e$ and momentum $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$, perpendicular to the ortbit plane. In such conditions, Lorentz force law predicts that
 \begin{equation}
