@@ -1,38 +1,49 @@
 \chapter{Introduction}
-This dissertation describes the optimization work performed at the SIRIUS storage ring with the objective to improve the ring's Dynamic Aperture and injection efficiency.
- This chapter is dedicated to introducing synchrotron light sources, the SIRIUS light source facility and the problem adressed throughout this master's project.
-
-This dissertation is arranged as follows:
+This dissertation describes the optimization work performed at the SIRIUS storage ring sextupole mangets with the objective to improve the ring's Dynamic Aperture and injection efficiency. This dissertation is arranged as follows:
 \begin{itemize}
     \item Chapter 1 introduces syncrhotron light sources and the SIRIUS project
-    \item Chapter 2 introduces the theoretical and scientific background of the dynamics of particles in particle accelerators
-    \item Chapter 3 reviews optimization algorithms, introduces online optimization and the Robust Conjugate Direction Search (RCDS) algorithm and presents an overview of its applications
-    \item Chapter 4 describes the experimental methods and experiments setup at the SIRIUS storage ring, as well as the results and analysis.
+    \item Chapter 2 introduces the theoretical and scientific background of dynamics of particles in particle accelerators. Nonlinear dyanamics is presented and its consequences are presented. Particular attention is drawn to the Dynamic Aperture.
+    \item Chapter 3 reviews optimization algorithms, introduces online optimization in accelerators and the Robust Conjugate Direction Search (RCDS) algorithm. 
+    \item Chapter 4 describes the experimental methods and experiments carried out at the SIRIUS storage ring.
+    \item Chapter 5 concludes this dissertation presenting some final remarks.
 \end{itemize}
 
 \section{Storage ring-based synchrotron light sources}
 
-Synchrotron ratiation (SR) refers to electromagnetic radiation emitted by charged relativistic particles upon acceleration. The phenomenon was theoretically formalized in the early 1900's by Wiechart and Larmor and first observed experimentally at a General Electric's $70~\unit{Mev}$ synchrotron\footnote{The term ``synchrotron" refers to the accelerator  technology based on the synchonicity of the charged particles period of revolution and the frequency of the electromagnetic fields exerting work on it to achieve and mantain high-energies.} accelerator. It was named \textit{synchrotron radiation} for this reason.
+Synchrotron radiation (SR) refers to electromagnetic radiation emitted by charged relativistic particles upon acceleration. The emitted intensity is largest along the direction perpendicular to the acceleration. In a circular accelerator, this implies the emission occurs along the curved trajectory's tangent direction.
 
-Syncrhotron radiation was in fact a negative side-effect of achievieng high-energy particles for studying nuclear and particle physics. But since it is emitted in a narrow angular aperture and can cover a big spectrum from infrared to hard X-rays, its potential for imaging techiniques in condensed matter physics, materials science, molecular biology and chemistry was soon realized.
+The phenomenon was theoretically formalized in the early 1900's by Wiechart and Larmor and first observed experimentally at a General Electric's $70~\unit{Mev}$ synchrotron\footnote{The term ``synchrotron" refers to the accelerator  technology based on the synchonicity of the charged particles period of revolution and the frequency of the electromagnetic fields exerting work on it to achieve and mantain high-energies.} accelerator. It was named \textit{synchrotron radiation} for this reason.
 
-The community interested in SR first revolved around big high-energy and nuclear physics machines. Those were the so-called 1st generation of synchrotron light sources, in which SR is obtained parasistically. The 2nd generation consists on machines built with the specific goal or being sources of SR. In thses machines, the radiation was emitted when the electrons beams had their trajectories bent at the dipole magnets. In the 1990's, there was a rise in the application of \textit{insertion devices} (IDs) such as \textit{wigglers} and \textit{undulators}. These components were added to straight sections in the machines to introduce additional transverse accelerations for the generation of SR. The 4th generation of light sources was ignaugurated with the start of the comisioning of the MAX IV machine, in Lund, Sweden. The main advances with respect to the previous generatioin is the reduction by one to two orders of magnitude in the figure of merit for SR sources: the emmittance.
+For nuclear and particle physicists, SR was in fact a detrimental side-effect of achievieng high-energies. But since the light is emitted within a narrow angular aperture and displays a broad spectrum, covering from infrared to hard X-rays, its potential for imaging techiniques in condensed matter physics, materials science, molecular biology and chemistry was soon realized.
 
-Low emmittance is important for achieving a high-brightnes. Brightness is defined by
+The community interested in SR for these purposes first revolved around big high-energy and nuclear physics machines and obtaine SR parasistically from them. Those were the so-called 1st generation of synchrotron light sources. The 2nd generation consists on machines built with the specific goal of generating SR.
+
+In the 1990's, the introduction of \textit{insertion devices} (IDs) such as \textit{wigglers} and \textit{undulators} characterized the 3rd generation of machines. These devices consists on arrays of alternating dipolar fields and introcue additional transverse accelerations to the beam for the generation of SR. With IDs, radiation was no longer produced exclusevely at the bending magnets. IDs also allow for control of radiation features, such as the energy and polarization.
+
+A figure of merit measuring the quality of a SR source is its \textit{brightness}, defined by
 \begin{equation}
-    B(\omega) = \frac{F(\omega)}{\Omega_{xx^\prime}\Omega_{yy^\prime}\frac{\Delta \omega}{\omega}}
+    B(\omega) = \frac{F(\omega)}{\Omega_{xx^\prime}\Omega_{yy^\prime}\frac{\Delta \omega}{\omega}},
 \end{equation}
-where $F(\omega)$ is the photon flux at energy $E=\hbar\omega$, $\Omega_{uu^\prime}$ is the the $(u,u^\prime)$ photon phase-space volumes, which depends on both the electron-beam and photon-beam distribution; and $\Delta\omega/\omega$ is the frquency bandwith. High-brightness is achieved by achieving higher electron-beam current to yield higher fluxes, while minimizing the emittances.
+where $F(\omega)$ is the photon flux at energy $E=\hbar\omega$, $\Omega_{uu^\prime}$ is the the $(u,u^\prime)$ photon phase-space volumes, which depends on both the electron beam and photon beam distributions; $\Delta\omega/\omega$ is the frquency bandwith. High-brightness is achieved by achieving higher electron-beam current to yield higher fluxes, while minimizing the electron beam emittances--the beam's average phase space volume.
 
-In a synchrotron light source facility\todo{work on it}
+The 4th generation of SR sources was ignaugurated with the start of the comisioning of the MAX IV machine, in Lund, Sweden. The main advances with respect to the previous generatioin is the reduction by one to two orders of magnitude in the emmittance, which was made possibile due to the recent technological advances. Soon after, an upgrade of the European Synchrotron Facility (ESRF) machine redered it the second 4th generation machine in the world (when?). SIRIUS, in Campinas, is the third in the world, the first in the global-south.
+
+\todo[inline]{what about FEL's? Why are you always making sure to clarify youre talking about storage rings?}
+
+\subsection{Typical layout and devices of a storage ring-based light source}
+Usually, the accelerators systems of a synchrotron light source facility consists on
 \begin{itemize}
-    \item linear accelerator: comprising
-    \item booster ring:
-    \item transport lines:
-    \item storage ring:
-    \item experimental hall and beamlines:
+    \item electron gun (eGun): from which electrons are obtained. At SIRIUS, a cathode is used, and the electrons are ejected by thermoionic emission, with $90~\unit{keV}$ energy.
+    \item linear accelerator (LINAC): consisting on a array of cavities along whcih RF fields propagate with increasing group velocity, carrying the electron along with it. SIRIUS' LINAC accelerates electrons to about $150~\unit{MeV}$.
+    \item booster ring: syncrhotron accelerator in which the electron energy is ramped to the storage ring's nominal operating energy of $3~\unit{GeV}$.
+    \item transport lines: along which the electron is transported from the linac to booster (LTB) and from the booster to the storage ring (LTS).
+    \item storage ring: where ultra-relativistic electrons are kept stable during hours, oscillating around a closed orbit.
 \end{itemize}
+The accelerators  are kept within concrete tunnels for radiation safety. Tangentially to the nominal orbits, optical beamlines direct the SR photon beams to the experimental cabins where the experiments in condensed matter physics, chemistry, molecular and celular biology are carried out. SIRIUS has X experimenta beamlines.
+\missingfigure{light source layout}
+
 Synchrotron storage rings store ultra-relativistic electrons beams close to a reference design orbit. The orbit is determined by the deflection magnets strenthgs, the dipoles. The focusing towards the closed orbit is provided by gradient fields, mostly coming from quadrupole magnets at SIRIUS. Since focusing and deflection depends on the beam energy, small energy deviations in the beam's energy can lead to differential focusing. Using an analogy from geometric optics, the beam's focusing at the lens (quadrupoles) depends on its color (energy). To correct this chromatic aberration, ``glasses'' are necessary. They introduce geometric aberations responsible for uniform, energy-independent focusing.
+\missingfigure{mangets and devices}
 
 
 \section{The SIRIUS project}
@@ -41,7 +52,7 @@ SIRIUS is the 4th generation storage ring-based synchrotron light source. It was
 SIRIUS has finished commissioning in 2022 and since 2023 is receiving its first users. It is currently operating for user's beam with a $100~\unit{mA}$ current, but is designed to achieve $350~\unit{mA}$ when the system of superconducting radio-frequency cavities, as well as the higher-oder-harmonic cavity are installed.
 
 \section{This dissertation problem}
-    The persuit of low-emmittances and high-brightnes pushed the accelerator community towards the 4th generation of storage rings. In such machines, there is strong focusing provided by quadrupole magnets which also require strong sextupolar fields needed for compensating the dependence of focusing on the beam-energy (the so-called chromaticity). Since sextupole provide nonlinear fields, the dyamics in 4th generation storage rings has become increasingly nonlinear.
+    The persuit of low-emmittances and high-brightnes pushed the accelerator community towards the 4th generation of storage rings, in which there is strong focusing provided by quadrupole magnets. Strong focusing requires also strong sextupolar fields for compensating chromatic effects. Since sextupole provide nonlinear fields, the dyamics in 4th generation storage rings has become increasingly nonlinear.
 
     Quasi-periodic nonlinear dynamics subject to the smallest perturbations, such as small fields deviations arising from rotation, alignement or excitation errors, can become unstable at large oscillation amplitudes. The instabilities result in limitations to large transverse oscillation amplitudes the machine can support. This amplitude is known as the Dynamic Aperture of the ring.
 
@@ -51,4 +62,4 @@ SIRIUS has finished commissioning in 2022 and since 2023 is receiving its first 
 
     Prior to the optimization work, the Dynamic Aperture was measured to be \todo{get data}, which rendered an average of \todo{get data} injection efficiency. The main difficulty was the typycal fluctuations in the effciency \todo{get data}.
 
-    Since the lattice configuration implemented is in principle close to the optimum configuration, it is reasonable to assume that small nudges and adjustments on the sextupoles strengths could accomodate the lattice to the physically realized errors distribution, improving the nonlinear dynamics performance, the DA and ultimately, the injection efficiency and its stability.
+    Since the lattice configuration implemented is in principle close to the optimum configuration, it is reasonable to assume that small nudges and adjustments on the sextupoles strengths could accomodate the lattice to the physically realized errors distribution, improving the nonlinear dynamics performance, the DA and ultimately, the injection efficiency and its stability. Online optimization consists on choosing computer-automated direct search strategies to seek the optimum sextupole configurations rendering the larges dynamic aperture.
