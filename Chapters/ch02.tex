@@ -1,9 +1,9 @@
 \chapter{Theoretical Background}
 
 \section{Single-particle dynamics in electron storage rings}
-Ultra-relativistic beams of electrons are injected into the SIRIUS storage ring with the nominal operating energy of $3~\unit{G eV}$. The beam is injected in the form of electron bunches, with characteristic length, width and size.
+Ultra-relativistic beams of electrons are injected into the SIRIUS storage ring with the ring nominal operating energy of $3~\unit{G eV}$. The beam is injected in the form of electron bunches, with characteristic length, width and size.
 
-The storage ring is designed to confine the bunches and steer them along a reference closed orbit. This is achieved by specifying dipolar magnetic fields along the orbit such that the integrated effect is an angular deviation of $2\pi$ in the beam's trajectory. Additionally, to keep electrons close to the closed orbit, it is also necessary to specify gradient magnetic fields with strengths proportional the the beam's transverse deviations. These fields provide alterating focusing and defocusing of the beam in such a manner that their overall effect is to restore the beam towards the design orbit.
+The storage ring is designed to confine the bunches and steer them along a reference closed orbitm which is achieved by specifying dipolar magnetic fields along the orbit such that the integrated effect is an angular deviation of $2\pi$ in the beam's trajectory. Additionally, to keep electrons close to the closed orbit, it is also necessary to specify gradient magnetic fields with strengths proportional the the beam's transverse deviations. These fields provide alterating focusing and defocusing of the beam in such a manner that their overall effect is to restore the beam towards the design orbit.
 
 To correct chromatic aberrations in the beam's motion, i.e. a dependence of focusing with the beam's energy, and guarantee correct focusing despite energy deviations from the nominal value, sextupolar magnetic fields are also introduced, providing fields depending qudratically on the deviations from the nominal orbit. These fields introduce strong nonlinearities in the dynamics.
 
@@ -19,30 +19,33 @@ The beam is also subject to elastic and inelastic collisions with residual gas m
 
 Because of the nonlinearities introduced by the sextupole magnets, the transverse acceptances can be limited not by the physical aperture but rather by the amplitudes above which motion is irregular, unstable and unbounded. This limiting amplitude is known as the dynamic aperture (DA), a term that can be used to refer to amplitudes in the transverse space $x,y$ or to the phase space coordinates $x, p_x$ and $y, p_y$.
 
-Despite the complicated physics involving the transverse oscilations as  well as the energy oscillations, the damping and the excitation of amplitudes, the collective effects and the instabilities, for the purpose of this dissertation, it is sufficient to model the motion of a single electron , negletcting radiation losses and any other collective interactions. This single-particle travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space. We neglect also coupling between the dynamics of these planes. The transverse dynamics thus consists on a quasi-periodic motion of two independent oscillators. These simplfications are justified because
+Despite the complicated physics involving the transverse oscilations as  well as the energy oscillations, the damping and the excitation of amplitudes, the collective effects and the instabilities, for the purpose of this dissertation, it is sufficient to model the motion of a single electron , negletcting radiation losses and any other collective interactions.
+
+The electron travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space which is the  dynamics of two independent quasi-periodic oscillators. These simplfications are justified for our immediate purposes because:
 \begin{itemize}
-    \item the amplitudes are ultimately damped and reach a regime equillibrium. Estimating maximum amplitudes accomodated by the dynamics neglecting radiative damping corresponds to an upper boundary
-    \item \todo{justify the neglecting of interactions}
-    \item This simplified dynamics will correspond to a linear dynamics which is used as building block upon which perturbation theory can be applied to generalize to a nonlinear, perturbated dynamics.
+    \item the linear, uncoupled dynamics it renders serves as a building block upon which ellaborate modeling can be carried out, incoporating coupling, nonlinearities and perturbations
+    \item in the machine, the amplitudes are ultimately damped out and reach an equillibrium regime. Estimating maximum amplitudes accomodated by the dynamics neglecting radiative damping corresponds to an upper bound
+    \item radiation losses/gains are only significant over a time scale of a couple of turns. Over this period, tens of transverse oscilations are carried out.
+    \item collective instabilities?
 \end{itemize}
 
 Next, the single-particle dynamics is presented with the aim of defining quantitavely the dynamic aperture and the characteristics of the dynamics in electron strorage rings. Throghout the modelling, optical functions and parameter for the SIRIUS storage rings are also presented.
 \subsection{Motion of charged particles in magnetic fields}
-An electron with charge $e$ and momentum $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$, perpendicular to the ortbit plane. In such conditions, Lorentz force law predicts that
+An electron of charge $e$ and momentum $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$, pointing along the perpendicular to the ortbit plane. In such conditions, Lorentz force law predicts that
 \begin{equation}
-    B\rho = \frac{p}{e}.
+    R(p)\equiv B\rho = \frac{p}{e}.
     \label{eq:rigidity}
 \end{equation}
 
 Consider now an electron traveling along a curve parametrized by the arclength $s$ with respect to an arbitrary reference point. The interaction with fields $B_x(x,y,s)$  and $B_y(x,y,s)$, both perpendicular to the electron's motion, results in deflections of the trajectory. The deflection angles are given by
     \begin{equation}
         \begin{aligned}
-            \dd{\theta_x} & = \frac{\dd{s}}{\rho_x(s)} = \frac{e}{p}B_y(x,y,s)\dd s = \frac{1}{B\rho}B_y(x,y,s)\dd s,\\
-            \dd{\theta_y} & = \frac{\dd{s}}{\rho_y(s)} = \frac{e}{p}B_x(x,y,s)\dd s = \frac{1}{B\rho}B_y(x,y,s)\dd s.
+            \dd{\theta_x} & = \frac{\dd{s}}{\rho_x(s)} = \frac{e}{p}B_y(x,y,s)\dd s = \frac{1}{R(p)}B_y(x,y,s)\dd s,\\
+            \dd{\theta_y} & = \frac{\dd{s}}{\rho_y(s)} = \frac{e}{p}B_x(x,y,s)\dd s = \frac{1}{R(p)}B_y(x,y,s)\dd s.
         \end{aligned}
         \label{eq:deflec_angles}
     \end{equation}
-Where eq. (1) has been used to replace the $p/e$ ratio by the \textit{magnetic rigity} $B\rho$, which is defined as the product of the uniform field strength needed for a beam with momentum $p$ and charge $e$ to perform circular orbit with radius $\rho$. The rigidity depends solely on the electron's momentum/energy and gives the appropriate normalization to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
+Where \eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the \textit{magnetic rigity} $R(p)$, which is defined as the product of the uniform field strength needed for a beam with momentum $p$ and charge $e$ to perform circular orbit with radius $\rho$. The rigidity depends solely on the electron's momentum/energy and gives the appropriate normalization to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
 
 \todo[inline]{Add deflection figures}
 
@@ -80,10 +83,10 @@ where $\rho(s) = \norm{\dv*{\vu{s}}{s}}^{-1}$ is the local curvature radius\foot
 \end{equation}
 The frame thus depends solely on the geometry of the specified path. Since the curvature is defined by the dipolar fields $B_0(s)$ in the $y$ direction, then, eq.~\eqref{eq:deflec_angles} leads to
     \begin{equation}
-        G(s) \equiv \frac{1}{\rho(s)} = \frac{B_0}{B\rho}.
-        \label{G}
+        G(s) \equiv \frac{1}{\rho(s)} = \frac{B_0(s)}{R_0},
+        \label{eq:G}
     \end{equation}
-
+where $R_0$ is the rigidity for the beam at the nominal energy.
 \subsection{Hamiltonian for the relativistic electron}
 The dynamics of relativistic electrons influenced by electromagnetic fields $(\Phi, \vb{A})$ is encapsulated by the Hamiltonian
     \begin{equation*}
@@ -91,14 +94,16 @@ The dynamics of relativistic electrons influenced by electromagnetic fields $(\P
     \end{equation*}
  $e$ being the elementary charge and $\vb{P}=\vb{p}+e\vb{A}$ the canonical momentum. The following steps are followed to obtain equations of motion for electrons in the storage ring:
  \begin{itemize}
-    \item A canonical transformation to change coordinates is applied in order to describe the motion in terms of the Frenet-Serret frame variables;
+    \item A canonical transformation to change coordinates is applied in order to describe the motion in terms of the Frenet-Serret frame variables $x$, $y$;
     \item Instead of time $t$, the Hamiltonian and the dynamical variables are described as functions of $s$, the longitudinal position along the ring;
-    \item Geometric quantities are used: canonical momenta are the angles with respect to the nominal orbit;
-    \item Paraxial approximation: transverse momenta are assumed to be way smaller than longitudinal momentum
+    \item Geometric quantities are used: canonical momenta are the angles $x^\prime = \dv*{x}{s}$ and $y^\prime = \dv*{y}{s}$ with respect to the nominal orbit;
+    \item Paraxial approximation: transverse momenta are assumed to be way smaller than longitudinal momentum;
  \end{itemize}
- all of these steps are shown in detail in textbooks such as  Refs.~\cite{lee, wiedemann,  wolski2014beam}. For the purpose of examining the DA, we can model the motion withouth RF cavities ($\Phi=0$) and neglect radiation losses. The dynamics will consist solely on the transverse degrees of freedom, and takes place on a 4-dimensional phase space. In this 4D dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where
+
+ All of these steps are shown in detail in textbooks such as  Refs.~\cite{lee, wiedemann,  wolski2014beam}. Neglecting RF cavities ($\Phi=0$) and radiation losses, the energy is a constant parameter and the dynamics will consist solely on the transverse degrees of freedom.
+  In this 4-dimensional dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where
 \begin{equation}\begin{cases} p_{x}= x^\prime(1+\delta),\\p_{y}=y^\prime (1+\delta),\end{cases}\end{equation}
-and the energy/momentum deviation is an additional parameter
+and
 \begin{equation}
     \delta = \frac{P-P_{0}}{P_{0}}\approx\frac{E-E_0}{E_0}
 \end{equation}
@@ -106,12 +111,13 @@ where the ultra-relativistic approximation $E\approx pc$ was used.
 
 Hamilton's equations for the Hamiltonian in the paraxial approximation lead to the equations of motion for 4D dynamics
 \begin{equation}
-x^{\prime \prime}=-\frac{(1+G x)^{2}}{1+\delta} \frac{B_{y}}{B \rho}+G(1+G x),
+x^{\prime \prime}=-\frac{(1+G x)^{2}}{1+\delta} \frac{B_{y}}{R_0}+G(1+G x),
 \quad
-y^{\prime \prime}=\frac{(1+G x)^{2}}{1+\delta} \frac{B_{x}}{B \rho}
+y^{\prime \prime}=\frac{(1+G x)^{2}}{1+\delta} \frac{B_{x}}{R_0}
+\label{eq:EOMs}
 \end{equation}
-where $B\rho = p/e$ and $G(s)$ defined as in Eq.~\eqref{G}.
-\subsubsection{The Magnetic Fields}
+where $R_0 = p_0/e$ and $G(s)$ defined as in Eq.~\eqref{eq:G}.
+
 Fields influencing the beam are those of dipoles, quadrupoles and sextupoles.
 Their functional forms are
 \begin{itemize}
@@ -122,14 +128,17 @@ Their functional forms are
     \item Normal sextupole\\
           $$B_x = B_2xy, \quad B_y = \frac{1}{2}B_2(x^2 - y^2)$$
 \end{itemize}
-These are the so-called normal multipole fields. There also exists skew multipole fields, which couple the horizontal and vertical dynamics. We will neglect skew fields and coupling for now.
+These are the so-called \textit{normal multipole fields}. There also exists \textit{skew multipole fields}, which couple the horizontal and vertical dynamics. We will neglect skew fields and coupling for now.
 
-In the equations of motion, the magnetic rigidity normalizes all the fields. So we define the dipolar, quadrupolar and sextupolar functions by
-$$G(s) = \frac{B_0(s)}{B\rho}, \quad K(s) = \frac{B_1(s)}{B\rho}, \quad S(s) = \frac{B_2(s)}{B\rho}$$
+In the equations of motion, eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We define the dipolar, quadrupolar and sextupolar functions by
+\begin{equation}
+    G(s) = \frac{B_0(s)}{B\rho}, \quad K(s) = \frac{B_1(s)}{B\rho}, \quad S(s) = \frac{B_2(s)}{B\rho}.
+    \label{eq:mag_funcs}
+\end{equation}
 
 \subsection{Linear Dynamics}
 \subsubsection{Linear equations of motion}
-Expansion of the equations of motion up to first order in the $x, y, \delta$ variables leads to \cite{sands}
+Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variables leads to \cite{sands}
     \begin{equation}
         x^{\prime\prime}+(G^2+K)x=G\delta, \quad
         y^{\prime\prime}-Ky=0.
@@ -141,12 +150,13 @@ Expansion of the equations of motion up to first order in the $x, y, \delta$ var
         \label{eq:Hill}
     \end{equation}
     which are a pair of parametric oscillators for $u=x,y$, with $s$-dependent focusing functions
-         $$K_x(s) = G^2(s) + K(s)$$ $$K_y(s) = - K(s)$$
+         $$K_x(s) = G^2(s) + K(s), \quad K_y(s) = - K(s).$$
 Motion in the linear approximation thus consists on oscilations around the closed orbit, known as betatron oscillations.
 \subsubsection{Pseudoharmonic description}
 The solutions for the equations of betatron motion can be cast in a amplitude-phase (WKB) form
 \begin{equation}
     u(s) = \sqrt{2\beta_u(s) J_u}\cos(\phi_u(s) + \phi_0),
+    \label{eq:pseudo_harmon}
 \end{equation}
 where $\beta_u(s)$ must satify the boundary value problem
 \begin{equation}
@@ -154,8 +164,9 @@ where $\beta_u(s)$ must satify the boundary value problem
         \begin{cases}
             \beta_{u}(0) = \beta_{u}(L)\\ \beta_{u}^{\prime}(0) = \beta_{u}^{\prime}(L)
         \end{cases}
+    \label{eq:beta_eq}
 \end{equation}
-and the phase advance is
+and the phase advance must be
     \begin{equation}
         \phi_u(s) = \int_{0}^{s}\frac{1}{\beta_u(\sigma)}\dd\sigma.
    \end{equation}
@@ -173,33 +184,36 @@ An important feature of the dynamics is the \textit{tune}: the phase advance per
 \end{equation*}
 The analysis of perturbations and nonlinearities shows that the tunes are a critical variables in determining the beam's response to perturbations. More specifically, the tunes impact over disturbances amplifiction factors, which are greatest when tunes are close to integer numbers.
 
-SIRIUS ring has tunes $(\nu_x, \nu_y)=(49.08, 14.14)$ which are very close to integers. It is desired to increase the tunes fractional parts to reduce orbit amplification factors. This is the reason why injection efficiency optimzation runs have also been carried in different machine tunes.
-\subsubsection{Turn-by-turn data}
+% SIRIUS ring has tunes $(\nu_x, \nu_y)=(49.08, 14.14)$ which are very close to integers. It is desired to increase the tunes fractional parts to reduce orbit amplification factors. This is the reason why injection efficiency optimzation runs have also been carried in different machine tunes.
+\subsubsection{Turn-by-turn motion}
 In the $u, u^\prime$ phase space, the quasi-periodic motion traces out ellipses. This can be verified by calculating the derivative
     \begin{equation}
         u^{\prime}(s) = - \sqrt{\frac{2J_u}{\beta_u}}\qty[\sin(\phi_u(s) + \phi_0) + \frac{1}{2}\beta_u^\prime(s)\cos(\phi_u(s) + \phi_0)],
+        \label{eq:uprime}
     \end{equation}
     defining $\alpha_u = \frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satify the quadratic form
     \begin{equation}
         2J_u=\gamma_u u^{2}+2\alpha_u u u^{\prime}+\beta_u u^{\prime2}.
      \end{equation}
 
-The ellipse properties are defined by the $\beta, \alpha$ and $\gamma$ functions, also known as Courant-Snyder or Twiss parameters. These parameters are functions of the position $s$, so at each point along the accelerator the Poincaré Section $u, u^\prime$ displays a different ellipse.
-Sampling the transverse motion at a fixed $s=s_0$ position reveals a harmonic displacement $x(t)$. Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$, and thus
+The ellipse properties are defined by the $\beta(s), \alpha(s)$ and $\gamma(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters. Tracking a particle's transverse position and momenta for several turns at some fixed point along the ring results in the ellipse with shape specified by the C-S parameters. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse for each point.
+
+ Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$, and thus
+ sampling the transverse motion at a fixed $s=s_0$ position reveals a harmonic displacement
 \begin{equation}
-    x_j(s_0)=\sqrt{2\beta_0 J}\cos(2\pi\nu j+\phi_0).
+    u_j(s_0)=\sqrt{2\beta_u(s_0) J_u}\cos(2\pi\nu_u j+\phi_u(s_0)).
+    \label{eq:TbT_motion}
 \end{equation}
-Time of flight during a complete turn is $L/c$ so, for $j$ turns, $t_j=\frac{L}{c} j$. With a revolution frequency of $\omega_r=2\pi/(L/c)$, we see that $2\pi j= \omega_r t_j$. As a function of the time elapsed over the $j$ turns, the displacements reads
-\begin{equation}
-    x_j=\sqrt{2\beta_0J}\cos(\omega_r\nu t_j+\phi_0).
-\end{equation}
+% Time of flight during a complete turn is $L/c$ so, for the $j$th turn, $t_j=\frac{L}{c} j$. With a revolution frequency of $\omega_r=2\pi/(L/c)$, we see that $2\pi j= \omega_r t_j$. As a function of the time elapsed over the $j$ turns, the displacements reads
+% \begin{equation}
+%     x_j=\sqrt{2\beta_0J}\cos(\omega_r\nu t_j+\phi_0).
+% \end{equation}
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/ellipse}
     \caption{Phase space ellipse traced by tur-by-turn (TbT) motion in the $(x,p_x)$ phase space. Optics functions determine the principal axes ratios and the inclination of the ellipse at each longitudinal position along the ring. From \cite{wolski2014beam}.}
     \label{ellipse}
 \end{figure}
-\subsection{Chromatic effects}
 \subsubsection{Dispersion}
 The equation of motion for off-momentum particles in the horizontal plane is the non-homogeneous Hill's equation. The solution consists on the linear combination of the homogeneous solutions in the phase-amplitude form plus the particular solution: $x=x_\beta+ x_\delta = x_\beta+ \eta(s)\delta $ where $\eta(s)$ is the \textit{dispersion function}, satisfying
     \begin{equation*}
@@ -216,59 +230,105 @@ The equation of motion for off-momentum particles in the horizontal plane is the
         \caption{Dispersion fucntion for SIRIUS superperiod.}
         \label{dispersion_func}
     \end{figure}
-\subsubsection{Chromaticity}
-Energy deviations affect not only the closed orbit but also the focusing. A more/less energetic beam has higer/lower rigidity and thus is focused differently when passes through quadrupoles. This chromatic aberration effect needs to be currected, which can be attained with the insertion of geometric aberrations provided by sextupolar fields. The correction comes at the expense of introducing nonlinearities in the dynamics.
+\subsubsection{Field Errors}
+    % The dipolar contributions promote additional bendgin and thud disturb the design orbit. Assuming the perturbations are not strong enough to kill the beam, a distorted closed orbit must exist. To find it we need to find the coordinates along the ring which are mapped to themselves after a complete revolution. That is, we must find the fixed point $\vb{X}_{\text{co}}$ of the disturbed one-turn map:
+    % \begin{equation}
+    %     \vb{X}_{\text{co}} = \mathbf{M} \vb{X}_{\text{co}} + \boldsymbol{\Delta}
+    % \end{equation}
+    % where $\boldsymbol{\Delta} = (0, \theta)^\intercal$, $\theta = B_y \Delta s / B\rho$ for the $(x, x^\prime)$ slice of the closed orbit, $\theta = B_x \Delta s / B\rho$ for the $(y, y^\prime)$. Solving for the closed orbit we find
+    % \begin{equation}
+    %     \vb{X}_{\text{co}} = (\mathbf{I} - \mathbf{M})^{-1}\boldsymbol{\Delta}.
+    % \end{equation}
+    % Using the Courant-Snyder parametrization for the one-turn map at the point $s_0$ immediately downstream the perturbation leads to
+    % \begin{equation}
+    %     \vb{X}_\text{co} = \frac{\theta}{2\sin\pi\nu}\mqty(\beta_0 \cos\pi\nu \\ \sin\pi\nu - \alpha_0 \cos\pi\nu).
+    % \end{equation}
+    % So the closed orbit coordinates can be propagated from $s_0$ to any point $s$ of the ring using the transfer matrix. For example, the propagated $x$ coordinate reads
+    % \begin{equation}
+    %     x_{\text{co}}(s) = \frac{\sqrt{\beta(s)\beta_0}}{2\sin\pi\nu}\theta\cos(|\phi(s)-\phi_0| - \pi\nu).
+    %     \label{eq:delta_disturb}
+    % \end{equation}
+    % Equation \eqref{eq:delta_disturb} is the closed-orbit distortion for a single perturbation.
+    In the presence of additional dipolar and quadrupolar fields $\Delta G$ and $\Delta K$, respectively, the orbit and focusing is changed. Assuming these are small perturbations, not strong enough to kill the beam we can evluate the changes in obrit and focusing.
 
-The focusing errors due to energy errors cause phase advance errors and consequently tune errors, or tune-shifts. As a first order approximation,
-\begin{equation}
-    \Delta \nu_u = \xi_u \delta,
-\end{equation}
-where the tune-shift per energy deviation $\xi_u$ is the chromaticity, which depends linearly on quadrupoles and sextupoles strengths. This linear dependence allows for the correction of chromaticity and control of the focusing for off-energy particles.
-\todo[inline]{Improve: more details on the tune-shifts due to errors and the derivations on chromaticity}
-\subsection{Chromaticity}
-As for the higher order effect on the focusing, also known as chromatic effect, we consider the motion in a straight section under a gradient, so that there is no non-homogeneous term in the horizontal equation. The equation of motion considering $x\delta $ terms reads
-\begin{equation}
-    x^{\prime\prime}+(K_x+\Delta K_x)x=0
-\end{equation}
-\begin{equation}
-    y^{\prime\prime}+(K_y+\Delta K_y)y=0
-\end{equation}
-where $K_x=h^2+K_1$, e $K_y=-K_1$ and
+    The closed orbit distortion for a distribution $\Delta G(s)$ of dipolar perturbations along the ring reads
+    \begin{equation}
+        x_{\text{co}}(s) = \frac{\sqrt{\beta(s)}}{2\sin\pi\nu}\int_{s}^{s+L} \Delta G(\sigma)\sqrt{\beta(\sigma)}\cos(\pi\nu + \phi(s) - \phi(\sigma))\dd \sigma.
+    \end{equation}
+    % Knowledge of the beam-response to perturbations allows for the inversion of the problem. We can use specified small dipole kicks to correct the orbit, bringing it closer to the nominal one. These small dipole fields are generated by corrector magnets (CM's) abd orbit correction consists on linear problem of seeking CMs strength that minimze orbit distortions.
+
+    % A quadrupole error can be represented by a thin-lens quadrupole transfer matrix \cite{Courant:1958wbj}
+    % \begin{equation}
+    %     \mathbf{M}_q = \mqty(1 & 0 \\ -k\Delta s & 1),
+    %  \end{equation}
+    %  so that, immediately downstream the error, the transfer matrix reads $\mathbf{M} = \mathbf{M}_q \mathbf{M}_0$. As a consequence, the optics deviates from the nominal optics. More notouriously, the beta and the phase advances, and thus tune, changes.
+
+    %  The phase advance over a turn, $\phi$, is related to the trace of the one-turn transfer matrix $\mathbf{M}$ as $\cos\phi = 2 \tr \mathbf{M}$. Using the CS parametrization for $\mathbf{M}$, performing the multiplication $\mathbf{M}_q \mathbf{M}_0$ and calcualting the trace leads to
+    %  \begin{equation}
+    %     \cos \phi - \cos\phi_0 = - \frac{1}{2} k(s)\Delta s \beta_0 \sin\phi_0.
+    %  \end{equation}
+    %  In a linear approximation (if $\sin \phi_0$ is not near zero) $\Delta(\cos \phi) = \cos \phi - \cos\phi_0 \approx \Delta \phi\dv*{(\cos \phi)}{\phi}$ so the tune-shift due to a single thin-lens quadrupole error is
+
+    As for a single quadrupole error, focusing is changed. The phase advance and thus the tune changes, as well as the beta-function. As for the tune-shift as a consequence of a gradient error acting during a small extent $\Delta s$ along the ring, we have
+     \begin{equation}
+        \Delta \nu \approx \frac{1}{4\pi} \beta_0 \Delta K \Delta s.
+     \end{equation}
+     For a distribution of errors, we must sum over the ring
+     \begin{equation}
+        \Delta \nu \approx \frac{1}{4\pi}\oint \beta(s) \Delta K(s) \dd s.
+        \label{eq:delta_tune}
+    \end{equation}
+    %  Besides calculating the tune-shift, the resulting transfer-matrix for the lattice with errors allows for the identification of the new optics $\alpha, \beta, \gamma$, which can then be propagated to anywhere in the ring. In particular we can identify $\beta$ and its fractional deviation from the nominal value along $s$, a parameter known as \textit{beta-beating}
+    The relative beta-function deviations, known as beta-beating, reads
+     \begin{equation}
+        \frac{\Delta \beta(s)}{\beta(s)} = - \frac{1}{2\sin(2\pi\nu_0)}\int_{s}^{s+L}\Delta K(\sigma)\cos(2\phi(\sigma)-2\phi(s)-\phi_0)\dd\sigma.
+     \end{equation}
+\subsubsection{Chromaticity}
+Energy deviations affect not only the closed orbit by means of the dispersion function but also the focusing. A more/less energetic beam has higer/lower rigidity and thus is focused differently when passes through quadrupoles. This chromatic aberration effect needs to be currected, which can be attained with the insertion of geometric aberrations provided by sextupolar fields.
+% As for the higher order effect on the focusing, also known as chromatic effect, we consider the motion in a straight section under a gradient, so that there is no non-homogeneous term in the horizontal equation. The equation of motion considering $x\delta $ terms reads
+% \begin{equation}
+%     x^{\prime\prime}+(K_x+\Delta K_x)x=0
+% \end{equation}
+% \begin{equation}
+%     y^{\prime\prime}+(K_y+\Delta K_y)y=0
+% \end{equation}
+% where $K_x=h^2+K_1$, e $K_y=-K_1$ and
+
+
+The equations of motion for off-energy particles up to the order of terms $u\delta$ leads to the additional higher-order terms
 \begin{equation}
     \Delta K_x = -(K_1+2G^2)\delta \approx K_x\delta
 \end{equation}
 \begin{equation}
     \Delta K_y = K_1\delta = -K_y\delta
 \end{equation}
-The result is that an off-momentum partcile sees a different optics along the ring: different beta function and different phase advance. Thus, it deviates from nominal operation conditions, specially in the tunes, inducing the tune-shifts
+This means there exists an energy-dependent tune-shift effect
+% The result is that an off-momentum partcile sees a different optics along the ring: different beta function and different phase advance. Thus, it deviates from nominal operation conditions, specially in the tunes, inducing the tune-shifts
 \begin{equation}
-    \Delta \nu _i \approx -\frac{1}{4\pi}\oint\beta K_i \delta \dd{s}
+    \Delta \nu _i \approx -\frac{1}{4\pi}\oint\beta K_i \delta \dd{s},
 \end{equation}
-with $i=x,y$. We can define the \textit{linear chromaticity} in the $i=x,y$ direction as the tune variation $\Delta \nu_i$ per energy deviation $\delta$ around $\delta = 0$
+with $i=x,y$.
+
+We can define the \textit{linear chromaticity} in the $i=x,y$ direction as the tune variation $\Delta \nu_i$ per energy deviation $\delta$ around $\delta = 0$
 \begin{equation}
     \xi_i=\dv{\nu_i}{\delta}.
 \end{equation}
 This uncorrected chromaticity is also called natural chromaticity.
 \begin{equation}
-C_{\text {nat }} \approx-\frac{1}{4 \pi} \oint K \beta d s
+\xi_{\text {nat }} \approx-\frac{1}{4 \pi} \oint K \beta d s
 \end{equation}
-To correct this chromatic effect,  we need to introduce sextupolar fields in the lattice, specifically in the dispersive regions. At dispersive regions, off-energy particles should have the deviation from the design closed orbit given by $\Delta x=\eta \delta$. Since sextupolar fields are of the form
+
+To correct this chromatic effect,  we need to introduce sextupolar fields in the lattice, specifically in the dispersive regions. At dispersive regions, off-energy particles should have a deviation from the design closed orbit given by $\Delta x=\eta \delta$. Since sextupolar fields are of the form
 $$B_{x}=B_{2} x y, \quad B_{y}=B_{2} \frac{x^{2}-y^{2}}{2}$$
 then the off-momentum particles ``see" the fields
 $$B_{x}=B_{2}(x_\beta y + \eta \delta y), \quad B_{y}=\frac{B_{2}}{2}({x_\beta^{2}-y^{2}})+B_2 x_\beta \eta \delta + \frac{B_2}{2}(\eta \delta)^2$$
-and feel the feed-down quadrupolar error
+and, up to dominant order, feel the quadrupolar error
 $$\Delta K_{x,y}(\delta)=\pm S\eta \delta$$
-$$S=B_2/B\rho$$
-The chromaticity then is
+The chromaticity then in a lattice with sextupoles is
 \begin{equation*}
-    \xi_{x,y}=\mp \frac{1}{4\pi}\oint\beta_{x,y}(K_{x,y}- S\eta)\dd s
+    \xi_{x,y}=\mp \frac{1}{4\pi}\oint\beta_{x,y}(K_{x,y}- S\eta)\dd s,
 \end{equation*}
-
-Thus they see, at leading order, a quadrupole field $\Delta K_i(\delta)=\pm S\eta \delta$, with $i=x,y$, $+$ for $x$ and $-$ para $y$, where the normalized sextupole gradient is $S=B_2/B\rho$, $B_2=\pdv*[2]{B_y}{s}$. The other effects are of the second order on $\delta$ and on $x, y$. Chromaticity can then be corrected by tuning $S$
-\begin{equation}
-    \xi_j=-\frac{1}{4\pi}\oint\beta_j(K_j\pm S\eta)\dd s
-\end{equation}
-with $j=x,y$.
+which depends linearly on sextupole strengths, allowing for the correction of chromaticity to specified values.
 
 More broadly speaking, the energy deviations induce the beam to see a completely different optics. The contributions to the changes can be of any order. For instance
 \begin{equation}
@@ -323,56 +383,7 @@ Since the tunes consist on the phase advance per revolution, we immediately see 
 Generically, the tunes can be expressed in terms of the tune-shifts as
 $$\nu_0 = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v$$
 where $\xi_u$ represents the momentum-dependent tune-shifts (higher order chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
-\subsubsection{Field Errors}
 
-The dipolar contributions promote additional bendgin and thud disturb the design orbit. Assuming the perturbations are not strong enough to kill the beam, a distorted closed orbit must exist. To find it we need to find the coordinates along the ring which are mapped to themselves after a complete revolution. That is, we must find the fixed point $\vb{X}_{\text{co}}$ of the disturbed one-turn map:
-\begin{equation}
-    \vb{X}_{\text{co}} = \mathbf{M} \vb{X}_{\text{co}} + \boldsymbol{\Delta}
-\end{equation}
-where $\boldsymbol{\Delta} = (0, \theta)^\intercal$, $\theta = B_y \Delta s / B\rho$ for the $(x, x^\prime)$ slice of the closed orbit, $\theta = B_x \Delta s / B\rho$ for the $(y, y^\prime)$. Solving for the closed orbit we find
-\begin{equation}
-    \vb{X}_{\text{co}} = (\mathbf{I} - \mathbf{M})^{-1}\boldsymbol{\Delta}.
-\end{equation}
-Using the Courant-Snyder parametrization for the one-turn map at the point $s_0$ immediately downstream the perturbation leads to
-\begin{equation}
-    \vb{X}_\text{co} = \frac{\theta}{2\sin\pi\nu}\mqty(\beta_0 \cos\pi\nu \\ \sin\pi\nu - \alpha_0 \cos\pi\nu).
-\end{equation}
-So the closed orbit coordinates can be propagated from $s_0$ to any point $s$ of the ring using the transfer matrix. For example, the propagated $x$ coordinate reads
-\begin{equation}
-    x_{\text{co}}(s) = \frac{\sqrt{\beta(s)\beta_0}}{2\sin\pi\nu}\theta\cos(|\phi(s)-\phi_0| - \pi\nu).
-    \label{eq:delta_disturb}
-\end{equation}
-
-Equation \eqref{eq:delta_disturb} is the closed-orbit distortion for a single perturbation. In the linear approximation, the distortion for a distribution of dipolar perturbations $\theta(s)$ along the ring reads
-\begin{equation}
-    x_{\text{co}}(s) = \frac{\sqrt{\beta(s)}}{2\sin\pi\nu}\int_{s}^{s+L} \theta(\sigma)\sqrt{\beta(\sigma)}\cos(\pi\nu + \phi(s) - \phi(\sigma))\dd \sigma.
-\end{equation}
-
-Knowledge of the beam-response to perturbations allows for the inversion of the problem. We can use specified small dipole kicks to correct the orbit, bringing it closer to the nominal one. These small dipole fields are generated by corrector magnets (CM's) abd orbit correction consists on linear problem of seeking CMs strength that minimze orbit distortions.
-\subsubsection{Quadrupole errors}
- A quadrupole error can be represented by a thin-lens quadrupole transfer matrix \cite{Courant:1958wbj}
-\begin{equation}
-    \mathbf{M}_q = \mqty(1 & 0 \\ -k\Delta s & 1),
- \end{equation}
- so that, immediately downstream the error, the transfer matrix reads $\mathbf{M} = \mathbf{M}_q \mathbf{M}_0$. As a consequence, the optics deviates from the nominal optics. More notouriously, the beta and the phase advances, and thus tune, changes.
-
- The phase advance over a turn, $\phi$, is related to the trace of the one-turn transfer matrix $\mathbf{M}$ as $\cos\phi = 2 \tr \mathbf{M}$. Using the CS parametrization for $\mathbf{M}$, performing the multiplication $\mathbf{M}_q \mathbf{M}_0$ and calcualting the trace leads to
- \begin{equation}
-    \cos \phi - \cos\phi_0 = - \frac{1}{2} k(s)\Delta s \beta_0 \sin\phi_0.
- \end{equation}
- In a linear approximation (if $\sin \phi_0$ is not near zero) $\Delta(\cos \phi) = \cos \phi - \cos\phi_0 \approx \Delta \phi\dv*{(\cos \phi)}{\phi}$ so the tune-shift due to a single thin-lens quadrupole error is
- \begin{equation}
-    \Delta \nu \approx \frac{1}{4\pi} \beta_0 k \Delta s
- \end{equation}
- while for a distribution of errors, we must sum over the ring
- \begin{equation}
-    \Delta \nu \approx \frac{1}{4\pi}\oint \beta(s) k(s) \dd s.
- \end{equation}
-
- Besides calculating the tune-shift, the resulting transfer-matrix for the lattice with errors allows for the identification of the new optics $\alpha, \beta, \gamma$, which can then be propagated to anywhere in the ring. In particular we can identify $\beta$ and its fractional deviation from the nominal value along $s$, a parameter known as \textit{beta-beating}
- \begin{equation}
-    \frac{\Delta \beta(s)}{\beta(s)} = - \frac{1}{2\sin(2\pi\nu_0)}\int_{s}^{s+L}k(\sigma)\cos(2\phi(\sigma)-2\phi(s)-\phi_0)\dd\sigma.
- \end{equation}
 
 \subsubsection{Ressonances}
 4D linear unperturbed motion consists on the motion of two uncoupled parametric oscillators. The phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori, corresponding to the different initial conditions $J_u$. Canonical perturbation theory applied to the perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational. The Poincare-Birkhoff theorem states that under such conditions, almost all the periodic phase-space orbits disappear. An even number of tori survives, half of which are stable and half unstable. Unstable motion in a storage ring can eventually lead to beam loss.
@@ -390,53 +401,3 @@ The condition for sufficiently rational tunes can be expressed as
     Nonlinear dynamics can become sensitive to initial conditions when the amplitudes are large. Because of the tune-shfits, specially the amplitude-dependent tune shifts, the tunes can wander in tune space, eventually crossing resonance conditions that may lead to instabilities, chatotic motion and beam loss. The dynamics can impose limitations to the maximum transverse deviations in which the beam can oscillate while displaying regular and bounded motion. This is a dynamic restriction to the motion known as the \textit{dynamic aperture}.
 
     Exceeding the dynamic aperture eventually leads to beam loss. During injection of the beam, if the transverse offsets are larger than the dynamic aperture, the beam is not captured into the storage ring. This is specially important for off-axis injection, such as in the case for SIRIUS.
-\section{The need for online optimization}
-\subsection{Injection scheme for acummulation at SIRIUS storage ring}
-Beam acummulation into the storage ring occurs in the off-axis scheme. The beam is delivered at $x\approx-8~\unit{mm}$, and receives the kick from the nonlinear kicker field. The field profile is nonlinear, with zero field and gradient at the center of the axis, so that it does not disturbs the stored beam.
-In the off-axis scheme, a sufficiently large dynamic aperture is desired to allow the beam to be captured into the storage ring. The predicted efficiency for SIRIUS setup, considering a dynamic aperture reaching $x=-9~\unit{mm}$, was nearly $100\%$. What was observed during 2022 was an injection efficiency of about $88\pm8\%$.
-\lipsum[1-10]
-\subsection{New working points}
-\section{Online Optimization}
-This sction describes the experimental methods and analysis employed for optimizing the nonlinear dynamics and evaluating the quality of the configurations found.
-\subsection{Dynamic Aperture Optimization}
-\subsubsection{Knobs}
-The dynamic aperture is determined by the quality of the dynamics in terms of perturbations and nonlinearities. Considering corrected quadrupoles and dipoles (linear optics), the main factors influencing SIRIUS DA are the nonlinearities introduced by the sextupoles and possbibly their field's small errors and deviations from the design parameters. The goal, thus, is to search for the sextupole configurations rendering the largest DA.
-
-The sextupoles are the parmeters which can be tuned, the knobs. SIRIUS has 21 sextupole families: magnets powered by the same power supply. 6 of them are achromatic sextupoles. They are placed where the the dispersion is zero. The 15 other families are chromatic families. Table~\ref{fams} shows the 21 sextupole families names.
- \begin{table}[htb]
-    \caption{SIRIUS sextupole families}
-    \centering
-    \begin{tabular}{cl}
-            \hline
-            achromatic & \begin{tabular}[c]{@{}l@{}}SFA0, SDA0, \\ SFB0, SDB0,\\ SDP0, SFP0\end{tabular}                                                                \\ \hline
-            chromatic  & \begin{tabular}[c]{@{}l@{}}SDA1, SFA1, \\ SDA2, SFA2, \\ SDA3,\\ SDB1, {SFB1}\\ SDB2, SFB2, \\ SDB3, \\ {SFP1}, SDP1,\\ SDP2, SFP2\\ SDP3\end{tabular} \\ \hline
-            \end{tabular}
-            \label{fams}
-            \end{table}
-In principle, thus, the optimization parameter space is 21-dimensional. In reality, we would like to change sextupoles without changing chromaticity. Since we need at least one degree of freedom for correcting chromaticity in the horizontal plane and one degree of freedom for correcting the chromaticity in vertical plane, there are 19 available knobs. The dimensionality of the search space can be further reduced by imposing additional constraints to certain families variations. The specific choices of knobs for optimzation experiments are discussed in more details in the Results section.
-% In 4th generation Synchrotron storage rings, stronger focusing is needed to deliver lower emittances. Which means stronger sextupole maagnets and more nonlinear dynamics.
-\subsubsection{Objective function}
-There is no analytical formula for relating the storage ring linear or nonlinear optics to the Dynamic Aperture. The optimization procedure must be a direct search procedure: changes are performed in the knobs and the effect over dynamic aperture is evaluated.
-
-Also, we cannot measure dynamic aperture directly. We must choose an objective function to act as a probe to the DA: a figure of merit related to the dynamic aperture to represent it.
-
-Two objectives usually adopted as probes are the injection efficiency and the beam's resilience to dipolar perturbations. The former is quite self-explanatory: the larger the dynamic aperture, the larger space for the beam to be captured during injection, and thus the larger the injection efficiency. The latter is related to the DA by the following: the larger the horizontal dipolar kicks the beam can survive, the larger the orbit distortions towards the positive or negative horizontal plane (depending on the kick direction). So the larger the amplitudes the beam explores as it oscillates, probing the DA borders. If the beam survives to large kicks, it means the ring can accomodate larger orbit distortions because of an increased dynamic aperture.
-
-In summary, the dynamic aperture optimization procedure must consist on the exploration of sextupole (knobs) configurations yielding the largest dynamic aperture as accessed by as objective function such as injection efficiency or beam kick-resiliency.
-\subsubsection{Noise-Robust Online Optimization}
-In the optimization literature, optimization routines and algorithms are usually classified according to whether they rely on the calculation of derivatives (gradient-based) or solely on the comparison of the objective function values (gradient-free). The latter can yet be classified into direct- or indirect-search methods, depending on whether the search of the extremum relies on direct comparisons from data or from a mathematical model, respectively \cite{numerical_recipes}.
-
-Both gradient-based and gradient-free strategies rely on the comparison of the objective function at different points of the parameter space. If the objective function suffers from noise this can significantly reduce the efficiency of the optimization routine \cite{numerical_recipes, huang2019beam}. In Chap. 7 of Ref.~\cite{huang2019beam}, a review of the most popular optimization algorithms shows how most of them suffer to find minima to, at least, the precision of the noise-$\sigma$ the objective function is subjected to.
-
-The Robust Conjugate Direction Search (RCDS) algorithm is a indirect-search, gradient-free optimization algorithm introduced in Ref.~\cite{Huang:2013}. The algorithm consists of a main loop for constructing and managing optimal search directions along the knobs space (Powell's Method) and a one-dimensional optimizer responsible for a noise-aware search for the minimum along a given direction. The algorithm is capable of optimizing the objective function (find its local maximum/minimum) to at least the precision of the objective-function noise \cite{Huang:2013, huang2019beam}, being thus adequate for online optimization problems. Specifically, for accelerator controls and optimization, the algorithm has been successfully applied to optimize beam steering and optics matching during injection \cite{Huang:2013}, reducing horizontal emittance \cite{Huang:2013, Huang:2015}and optimization of dynamic aperture \cite{Huang:2013,Huang:2015,Liuzzo:IPAC2016-THPMR015,Olsson:IPAC2018-WEPAL047,yang:ipac2022-tupopt064}.
-\subsection{Characterization of Sextupole Magnets Configurations}
-Once a configuration of sextupoles (position in parameter space) is found, the nonlinear optics it provides the machine needs to be characterized. The characterizations consisted on evaluatig/measuring the followint figures of merit and desired features
-\begin{itemize}
-    \item Injection efficiency in nominal off-axis conditions : this is the most desired characteristic. The sextupoles are to be optimized so the DA and the off-axis injection efficiency increase.
-    \item Beam Kick resilience: a small current of $2~\unit{\milli\ampere}$, concentrated in a single bucket is stored in the ring. The beam is kicked by the horizontal dipole kicker, which instantly provides a dipolar perturbation leading the beam to be displaced in the horizontal direction. The current before and after the kick is recorded by a current monitor (DCCT) and allows for the calculation of the fraction of the beam lost as a consequence of the kick and the transverse displacement. The procedure is repeated with progressively stronger kicks, and a curve of beam loss as a function of the kick can be constructed. The smaller the losses for larger kicks, the larger the resilience.
-    \item Phase portrait area: it is expected that the optimzation procedure increases the dynamic aperture of the machine, meaning it can accomodate larger oscillations and larger phase portraits $x-x^\prime$. Using beam position monitors (BPMs) at the two ends of a straight section, which record the positions of the beam centroid at each turn, we can calculate the position and angle of the beam in the middle of the straight section, and thus recostruct the phase-portrait from turn-by-turn (TbT) data.
-    \item Beam lifetime: the lifetime at SIRIUS is dominated by losses due to electron-electron interactions leading to momentum transfers exceeding the energy/momentum acceptance (MA). Optimization of DA does not necessarily leads to improvements in the MA. If the MA is reduced, the rate at which the beam is lost can increase, reducing the total lifetime. It is desireble that the configurations found during DA otpimzation do not worsen the MA and beam lifetime considerably.
-    % One dominat effect leading to beam loss is the so-called Touschek Effect, consisiting on collisions between electrons of the same bunch leading to momentum trasfers from the transverse to the longitudinal direction that can exceed the lattice tolerance to momentum deviations, the Momentum Acceptance. Momentum acceptance is the dynamic aperture for off-energy particles. Optimization of DA, which is accesed by the aforementioned objective functions, not necessarily leads to improvements in the MA. If the MA is reduced, the rate of Touschek events increases and thus the lifetime is reduced. Therefore, another desired feature from a good sextupole configurations is having a good beam lifetime. We expect not the worsen the lifetime.
-    \item Chromaticity: Sextupoles are introduced in the storage ring for correction of focusing chromatic aberretions. When changing the sextupole settings, it is desired to do so in such a manner that the chromaticity is unchanged. The methods for choosing the optimization knobs already take into account the need for keeping constant chromaticity. Still, after optimization is performed, we need to check whether chromaticity is unchanged.
-\end{itemize}
-The first two characterizations are quite similar to the two most immediate objective function candidates mentioned above. Indeed, in most nonlinear dynamics optimzation experiments, optimization using injection efficiency or kick resilience as objectives seemed to be completely interchangable. Improvements in injection efficiency necessarily led to improvements in kick resilience, and vice-versa. As shown in more details in the results section, for the SIRIUS storage ring this appears not to be the case. The configurations can be specialized to improvements solely on injection efficiency or solely to kick resilience. This feature was observed during the characterization of the optimized sextupole settings with respect to these two figures of merit.
