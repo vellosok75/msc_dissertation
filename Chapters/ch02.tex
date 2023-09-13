@@ -1,6 +1,5 @@
 \chapter{Theoretical Background}
 
-\section{Single-particle dynamics in electron storage rings}
 Ultra-relativistic beams of electrons are injected into the SIRIUS storage ring with the ring nominal operating energy of $3~\unit{G eV}$. The beam is injected in the form of electron bunches, with characteristic length, width and size.
 
 The storage ring is designed to confine the bunches and steer them along a reference closed orbitm which is achieved by specifying dipolar magnetic fields along the orbit such that the integrated effect is an angular deviation of $2\pi$ in the beam's trajectory. Additionally, to keep electrons close to the closed orbit, it is also necessary to specify gradient magnetic fields with strengths proportional the the beam's transverse deviations. These fields provide alterating focusing and defocusing of the beam in such a manner that their overall effect is to restore the beam towards the design orbit.
@@ -30,7 +29,7 @@ The electron travels along the ring at the speed of light and executes transvers
 \end{itemize}
 
 Next, the single-particle dynamics is presented with the aim of defining quantitavely the dynamic aperture and the characteristics of the dynamics in electron strorage rings. Throghout the modelling, optical functions and parameter for the SIRIUS storage rings are also presented.
-\subsection{Motion of charged particles in magnetic fields}
+\section{Motion of charged particles in magnetic fields}
 An electron of charge $e$ and momentum $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$, pointing along the perpendicular to the ortbit plane. In such conditions, Lorentz force law predicts that
 \begin{equation}
     R(p)\equiv B\rho = \frac{p}{e}.
@@ -49,7 +48,7 @@ Where \eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the \texti
 
 \todo[inline]{Add deflection figures}
 
-\subsection{Storage rings}
+\section{Storage rings}
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.4\textwidth]{Images/storage_ring.png}
@@ -64,7 +63,7 @@ For providing stability, focusing towards the reference closed orbit is also nee
 Sextupole mangets are also usually included in the design of storage rings. The fields they produce is quadratic with transverse displacement and are needed for correction of chromatic errors in the dynamics.
 \todo[inline]{add magnets and field profile figures}
 
-\subsection{The coordinate system}
+\section{The coordinate system}
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/frenetserret.png}
@@ -87,7 +86,7 @@ The frame thus depends solely on the geometry of the specified path. Since the c
         \label{eq:G}
     \end{equation}
 where $R_0$ is the rigidity for the beam at the nominal energy.
-\subsection{Hamiltonian for the relativistic electron}
+\section{Hamiltonian for the relativistic electron}
 The dynamics of relativistic electrons influenced by electromagnetic fields $(\Phi, \vb{A})$ is encapsulated by the Hamiltonian
     \begin{equation*}
         H=\sqrt{m^2c^4+(\vb{P}-q\vb{A})^2c^2}+e\Phi,
@@ -136,7 +135,7 @@ In the equations of motion, eqs.~\eqref{eq:EOMs}, the magnetic rigidity normaliz
     \label{eq:mag_funcs}
 \end{equation}
 
-\subsection{Linear Dynamics}
+\section{Linear Dynamics}
 \subsubsection{Linear equations of motion}
 Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variables leads to \cite{sands}
     \begin{equation}
@@ -341,7 +340,7 @@ which depends linearly on sextupole strengths, allowing for the correction of ch
 % \begin{equation}
 %     \Delta \beta(s, \delta) = \beta^{(1)}(s) \delta + \beta^{(2)}(s) \delta^2 + \dots
 % \end{equation}
-\subsection{Nonlinear Dynamics and Perturbations}
+\section{Nonlinear Dynamics and Perturbations}
 \subsubsection{Action-Angle Variables}
 Betatron motion of equation~\eqref{eq:Hill} can be obtained as Hamilton's equations for the effective, linear Hamiltonian
 \begin{equation}
