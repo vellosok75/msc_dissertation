@@ -342,12 +342,12 @@ which depends linearly on sextupole strengths, allowing for the correction of ch
 %     \Delta \beta(s, \delta) = \beta^{(1)}(s) \delta + \beta^{(2)}(s) \delta^2 + \dots
 % \end{equation}
 \subsection{Nonlinear Dynamics and Perturbations}
-\subsubsection{Action Angle Variables}
-Betatron motion of equation~\eqref{eq:Hill} can be obtained as Hamilton's equations for the effective Hamiltonian
+\subsubsection{Action-Angle Variables}
+Betatron motion of equation~\eqref{eq:Hill} can be obtained as Hamilton's equations for the effective, linear Hamiltonian
 \begin{equation}
     \mathcal{H}=\frac{1}{2}u^{\prime2}+\frac{1}{2}K_u(s)u^2.
 \end{equation}
-A transformation $(u,u^\prime)\to(\psi, J)$ to Action-angle variables is implicitly implemented by the generating function
+A transformation $(u,u^\prime)\to(\psi, J)$ to Action-angle variables is implicitly implemented by the type-1 generating function
 \begin{equation}
     F_1(u,\phi_u)=\int{u}^\prime\dd{{u}}=\frac{u^2}{2\beta_u}\qty(\tan \phi_u-\frac{\beta_u^\prime}{2}).
 \end{equation}
@@ -356,7 +356,7 @@ The action variable reads
     J_u=-\pdv{F_1}{\phi_u} = \frac{u}{2\beta_u}\sec^2\phi_u = \frac{1}{2\beta_u}[u^2 + (\beta_u u^\prime + \alpha_u u^2)],
     \label{eq:action}
 \end{equation}
-from which we recover the pseudo-harmonic form $u=\sqrt{2\beta_u J_u}\cos(\phi_u(s)+\phi_0)$. This justifies our choice for the amplitude constant in the pseudo-harmonic description.
+from which we recover the pseudo-harmonic form $u=\sqrt{2\beta_u J_u}\cos(\phi_u(s)+\phi_0)$.
 
 In the $J,\phi$ variables, the new hamiltonian is $H_0(\phi, J)$,  given by
 \begin{equation}
@@ -381,19 +381,19 @@ Hamilton's equations read
 \begin{equation}
 \phi_u^\prime = \frac{1}{\beta_u(s)}+\pdv{V(J,\phi)}{J_u}, \quad J_u^\prime = \pdv{V(J,\phi)}{\phi_u}.
 \end{equation}
-Since the tunes consist on the phase advance per revolution, we immediately see that the presence of perturbations leads to tune-shifts.
-
-Generically, the tunes can be expressed in terms of the tune-shifts as
+Since the tunes consist on the phase advance per revolution, we immediately see that the presence of perturbations leads to tune-shifts. Generically thus, the tunes can be expressed in terms of the tune-shifts as
 $$\nu_0 = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v$$
-where $\xi_u$ represents the momentum-dependent tune-shifts (higher order chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
+where $\xi_u$ represents the energy-dependent tune-shifts (higher order generalization of linear chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
 
 
 \subsubsection{Ressonances}
-4D linear unperturbed motion consists on the motion of two uncoupled parametric oscillators. The phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori, corresponding to the different initial conditions $J_u$. Canonical perturbation theory applied to the perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational. The Poincare-Birkhoff theorem states that under such conditions, almost all the periodic phase-space orbits disappear. An even number of tori survives, half of which are stable and half unstable. Unstable motion in a storage ring can eventually lead to beam loss.
+4D linear unperturbed motion consists on the motion of two uncoupled parametric oscillators. The phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori, corresponding to the different choices of initial conditions $J_u$.
+
+Canonical perturbation theory applied to perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational. The Poincare-Birkhoff theorem states that under such conditions, almost all the periodic phase-space orbits disappear. An even number of tori survives, half of which are stable and half unstable. Unstable motion in a storage ring can eventually lead to beam loss.
 
 The condition for sufficiently rational tunes can be expressed as
     $$m\nu_x + n\nu_y = \ell,$$
-    for $n, m, \ell\in\mathbb{Z}$, and defines the lines in tune-space in which perturbation theory fails and motion can become unstable. These are resonance lines and $|n|+|m|$ is the order of the resonance. Figure~\ref{resons} shows resonance lines for the resonances up to second, third and fourth order respectively. First order resonances can be excited by dipolar fields, 2nd order resonances can be excited by quadrupole fields and 3rd order resonances can be driven by sextupolar fields.
+    for $n, m, \ell\in\mathbb{Z}$. This condition defines lines in tune-space corresponding to the locus in which perturbation theory fails and motion can become unstable. These are resonance lines and $|n|+|m|$ is the order of the resonance. Figure~\ref{resons} shows resonance lines for the resonances up to second, third and fourth order respectively. First order resonances can be excited by dipolar fields, 2nd order resonances can be excited by quadrupole fields and 3rd order resonances can be driven by sextupolar fields.
 \begin{figure}[thb]
     \centering
     \includegraphics[width=\textwidth]{Images/tunes.png}
