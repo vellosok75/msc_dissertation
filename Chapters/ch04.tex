@@ -1,12 +1,48 @@
-\chapter{The Phantom Menace	May}
-\section{Turmoil has engulfed the Galactic Republic}
-The taxation of trade routes to outlying star systems is in 
-dispute. Hoping to resolve the matter with a blockade of 
-deadly battleships, the greedy Trade Federation has stopped 
-all shipping to the small planet of Naboo. While the Congress 
-of the Republic endlessly debates this alarming chain of 
-events, the Supreme Chancellor has secretly dispatched two 
-Jedi Knights, the guardians of peace and justice in the 
-galaxy, to settle the conflict \cite{bib_binks99, bib_quigon99}.
+\chapter{Online Optimzation of storage ring Dynamic Aperture}
 
+\subsection{Injection scheme for acummulation at SIRIUS storage ring}
+Beam acummulation into the storage ring occurs in the off-axis scheme. The beam is delivered at $x\approx-8~\unit{mm}$, and receives the kick from the nonlinear kicker field. The field profile is nonlinear, with zero field and gradient at the center of the axis, so that it does not disturbs the stored beam.
+In the off-axis scheme, a sufficiently large dynamic aperture is desired to allow the beam to be captured into the storage ring. The predicted efficiency for SIRIUS setup, considering a dynamic aperture reaching $x=-9~\unit{mm}$, was nearly $100\%$. What was observed during 2022 was an injection efficiency of about $88\pm8\%$.
+\lipsum[1-10]
+\subsection{New working points}
+\section{Online Optimization}
+This sction describes the experimental methods and analysis employed for optimizing the nonlinear dynamics and evaluating the quality of the configurations found.
+\subsection{Dynamic Aperture Optimization}
+\subsubsection{Knobs}
+The dynamic aperture is determined by the quality of the dynamics in terms of perturbations and nonlinearities. Considering corrected quadrupoles and dipoles (linear optics), the main factors influencing SIRIUS DA are the nonlinearities introduced by the sextupoles and possbibly their field's small errors and deviations from the design parameters. The goal, thus, is to search for the sextupole configurations rendering the largest DA.
+
+The sextupoles are the parmeters which can be tuned, the knobs. SIRIUS has 21 sextupole families: magnets powered by the same power supply. 6 of them are achromatic sextupoles. They are placed where the the dispersion is zero. The 15 other families are chromatic families. Table~\ref{fams} shows the 21 sextupole families names.
+ \begin{table}[htb]
+    \caption{SIRIUS sextupole families}
+    \centering
+    \begin{tabular}{cl}
+            \hline
+            achromatic & \begin{tabular}[c]{@{}l@{}}SFA0, SDA0, \\ SFB0, SDB0,\\ SDP0, SFP0\end{tabular}                                                                \\ \hline
+            chromatic  & \begin{tabular}[c]{@{}l@{}}SDA1, SFA1, \\ SDA2, SFA2, \\ SDA3,\\ SDB1, {SFB1}\\ SDB2, SFB2, \\ SDB3, \\ {SFP1}, SDP1,\\ SDP2, SFP2\\ SDP3\end{tabular} \\ \hline
+            \end{tabular}
+            \label{fams}
+            \end{table}
+In principle, thus, the optimization parameter space is 21-dimensional. In reality, we would like to change sextupoles without changing chromaticity. Since we need at least one degree of freedom for correcting chromaticity in the horizontal plane and one degree of freedom for correcting the chromaticity in vertical plane, there are 19 available knobs. The dimensionality of the search space can be further reduced by imposing additional constraints to certain families variations. The specific choices of knobs for optimzation experiments are discussed in more details in the Results section.
+% In 4th generation Synchrotron storage rings, stronger focusing is needed to deliver lower emittances. Which means stronger sextupole maagnets and more nonlinear dynamics.
+\subsubsection{Objective function}
+There is no analytical formula for relating the storage ring linear or nonlinear optics to the Dynamic Aperture. The optimization procedure must be a direct search procedure: changes are performed in the knobs and the effect over dynamic aperture is evaluated.
+
+Also, we cannot measure dynamic aperture directly. We must choose an objective function to act as a probe to the DA: a figure of merit related to the dynamic aperture to represent it.
+
+Two objectives usually adopted as probes are the injection efficiency and the beam's resilience to dipolar perturbations. The former is quite self-explanatory: the larger the dynamic aperture, the larger space for the beam to be captured during injection, and thus the larger the injection efficiency. The latter is related to the DA by the following: the larger the horizontal dipolar kicks the beam can survive, the larger the orbit distortions towards the positive or negative horizontal plane (depending on the kick direction). So the larger the amplitudes the beam explores as it oscillates, probing the DA borders. If the beam survives to large kicks, it means the ring can accomodate larger orbit distortions because of an increased dynamic aperture.
+
+In summary, the dynamic aperture optimization procedure must consist on the exploration of sextupole (knobs) configurations yielding the largest dynamic aperture as accessed by as objective function such as injection efficiency or beam kick-resiliency.
+\subsubsection{Noise-Robust Online Optimization}
+
+\subsection{Characterization of Sextupole Magnets Configurations}
+Once a configuration of sextupoles (position in parameter space) is found, the nonlinear optics it provides the machine needs to be characterized. The characterizations consisted on evaluatig/measuring the followint figures of merit and desired features
+\begin{itemize}
+    \item Injection efficiency in nominal off-axis conditions : this is the most desired characteristic. The sextupoles are to be optimized so the DA and the off-axis injection efficiency increase.
+    \item Beam Kick resilience: a small current of $2~\unit{\milli\ampere}$, concentrated in a single bucket is stored in the ring. The beam is kicked by the horizontal dipole kicker, which instantly provides a dipolar perturbation leading the beam to be displaced in the horizontal direction. The current before and after the kick is recorded by a current monitor (DCCT) and allows for the calculation of the fraction of the beam lost as a consequence of the kick and the transverse displacement. The procedure is repeated with progressively stronger kicks, and a curve of beam loss as a function of the kick can be constructed. The smaller the losses for larger kicks, the larger the resilience.
+    \item Phase portrait area: it is expected that the optimzation procedure increases the dynamic aperture of the machine, meaning it can accomodate larger oscillations and larger phase portraits $x-x^\prime$. Using beam position monitors (BPMs) at the two ends of a straight section, which record the positions of the beam centroid at each turn, we can calculate the position and angle of the beam in the middle of the straight section, and thus recostruct the phase-portrait from turn-by-turn (TbT) data.
+    \item Beam lifetime: the lifetime at SIRIUS is dominated by losses due to electron-electron interactions leading to momentum transfers exceeding the energy/momentum acceptance (MA). Optimization of DA does not necessarily leads to improvements in the MA. If the MA is reduced, the rate at which the beam is lost can increase, reducing the total lifetime. It is desireble that the configurations found during DA otpimzation do not worsen the MA and beam lifetime considerably.
+    % One dominat effect leading to beam loss is the so-called Touschek Effect, consisiting on collisions between electrons of the same bunch leading to momentum trasfers from the transverse to the longitudinal direction that can exceed the lattice tolerance to momentum deviations, the Momentum Acceptance. Momentum acceptance is the dynamic aperture for off-energy particles. Optimization of DA, which is accesed by the aforementioned objective functions, not necessarily leads to improvements in the MA. If the MA is reduced, the rate of Touschek events increases and thus the lifetime is reduced. Therefore, another desired feature from a good sextupole configurations is having a good beam lifetime. We expect not the worsen the lifetime.
+    \item Chromaticity: Sextupoles are introduced in the storage ring for correction of focusing chromatic aberretions. When changing the sextupole settings, it is desired to do so in such a manner that the chromaticity is unchanged. The methods for choosing the optimization knobs already take into account the need for keeping constant chromaticity. Still, after optimization is performed, we need to check whether chromaticity is unchanged.
+\end{itemize}
+The first two characterizations are quite similar to the two most immediate objective function candidates mentioned above. Indeed, in most nonlinear dynamics optimzation experiments, optimization using injection efficiency or kick resilience as objectives seemed to be completely interchangable. Improvements in injection efficiency necessarily led to improvements in kick resilience, and vice-versa. As shown in more details in the results section, for the SIRIUS storage ring this appears not to be the case. The configurations can be specialized to improvements solely on injection efficiency or solely to kick resilience. This feature was observed during the characterization of the optimized sextupole settings with respect to these two figures of merit.
 \lipsum[1-10]
