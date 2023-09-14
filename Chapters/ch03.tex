@@ -15,6 +15,32 @@ In the literature, optimization routines and algorithms are usually classified a
 Both gradient-based and gradient-free strategies rely on the comparison of the objective function at different points of the parameter space. If the objective function suffers from noise this can significantly reduce the efficiency of the optimization routine \cite{numerical_recipes, huang2019beam}. In Chap. 7 of Ref.~\cite{huang2019beam}, a review of the most popular optimization algorithms shows how most of them suffer to find minima to, at least, the precision of the noise-$\sigma$ the objective function is subjected to.
 
 The Robust Conjugate Direction Search (RCDS) algorithm is a indirect-search, gradient-free optimization algorithm introduced in Ref.~\cite{Huang:2013}. The algorithm consists of a main loop for constructing and managing optimal search directions along the knobs space (Powell's Method) and a one-dimensional optimizer responsible for a noise-aware search for the minimum along a given direction. The algorithm is capable of optimizing the objective function (find its local maximum/minimum) to at least the precision of the objective-function noise \cite{Huang:2013, huang2019beam}, being thus adequate for online optimization problems. Specifically, for accelerator controls and optimization, the algorithm has been successfully applied to optimize beam steering and optics matching during injection \cite{Huang:2013}, reducing horizontal emittance \cite{Huang:2013, Huang:2015}and optimization of dynamic aperture \cite{Huang:2013,Huang:2015,Liuzzo:IPAC2016-THPMR015,Olsson:IPAC2018-WEPAL047,yang:ipac2022-tupopt064}.
-\subsection{Powell's conjugate direction set}
+\subsection{Line methods}
+Let $f(x)\in\mathbb{R}$ be the objective function depending on the single parameter $x\in\mathbb{R}$. The task of optimizing (minimizing or maximizing) $f$ can be achieved by a direct search onver the possibile values of $x$. Since maximizing a function equals to minimizing the same function multipled by $-1$, in what follows, we shall refer to minimization only.
 
-\subsection{Bracetking and line-search}
+The search for the minimum is usually preceeded by initially \textit{bracketing} the miminum: finding a triplet of points $a<b<c$ in the domain such that $f(b)$ is smaller than both $f(a)$ and $f(c)$. If $f$ is reasonably smooth, we are certain there will be a minimium in the interval $(a, c)$. Standard bracket routines for well-behaved, noiseless objective functions can be found in the literature.
+
+Given an intial bracketed interval, the most common line-search methods are
+\begin{itemize}
+    \item Golden Section Search: which updates the brackets progressively shrinking it until spans only a small interval specified by the user. Usually the machine precision is used. The miminum is then found to within this tolerance.
+    \item Parabolic Interpolation: where a parabola is fitted to $f(a), f(b), f(c)$. The parabola minimum takes us to the minumum or close to a it in a single leap.
+\end{itemize}
+For dealing with noisy objective functions, RCDS introduces a noise-aware bracketing routine and a parabolic interpolation scan over the bracket. We assume that what we measure is $y(x)=f(x) + \xi$, where $\xi\sim\mathcal{N}(\mu=0, \sigma)$ is a random variable modeling the experimental noise. Instead of seeking for points $a<b<c$ satisfying $f(b)< f(a), f(b) < f(c)$, RCDS requires a more strict condition $f(b)< f(a)+3\sigma, f(b) < f(c)+3\sigma$, where $\sigma$ is the expected noise $\sigma = \text{Var}[\xi]$.
+
+During the line-search, the parabola is fitted within the brackets and its minimum is taken as the objective function minimum. There is also an additional comparison of the available points within the brackets used for the fitting. If any of them is considered an outlier, it is not used during the fitting.
+\subsection{Powell's conjugate direction set}
+With a line-optimizer at hand, optimization of the objective function $f(\vb{x})\in\mathbb{R}$ depending on $p$ parameters $x_i$ (knobs) arranged as $\vb{x} = \mqty[x_1 & \dots & x_p]^\intercal \in \mathbb{R}^p$ is a simple matter of iterating the one-dimensional minimization along the direction of each one of the $p$ unit vectors $\vu{e}_i$. That is, given an intial configuration $\vb{x}_0$, and directions $\vu{n}$, we have the one-dimensional problem to minimize $g(\delta)=f(\vb{x}_0 + \delta \vu{n})$. The minimum is  then $f(\vb{x}_0 + \delta_* \vu{n})$, where $\delta_* = \text{arg min}_\delta g(\delta)$
+
+As can be seen in figure, scanning along each orthogonal directioon can be time consuming and suboptimial when evaluation of the objective function is expensive, specially for some functions with long narrow valleys at some angle with the coordinates basis vectors.
+
+A more effieicent strategy was introduced by Powell, which advises the construction of mutually conjugate directions. Powell proves these are non-iterfering directions, meaning the minimization carried at any given conjugate direction does not spoil the minimiation along any other of them.
+
+Conjugate directions are constructed as follows
+\begin{enumerate}
+    \item Set the initial directions as the basis vectors: $\vu{u}_i=\vu{e}_i, i=1,\dots, p$.
+    \item Save the starting point (initial parameters state) as $\vb{x}_0$ and let $\vb{x}_i$ denote the minimum position found up until the minimization along the $i$th direction.
+    \item For $i=1,\dots, p$ minimize along $\vu{u}_i$. Update the minimimum $\vb{x}_i$.
+    \item For $i=1,\dots p-1$ set $\vu{u}_i\to\vu{u}_{i+1}$
+    \item Set $\vb{u}_p=\vb{x}_p - \vb{x}_0$. Normalize to obtain $\vu{u}_p$.
+    \item Minimize along $\vu{u}_p$. Call the minimum found $\vb{x}_0$ and repeat the procedure until reaching a certain number of evaluations or until some condition is reached.
+\end{enumerate}
