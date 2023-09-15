@@ -31,16 +31,41 @@ During the line-search, the parabola is fitted within the brackets and its minim
 \subsection{Powell's conjugate direction set}
 With a line-optimizer at hand, optimization of the objective function $f(\vb{x})\in\mathbb{R}$ depending on $p$ parameters $x_i$ (knobs) arranged as $\vb{x} = \mqty[x_1 & \dots & x_p]^\intercal \in \mathbb{R}^p$ is a simple matter of iterating the one-dimensional minimization along the direction of each one of the $p$ unit vectors $\vu{e}_i$. That is, given an intial configuration $\vb{x}_0$, and directions $\vu{n}$, we have the one-dimensional problem to minimize $g(\delta)=f(\vb{x}_0 + \delta \vu{n})$. The minimum is  then $f(\vb{x}_0 + \delta_* \vu{n})$, where $\delta_* = \text{arg min}_\delta g(\delta)$
 
-As can be seen in figure, scanning along each orthogonal directioon can be time consuming and suboptimial when evaluation of the objective function is expensive, specially for some functions with long narrow valleys at some angle with the coordinates basis vectors.
+As can be seen in figure, scanning along each orthogonal directioon can be time consuming specially for some functions with long narrow valleys at some angle with the coordinates basis vectors. This strategy thus is suboptimial when evaluation of the objective function is expensive.
 
-A more effieicent strategy was introduced by Powell, which advises the construction of mutually conjugate directions. Powell proves these are non-iterfering directions, meaning the minimization carried at any given conjugate direction does not spoil the minimiation along any other of them.
+The reason why using basis vectors can be so inneficient is because optimizing along some basis vector spoils down minimization carried out in the any other of them one. So repetetion of the procedure is required. A more effieicent strategy consists on constructing a set of special non-interfering direction vectors so that minimization carried at any given direction does not spoil the minimiation performed in any other of them. We quickly present the necessary condition these non-interfering directions must satisty.
 
-Conjugate directions are constructed as follows
+Going back to the one-dimensional problem of minimizing along a direction $\vb{u}$, $\delta_* = \text{arg min}\ g(\delta) = f(\vb{x}_{0}+\delta\vu{u})$, we know that, at the minimum, we must have vanishing derivative: $g^{\prime}(\delta_*)=\grad f(\vb{x}_{0}+ \delta_* \vu{u})\cdot \vu{u}=0$. Therefore, the gradient is perpendicular to $\vu{u}$ at $\delta_*$.
+
+Consider now the quadratic-form approximation for the objective function around point $\vb{x}_0$, taken as the origin.
+\begin{equation}
+    f(\vb{x})=f(\vb{x}_0)+\grad f(\vb{x}_0)\cdot \vb{x} + \frac{1}{2}\vb{x}\cdot\vb{H}(\vb{x}_0)\cdot\vb{x},
+\end{equation}
+where, as usual, $(\grad f(\vb{x}_0))_i = \pdv*{f(\vb{x}_0)}{x_i}$ is the gradient, and $(\vb{H})_{ij} = \pdv*{f(\vb{x}_0)}{x_i}{x_j}$ is the Hessian matrix. Up to such approximation, differentiation of the previous expression reaveals the gradient can be approximated by
+\begin{equation}
+    \grad f(\vb{x}) = \grad f(\vb{p}) + \vb{H}\cdot \vb{x}
+\end{equation}
+and thus is changed by
+$$\delta(\grad f ) = \vb{H}\cdot \delta \vb{x}$$
+upon a step $\vb{\delta \vb{x}}$. Suppose we have optimzed along direction $\vb{u}$, so $\grad f(\vb{u}) = \grad f(\vb{x}_0) + \vb{H}\cdot \vb{u}$. Now, optimizing along $\vb{v}$ will be non-interfering if the gradient stays orthogonal to $\vb{v}$, that its
+\begin{equation}
+    \vb{v}\cdot\vb{H}\cdot\vb{u}=0.
+\end{equation}
+
+Let $\vu{u}_i$ denote our directions set. Powell proved conjugate directions can be constructed as follows
 \begin{enumerate}
     \item Set the initial directions as the basis vectors: $\vu{u}_i=\vu{e}_i, i=1,\dots, p$.
-    \item Save the starting point (initial parameters state) as $\vb{x}_0$ and let $\vb{x}_i$ denote the minimum position found up until the minimization along the $i$th direction.
-    \item For $i=1,\dots, p$ minimize along $\vu{u}_i$. Update the minimimum $\vb{x}_i$.
-    \item For $i=1,\dots p-1$ set $\vu{u}_i\to\vu{u}_{i+1}$
+    \item Save the starting point (initial parameters state) as $\vb{x}_0$;
+    \item For $i=1,\dots, p$ minimize along $\vu{u}_i$. Save the minimimum as $\vb{x}_i$.
+    \item For $i=1,\dots p-1$ set $\vu{u}_i\leftarrow\vu{u}_{i+1}$
     \item Set $\vb{u}_p=\vb{x}_p - \vb{x}_0$. Normalize to obtain $\vu{u}_p$.
-    \item Minimize along $\vu{u}_p$. Call the minimum found $\vb{x}_0$ and repeat the procedure until reaching a certain number of evaluations or until some condition is reached.
+    \item Minimize along $\vu{u}_p$. Name the found minimum as the new $\vb{x}_0$ and repeat the procedure until reaching a certain number of evaluations or until some stopping condition is reached.
 \end{enumerate}
+
+Powell proved that repeating this procedure $k$ times for a quadratic form produces a set of directions whose last $k$ vectors are mutually, pairwise conjugate, in the sense of the Hessian matrix and that $p$ iterations of the algorithm exactly minmizes the quadratic form.
+
+There is a problem in throwing away  for $\vu{u}_1$ for $\vb{x}_p - \vb{x}_0$ every iteration  : at some point the lines start to fold up on each other and lose linear independence. As a result the function can end up minimized only within a subspace of parameter space.
+
+At each step, you can reinitialize directions to the basis vectors, or use any new set of orthogonal directions.The somewhat counterintuitive solution suggested by Powell is to discard not necessarily $\vu{u}_1$, but the direction along which $f$ had its largest decrease. This is justified because this direction is likely have a largest component along the new proposed conjugate direction. When doing this, the resulting set of directions is no longer conjugate, but still adequate for functions with long and narrow valleys.
+
+\todo[inline]{Investigate the following:for a simple quadratic form, does the conjugate directions match principal axis from PCA?}
