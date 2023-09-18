@@ -23,49 +23,68 @@ In the real machine, additional errors arising from magnets misalignment or any 
 In the machine, a particular error configuration is physically realized, and we are thus dealing with one possible lattice realization, for which the optimum configuration is not that with the largest average DA or lifetime. But we expect it to be not too far from that reference configuration chosen and applied to the machine. Online optimzaiton thus consists on adjusting the sextupole lattice to the physically realized machine lattice so that it reaches its best-performing configuration.
 
 \section{Robust Conjugate Direction Search}
-In the literature, optimization routines and algorithms are usually classified according to whether they rely on the calculation of derivatives (gradient-based) or solely on the comparison of the objective function values (gradient-free). The latter can yet be classified into direct- or indirect-search methods, depending on whether the search of the extremum relies on direct comparisons of the objective function itself or from a mathematical model of it, respectively \cite{numerical_recipes}.
+Optimization routines and algorithms are usually classified according to whether they rely on the calculation of derivatives (gradient-based) or solely on the comparison of the objective function values (gradient-free). The latter can yet be classified into direct- or indirect-search methods, depending on whether the search of the extremum relies on direct comparisons of the objective function itself or from a mathematical model of it, respectively \cite{numerical_recipes}.
 
 Both gradient-based and gradient-free strategies rely on the comparison of the objective function at different points of the parameter space. If the objective function suffers from noise this can significantly reduce the efficiency of the optimization routine \cite{numerical_recipes, huang2019beam}. In Chap. 7 of Ref.~\cite{huang2019beam}, a review of the most popular optimization algorithms shows how most of them suffer to find minima to, at least, the precision of the noise-$\sigma$ the objective function is subjected to.
 
 The Robust Conjugate Direction Search (RCDS) algorithm is a indirect-search, gradient-free optimization algorithm introduced in Ref.~\cite{Huang:2013}. The algorithm consists of a main loop for constructing and managing optimal search directions along the knobs space (Powell's Method) and a one-dimensional optimizer responsible for a noise-aware search for the minimum along a given direction. The algorithm is capable of optimizing the objective function (find its local maximum/minimum) to at least the precision of the objective-function noise \cite{Huang:2013, huang2019beam}, being thus adequate for online optimization problems. Specifically, for accelerator controls and optimization, the algorithm has been successfully applied to optimize beam steering and optics matching during injection \cite{Huang:2013}, reducing horizontal emittance \cite{Huang:2013, Huang:2015}and optimization of dynamic aperture \cite{Huang:2013,Huang:2015,Liuzzo:IPAC2016-THPMR015,Olsson:IPAC2018-WEPAL047,yang:ipac2022-tupopt064}.
+
+RCDS actually consists on small modifications of well-known indirect-search routines. To grasp how it works, a brief overview on its predecessors is presented next.
+
 \subsection{Line methods}
-Let $f(x)\in\mathbb{R}$ be the objective function depending on the single parameter $x\in\mathbb{R}$. The task of optimizing (minimizing or maximizing) $f$ can be achieved by a direct search onver the possibile values of $x$. Since maximizing a function equals to minimizing the same function multipled by $-1$, in what follows, we shall refer to minimization only.
+Let us incorporate the role of an accelerator operator and suppose we are seeking the configuration of a single knob rendering the best peformance, say, the minimum of a certain figure of merit. We nudge the knobs slowly and measure the objective, scanning for the minimum. We might scan tuning the knobs up while the objective goes downhill, and stop when starts increasing. The knobs lives over the real line, so this is basicaly a line-scan, the basis of line optimization methods. How to teach a computer do the same?
 
-The search for the minimum is usually preceeded by initially \textit{bracketing} the miminum: finding a triplet of points $a<b<c$ in the domain such that $f(b)$ is smaller than both $f(a)$ and $f(c)$. If $f$ is reasonably smooth, we are certain there will be a minimium in the interval $(a, c)$. Standard bracket routines for well-behaved, noiseless objective functions can be found in the literature.
+Let $f(x)\in\mathbb{R}$ be the objective function depending on the single parameter $x\in\mathbb{R}$. The task of optimizing $f$ is achieved by a direct search over its domain. Since maximizing a function equals to minimizing the same function multipled by $-1$, in what follows, we shall refer to minimization only.
 
-Given an intial bracketed interval, the most common line-search methods are
+The search for the minimum is usually preceeded by initially \textit{bracketing} the miminum. We seek for points $a<b<c$ in the domain such that $f(b)$ is smaller than both $f(a)$ and $f(c)$. If $f$ is reasonably smooth, we are certain there will be a minimium in the interval $(a, c)$. Standard bracket routines for well-behaved, noiseless objective functions can be found in the literature, and mostly consists on, starting from an initial point, scanning the line ``downhill" until the function stops decreasing.
+
+We can see the bracketing procedure as a coarse-grained scan initially performed by the operator. The minimum is then finely searched on a second line-search scan. Given an intial bracketed interval, the most common line-search methods are
 \begin{itemize}
-    \item Golden Section Search: which updates the brackets progressively shrinking it until spans only a small interval specified by the user. Usually the machine precision is used. The miminum is then found to within this tolerance.
-    \item Parabolic Interpolation: where a parabola is fitted to $f(a), f(b), f(c)$. The parabola minimum takes us to the minumum or close to a it in a single leap.
+    \item Golden Section Search: which progressively scans within the brackets, updating it at each iteration so that it shrinks at each round until it spans only a small interval specified by the user. The machine precision $\epsilon$ is often indicated. The guess for the miminum is taken as the mid-point along the interval. The minimum point is found to within the precision of $\epsilon/2$.
+    \item Parabolic Interpolation: where a parabola is fitted to the values $f(a), f(b), f(c)$ the function takes along the brackets. Moving along the parabola minimum takes us to $f$'s minumum or pretty close to a it in a single leap.
 \end{itemize}
-For dealing with noisy objective functions, RCDS introduces a noise-aware bracketing routine and a parabolic interpolation scan over the bracket. We assume that what we measure is $y(x)=f(x) + \xi$, where $\xi\sim\mathcal{N}(\mu=0, \sigma)$ is a random variable modeling the experimental noise. Instead of seeking for points $a<b<c$ satisfying $f(b)< f(a), f(b) < f(c)$, RCDS requires a more strict condition $f(b)< f(a)+3\sigma, f(b) < f(c)+3\sigma$, where $\sigma$ is the expected noise $\sigma = \text{Var}[\xi]$.
 
-During the line-search, the parabola is fitted within the brackets and its minimum is taken as the objective function minimum. There is also an additional comparison of the available points within the brackets used for the fitting. If any of them is considered an outlier, it is not used during the fitting.
+The brackets routine and the line-search methods presented rely on the comparison of the objective function at different points in the parameter space. They assume the functions to be deterministic and trust the behaviour and are completely unaware of the experimental noise.
+
+In what follows, we assume what we actually measure in the control-room is $\hat{f}(x)=f(x) + \xi$, where $\xi\sim\mathcal{N}(\mu=0, \sigma)$ is a random variable modeling the experimental noise, with $\sigma$ being expected noise error, $\sigma^2 = \text{Var}[\xi]$.
+
+For the optmization of noisy objective functions, RCDS introduces a noise-aware bracketing routine and a parabolic interpolation scan over the bracket interval. For the brackets, instead of seeking for points $a<b<c$ satisfying $f(b)< f(a), f(b) < f(c)$, RCDS requires a more strict condition $f(b)< f(a)+3\sigma, f(b) < f(c)+3\sigma$. This increase the likelihood the observed trend consists on real trends of the objection itself, rather than random errors.
+
+During the line-search, a parabola is fitted within the brackets and its minimum is taken as the objective function minimum. Additionally there is a comparison of the available (previously evaluated) points within the brackets used for the fitting of the parabola. If any of them is considered an outlier, it is discarded and the fitting is repeated without it.
+
+\missingfigure{bracketing and linescan illustrations}
+
 \subsection{Powell's conjugate direction set}
-With a line-optimizer at hand, optimization of the objective function $f(\vb{x})\in\mathbb{R}$ depending on $p$ parameters $x_i$ (knobs) arranged as $\vb{x} = \mqty[x_1 & \dots & x_p]^\intercal \in \mathbb{R}^p$ is a simple matter of iterating the one-dimensional minimization along the direction of each one of the $p$ unit vectors $\vu{e}_i$. That is, given an intial configuration $\vb{x}_0$, and directions $\vu{n}$, we have the one-dimensional problem to minimize $g(\delta)=f(\vb{x}_0 + \delta \vu{n})$. The minimum is  then $f(\vb{x}_0 + \delta_* \vu{n})$, where $\delta_* = \text{arg min}_\delta g(\delta)$
+% Next we investigate how to optimize a several-variables objective function. We note that a multi-dimensional problem can be reduced to a line-search if we choose to focus on a single direction.
+How could we optimize an objective function $f(\vb{x})\in\mathbb{R}$ depending on the set of $p$ parameters $\{x_i\}_{i=1,\dots,p}$? The simplest idea is to iteratively optimize nudging each knob individually: optimize $f$ by changing $x_1$, while the other knobs remain fixed. Next, optimize by changing $x_2$ only, and so forth. In other words, each one of the knobs defines a direction whose basis vector is $\vu{e}_i$, correspoinding to a unit change of the knob. This is easy to automate with the noise-robust line-optimzer introduced in the previous section.
 
-As can be seen in figure, scanning along each orthogonal directioon can be time consuming specially for some functions with long narrow valleys at some angle with the coordinates basis vectors. This strategy thus is suboptimial when evaluation of the objective function is expensive.
+Formally, we are reducing a multi-dimensional optimzation problem into a series of line-searches. That is, given an intial configuration of the parameters (an initial position) $\vb{x}_0$, and a direction $\vu{n}$, we have the one-dimensional problem to minimize $g(\delta)=f(\vb{x}_0 + \delta \vu{n})$. The minimum is  then $f(\vb{x}_0 + \delta_* \vu{n})$, where $\delta_* = \text{arg min}_\delta g(\delta)$. In the previous paragraph, we specialized to $\vb{n}=\vu{e}_i$, and iterated for $i=1,\dots, p$.
 
-The reason why using basis vectors can be so inneficient is because optimizing along some basis vector spoils down minimization carried out in the any other of them one. So repetetion of the procedure is required. A more effieicent strategy consists on constructing a set of special non-interfering direction vectors so that minimization carried at any given direction does not spoil the minimiation performed in any other of them. We quickly present the necessary condition these non-interfering directions must satisty.
+\missingfigure{basis vectors minimization vs conjugate directions}
 
-Going back to the one-dimensional problem of minimizing along a direction $\vb{u}$, $\delta_* = \text{arg min}\ g(\delta) = f(\vb{x}_{0}+\delta\vu{u})$, we know that, at the minimum, we must have vanishing derivative: $g^{\prime}(\delta_*)=\grad f(\vb{x}_{0}+ \delta_* \vu{u})\cdot \vu{u}=0$. Therefore, the gradient is perpendicular to $\vu{u}$ at $\delta_*$.
+As can be seen in figure, scanning along each orthogonal directioon can be time-consuming, specially for some functions with long narrow valleys at some angle with the coordinates basis vectors. This strategy thus is suboptimial when evaluation of the objective function is expensive.
 
-Consider now the quadratic-form approximation for the objective function around point $\vb{x}_0$, taken as the origin.
+The reason why using unit basis vectors can be so inneficient is because optimizing along a given basis vector spoils down minimization carried out in the any other of them. So the processes needs to be iterated. A more efficient strategy consists on constructing a set of special non-interfering direction vectors for which the minimizationsare preserved when optimizing in a different driection.
+% Going back to the one-dimensional problem of minimizing along a direction $\vb{u}$, $\delta_* = \text{arg min}\ g(\delta) = f(\vb{x}_{0}+\delta\vu{u})$, we know that, at the minimum, we must have vanishing derivative: $g^{\prime}(\delta_*)=\grad f(\vb{x}_{0}+ \delta_* \vu{u})\cdot \vu{u}=0$. Therefore, the gradient is perpendicular to $\vu{u}$ at $\delta_*$.
+
+% Consider now the quadratic-form approximation for the objective function around point $\vb{x}_0$, taken as the origin.
+% \begin{equation}
+%     f(\vb{x})=f(\vb{x}_0)+\grad f(\vb{x}_0)\cdot \vb{x} + \frac{1}{2}\vb{x}\cdot\vb{H}(\vb{x}_0)\cdot\vb{x},
+% \end{equation}
+% where, as usual, $(\grad f(\vb{x}_0))_i = \pdv*{f(\vb{x}_0)}{x_i}$ is the gradient, and $(\vb{H})_{ij} = \pdv*{f(\vb{x}_0)}{x_i}{x_j}$ is the Hessian matrix. Up to such approximation, differentiation of the previous expression reaveals the gradient can be approximated by
+% \begin{equation}
+%     \grad f(\vb{x}) = \grad f(\vb{x}_0) + \vb{H}(\vb{x}_0)\cdot \vb{x}
+% \end{equation}
+% and thus is changed by
+% $$\delta(\grad f ) = \vb{H}(\vb{x}_0)\cdot \delta \vb{x}$$
+% upon a step $\vb{\delta \vb{x}}$. Suppose we have optimzed along direction $\vb{u}$, so $\grad f(\vb{u}) = \grad f(\vb{x}_0) + \vb{H}\cdot \vb{u}$. Now, optimizing along $\vb{v}$ will be non-interfering if the gradient stays orthogonal to $\vb{v}$, that its
+The necessary condition for direction vectors $\vb{u}$ and $\vb{v}$ to be non-interfering is (proof in the apendix)
 \begin{equation}
-    f(\vb{x})=f(\vb{x}_0)+\grad f(\vb{x}_0)\cdot \vb{x} + \frac{1}{2}\vb{x}\cdot\vb{H}(\vb{x}_0)\cdot\vb{x},
+    \vb{v}\cdot\vb{H}\cdot\vb{u}=0,
 \end{equation}
-where, as usual, $(\grad f(\vb{x}_0))_i = \pdv*{f(\vb{x}_0)}{x_i}$ is the gradient, and $(\vb{H})_{ij} = \pdv*{f(\vb{x}_0)}{x_i}{x_j}$ is the Hessian matrix. Up to such approximation, differentiation of the previous expression reaveals the gradient can be approximated by
-\begin{equation}
-    \grad f(\vb{x}) = \grad f(\vb{p}) + \vb{H}\cdot \vb{x}
-\end{equation}
-and thus is changed by
-$$\delta(\grad f ) = \vb{H}\cdot \delta \vb{x}$$
-upon a step $\vb{\delta \vb{x}}$. Suppose we have optimzed along direction $\vb{u}$, so $\grad f(\vb{u}) = \grad f(\vb{x}_0) + \vb{H}\cdot \vb{u}$. Now, optimizing along $\vb{v}$ will be non-interfering if the gradient stays orthogonal to $\vb{v}$, that its
-\begin{equation}
-    \vb{v}\cdot\vb{H}\cdot\vb{u}=0.
-\end{equation}
+where $(\vb{H})_{ij} = \pdv*{f(\vb{x}_0)}{x_i}{x_j}$ is the Hessian matrix for function $f$. The $\vb{u}$ and $\vb{v}$ directions are said to be conjugate directions.
 
-Let $\vu{u}_i$ denote our directions set. Powell proved conjugate directions can be constructed as follows
+The problem now consists on finding an appropriate set of $p$ conjugate directions, so we can optimize $f(\vb{x})$ along them. Let $\{\vb{u}_i\}$ denote our directions set. Powell proved conjugate directions can be constructed as follows
 \begin{enumerate}
     \item Set the initial directions as the basis vectors: $\vu{u}_i=\vu{e}_i, i=1,\dots, p$.
     \item Save the starting point (initial parameters state) as $\vb{x}_0$;
@@ -75,10 +94,16 @@ Let $\vu{u}_i$ denote our directions set. Powell proved conjugate directions can
     \item Minimize along $\vu{u}_p$. Name the found minimum as the new $\vb{x}_0$ and repeat the procedure until reaching a certain number of evaluations or until some stopping condition is reached.
 \end{enumerate}
 
-Powell proved that repeating this procedure $k$ times for a quadratic form produces a set of directions whose last $k$ vectors are mutually, pairwise conjugate, in the sense of the Hessian matrix and that $p$ iterations of the algorithm exactly minmizes the quadratic form.
+That is, from steps 1--3. we optimize along each one of the unit basis vectors, updating the minimum. When finishing optimization along ${x}_p$, the current minimum will be $\vb{x}_p$. In step 4 we discard the first direction, rename directions $\vb{u}_{i+1}$ to $\vb{u}_i$, and set as our new $p$th direction the vector from the starting point $\vb{x}_0$ to the the current minimum.
 
-There is a problem in throwing away  for $\vu{u}_1$ for $\vb{x}_p - \vb{x}_0$ every iteration  : at some point the lines start to fold up on each other and lose linear independence. As a result the function can end up minimized only within a subspace of parameter space.
+Powell proved that repeating this procedure $k$ times for a quadratic form produces a set of directions whose last $k$ vectors are mutually, pairwise conjugate, in the sense of the Hessian matrix. So $p$ iterations exactly minmizes the quadratic form. The method is also quadratically convergent: each iteration doubles the number of significant figures of the candidate minimum for the quadratic form.
 
-At each step, you can reinitialize directions to the basis vectors, or use any new set of orthogonal directions.The somewhat counterintuitive solution suggested by Powell is to discard not necessarily $\vu{u}_1$, but the direction along which $f$ had its largest decrease. This is justified because this direction is likely have a largest component along the new proposed conjugate direction. When doing this, the resulting set of directions is no longer conjugate, but still adequate for functions with long and narrow valleys.
+There is a problem in throwing away  for $\vu{u}_1$ for $\vb{x}_p - \vb{x}_0$ every iteration: at some point the lines start to fold up on each other and lose linear independence. As a result the function can end up minimized only within a subspace of parameter space. To fix this, you can reinitialize the directions to the basis vectors after an iteration along the $p$ directions, or use any new set of orthogonal directions.
 
-\todo[inline]{Investigate the following:for a simple quadratic form, does the conjugate directions match principal axis from PCA?}
+The somewhat counterintuitive solution suggested by Powell is to discard not necessarily $\vu{u}_1$ in favor of the new direction, but the direction along which $f$ had its largest decrease so far. This is justified because this direction is likely have a largest component along the new proposed conjugate direction. Accepting this advice results in a set of $p$ directions which are no longer mutually conjugate by the end of $p$ iterations. As a result, the method will no longer be quadratically convergent
+
+Powell also posits some conditions in which is best not to add any new directions, keeping the old set from the previous iteration. These are presented in the appendix, as well as the pseudo-code for the Powell loop.
+
+In summary, Powell's direction set loop calculates and manages directions adaptatively, deciding when to change old directions in favor of newly calculated conjugated vectors, and when to avoid the changes to control build-up of linear depencence
+
+In practice, using conjugate directions accounts to finding a good set of directions in which the number of steps along the vectors is reduced. They provide ``shortcuts'' towards the minimum in the objective landscape.
