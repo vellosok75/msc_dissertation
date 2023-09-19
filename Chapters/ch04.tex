@@ -1,14 +1,52 @@
-\chapter{Online Optimzation of storage ring Dynamic Aperture}
+\chapter{Dynamic Aperture Optimization Experiments}
+This is a ``methods" chapter. Its first section presents the available diagnostics at the storage ring and describes the experimental measurements of relevant quantities such as beam positions, trajectories and orbits, beam current and lifetime, the tunes and chromaticity and how these are dialed at our will during a study. The other two sections discuss the choice of objective functions to probe the Dynamic Aperture and the appropriate selection of sextupoles to act as knobs.
+\section{Diagnostics and measurements at the control room}
+\subsection{Beam Position Monitors}
+Beam-position-monitors (BPMs) consist on a set of four antennas placed inside the vaccum chamber. The antennas are placed in such a manner that when the electron beam passes through it, it induces mirror charges which trigger the antenna a certain voltage. The singal from the antennas is electronically processed allowing for the inference of relative changes in the beam's centroid position. BPMs thus record the average beam's relative trajectories changes along the transverse plane.
+\missingfigure{BPMS antennas diagram}
+\subsection{Beam-Current Monitors}
+DCCTs allow us to measure the stored current on the ring. From the current in the booster or the transport line immediately before the injection into the storage ring and the measurement of the storage ring stored current   immediately after we can infer the efficiency of the injection process.
+\subsection{Tunes monitor \& tune changes}
+When turn-by-turn motion is viewd at a fixed $s$ position, it consits on the sampling of harmonic motion. The fundamental frequency is the tune $\nu$. Precise measurement and monitoring of the tunes is achieved by placing a stripline, which constantly excites the beam in a narrow range of frquencies. The freuqency which is capable of exiciting a resonance peak is idnetified as the tune\todo{Need to study it}
+
+As for changes and control of the tunes, as formula () reveals, changes in the quadrupoles, specially at large $\beta$-function sections allows for the control of the tunes.  In fact, knowing the response is linear, a tune-response matrix can be constructed, i.e. the Jacobian of the tunes with respect to changes in quadrupoles
+\begin{equation}
+    \Delta\boldsymbol{\nu} = \vb{J}_{\boldsymbol{\nu}}\Delta \vb{K},
+\end{equation}
+where $\boldsymbol{\nu} = \mqty*[\Delta \nu_x & \Delta \nu_y]^\intercal$ and the Jacobian has matrix elements
+\begin{equation}
+    (\vb{J}_{\boldsymbol{\nu}})_{ij} = \pdv{\nu_{i}}{K_j} \approx \frac{\Delta \nu_{i}}{\Delta K_j}, i=x, y.
+\end{equation}
+The system can pseudo-inverted allowing for the determination of quadrupoles changes for a desired tune change.
+\subsection{Chromaticity changes \& measurements}
+Chromaticity corresponds to the tune change per unit change in the relative energy deviations $\delta$. In practice, to we calculate the tune changes per unit RF cavity frequency changes\todo{needs refreshing}.
+
+Due to the lienariry of the problem, chromaticity is corrected or changed according to the same pseudo-inversion procedure described above for the tunes. We relate chromaticity changes to sextupole changes
+\begin{equation}
+    \Delta\boldsymbol{\xi} = \vb{J}_{\boldsymbol{\xi}}\Delta \vb{S},
+\end{equation}
+where $\boldsymbol{\xi} = \mqty*[\Delta \xi_x & \Delta \xi_y]^\intercal$ and the Jacobian has matrix elements
+\begin{equation}
+    (\vb{J}_{\boldsymbol{\xi}})_{ij} = \pdv{\xi_{i}}{S_j} \approx \frac{\Delta \xi_{i}}{\Delta S_j}, i=x, y.
+\end{equation}
+and carry-out the pseudo-inversion. In practice, though, the chromaticity jacobian was never actually calculated in the real machine, due to the time-consuming process of varying a single sextupole family, carrying out the chromaticity measurement and repeating it for the 21 families. The SIRIUS computer model is used to construct the matrix and whenever a chromaiticity change is desired or required, the changes are calculated by pseudo-inversion of the model-calculated Jacobian
+
+\section{The choice of objective function}
+There is no analytical formula for relating the storage ring linear or nonlinear optics to the Dynamic Aperture. The optimization procedure must be a direct search procedure: changes are performed in the knobs and the effect over dynamic aperture is evaluated.
+
+Also, we cannot measure dynamic aperture directly. We must choose an objective function to act as a probe to the DA: a figure of merit related to the dynamic aperture to represent it.
+
+Two objectives usually adopted as probes are the injection efficiency and the beam's resilience to dipolar perturbations. The former is quite self-explanatory: the larger the dynamic aperture, the larger space for the beam to be captured during injection, and thus the larger the injection efficiency. The latter is related to the DA by the following: the larger the horizontal dipolar kicks the beam can survive, the larger the orbit distortions towards the positive or negative horizontal plane (depending on the kick direction). So the larger the amplitudes the beam explores as it oscillates, probing the DA borders. If the beam survives to large kicks, it means the ring can accomodate larger orbit distortions because of an increased dynamic aperture
+.
+
+In summary, the dynamic aperture optimization procedure must consist on the exploration of sextupole (knobs) configurations yielding the largest dynamic aperture as accessed by as objective function such as injection efficiency or beam kick-resiliency.
 
 \subsection{Injection scheme for acummulation at SIRIUS storage ring}
 Beam acummulation into the storage ring occurs in the off-axis scheme. The beam is delivered at $x\approx-8~\unit{mm}$, and receives the kick from the nonlinear kicker field. The field profile is nonlinear, with zero field and gradient at the center of the axis, so that it does not disturbs the stored beam.
 In the off-axis scheme, a sufficiently large dynamic aperture is desired to allow the beam to be captured into the storage ring. The predicted efficiency for SIRIUS setup, considering a dynamic aperture reaching $x=-9~\unit{mm}$, was nearly $100\%$. What was observed during 2022 was an injection efficiency of about $88\pm8\%$.
-\lipsum[1-10]
-\subsection{New working points}
-\section{Online Optimization}
-This sction describes the experimental methods and analysis employed for optimizing the nonlinear dynamics and evaluating the quality of the configurations found.
-\subsection{Dynamic Aperture Optimization}
-\subsubsection{Knobs}
+
+\section{Selection of optimization knobs}
+
 The dynamic aperture is determined by the quality of the dynamics in terms of perturbations and nonlinearities. Considering corrected quadrupoles and dipoles (linear optics), the main factors influencing SIRIUS DA are the nonlinearities introduced by the sextupoles and possbibly their field's small errors and deviations from the design parameters. The goal, thus, is to search for the sextupole configurations rendering the largest DA.
 
 The sextupoles are the parmeters which can be tuned, the knobs. SIRIUS has 21 sextupole families: magnets powered by the same power supply. 6 of them are achromatic sextupoles. They are placed where the the dispersion is zero. The 15 other families are chromatic families. Table~\ref{fams} shows the 21 sextupole families names.
@@ -23,16 +61,7 @@ The sextupoles are the parmeters which can be tuned, the knobs. SIRIUS has 21 se
             \label{fams}
             \end{table}
 In principle, thus, the optimization parameter space is 21-dimensional. In reality, we would like to change sextupoles without changing chromaticity. Since we need at least one degree of freedom for correcting chromaticity in the horizontal plane and one degree of freedom for correcting the chromaticity in vertical plane, there are 19 available knobs. The dimensionality of the search space can be further reduced by imposing additional constraints to certain families variations. The specific choices of knobs for optimzation experiments are discussed in more details in the Results section.
-% In 4th generation Synchrotron storage rings, stronger focusing is needed to deliver lower emittances. Which means stronger sextupole maagnets and more nonlinear dynamics.
-\subsubsection{Objective function}
-There is no analytical formula for relating the storage ring linear or nonlinear optics to the Dynamic Aperture. The optimization procedure must be a direct search procedure: changes are performed in the knobs and the effect over dynamic aperture is evaluated.
 
-Also, we cannot measure dynamic aperture directly. We must choose an objective function to act as a probe to the DA: a figure of merit related to the dynamic aperture to represent it.
-
-Two objectives usually adopted as probes are the injection efficiency and the beam's resilience to dipolar perturbations. The former is quite self-explanatory: the larger the dynamic aperture, the larger space for the beam to be captured during injection, and thus the larger the injection efficiency. The latter is related to the DA by the following: the larger the horizontal dipolar kicks the beam can survive, the larger the orbit distortions towards the positive or negative horizontal plane (depending on the kick direction). So the larger the amplitudes the beam explores as it oscillates, probing the DA borders. If the beam survives to large kicks, it means the ring can accomodate larger orbit distortions because of an increased dynamic aperture.
-
-In summary, the dynamic aperture optimization procedure must consist on the exploration of sextupole (knobs) configurations yielding the largest dynamic aperture as accessed by as objective function such as injection efficiency or beam kick-resiliency.
-\subsubsection{Noise-Robust Online Optimization}
 
 \subsection{Characterization of Sextupole Magnets Configurations}
 Once a configuration of sextupoles (position in parameter space) is found, the nonlinear optics it provides the machine needs to be characterized. The characterizations consisted on evaluatig/measuring the followint figures of merit and desired features
@@ -45,4 +74,3 @@ Once a configuration of sextupoles (position in parameter space) is found, the n
     \item Chromaticity: Sextupoles are introduced in the storage ring for correction of focusing chromatic aberretions. When changing the sextupole settings, it is desired to do so in such a manner that the chromaticity is unchanged. The methods for choosing the optimization knobs already take into account the need for keeping constant chromaticity. Still, after optimization is performed, we need to check whether chromaticity is unchanged.
 \end{itemize}
 The first two characterizations are quite similar to the two most immediate objective function candidates mentioned above. Indeed, in most nonlinear dynamics optimzation experiments, optimization using injection efficiency or kick resilience as objectives seemed to be completely interchangable. Improvements in injection efficiency necessarily led to improvements in kick resilience, and vice-versa. As shown in more details in the results section, for the SIRIUS storage ring this appears not to be the case. The configurations can be specialized to improvements solely on injection efficiency or solely to kick resilience. This feature was observed during the characterization of the optimized sextupole settings with respect to these two figures of merit.
-\lipsum[1-10]
