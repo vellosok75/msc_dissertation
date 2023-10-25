@@ -1,34 +1,36 @@
 \chapter{Theoretical Background}
-This chapter provides the bare minimum theoretical knowledge on electron storage ring physics and particles dynamics needed to state to the reader the optimization problem and the constraints which are involved. A qualitative description of the physics of electron storage rings is presented, followed by a more detailed and more quantitative treatment of single particle dynamics in storage rings.  
+This chapter provides the bare minimum theoretical knowledge on electron storage ring physics and particles dynamics needed to state to the reader the optimization problem and the constraints which are involved. A qualitative description of the physics of electron storage rings is presented, followed by a more detailed and more quantitative treatment of single particle dynamics in storage rings.
 
 \section{The physics of electron storage rings}
 As mentioned previously, a storage ring is designed to confine bunches of electrons and steer them along a reference closed orbit. The orbit is defined by the bending magnets, the dipoles. The trajectories consist on oscillations about the closed orbit, and focusing of such oscillations toward the closed orbit is provided by gradient fields, mostly coming from quadrupole magnets. Additionally, to correct chromatic aberrations in the beam's motion, i.e. a dependence of focusing with the beam's energy, and guarantee correct focusing despite energy deviations from the nominal value, sextupolar magnetic fields are also introduced, providing fields depending qudratically on the deviations from the nominal orbit. These fields introduce strong nonlinearities in the dynamics.
 
-When having its trajectory bent at the dipoles and insertion devices\footnote{Insertion devices (IDs) consist on arrays of magnetic blocks arranged to provide additional deflection of the beam's trajectory for the production of synchrotron radiation. IDs allow for fine-tuning of the fields and as consequence of the characteristics of the emitted readiation, such as the energy and polarization.}, the beam loses energy in the form of synchrotron radiation. To mantain the beam stored, the energy lost must be replenished. To this aim, radio-frequency (RF) cavities are placed along the ring to provide oscilating electric fields parallel to the longitudinal direction. The work done in the beam by the fields restore its energy.
+When having its trajectory bent at the dipoles and insertion devices,
+%\footnote{Insertion devices (IDs) consist on arrays of magnetic blocks arranged to provide additional deflection of the beam's trajectory for the production of synchrotron radiation. IDs allow for fine-tuning of the fields and as consequence of the characteristics of the emitted readiation, such as the energy and polarization.}
+the beam loses energy in the form of synchrotron radiation. To mantain the beam stored, the energy lost must be replenished. To this aim, radio-frequency (RF) cavities are placed along the ring to provide oscilating electric fields parallel to the longitudinal direction. The work done in the beam by the fields restore its energy.
 
-The radiated photons are emitted in a narrow cone with angular aperture of $1/\gamma$, $\gamma$ being the relativistic Lorentz factor ($\sim 6000$ at SIRIUS storage ring). The photons carry away a fraction of the beam's energy and momentum in both the longitudinal and transverse directions. When passing through RF cavities, only momentum in the longitudinal direction is replenished. Radiating photons thus leads to an overall damping of transverse amplitudes.
+The radiated photons are emitted in a narrow cone with angular aperture of $1/\gamma$, $\gamma$ being the relativistic Lorentz factor ($\sim 6000$ at SIRIUS storage ring). The photons carry away a fraction of the beam's energy and momentum in both the longitudinal and transverse directions. When passing through RF cavities, only momentum in the longitudinal direction is replenished. The combined effect of radiating photons and passing throgh RF cavities leads to an overall damping of transverse amplitudes.
 
 On the other hand, the quantum nature of the emitted radiation leads to the excitation of transverse oscillations, which is known as quantum excitation. When a photon carries away energy, it depletes the electrons energy by the same amount. It thus changes the reference orbit of the electron in certain regions of the ring (dispersive regions), inducing oscillations. Eventually, equillibrium between radiative damping and quantum excitation is achieved, leading the rms values of each electron's amplitudes to reach a stationary regime.
 \todo[inline]{include the case of nondispersive and vertical amplitudes damping}
 
-Each one of the beam's degrees of freedom defines an acceptance: limits which if exceeded can lead to instabilities and eventually beam losses. The most obvious acceptance is the transverse acceptance: the beam motion is bounded by a vacuum chamber and collisions with the chamber's physical apperture leads to losses. Additionally, the beam also has an energy acceptance: a tolerance for energy deviations from the nominal value that when exceeded can lead  to a suboptimal energetic balance, deviations from the nominal orbit and eventually collisions with the vacuum chamber.
+Each one of the beam's degrees of freedom defines an acceptance: limits which if exceeded can result in instabilities and eventually beam losses. The most obvious acceptance is the transverse acceptance: the beam motion is bounded by a vacuum chamber and colliding with the chamber's physical apperture leads to losses. Additionally, the beam also has an energy acceptance: a tolerance for energy deviations from the nominal value that when exceeded can lead to a suboptimal energetic balance, which, in turn, leads to significant deviations from the nominal orbit and eventually collisions with the vacuum chamber.
 
-The beam is also subject to elastic and inelastic collisions with residual gas molecules within the chamber and also the collisions between electrons within the same bunch, besides other kinds of interactions with wake-fields from other bunches. The overall beam loss rate defines the characteristic time scale at which a given electron current survives in the ring. This is the beam lifetime and determines the rate at which injections into the storage ring are required.
+The beam is also subject to elastic and inelastic collisions with residual gas molecules within the chamber and also the collisions between electrons within the same bunch, besides other kinds of interactions with wake-fields from other bunches. All these effects can lead to beam-losses and the overall beam loss rate resulting from these combined mechanisms defines the characteristic time scale at which a given electron current survives in the ring. This is the beam lifetime and determines the rate at which injections into the storage ring are required.
 
-Because of the nonlinearities introduced by the sextupole magnets, the transverse acceptances can be limited not by the physical aperture but rather by the amplitudes above which motion is irregular, unstable and unbounded. As already mentioned before, this limiting amplitude is known as the dynamic aperture (DA), a term that can be used to refer to amplitudes in the transverse space $x,y$ or to the phase space coordinates $x, p_x$ and $y, p_y$.
+Because of the nonlinearities introduced by the sextupole magnets, the transverse acceptances can be limited not solely by the physical aperture available in the vaccum chamber but rather by the amplitudes above which motion is irregular, unstable and unbounded. As already mentioned before, this limiting amplitude is known as the dynamic aperture (DA), a term that can be used to refer to amplitudes in the transverse space $x,y$ or to the phase space coordinates $x, p_x$ and $y, p_y$.
 
-Despite the complicated physics of a fully-coupled dynamics involving the transverse and the energy oscillations and also the damping and the excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation, it is sufficient to model the motion of a single electron, negletcting radiation losses and any other collective interactions.
+Despite the complicated physics of a fully-coupled dynamics involving the transverse and the energy oscillations and also the damping and the excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation, it is sufficient to model the motion of a single electron, negletcting radiation losses (and thus the existence of the RF cavities) and any other collective interactions.
 
 In this picture, the electron travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space which is the  dynamics of two independent quasi-periodic oscillators. These simplfications are justified for our immediate purposes because:
 \begin{itemize}
     \item radiation losses/gains and energy oscillations are only significant over a time scale of a couple of turns. Over this period, tens of transverse oscilations take place
-    \item the linear, uncoupled dynamics this modeling renders serves as a building block upon which ellaborate modeling can be carried out, incoporating coupling, nonlinearities and perturbations
-    \item why is ok to ignore collective effects and instabilities?
+    \item the linear and uncoupled dynamics this modeling renders serves as a building block upon which ellaborate modeling can be carried out, incoporating coupling, nonlinearities and perturbations with perturbation theory
+    \item why is it ok to ignore collective effects and instabilities?
 \end{itemize}
 
 Next, the single-particle dynamics is presented with the aim of defining quantitavely the dynamic aperture and the characteristics of the dynamics in electron strorage rings. Throghout the modelling, optical functions and parameter for the SIRIUS storage rings are also presented.
 \section{Motion of charged particles in magnetic fields}
-An electron of charge $e$ and momentum $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$, pointing along the perpendicular to the ortbit plane. In such conditions, Lorentz force law predicts that
+An electron of charge $e$ and momentum of magnitude $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$ directed perpendicularly to the ortbit plane. In such conditions, the Lorentz force law predicts that the relevant quantities are related by
 \begin{equation}
     R(p)\equiv B\rho = \frac{p}{e}.
     \label{eq:rigidity}
@@ -37,8 +39,7 @@ An electron of charge $e$ and momentum $p$ follows a circular orbit of radius $\
 Consider now an electron traveling along a curve parametrized by the arclength $s$ with respect to an arbitrary reference point. The interaction with fields $B_x(x,y,s)$  and $B_y(x,y,s)$, both perpendicular to the electron's motion, results in deflections of the trajectory. The deflection angles are given by
     \begin{equation}
         \begin{aligned}
-            \dd{\theta_x} & = \frac{\dd{s}}{\rho_x(s)} = \frac{e}{p}B_y(x,y,s)\dd s = \frac{1}{R(p)}B_y(x,y,s)\dd s,\\
-            \dd{\theta_y} & = \frac{\dd{s}}{\rho_y(s)} = \frac{e}{p}B_x(x,y,s)\dd s = \frac{1}{R(p)}B_y(x,y,s)\dd s.
+            \dd{\theta_u} & = \frac{\dd{s}}{\rho_u(s)} = \frac{e}{p}B_v(x,y,s)\dd s = \frac{1}{R(p)}B_v(x,y,s)\dd s, \quad u,v=x, y \quad\text{or}\quad y,x.
         \end{aligned}
         \label{eq:deflec_angles}
     \end{equation}
@@ -46,46 +47,32 @@ Where \eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the \texti
 
 \todo[inline]{Add deflection figures}
 
-\section{Storage rings}
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=0.4\textwidth]{Images/storage_ring.png}
-    \caption{Storage ring typycal configuration. From \cite{sands}}
-    \label{fig:storage_ring}
-\end{figure}
-\todo[inline]{draw my onw figure}
-Figure~\ref{fig:storage_ring} sketches the typical design of a storage ring. For the porpose of storing a beam of electrons in closed orbits, magnetic fields defining a closed orbit are necessary. The angular deflections should add up to $2\pi$, and the specification of the beam's operating energy determines the integrated field required for causing the closed orbit deflections.
+\section{The coordinate system for storage ring dynamics}
+As sketched by Figure~\ref{fig:storage_ring}, electrons in a storage ring perform a prescribed nearly circular trajectory close to a reference orbit. A convenient coordinate frame to decribe the dynamics in storge rings can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{fig:frenet-serret} shows. The idea is that this particle samples exactly the reference nominal orbit. The particle travels a distance $s$ along the ring, which can be used to parametrize the motion. The triad of direction vectors consists of a vector $\vu{s}$, tangent to the trajectory, a vector $\vu{x}$ normal to it, pointing in the direction at which $\vu{s}$ changes and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame. The deviations from the nominal orbit can be measured in units of the unit vectors in the normal and bi-normal directions, characterizing the transverse dynamics. One may also be concerned with the distance of a given particle from the reference particle itself along the curce. Such differences may arise due to differences in the energy two particles. Since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle are not dynamical quantities, but rather parameters of the dynamics.
 
-For providing stability, focusing towards the reference closed orbit is also needed, and can be attained with the introduction of gradient fields whose strengths depend linearly on the tranverse excursions from the reference orbit. Such fields are provided mainly by quadrupole magnets, which are physically realized by specifying  magnetic poles with the shape of truncated hyperbolas.
-
-Sextupole mangets are also usually included in the design of storage rings. The fields they produce is quadratic with transverse displacement and are needed for correction of chromatic errors in the dynamics.
-\todo[inline]{add magnets and field profile figures}
-
-\section{The coordinate system}
-\begin{figure}[htb]
-    \centering
-    \includegraphics[width=0.6\textwidth]{Images/frenetserret.png}
-    \caption{The Frenet-Serret coordinate system. From \cite{huang2019beam}.}
-    \label{fig:frenet-serret}
-\end{figure}
-A convinient coordinate frame to decribe the dynamics in storge rings can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{fig:frenet-serret} shows. The particle travels a distance $s$ along the ring, which can be used to parametrize the motion. The triad of direction vectors consists of a vector $\vu{s}$, tangent to the trajectory, a vector $\vu{x}$ normal to it, pointing in the direction at which $\vu{s}$ changes and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame.
-
-Assuming no curvature in the $y$ plane, i.e. that the accelerator defines a curve whose plane is parallel to the ground, then the unit vectors defining the frame can be calculated by\cite{lee}
+Assuming no curvature in the $y$ plane, i.e. that the accelerator defines a curve whose plane is parallel to the facility flat floor, then the unit vectors defining the frame can be calculated by\cite{lee_accelerator_2004}
 \begin{equation}
-\vu{s}=\dv{\vb{r}_{0}}{s}, \quad \vu{x}=-\rho\dv{\vu{s}}{s}, \quad \vu{y} =  \vu{x}\times\vu{s},
+\vu{s}=\dv{\vb{r}_{0}}{s}, \quad \vu{x}=-\rho\dv{\vu{s}}{s}, \quad \vu{y} =  \vu{x}\times\vu{s}.
 \end{equation}
-where $\rho(s) = \norm{\dv*{\vu{s}}{s}}^{-1}$ is the local curvature radius\footnote{For a circular trajectory, $\vb{r}_0 = (R\cos(s/R), R\sin(s/R), 0)$, $ 0\leq s \leq L$ (check), in the cartesian laboratory frame. $\vu{s}=(-\sin(s/R), \cos(s/R), 0)$, $\dv*{\vu{s}}{s} = -R^{-1}(\cos(s/R),\sin(s/R), 0 )$ and $\rho(s)=R$}. The vectors evolve along $s$ as prescribed by the Frenet-Serret equations:
+where $\rho(s) = \norm{\dv*{\vu{s}}{s}}^{-1}$ is the local curvature radius\footnote{For a circular trajectory, $\vb{r}_0 = (R\cos(s/R), R\sin(s/R), 0)$, $ 0\leq s \leq L$ (check), in the cartesian laboratory frame. $\vu{s}=(-\sin(s/R), \cos(s/R), 0)$, $\dv*{\vu{s}}{s} = -R^{-1}(\cos(s/R),\sin(s/R), 0 )$ and $\rho(s)=R$, justifying the interpretation as curvature radius.}. The vectors evolve along $s$ as prescribed by the Frenet-Serret equations:
 \begin{equation}
 \dv{\vu{s}}{s}=-\frac{1}{\rho(s)}\vu{x}, \quad\dv{\vu{x}}{s}=\frac{1}{\rho(s)}\vu{s}, \quad \dv{\vu{y}}{s}=0,
 \end{equation}
 The frame thus depends solely on the geometry of the specified path. Since the curvature is defined by the dipolar fields $B_0(s)$ in the $y$ direction, then, eq.~\eqref{eq:deflec_angles} leads to
     \begin{equation}
-        G(s) \equiv \frac{1}{\rho(s)} = \frac{B_0(s)}{R_0},
+        \frac{1}{\rho(s)} = \frac{B_0(s)}{R_0},
         \label{eq:G}
     \end{equation}
 where $R_0$ is the rigidity for the beam at the nominal energy.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/frenetserret.png}
+    \caption{The Frenet-Serret coordinate system. From \cite{huang_beam-based_2019}.}
+    \label{fig:frenet-serret}
+\end{figure}
+
 \section{Hamiltonian for the relativistic electron}
-The dynamics of relativistic electrons influenced by electromagnetic fields $(\Phi, \vb{A})$ is encapsulated by the Hamiltonian
+The dynamics of relativistic electrons influenced by electromagnetic fields $(\Phi, \vb{A})$ is encapsulated by the Hamiltonian \cite{landau_classical_1975}
     \begin{equation*}
         H=\sqrt{m^2c^4+(\vb{P}-q\vb{A})^2c^2}+e\Phi,
     \end{equation*}
@@ -93,37 +80,34 @@ The dynamics of relativistic electrons influenced by electromagnetic fields $(\P
  \begin{itemize}
     \item A canonical transformation to change coordinates is applied in order to describe the motion in terms of the Frenet-Serret frame variables $x$, $y$;
     \item Instead of time $t$, the Hamiltonian and the dynamical variables are described as functions of $s$, the longitudinal position along the ring;
-    \item Geometric quantities are used: canonical momenta are the angles $x^\prime = \dv*{x}{s}$ and $y^\prime = \dv*{y}{s}$ with respect to the nominal orbit;
-    \item Paraxial approximation: transverse momenta are assumed to be way smaller than longitudinal momentum;
+    \item Paraxial approximation: the transverse momenta are assumed to be way smaller than the momentum along the direction tangent to the trajectory. This allows the expansion the square root in a power series, revealing the expression for an approximate Hamiltonian which can be more easily handled;
+    \item Geometric quantities are used: in the paraxial approximation, the canonical momenta for on-energy particles are identified with the derivatives with respect to the parameter $s$ $x^\prime = \dv*{x}{s}$ and $y^\prime = \dv*{y}{s}$, which represent the divergence angles from the nominal orbit;
  \end{itemize}
-
- All of these steps are shown in detail in textbooks such as  Refs.~\cite{lee, wiedemann,  wolski2014beam}. Neglecting RF cavities ($\Phi=0$) and radiation losses, the energy is a constant parameter and the dynamics will consist solely on the transverse degrees of freedom.
-  In this 4-dimensional dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where
-\begin{equation}\begin{cases} p_{x}= x^\prime(1+\delta),\\p_{y}=y^\prime (1+\delta),\end{cases}\end{equation}
+ All of these steps can be found in detail in litereature, such as Refs.~\cite{lee_accelerator_2004, wiedemann_particle_2015,  wolski_beam_2014}. As mentioned previously, by neglecting RF cavities ($\Phi=0$) and radiation losses, the energy will a constant parameter and the dynamics will consist solely on the transverse degrees of freedom.  In this 4-dimensional dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where
+\begin{equation} p_{x}= x^\prime(1+\delta),\\p_{y}=y^\prime (1+\delta)\end{equation}
 and
 \begin{equation}
     \delta = \frac{P-P_{0}}{P_{0}}\approx\frac{E-E_0}{E_0}
 \end{equation}
 where the ultra-relativistic approximation $E\approx pc$ was used.
 
-Hamilton's equations for the Hamiltonian in the paraxial approximation lead to the equations of motion for 4D dynamics
+Hamilton's equations for the approximate Hamiltonian reveals the equations of motion for $x$ and $y$ Frenet-Serret coordinates:
 \begin{equation}
 x^{\prime \prime}=-\frac{(1+G x)^{2}}{1+\delta} \frac{B_{y}}{R_0}+G(1+G x),
 \quad
-y^{\prime \prime}=\frac{(1+G x)^{2}}{1+\delta} \frac{B_{x}}{R_0}
+y^{\prime \prime}=\frac{(1+G x)^{2}}{1+\delta} \frac{B_{x}}{R_0},
 \label{eq:EOMs}
 \end{equation}
-where $R_0 = p_0/e$ and $G(s)$ defined as in Eq.~\eqref{eq:G}.
+where $R_0 = p_0/e$ and $G(s)\equiv\rho^{-1}(s)$ defined as in Eq.~\eqref{eq:G}.
 
-Fields influencing the beam are those of dipoles, quadrupoles and sextupoles.
-Their functional forms are
+To study the motion thus, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting on the beam. Since in a storage ring the magnets are arranged as an array of dipoles, quadrupoles and sextupoles which usually have some symmetry and periodicity, these $B_x(s)$ and $B_y(s)$ functions will also be periodic. If $\ell_{\text{d}}, \ell_{\text{s}}, \ell_{\text{s}}$ are the lengths of dipole, quadrupole and sextupole magnets, respectively, the magnetic fields are sectionally defined according to
 \begin{itemize}
-    \item Horizontal Dipole:\\
-           $$ B_x = 0, \quad B_y = B_0$$
-    \item Normal quadrupole\\
-          $$B_x = B_1 y, \quad B_y = B_1 x$$
-    \item Normal sextupole\\
-          $$B_x = B_2xy, \quad B_y = \frac{1}{2}B_2(x^2 - y^2)$$
+    \item Horizontal Dipole
+           $$ B_x(s) = 0, \quad B_y(s) = B_0, \quad s\in(0,\ell_{\text{d}})$$
+    \item Normal quadrupole
+          $$B_x = B_1 y, \quad B_y = B_1 x, \quad s\in(0,\ell_{\text{q}})$$
+    \item Normal sextupole
+          $$B_x = B_2xy, \quad B_y = \frac{1}{2}B_2(x^2 - y^2), \quad s\in(0,\ell_{\text{s}})$$
 \end{itemize}
 These are the so-called \textit{normal multipole fields}. There also exists \textit{skew multipole fields}, which couple the horizontal and vertical dynamics. We will neglect skew fields and coupling for now.
 
@@ -135,7 +119,7 @@ In the equations of motion, eqs.~\eqref{eq:EOMs}, the magnetic rigidity normaliz
 
 \section{Linear Dynamics}
 \subsubsection{Linear equations of motion}
-Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variables leads to \cite{sands}
+Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variables leads to \cite{sands_1969}
     \begin{equation}
         x^{\prime\prime}+(G^2+K)x=G\delta, \quad
         y^{\prime\prime}-Ky=0.
