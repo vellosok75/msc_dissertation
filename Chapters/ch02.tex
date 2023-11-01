@@ -84,10 +84,10 @@ The dynamics of relativistic electrons influenced by electromagnetic fields $(\P
     \item Geometric quantities are used: in the paraxial approximation, the canonical momenta for on-energy particles are identified with the derivatives with respect to the parameter $s$ $x^\prime = \dv*{x}{s}$ and $y^\prime = \dv*{y}{s}$, which represent the divergence angles from the nominal orbit;
  \end{itemize}
  All of the transformations and manipulations summarized above can be found in detail in the litereature, such as in Refs.~\cite{lee_accelerator_2004, wiedemann_particle_2015,  wolski_beam_2014}. As mentioned previously, by neglecting RF cavities ($\Phi=0$) and radiation losses, the energy will a constant parameter and the dynamics will consist solely on the transverse degrees of freedom.  In this 4-dimensional dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where the momenta are given by
-\begin{equation} p_{x}= x^\prime(1+\delta),\quad \\p_{y}=y^\prime (1+\delta)\end{equation}
-where $\delta$ is the relative deviation from the nominal energy-momentum:
+\begin{equation} p_{x}= x^\prime(1+\delta),\quad p_{y}=y^\prime (1+\delta)\end{equation}
+and $\delta$ is the relative deviation from the nominal energy-momentum:
 \begin{equation}
-    \delta = \frac{P-P_{0}}{P_{0}}\approx\frac{E-E_0}{E_0}.
+    \delta \equiv \frac{P-P_{0}}{P_{0}}\approx\frac{E-E_0}{E_0}.
 \end{equation}
 The ultra-relativistic approximation $E\approx pc$ was used.
 
@@ -98,7 +98,7 @@ x^{\prime \prime}=-\frac{(1+G x)^{2}}{1+\delta} \frac{B_{y}}{R_0}+G(1+G x),
 y^{\prime \prime}=\frac{(1+G x)^{2}}{1+\delta} \frac{B_{x}}{R_0},
 \label{eq:EOMs}
 \end{equation}
-where $R_0 = p_0/e$ is the nominal energy magnetic rigidity and the inverse local radius of curvature $G(s)\equiv\rho^{-1}(s)$ is defined as in Eq.~\eqref{eq:G}.
+where $R_0 = p_0/e$ is the magnetic rigidity of the beam at the nominal energy and $G(s)\equiv\rho^{-1}(s)$ is the inverse local radius of curvature, related to the dipole field as in Eq.~\eqref{eq:G}.
 \section{Specification of magnetic fields}
 To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting on the beam. Since in a storage ring the magnets are arranged as arrays of dipoles, quadrupoles and sextupoles which usually have some symmetry and periodicity, the $B_x(s)$ and $B_y(s)$ functions are generally periodic. If $\ell_{\text{d}}, \ell_{\text{s}}, \ell_{\text{s}}$ are the lengths of dipoles, quadrupoles and sextupoles magnets in a ring, respectively, the magnetic fields are sectionally defined and have the following functional forms
 \begin{itemize}
@@ -115,36 +115,35 @@ To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting 
             \label{eq:sextupole}
            \end{equation}
 \end{itemize}
-and zero everywhere else, neglecting the fields of Insertion devices.
+and zero everywhere else, neglecting the fields of insertion devices. Fields \eqref{eq:dipole}--\eqref{eq:sextupole}  are the so-called \textit{normal multipole fields}. There are also \textit{skew multipole fields}, which couple the horizontal and vertical dynamics. We will neglect skew fields and coupling for now. They can be treated as perturbations in perturbation theory schemes.
 
-Fields \eqref{eq:dipole}--\eqref{eq:sextupole}  are the so-called \textit{normal multipole fields}. There are also \textit{skew multipole fields}, which couple the horizontal and vertical dynamics. We will neglect skew fields and coupling for now. They can be treated as perturbations in perturbation theory schemes.
-
-In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We define the normalized dipolar, quadrupolar and sextupolar fields as the functions
+In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We therefore define the normalized dipolar, quadrupolar and sextupolar fields as the functions
 \begin{equation}
     G(s) = \frac{B_0(s)}{R_0}, \quad K(s) = \frac{B_1(s)}{R_0}, \quad S(s) = \frac{B_2(s)}{R_0}.
     \label{eq:mag_funcs}
 \end{equation}
+\todo[inline]{add plot of the $S$, $K$ and $S$ functions}
 
 \section{Linear Dynamics}
-\subsubsection{Linear equations of motion}
+\subsubsection{The linear equations of motion}
 Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variables leads to \cite{sands_physics_1969}
     \begin{equation}
         x^{\prime\prime}+(G^2+K)x=G\delta, \quad
         y^{\prime\prime}-Ky=0.
         \label{eq:linearEOM}
     \end{equation}
-    For on-momentum particles, $\delta=0$, both equations reduce to Hill's equations
+    For on-momentum particles, $\delta=0$, both equations are instances of Hill's equations
     \begin{equation}
         u^{\prime\prime}+K_u(s)u = 0,
         \label{eq:Hill}
     \end{equation}
-    a pair of parametric oscillators for $u=x,y$, with $s$-dependent and periodic focusing functions
+   i.e, a pair of parametric oscillators for $u=x,y$, with $s$-dependent and periodic focusing functions
          $$K_x(s) = G^2(s) + K(s), \quad K_y(s) = - K(s),$$
-    which are analogues to an oscillator's spring force per unit mass. Motion in the linear approximation thus consists on oscilation around the closed orbit, known as \textit{betatron oscillations}.
+    the analogues to an oscillator's spring force per unit mass. Motion in the linear approximation thus consists on oscilations around the closed orbit, known as \textit{betatron oscillations}.
 \subsubsection{Pseudoharmonic description}
-The betatron motion can be cast in a amplitude-phase form. One can show that
+Betatron motion can be cast in a amplitude-phase form. One can show that
 \begin{equation}
-    u(s) = \sqrt{2\beta_u(s) J_u}\cos(\phi_u(s) + \phi_0)
+    u(s) = \sqrt{2\beta_u(s) J_u}\cos(\phi_u(s) + \phi_0),\quad u=x,y,
     \label{eq:pseudo_harmon}
 \end{equation}
 is a solution to \eqref{eq:Hill} as long as the $\beta_u(s)$ function satifies the boundary-value problem
@@ -159,7 +158,7 @@ and the phase advance is given by
     \begin{equation}
         \phi_u(s) = \int_{0}^{s}\frac{1}{\beta_u(\sigma)}\dd\sigma.
    \end{equation}
-The betatron functions for the SIRIUS storage ring are shown in Fig.~\ref{betafunc}.
+The motion is oscillatory, non-harmonic and non-periodic. The oscillations envelope is the square-root of the beta functions $\beta_u(s)$, which for the SIRIUS storage ring are shown in Fig.~\ref{betafunc}.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=\textwidth]{Images/beta_functions.pdf}
@@ -167,15 +166,16 @@ The betatron functions for the SIRIUS storage ring are shown in Fig.~\ref{betafu
     \label{betafunc}
 \end{figure}
 \subsubsection{The tune}
-An important feature of the dynamics is the \textit{tune}: the phase advance per ring revolution
+An important feature of the dynamics is the \textit{tune}: the phase advance over a revolution along the ring
 \begin{equation*}
     \nu_u=\frac{1}{2\pi}\int_{s}^{s+L}\frac{\dd \sigma}{\beta_u(\sigma)}\equiv\frac{1}{2\pi}\oint\frac{\dd s}{\beta_u(s)}.
 \end{equation*}
-When studying perturbations and nonlinearitiesm one finds the tunes are a critical variables in determining the beam's response to perturbations. More specifically, the tunes impact over disturbances amplifiction factors, which are greatest when tunes are close to integer numbers.
+The tune reveals the number of transverse oscilations per revolution. The nominual tunes for SIRIUS storage ring are $(\nu_x, \nu_y)=(49.08, 14.14)$.
 
-% SIRIUS ring has tunes $(\nu_x, \nu_y)=(49.08, 14.14)$ which are very close to integers. It is desired to increase the tunes fractional parts to reduce orbit amplification factors. This is the reason why injection efficiency optimzation runs have also been carried in different machine tunes.
+When studying the effects of perturbations and nonlinearities acting on the beam, one finds the tunes are a critical variables in determining the beam's response. More specifically, the tunes impact over disturbances amplifiction factors, which are greatest when tunes are close to integer numbers.
+
 \subsubsection{Turn-by-turn motion}
-If one keeps track of the time evolution of the the $u, u^\prime$ variables, plotting them in a phase space, one realizes the the quasi-periodic motion traces out ellipses in such plane. This fact can be analytically verified by calculating the derivative
+If one keeps track of the time evolution of the the $u, u^\prime$ variables at a fixed position along the ring, plotting them in a phase space, one realizes the the quasi-periodic motion traces out ellipses in such plane. This fact can be analytically verified by calculating the derivative
     \begin{equation}
         u^{\prime}(s) = - \sqrt{\frac{2J_u}{\beta_u}}\qty[\sin(\phi_u(s) + \phi_0) + \frac{1}{2}\beta_u^\prime(s)\cos(\phi_u(s) + \phi_0)],
         \label{eq:uprime}
@@ -184,7 +184,7 @@ If one keeps track of the time evolution of the the $u, u^\prime$ variables, plo
     \begin{equation}
         2J_u=\gamma_u u^{2}+2\alpha_u u u^{\prime}+\beta_u u^{\prime2}.
      \end{equation}
-The ellipse properties are defined by the $\beta(s), \alpha(s)$ and $\gamma(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters. Tracking a particle's transverse position and momenta for several turns at some fixed point along the ring results in the ellipse with shape specified by the C-S parameters. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse.
+The ellipse properties are ruled by the $\beta_u(s), \alpha_u(s)$ and $\gamma_u(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse. Although different in shape, their areas are proportional to $J_u$, an invariant quantity determined by the particle's initial condition. The areas are thus conserved along the ring \cite{lee_accelerator_2004,wiedemann_particle_2015}.
 
  Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$, and thus
  sampling the transverse motion at a fixed $s=s_0$ position reveals a harmonic displacement, which at the $j$-th turn reads
@@ -204,7 +204,7 @@ The ellipse properties are defined by the $\beta(s), \alpha(s)$ and $\gamma(s)$ 
 \end{figure}
 \section{Dispersive \& Chromatic Effecs and Linear Perturbations}
 \subsubsection{Dispersion}
-The equation of motion for off-momentum particles in the horizontal plane, the first of \eqref{eq:linearEOM} is a non-homogeneous Hill's equation. The solution consists on the linear combination of the homogeneous solution (betatron motion)  plus the particular solution: $x=x_\beta+ x_\delta$. Since the driving term $G(s)\delta$ is proportional to $\delta$, we can assume  $x_{\delta} = \eta(s)\delta$ where $\eta(s)$ is the \textit{dispersion function}, which should satisfy
+The equation of motion for off-momentum particles in the horizontal plane, the first of eqs.~\eqref{eq:linearEOM}, is a non-homogeneous Hill's equation. The solution consists on the linear combination of the homogeneous solution (betatron motion)  plus the particular solution: $x=x_\beta+ x_\delta$. Since the non-homogeneous term, $G(s)\delta$, is proportional to $\delta$, we can assume  $x_{\delta} = \eta(s)\delta$ where $\eta(s)$ is the \textit{dispersion function}, which should satisfy
     \begin{equation*}
         \eta^{\prime\prime}+(G^2+K)\eta=G,\quad
         \begin{cases}
@@ -212,7 +212,7 @@ The equation of motion for off-momentum particles in the horizontal plane, the f
             \eta^\prime(0) = \eta^\prime(L).
         \end{cases}
     \end{equation*}
-    The periodicity in the $\eta(s)$ function is required if we want to interpret it as a closed orbit distortion per relative momentum deviation. That is, off-momentum particles perform betatron oscillations around a dispersive orbit, displaced from the nominal orbit by $\eta(s)\delta$. The dispersion function for the SIRIUS storage ring is shown in Fig.~\ref{dispersion_func}
+    The periodicity in the $\eta(s)$ function is required if we want to interpret it as a closed orbit distortion per relative momentum deviation. Thus, off-momentum particles perform betatron oscillations around a dispersive orbit, displaced from the nominal orbit by $\eta(s)\delta$. The dispersion function for the SIRIUS storage ring is shown in Fig.~\ref{dispersion_func}
     \begin{figure}[htb]
         \centering
         \includegraphics[width=\textwidth]{Images/dispersion.pdf}
@@ -233,17 +233,25 @@ The equation of motion for off-momentum particles in the horizontal plane, the f
     %     \vb{X}_\text{co} = \frac{\theta}{2\sin\pi\nu}\mqty(\beta_0 \cos\pi\nu \\ \sin\pi\nu - \alpha_0 \cos\pi\nu).
     % \end{equation}
 
-    In the presence of additional dipolar and quadrupolar fields representing field errors and deviations from normality, the bending and focusing functions in eqs.~\eqref{eq:linearEOM} are corrected by $G(s)\to\Delta G(s)$ and $K_u(s)\to\Delta K_u(s)$, respectively. The orbit and the focusing of the beam is changed. Assuming these are small perturbations and not strong enough to kill the beam, we can evluate the disturbances to the unperturbed dynamics. The details and derivations can be found in the literature, such as in chapter 2 of ref. \cite{lee_accelerator_2004}. Here we highlight the main results.  The closed orbit distortion due to a single, localized dipole error $\Delta G$ reads
+    In the presence of additional dipolar and quadrupolar fields representing field errors and deviations from the nominal fields, the orbit focusing of the beam is changed. Assuming these are small perturbations and not sufficiently strong to kill the beam, we can evaluate the disturbances to the unperturbed dynamics. The details and derivations can be found in the literature, such as in chapter 2 of ref. \cite{lee_accelerator_2004}. Here we highlight the main results.
+
+    For dipole errors $\Delta G_y(s)=-\Delta B_{0x}(s)/R_0$ and $\Delta G_x(s)=\Delta B_{0y}(s)/R_0$, the equations of motion read
     \begin{equation}
-        x_{\text{co}}(s) = \frac{\sqrt{\beta(s)\beta_0}}{2\sin\pi\nu}\Delta G\cos(|\phi(s)-\phi_0| - \pi\nu).
+        x^{\prime\prime}+K_x(s)x=G\delta + \Delta G_x(s), \quad
+        y^{\prime\prime}+K_y(s)y = \Delta G_y(s).
+        \label{eq:dip_errEOM}
+    \end{equation}
+    The solution consists on the combinations of the betatron motion plus the dispersive orbit (for the horizontal plane) plus the closed orbit distortion $u_{\text{co}}$ induced by the additional bending terms due to the dipole errors. For a single thin bending error $\Delta G_u$ in the $u=x,y$ plane, located $s=s_0$ and actind for a length $\Delta s$, the closed orbit distortion $u_{\text{co}}$ reads
+    \begin{equation}
+        u_{\text{co}}(s) = \frac{\sqrt{\beta_u(s)\beta_u(s_0)}}{2\sin\pi\nu_u}\Delta G_u\cos( \pi\nu_u - |\phi_u(s)-\phi_u(s_0)|)\Delta s.
         \label{eq:cod}
     \end{equation}
-    For a distribution $\Delta G(s)$ of dipolar perturbations along the ring, we sum over the contributions, and obtain the total disturbance
+    For a distribution $\Delta G_u(s)$ of dipolar perturbations along the ring, we sum over the contributions:
     \begin{equation}
-        x_{\text{co}}(s) = \frac{\sqrt{\beta(s)}}{2\sin\pi\nu}\int_{s}^{s+L} \Delta G(\sigma)\sqrt{\beta(\sigma)}\cos(\pi\nu + \phi(s) - \phi(\sigma))\dd \sigma.
-        \label{eq:cod_dist}
+        u_{\text{co}}(s) = \frac{\sqrt{\beta_u(s)}}{2\sin\pi\nu_u}\int_{s}^{s+L} \Delta G_u(\sigma)\sqrt{\beta_u(\sigma)}\cos(\pi\nu_u + \phi_u(s) - \phi_u(\sigma))\dd{\sigma}.
+        \label{eq:co_dist}
     \end{equation}
-    The prefactor involves the tune and shows how $\nu$ close to an integer can amplify the effects of the dipolar perturbations.
+    The prefactor involves the tune and shows how $\nu_{u}$ close to an integer can amplify the effects of the dipolar perturbations. At first sight, aiming for tunes $\nu=1/2$ might seem interesting to minimized perturbations. Doing so, however, increases the sensitivity to gradient errors, which we examine next.
     % Knowledge of the beam-response to perturbations allows for the inversion of the problem. We can use specified small dipole kicks to correct the orbit, bringing it closer to the nominal one. These small dipole fields are generated by corrector magnets (CM's) abd orbit correction consists on linear problem of seeking CMs strength that minimze orbit distortions.
 
     % A quadrupole error can be represented by a thin-lens quadrupole transfer matrix \cite{Courant:1958wbj}
@@ -258,24 +266,27 @@ The equation of motion for off-momentum particles in the horizontal plane, the f
     %  \end{equation}
     %  In a linear approximation (if $\sin \phi_0$ is not near zero) $\Delta(\cos \phi) = \cos \phi - \cos\phi_0 \approx \Delta \phi\dv*{(\cos \phi)}{\phi}$ so the tune-shift due to a single thin-lens quadrupole error is
 
-    As for gradient errors, the beam focusing is changed, which leads to changes in the beta functions and phase advances. One can show the tune-shift as a consequence of a gradient error acting ``during" a small extent $\Delta s$ along the ring is \cite{lee_accelerator_2004}
+    Gradient errors can be modeled as corrections to the focusing functions in the equations of motion: $K_u(s)\to K_u(s) + \Delta K_u(s)$, for $\Delta K_x(s) = \Delta B_{1y}(s)/R_0$ and $\Delta K_y(s) = -\Delta B_{1x}(s)/R_0$. The changes in beam focusing lead to changes in the beta-functions, phase advances and consequently the betatron tunes. One can show the tune-shift as a consequence of a gradient error acting over a small extent $\Delta s$ around $s=s_0$ \cite{lee_accelerator_2004} is
          \begin{equation}
-        \Delta \nu \approx \frac{1}{4\pi} \beta_0 \Delta K \Delta s.
+        \Delta \nu_u = \frac{1}{4\pi} \beta(s_0) \Delta K_u \Delta s.
         \label{eq:delta_nu}
      \end{equation}
-     Again, for a distribution of errors we sum over the ring:
+     For a distribution of errors we sum over the ring:
      \begin{equation}
-        \Delta \nu \approx \frac{1}{4\pi}\oint \beta(s) \Delta K(s) \dd s.
+        \Delta \nu = \frac{1}{4\pi}\oint \beta(s) \Delta K(s) \dd s,
         \label{eq:delta_nu_dist}
     \end{equation}
+    where the closed integration sign refers to a complete circulation along the ring, i.e., integration from $s_0$ to $s_0+L$, for any $s_0\in[0,L)$.
+
     %  Besides calculating the tune-shift, the resulting transfer-matrix for the lattice with errors allows for the identification of the new optics $\alpha, \beta, \gamma$, which can then be propagated to anywhere in the ring. In particular we can identify $\beta$ and its fractional deviation from the nominal value along $s$, a parameter known as \textit{beta-beating}
-    Is also possible to show tha the the relative beta-function error, known as beta-beating, reads
+    As for the induced error on the beta-functions, it is possible to show that their relative error, known as betabeat, can be expressed as
      \begin{equation}
-        \frac{\Delta \beta(s)}{\beta(s)} = - \frac{1}{2\sin(2\pi\nu_0)}\int_{s}^{s+L}\Delta K(\sigma)\cos(2\phi(\sigma)-2\phi(s)-\phi_0)\dd\sigma.
+        \frac{\Delta \beta_u(s)}{\beta_u(s)} = - \frac{1}{2\sin(2\pi\nu_u)}\int_{s}^{s+L}\Delta K_u(\sigma)\cos[2(\phi_u(\sigma)-\phi_u(s)-\pi\nu)]\dd\sigma.
         \label{eq:beta_beat}
      \end{equation}
+which is the largest for $2\nu_u$ closest to an integer. This means we must avoid tunes close to half-integers if we want to avoid the build-up of the amplitudes, which can eventually lead to beam loss. The effects resulting of tunes being close to integers or half-integers are the simplest examples of resonances the transverse dynamics can be subject to. A more general overview of resonances will come in the following section.
 \subsubsection{Chromaticity}
-Energy deviations affect not only the closed orbit by means of the dispersion effect. A more/less energetic beam has higer/lower rigidity and thus is also focused differently when passing through quadrupoles.
+We know the bending angles at the dipoles is different for electrons with different energies, which is the origin of dispersive orbits. Energy deviations affect not only the closed orbit by means of the dispersion effect. A more/less energetic beam has higer/lower rigidity and thus is also focused differently when passing through quadrupoles.
 %  This chromatic aberration effect needs to be corrected, which can be attained with the insertion of geometric aberrations provided by sextupolar fields.
 % As for the higher order effect on the focusing, also known as chromatic effect, we consider the motion in a straight section under a gradient, so that there is no non-homogeneous term in the horizontal equation. The equation of motion considering $x\delta $ terms reads
 % \begin{equation}
@@ -285,29 +296,26 @@ Energy deviations affect not only the closed orbit by means of the dispersion ef
 %     y^{\prime\prime}+(K_y+\Delta K_y)y=0
 % \end{equation}
 % where $K_x=h^2+K_1$, e $K_y=-K_1$ and
-
-Expanding the equations of motion, \eqref{eq:EOMs}, for off-energy particles up to the order of terms $u\delta$ ($u=x,y$) reveals additional higher-order gradient terms. The focusing functions are corrected $K_u(s)\to K_u(s) + \Delta K_u(s)$, where
+Expanding the equations of motion, eqs.~\eqref{eq:EOMs}, for off-energy particles up to the order of terms $u\delta$, for $u=x,y$, reveals additional higher-order gradient errors. The focusing functions are corrected by $K_u(s)\to K_u(s) + \Delta K_u(s)$, where
 \begin{equation}
-    \Delta K_x = -(K_1+2G^2)\delta \approx K_x\delta
+    \Delta K_x = (K+2G^2)\delta \approx K_x\delta
 \end{equation}
 \begin{equation}
-    \Delta K_y = K_1\delta = -K_y\delta
+    \Delta K_y = -K\delta = K_y\delta
 \end{equation}
 This means there exists an energy-dependent tune-shift effect, which, using eq.~\eqref{eq:delta_nu_dist}, reads
 % The result is that an off-momentum partcile sees a different optics along the ring: different beta function and different phase advance. Thus, it deviates from nominal operation conditions, specially in the tunes, inducing the tune-shifts
 \begin{equation}
-    \Delta \nu _i \approx -\frac{1}{4\pi}\oint\beta K_i \delta \dd{s},
+    \Delta \nu_u = \frac{1}{4\pi}\oint\beta K_u \delta \dd{s},
     \label{eq:energy_delta_tune}
 \end{equation}
-for the $i=x,y$ planes.
-
-We can define the \textit{linear chromaticity} in the $i=x,y$ direction as energy error-induced tune-shift $\Delta \nu_i$ per energy deviation $\delta$
+for the $u=x,y$ planes. We can define the \textit{linear chromaticity} in the $u=x,y$ direction as tune-shift induced by energy errors,$\Delta \nu_u$, per relative energy deviation $\delta$
 \begin{equation}
-    \xi_i=\dv{\nu_i}{\delta}.
+    \xi_u=\dv{\nu_u}{\delta}.
 \end{equation}
 This uncorrected chromaticity is also called natural chromaticity. Using expression \eqref{eq:energy_delta_tune} for the tune-shift, the natural chromaticity reads
 \begin{equation}
-\xi_{i, \text {nat }} \approx-\frac{1}{4 \pi} \oint K_i \beta_i \dd{s}.
+\xi_{u, \text {nat }} =\frac{1}{4 \pi} \oint K_u \beta_u \dd{s}.
 \end{equation}
 
 To correct this chromatic effect,  we need to introduce sextupolar fields in the lattice, specifically in the dispersive regions. In such regions, off-energy particles should have a deviation from the design closed orbit. Their position reads $x(s)=x_{\beta}(s)+\eta(s) \delta$, where $x_{\beta}(s)$ consists on the betatron oscillations. Since sextupolar fields are of the form
