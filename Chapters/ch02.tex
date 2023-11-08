@@ -338,30 +338,29 @@ with the minus sign for $u=x$ and the plus sign for $u=y$. The chromaticity depe
 \section{Nonlinear Dynamics, Perturbations, Ressonances and Tune-Shifts}
 
 \subsubsection{Action-Angle Variables}
-Betatron motion of equation~\eqref{eq:Hill} can be obtained as Hamilton's equations for the effective, linear Hamiltonian
+The betatron equations of motion, Eqs.~\eqref{eq:Hill}, can be obtained as Hamilton's equations for an effective, linear Hamiltonian
 \begin{equation}
-    \mathcal{H}=\frac{1}{2}u^{\prime2}+\frac{1}{2}K_u(s)u^2.
+    \mathcal{H}_u=\frac{1}{2}u^{\prime2}+\frac{1}{2}K_u(s)u^2,
 \end{equation}
-A transformation $(u,u^\prime)\to(\psi, J)$ to Action-angle variables is implicitly implemented by the type-1 generating function
+summed over $u=x,y$.
+A transformation $(u,u^\prime)\to(\psi_u, J_u)$ to Action-angle variables is implicitly implemented by the type--1 generating function \cite{lee_accelerator_2004}
 \begin{equation}
-    F_1(u,\phi_u)=\int{u}^\prime\dd{{u}}=\frac{u^2}{2\beta_u}\qty(\tan \phi_u-\frac{\beta_u^\prime}{2}).
+    F_1(u,\phi_u)=\int{u}^\prime\dd{{u}}=-\frac{u^2}{2\beta_u}\qty(\tan \phi_u-\frac{\beta_u^\prime}{2}).
 \end{equation}
 The action variable reads
 \begin{equation}
-    J_u=-\pdv{F_1}{\phi_u} = \frac{u}{2\beta_u}\sec^2\phi_u = \frac{1}{2\beta_u}[u^2 + (\beta_u u^\prime + \alpha_u u^2)],
+    J_u=-\pdv{F_1}{\phi_u} = \frac{u^2}{2\beta_u}\sec^2\phi_u = \frac{1}{2\beta_u}[u^2 + (\beta_u u^\prime + \alpha_u u^2)],
     \label{eq:action}
 \end{equation}
-from which we recover the pseudo-harmonic form $u=\sqrt{2\beta_u J_u}\cos(\phi_u(s)+\phi_0)$.
-
-In the $J,\phi$ variables, the new hamiltonian is $H_0(\phi, J)$,  given by
+from which we can recover the pseudo-harmonic form $u=\sqrt{2\beta_u J_u}\cos(\phi_u(s)+\phi_0)$. In the $J,\phi$ variables, the new hamiltonian is $H_0(\phi, J)$,  given by
 \begin{equation}
-    H_0=\mathcal{H}+\pdv{F_1}{s} = \frac{J}{\beta}.
+    H_u=\mathcal{H}_u+\pdv{F_1}{s} = \frac{J_u}{\beta_u}.
 \end{equation}
-Performing the change to action-angle variable in both the horizontal and vertical planes we find the new Hamiltonian for 4D dynamics
+Performing the change to action-angle variable in both the horizontal and vertical planes we find the action-angle Hamiltonian for 4D dynamics
 \begin{equation}
-    H_0= \frac{J_x}{\beta_x} +  \frac{J_y}{\beta_y},
+    H_0= \frac{J_x}{\beta_x} +  \frac{J_y}{\beta_y}.
 \end{equation}
-and Hamilton's equations read
+Hamilton's equations read
 \begin{equation}
     \phi_u^\prime = \frac{1}{\beta_u(s)},\qquad J_u^\prime=0.
 \end{equation}
@@ -370,25 +369,35 @@ Linear motion is integrable, since it can be written in terms of the action vari
 
 Linear motion, though, is only a useful first approximation. In reality, in an storage ring, there are higher order multipole magnets, such as sextupole magnets, and also multipole, alignement and excitation errors, all acting as perturbations to linear motion. Generically referring to perturbations as $V(J, \phi)$, we can write the perturbed motion Hamiltonian
 \begin{equation}
-    H(J,\phi) =H_0 + V(J,\phi).
+    H(J,\phi) =H_0 + V(J,\phi),
 \end{equation}
-Hamilton's equations read
+For which Hamilton's equations read
 \begin{equation}
 \phi_u^\prime = \frac{1}{\beta_u(s)}+\pdv{V(J,\phi)}{J_u}, \quad J_u^\prime = \pdv{V(J,\phi)}{\phi_u}.
 \end{equation}
-Since the tunes consist on the phase advance per revolution, we immediately see that the presence of perturbations leads to tune-shifts. Generically thus, the tunes can be expressed in terms of the tune-shifts as
-$$\nu_0 = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v$$
-where $\xi_u$ represents the energy-dependent tune-shifts (higher order generalization of linear chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
+The action is no longer an invariant and the phase advance rate deviates from the linear betatron phase advance.
+\missingfigure{Phase space ellipses distortions and phase accumulation deviations}
+
+Focusing on the effects on the tunes, we can be express the tunes in terms of the nonlinear chromatic and amplitude-dependent tune-shifts
+\begin{equation}
+    \nu_u = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v
+\end{equation}
+where $\xi_u$ represents the energy-dependent tune-shifts (higher order generalization of the linear chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
 
 
 \subsubsection{Ressonances}
-4D linear unperturbed motion consists on the motion of two uncoupled parametric oscillators. The phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori, corresponding to the different choices of initial conditions $J_u$.
+4D linear and unperturbed motion consists on the motion of two uncoupled parametric oscillators. As a quasi-periodic, integrable system, the phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori covering phase space, corresponding to the different choices of initial conditions $J_u$.
 
 Canonical perturbation theory applied to perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational. The Poincare-Birkhoff theorem states that under such conditions, almost all the periodic phase-space orbits disappear. An even number of tori survives, half of which are stable and half unstable. Unstable motion in a storage ring can eventually lead to beam loss.
 
 The condition for sufficiently rational tunes can be expressed as
-    $$m\nu_x + n\nu_y = \ell,$$
-    for $n, m, \ell\in\mathbb{Z}$. This condition defines lines in tune-space corresponding to the locus in which perturbation theory fails and motion can become unstable. These are resonance lines and $|n|+|m|$ is the order of the resonance. Figure~\ref{resons} shows resonance lines for the resonances up to second, third and fourth order respectively. First order resonances can be excited by dipolar fields, 2nd order resonances can be excited by quadrupole fields and 3rd order resonances can be driven by sextupolar fields.
+\begin{equation}
+        m\nu_x + n\nu_y = \ell,
+        \label{eq:resonance_condition}
+\end{equation}
+    for $n, m, \ell\in\mathbb{Z}$. This condition defines lines in tune-space corresponding to the locus in which perturbation theory fails and motion can become unstable. These are resonance lines and $|n|+|m|$ is the order of the resonance. Particular ressonances arising from linear field errors, such as dipolar errors, $\nu_x, \nu_y = n\in\mathbb{Z}$, and gradient field errors, $2\nu_x, 2nu_y = n\in\mathbb{Z}$, are contained in condition~\eqref{eq:resonance_condition}. Resonances coupling both planes arise when considering perturbations the skew multipole magnets, which can be treated by perturbation theory. Linear coupling resonances are the famous sum and difference resonances $\nu_x + \nu_y = \ell, \nu_x - \nu_y = \ell$, excited by skew quadrupoles magnets.
+\todo[inline]{more detials, and the resonances induced by sextupoles}
+    Figure~\ref{resons} shows resonance lines for the resonances up to second, third and fourth order respectively. First order resonances can be excited by dipolar fields, 2nd order resonances can be excited by quadrupole fields and 3rd order resonances can be driven by sextupolar fields.
 \begin{figure}[thb]
     \centering
     \includegraphics[width=\textwidth]{Images/tunes.png}
@@ -399,3 +408,5 @@ The condition for sufficiently rational tunes can be expressed as
     Nonlinear dynamics can become sensitive to initial conditions when the amplitudes are large. Because of the tune-shfits, specially the amplitude-dependent tune shifts, the tunes can wander in tune space, eventually crossing resonance conditions that may lead to instabilities, chatotic motion and beam loss. The dynamics can impose limitations to the maximum transverse deviations in which the beam can oscillate while displaying regular and bounded motion. This is a dynamic restriction to the motion known as the \textit{dynamic aperture}.
 
     Exceeding the dynamic aperture eventually leads to beam loss. During injection of the beam, if the transverse offsets are larger than the dynamic aperture, the beam is not captured into the storage ring. This is specially important for off-axis injection, such as in the case for SIRIUS.
+
+\todo[inline]{More discussion on DA.}
