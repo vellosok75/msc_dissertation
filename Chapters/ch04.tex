@@ -1,5 +1,5 @@
-\chapter{Dynamic Aperture Optimization Experiments}
-This is a ``methods" chapter. Its first section presents the available diagnostics at the storage ring and describes the experimental measurements of relevant quantities such as beam positions, trajectories and orbits, beam current and lifetime, the tunes and chromaticity and how these are dialed at our will during a study. The other two sections discuss the choice of objective functions to probe the Dynamic Aperture and the appropriate selection of sextupoles to act as knobs.
+\chapter{Diagnostics tools, measurements processes \& experimental setup}
+This is a "methods" chapter. Its first section presents the available beam diagnostics at the storage ring and describes the experimental measurements of relevant quantities such as beam positions, trajectories and orbits, beam current and lifetime, the tunes and chromaticity and how these are dialed at our will during a study. The last two sections discuss the choice of objective functions to probe the Dynamic Aperture and the appropriate selection of sextupole families as the optimzation knobs.
 \section{Diagnostics and measurements at the control room}
 \subsection{Beam Position Monitors}
 Beam-position-monitors (BPMs) consist on a set of four antennas placed inside the vaccum chamber. The antennas are placed in such a manner that when the electron beam passes through it, it induces mirror charges which trigger the antenna a certain voltage. The singal from the antennas is electronically processed allowing for the inference of relative changes in the beam's centroid position. BPMs thus record the average beam's relative trajectories changes along the transverse plane.
@@ -7,30 +7,44 @@ Beam-position-monitors (BPMs) consist on a set of four antennas placed inside th
 \subsection{Beam-Current Monitors}
 DCCTs allow us to measure the stored current on the ring. From the current in the booster or the transport line immediately before the injection into the storage ring and the measurement of the storage ring stored current   immediately after we can infer the efficiency of the injection process.
 \subsection{Tunes monitor \& tune changes}
-When turn-by-turn motion is viewd at a fixed $s$ position, it consits on the sampling of harmonic motion. The fundamental frequency is the tune $\nu$. Precise measurement and monitoring of the tunes is achieved by placing a stripline, which constantly excites the beam in a narrow range of frquencies. The freuqency which is capable of exiciting a resonance peak is idnetified as the tune\todo{Need to study it}
+When turn-by-turn motion is viewed at a fixed position $s$, it consits on the sampling of a harmonic motion. Its fundamental frequency is the tune $\nu$. Precise measurement and monitoring of the tunes is achieved by placing a stripline, which constantly excites the beam in a narrow range of frquencies. The freuqency which is capable of exiciting a resonance peak is idnetified as the tune
+\todo[inline]{Need to study it}
 
-As for changes and control of the tunes, as formula () reveals, changes in the quadrupoles, specially at large $\beta$-function sections allows for the control of the tunes.  In fact, knowing the response is linear, a tune-response matrix can be constructed, i.e. the Jacobian of the tunes with respect to changes in quadrupoles
+As formula~\eqref{eq:delta_nu} reveals, changes in the quadrupoles strengths, specially at the quadrupoles at large $\beta$-function sections, allow for the control of the tunes.  Since the tune response to quadrupole strength changes is linear, a tune-response matrix can be constructed, i.e. the Jacobian of the tunes with respect to changes in quadrupoles, so that tune changes can be expressed as
 \begin{equation}
     \Delta\boldsymbol{\nu} = \vb{J}_{\boldsymbol{\nu}}\Delta \vb{K},
 \end{equation}
-where $\boldsymbol{\nu} = \mqty*[\Delta \nu_x & \Delta \nu_y]^\intercal$ and the Jacobian has matrix elements
+where $\Delta\boldsymbol{\nu} = \mqty*[\Delta \nu_x & \Delta \nu_y]^\intercal$ is the tune-shifts vector, $\Delta \vb{K}$ is the vector containing the changes in stregths across all the quadrupole families, and the Jacobian or response matrix has entries
 \begin{equation}
-    (\vb{J}_{\boldsymbol{\nu}})_{ij} = \pdv{\nu_{i}}{K_j} \approx \frac{\Delta \nu_{i}}{\Delta K_j}, i=x, y.
+    (\vb{J}_{\boldsymbol{\nu}})_{ij} = \pdv{\nu_{i}}{K_j} \approx \frac{\Delta \nu_{i}}{\Delta K_j}, \quad i=x, y,\quad j\in\text{quadrupole families}.
 \end{equation}
-The system can pseudo-inverted allowing for the determination of quadrupoles changes for a desired tune change.
+The system can pseudo-inverted, allowing for the determination of quadrupoles changes required for a desired tune change
+\begin{equation}
+    \Delta \vb{K} = \vb{J}_{\nu}^{+}\Delta \boldsymbol{\nu}
+\end{equation}
+where $\vb{J}_{\nu}^{+} = (\vb{J}_{\nu}^{\intercal}\vb{J}_{\nu})^{-1}\vb{J}_{\nu}^{\intercal}$ is the Moore-Penrose pseudoinverse.
+\todo[inline]{which families are used when changing tunes? add discussion on chaging the optics when changing tunes}
 \subsection{Chromaticity changes \& measurements}
-Chromaticity corresponds to the tune change per unit change in the relative energy deviations $\delta$. In practice, to we calculate the tune changes per unit RF cavity frequency changes\todo{needs refreshing}.
+Chromaticity measures the tune changes per unit change in the relative energy deviations $\delta$. In practice, we calculate the tune changes per unit RF cavity frequency changes
+\todo[inline]{needs refreshing}.
 
-Due to the lienariry of the problem, chromaticity is corrected or changed according to the same pseudo-inversion procedure described above for the tunes. We relate chromaticity changes to sextupole changes
+Just as the tunes depend on the quadrupoles strengths linearly, chromaticity depends linearly on the sextupole strengths, as eq.~\eqref{eq:chromaticity} shows. Chromaticity can be dialed to certain desired values according to the same pseudo-inversion procedure described above for the tunes. We relate the chromaticity changes $\Delta \boldsymbol{\xi}\in\mathbb{R}^2$ to sextupole familiy strength changes $\Delta \vb{S}\in\mathbb{R}^{d_s}$ by
 \begin{equation}
     \Delta\boldsymbol{\xi} = \vb{J}_{\boldsymbol{\xi}}\Delta \vb{S},
 \end{equation}
-where $\boldsymbol{\xi} = \mqty*[\Delta \xi_x & \Delta \xi_y]^\intercal$ and the Jacobian has matrix elements
+where $\Delta\boldsymbol{\xi} = \mqty*[\Delta \xi_x & \Delta \xi_y]^\intercal$ and the Jacobian matrix $\vb{J}\in\mathbb{R}^{2 \times d_s}$ has entries
 \begin{equation}
-    (\vb{J}_{\boldsymbol{\xi}})_{ij} = \pdv{\xi_{i}}{S_j} \approx \frac{\Delta \xi_{i}}{\Delta S_j}, i=x, y.
+    (\vb{J}_{\boldsymbol{\xi}})_{ij} = \pdv{\xi_{i}}{S_j} \approx \frac{\Delta \xi_{i}}{\Delta S_j},\quad i=x, y, \quad j\in\text{sextupole families}.
 \end{equation}
-and carry-out the pseudo-inversion. In practice, though, the chromaticity jacobian was never actually calculated in the real machine, due to the time-consuming process of varying a single sextupole family, carrying out the chromaticity measurement and repeating it for the 21 families. The SIRIUS computer model is used to construct the matrix and whenever a chromaiticity change is desired or required, the changes are calculated by pseudo-inversion of the model-calculated Jacobian
+$d_s$ refers to cardinality of the set of sextupole families used in the chromaticity change process. In principle, at least two families are required for correcting/tuning chromaticity in the machine: one family for each plane. Since the chromatic sextupole families are the only ones effectively changing chromaticity to leading order, then, at most, $d_s=15$.
 
+If we wish to change chromaticity by a $\Delta\boldsymbol{\xi}$ amount, the jacobian can be pseudo-inverted to calculate the required sextupole strength changes
+\begin{equation}
+    \Delta \vb{S} = \vb{J}_{\xi}^{+}\Delta \boldsymbol{\xi}.
+\end{equation}
+
+In practice the chromaticity jacobian was never actually measured in the real machine, due to the time-consuming process of varying a single sextupole family, carrying out the chromaticity measurement and repeating the processs for the 15 chromatic families. The "measurement" is instead done in the SIRIUS storage ring computer model, since the model-calculated jacobian allows for satisfactory correction or tuning of the chromaticity in the actual machine.
+\todo[inline]{which families are used for correctiing}
 \section{The choice of objective function}
 There is no analytical formula for relating the storage ring linear or nonlinear optics to the Dynamic Aperture. The optimization procedure must be a direct search procedure: changes are performed in the knobs and the effect over dynamic aperture is evaluated.
 
