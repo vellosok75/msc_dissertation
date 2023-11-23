@@ -14,7 +14,7 @@ Direct-Current Current Transformers (DCCTs) enable the measurement of the stored
  Utilizing the current measurement and the beam revolution period in the respective ring, one can assess the stored charge, and calculate the injection efficiency during storage ring injections. By estimating the charge in the booster or transport line just before injection into the storage ring and the storage ring charge immediately after the injection pulse, is possible to deduce the efficiency of the injection process.The efficiency of the injection can also be estimated from the sum-signal of the BPMs, since it is proportional to the stored current.
 \todo[inline]{what is the accuracy and prcision of the current measurements with the DCCT? what are its limitations? what about the sum-signal}
 
-\subsection{Tunes measurement \& tune changes}
+\subsection{Tunes measurement \& control}
 When turn-by-turn motion is viewed at a fixed longitudinal position $s$, it consits on the sampling of a harmonic motion. Its fundamental frequency is the tune $\nu$. Any observation of Turn-by-turn (TbT) motion can reveal the tunes upon the appropriate singal processing. For instance, the betatron motion can be Fourier-transformed (discrete Fourier transform via fast-fourier transform algorithm), revealing the BPM signal spectrum. Alternatively the time-domain singal can be fitted to a sinusoid, allowing the determination of the tune as the fundamental frequency.
 
 Precise measurement and online monitoring of the tunes in an accelerator ring can be achieved with the aid of a stripline shaker, which constantly drives the beam with an alternating electric field in a narrow of frquencies, leading to sub-nanometer displacements and inducing small-amplitude, noninterfering with operation betatron motion. The same system also reads back the beam response at that same frequency range. The peak of the beam response signal is identified with the betatron tune.
@@ -34,9 +34,18 @@ The system can pseudo-inverted, allowing for the determination of quadrupoles ch
 \end{equation}
 where $\vb{J}_{\nu}^{+} = (\vb{J}_{\nu}^{\intercal}\vb{J}_{\nu})^{-1}\vb{J}_{\nu}^{\intercal}$ is the Moore-Penrose pseudoinverse.
 \todo[inline]{which families are used when changing tunes? add discussion on chaging the optics when changing tunes}
-\subsection{Chromaticity changes \& measurements}
-Chromaticity measures the tune changes per unit change in the relative energy deviations $\delta$. In practice, we calculate the tune changes per unit RF cavity frequency changes
-\todo[inline]{needs refreshing}.
+\subsection{Chromaticity measurements \& control}
+Chromaticity characterizes the energy-dependent tune-shift. To measure it, we need to calculate the numerical derivative
+$$\xi_u = \pdv{\nu_u}{\delta}\approx \frac{\Delta \nu_u}{\delta}$$
+
+The \textit{momentum compaction factor} establishes the relation between energy deviation induced orbit length changes. Since the revolution period and thus the revolution frequency depend on the orbit length and since the RF frequency is adjusted to match a harmonic of the revolution frequency, a relation can be established between the energy deviations and RF frequency changes
+\begin{equation}
+    \delta = -\frac{1}{\alpha}\frac{\Delta f}{f}
+\end{equation}
+thus the chromaticity can be measured by instead calculating the numerical derivative
+\begin{equation}
+\xi_u = -\frac{f}{\alpha}\frac{\Delta \nu_u}{\Delta f}
+\end{equation}
 
 Just as the tunes depend on the quadrupoles strengths linearly, chromaticity depends linearly on the sextupole strengths, as eq.~\eqref{eq:chromaticity} shows. Chromaticity can be dialed to certain desired values according to the same pseudo-inversion procedure described above for the tunes. We relate the chromaticity changes $\Delta \boldsymbol{\xi}\in\mathbb{R}^2$ to sextupole familiy strength changes $\Delta \vb{S}\in\mathbb{R}^{d_s}$ by
 \begin{equation}
