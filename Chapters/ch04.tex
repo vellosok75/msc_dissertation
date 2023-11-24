@@ -36,18 +36,23 @@ where $\vb{J}_{\nu}^{+} = (\vb{J}_{\nu}^{\intercal}\vb{J}_{\nu})^{-1}\vb{J}_{\nu
 \todo[inline]{which families are used when changing tunes? add discussion on chaging the optics when changing tunes}
 \subsection{Chromaticity measurements \& control}
 Chromaticity characterizes the energy-dependent tune-shift. To measure it, we need to calculate the numerical derivative
-$$\xi_u = \pdv{\nu_u}{\delta}\approx \frac{\Delta \nu_u}{\delta}$$
-
-The \textit{momentum compaction factor} establishes the relation between energy deviation induced orbit length changes. Since the revolution period and thus the revolution frequency depend on the orbit length and since the RF frequency is adjusted to match a harmonic of the revolution frequency, a relation can be established between the energy deviations and RF frequency changes
+$$\xi_u = \pdv{\nu_u}{\delta}\approx \frac{\Delta \nu_u}{\delta},$$
+that is, measure the tune-shift $\Delta \nu_u$ induced by the energy-shift $\delta$. A direct manner to induce a particular energy-shift is to change the RF cavities frequency (see anexxes for brief overview of longitudinal dynamics and details about momentum compaction). A relation can be established between energy deviations $\delta$ and relative RF frequency changes with the aid of a quantity $\alpha$, known as \textit{momentum compaction factor} \cite{lee_accelerator_2004,sands_physics_1969}:
 \begin{equation}
-    \delta = -\frac{1}{\alpha}\frac{\Delta f}{f}
+    \delta = -\frac{1}{\alpha}\frac{\Delta f}{f}.
 \end{equation}
-thus the chromaticity can be measured by instead calculating the numerical derivative
+The momentum compaction factor relates changes in orbit length with energy deviations and is defined by
+\begin{equation}
+    \alpha = \frac{1}{L}\oint G(s) \eta(s) \dd{s}.
+\end{equation}
+Therefore, in practice, when measuring chromaticity we are interested in the numerical derivative
 \begin{equation}
 \xi_u = -\frac{f}{\alpha}\frac{\Delta \nu_u}{\Delta f}
 \end{equation}
+which is obtained as the first-degree coefficient (properly normalized by $\alpha/f$) of the polynomial fitting of the tune-shift vs. RF frequency curve. A typical tune-shift curve is shown by Fig.
+\missingfigure{energy tune shift and chromaticity meas}
 
-Just as the tunes depend on the quadrupoles strengths linearly, chromaticity depends linearly on the sextupole strengths, as eq.~\eqref{eq:chromaticity} shows. Chromaticity can be dialed to certain desired values according to the same pseudo-inversion procedure described above for the tunes. We relate the chromaticity changes $\Delta \boldsymbol{\xi}\in\mathbb{R}^2$ to sextupole familiy strength changes $\Delta \vb{S}\in\mathbb{R}^{d_s}$ by
+As eq.~\eqref{eq:chromaticity} shows, chromaticity depends linearly on the chromatic sextupole families strengths. It can thus be dialed to certain desired values according to the same pseudo-inversion procedure described above for the tunes. We relate the chromaticity changes $\Delta \boldsymbol{\xi}\in\mathbb{R}^2$ to the sextupole families strength changes $\Delta \vb{S}\in\mathbb{R}^{d_s}$ by
 \begin{equation}
     \Delta\boldsymbol{\xi} = \vb{J}_{\boldsymbol{\xi}}\Delta \vb{S},
 \end{equation}
@@ -57,12 +62,12 @@ where $\Delta\boldsymbol{\xi} = \mqty*[\Delta \xi_x & \Delta \xi_y]^\intercal$ a
 \end{equation}
 $d_s$ refers to cardinality of the set of sextupole families used in the chromaticity change process. In principle, at least two families are required for correcting/tuning chromaticity in the machine: one family for each plane. Since the chromatic sextupole families are the only ones effectively changing chromaticity to leading order, then, at most, $d_s=15$.
 
-If we wish to change chromaticity by a $\Delta\boldsymbol{\xi}$ amount, the jacobian can be pseudo-inverted to calculate the required sextupole strength changes
+If we wish to change chromaticity by a $\Delta\boldsymbol{\xi}$ amount, the jacobian can be pseudo-inverted to calculate the required sextupole strength changes:
 \begin{equation}
     \Delta \vb{S} = \vb{J}_{\xi}^{+}\Delta \boldsymbol{\xi}.
 \end{equation}
 
-In practice the chromaticity jacobian was never actually measured in the real machine, due to the time-consuming process of varying a single sextupole family, carrying out the chromaticity measurement and repeating the processs for the 15 chromatic families. The "measurement" is instead done in the SIRIUS storage ring computer model, since the model-calculated jacobian allows for satisfactory correction or tuning of the chromaticity in the actual machine.
+In practice the chromaticity jacobian was never actually measured in the real machine, due to the time-consuming process of varying a single sextupole family, carrying out the chromaticity measurement and repeating the processs for the 15 chromatic families. The "measurement" is instead carried out in the SIRIUS storage ring computer model. The model-calculated jacobian renders a satisfactory correction or tuning of the chromaticity in the actual machine.
 \todo[inline]{which families are used for correctiing}
 \section{The choice of objective function}
 There is no analytical formula for relating the storage ring linear or nonlinear optics to the Dynamic Aperture. The optimization procedure must be a direct search procedure: changes are performed in the knobs and the effect over dynamic aperture is evaluated.
