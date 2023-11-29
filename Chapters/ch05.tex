@@ -1,16 +1,22 @@
-\chapter{Experiments and Results}
-This section presents partial results from the optimzation experiments carried out up until now. The early experiments were performed in december 2022, and the latest have been happening since february 2023.
-\subsection{Kick resilience optimization - december 2022}
+\chapter{Online Optimzation of Nonlinear Dynamics Experiments}
+This chapter presents the results of the experiments carried out during the this masters project. There are two set of important results: i) experiments carried out in late 2022 and ii) experiments carried out in the first semester of 2023. In the first batch of experiments, the experimental method and setup was still being perfected. We attempted optimzation using the kick resilience as objective function and learned it was not the best choice. We moved on to using instead the Injection Efficiency as objective, which had a better performance.  In ii), we continued using the injection efficiency. We started to take more care when choosing the knobs, avoiding the families close to their magnatic nonlinear regime and experimenting with different possibilities of constraints. We also carried out optimzation in different working tunes and had the time to perform further characterization and analysis of the found configurations.
+\section{Kick resilience optimization attempts}
 \label{experiments22}
-The parameter space (knobs) adopted consisted on the SDA0, SDB0, SDP0, SFA0, SFB0, SFP0, SDA1, SDB1, SDP1, SDA3, SDB3, SDP3, SFA1, SFB1, SFP1 sextupole families. The SDA2, SDB2, SDP2 and SFA2, SFB2, SFP2 families were used keep chromaticity constant when varying the optimization knobs. This was implemented in the following manner: RCDS freely proposed strength variations to the knob families. For each proposed change in strength, the corresponding changes in chromaticity were estimated from a chromaticity jacobian matrix constructed from the model. To the ``correction"~ families were applied the strengths needed to cancel these chromaticity changes. In this first attempt, we tested the optimization routine twice, with different objective functions to probe the dynamic aperture.
-    \begin{itemize}
-        \item Objective function: kick resilience\\
-        The first objective function adopted was the beam loss after dipolar kick from the horizontal dipole kicker. The idea was to minimize the loss at a given kick, and progressively increase the kicks, to probe larger acceptances. The BPMs acquisition was fired in synchrony with the dipole kick and beam-loss was calculated by comparing the sum-signal\footnote{BPMs determine the relative changes in position of the beam centroid from the differential image charges the beam induces in the device's four antennas. The sum-sginal consists on the sum of the signal from all the antennas and, up to a scale, represents the total beam current. Relative changes in sum-signal correspond to relative changes in beam current. } of the beam's first 10 turns with the sum-signal of the last 10 turns. As for the strength of the dipole kick, we set a horizontal kick of $\Delta x^\prime = -0.760~ \unit{m rad}$, which rendered about 35 - 40\% of beam-loss.
-        \item Experiment: \\
-        With the aforementioned scheme for changing strengths in the sextupole families, RCDS was started to minimize the beam-loss upon the horizontal kick. In the algorithm's first iteration\footnote{An RCDS iteration is reached upon completing the one-dimensional optimization along all directions in the parameter space. After each iteration, the algorithm constructs a new (conjugate) direction according to Powell's method and may replace existing directions by this new conjugate direction.}, beam loss dropped from 60\% to nearly 0\% (Figure~\ref{beam_loss_hist}). In the beginning of the 2nd iteration, the objective function took negative values (an artifact) and we stopped the optimization run.
-        \item Results:\\
-         The beam-loss minimization significantly improved the beam's resiliency to dipole kicks. After the optimization, it was necessary to kick the beam at approximately $\Delta x^\prime=-0.850~\unit{m rad}$ to achieve the same  30--40\% beam-loss rate previously achieved by a $\Delta x^\prime=-0.760~\unit{m rad}$ kick. By the end of this first attempt, the machine magnets were cycled\footnote{Cycling or standardizing magnets cosnsists on driving their power suplies with decaying sinusoidal waveforms to remove hysteresis effects and bring the magnets yokes to their standard reference magnetization.} and the configurations found during optimization were loaded. When trying to inject in the nominal off-axis scheme, the efficiency was quite low. The improved kick resilience, however, was preserved. This raised the suspicion that the aperture along the negative horizontal direction might have been negatively impacted by the procedure, while the aperture in $x^\prime$ increased. This observation motivated the adoption of injection efficiency to probe the DA.
-    \end{itemize}
+In the first attempt to online otpimze the nonlinear dynamics, we used the beam kick resilience as objective function. As mentioned in section, we sought to minimize the beam-loss rate at a given fixed dipolar kick. The idea was to minize for a given kick, increase the kick and repeat the process, reaching higher kicks resilience.
+\subsection{The knobs}
+The knobs were chosen according to the compensation scheme described in section: the achromatic families SDA0, SDB0, SDP0, SFA0, SFB0, SFP0, and the chromatic families SDA1, SDB1, SDP1, SDA3, SDB3, SDP3, SFA1, SFB1, SFP1 varied freely. The SDA2, SDB2, SDP2 and SFA2, SFB2, SFP2 families were the compensation families used keep chromaticity constant when varying the optimization knobs.
+\subsection{Objective function and setup}
+Before firing the experiment, a small beam current was accumulated into the storage ring, usually $10~\unit{mA}$, localized in a single bunch. At a given moment, we can fire up the kick from a dipole kicker, located close to the injection section. The BPMs acquisition was fired in synchrony with the kick. Since we are interested in optimizing the horiontal DA, the kick is in the horizontal direction. The scheme below sketches the $x,x^\prime$ phase space during the experiment. For small kicks, in the linear approximation, the beam would receive an anction-jump along the $x^\prime$ axis and start to rotate along the corresponding ellipse. In the nonlinear regime, the ellipses are distorted, but we expect the same overall behaviour: action jump along the angles which is eventually translated into horizontal oscillations. Thus, the larger the kick resilience, larger the DA.
+\todo[inline]{move the phase-space discussion to the previous chapter as well as figure illustrating it}
+To evaluate the beam loss we used the BPMs sum signal, which is proportional to the stored current. The average sum-signal of the first 10 turns was compared to that of the last 10 turns in a X turns BPMs acquisition. The kick strength was chosen to render an initial beam rate loss of about 35\% up to 60\%
+\subsection{Optimization runs \& results}
+With the aforementioned scheme for changing strengths in the sextupole families, RCDS was started to minimize the beam-loss upon the horizontal kick. In the algorithm's first iteration\footnote{An RCDS iteration is reached upon completing the one-dimensional optimization along all directions in the parameter space. After each iteration, the algorithm constructs a new (conjugate) direction according to Powell's method and may replace existing directions by this new conjugate direction.}, beam loss dropped from 60\% to nearly 0\%, as Figure~\ref{beam_loss_hist} shows. In the beginning of the 2nd iteration, the objective function took negative values, which is a numerical artifact, so the optimization run was stopped.
+
+The beam-loss minimization significantly improved the beam's resiliency to dipole kicks. After the optimization, it was necessary to kick the beam at approximately $\Delta x^\prime=-0.850~\unit{m rad}$ to achieve the same  30--60\% beam-loss rate previously achieved by a $\Delta x^\prime=-0.760~\unit{m rad}$ kick.
+
+By the end of this first attempt, the machine magnets were standardized\footnote{Standardizing magnets cosnsists on driving their power suplies with decaying sinusoidal waveforms to remove hysteresis effects and bring the magnets yokes to their standard reference magnetization.} and the configurations found during optimization were loaded into the machine sextupoles. This was done to test the repeatability of the configuration found.
+
+Given the improvements in the resilience, it was expected the injection efficiency would also improve as a result of the DA enlargement, however, when trying to inject in the off-axis scheme, the efficiency was quite low, indicating no improvements on DA at all. The improved kick resilience, however, was preserved. This observation raised the suspicion that the aperture along the negative horizontal direction might have been negatively impacted by the procedure, while the aperture in $x^\prime$ increased. In other words, the optimization was not evenly distributed along both $x$ and $x^\prime$. The DA border apparently is way more elstic than anticipated, and can be stretched preferentially along $x$ or $x^\prime$. This observation motivated the adoption of injection efficiency to probe the DA.
 \begin{figure}
     \begin{minipage}{0.48\textwidth}
         \centering
@@ -34,55 +40,58 @@ The parameter space (knobs) adopted consisted on the SDA0, SDB0, SDP0, SFA0, SFB
 %     \label{beam_loss_sexts}
 % \end{figure*}
 
-\subsection{Injection efficiency optimization - december 2022}
-The first attempt at optimizing DA by minizing beam-loss revealed that the optimization procedure did not improve injection efficiency. We started another attempt, using the injection efficiency itself as objective function. The knobs (parameter space) used were the same as in the beam-loss optimization.
-\begin{itemize}
-        \item Objective function \& setup:\\
-        The off-axis injection efficiency was worsened by reducing the NLK strength
+% \subsection{Injection efficiency optimization - december 2022}
+% The first attempt at optimizing DA by minizing beam-loss revealed that the optimization procedure did not improve injection efficiency. We started another attempt, using the injection efficiency itself as objective function. The knobs (parameter space) used were the same as in the beam-loss optimization.
+% \begin{itemize}
+%         \item Objective function \& setup:\\
+%         The off-axis injection efficiency was worsened by reducing the NLK strength
+%         %$-2.45~\unit{m rad}$ to $-2.25~\unit{m rad}$
+%         so the beam was injected in the upper-left border of the  $(x,x^\prime)$ aperture (see Figure~\ref{fig:inj_cond}). The efficiency under such conditions was about 30\%. The maximization of injection efficiency under such injection conditions should correspond to a maximization of the DA evenly among the $x$ and $x^{\prime}$ directions, as opposed to the increase on the $x^\prime$ direction only, as seemed to be the case in the previous attempt.
+%         \item Experiment:\\
+%         In the first run, within three iterations the injection efficiency reached 70\%,  as shown by Fig.~\ref{injeff_hist1}. The algorithm stopped as it reached the maximum number of the objective function evaluations. A second run was launched, starting from the sextupole configurations just found in the first ruun. In four iterations, 85\% efficiency was reached, as Fig.~\ref{injeff_hist2} shows.
+%         \item Results:\\
+%         When the NLK strength was restored to the reference value, meaning the nominal off-axis injection conditions were restored (in which the beam ``lands"~ not at the border but within the acceptance), the injection efficiency fluctuated around 95--100\% with good repeatability. There was a severe reduction in beam lifetime by the end of the last optimization trial. Measurement indicated 54.12 hrs lifetime at $15~\unit{mA}$ current, while, the reference (non-optimized) configuration, lifetime at this same current is about 68 hrs.
+%     \end{itemize}
+% \begin{figure}
+%     \begin{minipage}{0.49\textwidth}
+%             \centering
+%             \includegraphics[width=\textwidth]{Images/injeff_hist_run1.png}
+%             \caption{Objective function vs iterations during the first run of injection efficiency optimization}
+%             \label{injeff_hist1}
+%     \end{minipage}
+%     \hfill
+%     \begin{minipage}{0.49\textwidth}
+%             \centering
+%             \includegraphics[width=\textwidth]{Images/injeff_hist_run2.png}
+%             \caption{Objective function vs iterations during the second run of injection efficiency optimization}
+%             \label{injeff_hist2}
+%         \end{minipage}
+% \end{figure}
+
+% We carried out chromaticity measurements in the machine loaded with the reference configuration (ref-config) and with the sextupole configurations found at iterations 0, 2, and 3 of the last injection efficiency optimization run
+% (run shown by Fig.~\ref{injeff_hist2}). Table~\ref{chrom} presents the measured values, from which we can note the chromaticity changes despite the efforts to anticipate and compensate them when applying changes to the sextupoles. It was later realized, due to the success of the optimization experiments throughout 2023, that the undesired changes in chromaticity are probably not related to this compensation scheme itself, but rather by the choice of sextupole families operating close to their saturation strengths. Under such conditions, the applied fields are not repeatable, and the excited fields might not correspond to the correct values required to control chromaticity.
+% \begin{table}[h]
+% \centering
+% \begin{tabular}{@{}ccc@{}}
+% \toprule
+% machine configuration & $\xi_x$       & $\xi_y$         \\ \midrule
+% ref-config   & $2.33\pm0.02$ & $2.531\pm0.008$ \\
+% iter 0   & $2.59\pm0.02$ & $3.700\pm0.008$   \\
+% iter 2   & $2.72\pm0.04$ & $3.704\pm0.008$ \\
+% iter 3   & $2.76\pm0.05$  & $3.510\pm0.01$   \\ \bottomrule
+% \end{tabular}
+% \caption{Chromaticity measurements for ref-config and sextupole configs. found at the second round of injection optimization}
+% \label{chrom}
+% \end{table}
+
+% In summary, in these early attempts in december 2022 it was realized that beam-loss minimization/kick resilience maximization does not necessarily leads to injection efficiency improvements. The $x-x^\prime$ phase space seems to be ``elastic'' and the dynamic aperture can be deformed preferably along $x$ or $x^\prime$ directions, rather than being uniformily increased, as the experiences in other accelerators suggests.
+
+% The injection efficiency optimization was successful, but at the expense of a significant decrease in beam lifetime. Undesired chromaticity changes were  also observed.
+\subsection{Injection efficiency optimzation}
+The first attempt at optimizing DA by minizing beam-loss revealed that the optimization procedure did not improve injection efficiency. This motivated using the injection efficiency itself as objective function: Changes are preformed to the sextupoles and each evaluation of the objective function consist on the average of 5 injection pulses into the storage ring. However, extra care was taken given the seemingly "elasticness" of the DA border. The off-axis injection efficiency was worsened by reducing the NLK strength
         %$-2.45~\unit{m rad}$ to $-2.25~\unit{m rad}$
-        so the beam was injected in the upper-left border of the  $(x,x^\prime)$ aperture (see Figure~\ref{fig:inj_cond}). The efficiency under such conditions was about 30\%. The maximization of injection efficiency under such injection conditions should correspond to a maximization of the DA evenly among the $x$ and $x^{\prime}$ directions, as opposed to the increase on the $x^\prime$ direction only, as seemed to be the case in the previous attempt.
-        \item Experiment:\\
-        In the first run, within three iterations the injection efficiency reached 70\%,  as shown by Fig.~\ref{injeff_hist1}. The algorithm stopped as it reached the maximum number of the objective function evaluations. A second run was launched, starting from the sextupole configurations just found in the first ruun. In four iterations, 85\% efficiency was reached, as Fig.~\ref{injeff_hist2} shows.
-        \item Results:\\
-        When the NLK strength was restored to the reference value, meaning the nominal off-axis injection conditions were restored (in which the beam ``lands"~ not at the border but within the acceptance), the injection efficiency fluctuated around 95--100\% with good repeatability. There was a severe reduction in beam lifetime by the end of the last optimization trial. Measurement indicated 54.12 hrs lifetime at $15~\unit{mA}$ current, while, the reference (non-optimized) configuration, lifetime at this same current is about 68 hrs.
-    \end{itemize}
-\begin{figure}
-    \begin{minipage}{0.49\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Images/injeff_hist_run1.png}
-            \caption{Objective function vs iterations during the first run of injection efficiency optimization}
-            \label{injeff_hist1}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.49\textwidth}
-            \centering
-            \includegraphics[width=\textwidth]{Images/injeff_hist_run2.png}
-            \caption{Objective function vs iterations during the second run of injection efficiency optimization}
-            \label{injeff_hist2}
-        \end{minipage}
-\end{figure}
+    so the beam was injected in the upper-left border of the  $(x,x^\prime)$ aperture (see Figure~\ref{fig:inj_cond}). The efficiency under such conditions was about 30\%. The maximization of injection efficiency under such injection conditions should correspond to a maximization of the DA more evenly among the $x$ and $x^{\prime}$ directions, as opposed to the increase on the $x^\prime$ direction only, as seemed to be the case in the previous attempt.
 
-We carried out chromaticity measurements in the machine loaded with the reference configuration (ref-config) and with the sextupole configurations found at iterations 0, 2, and 3 of the last injection efficiency optimization run
-(run shown by Fig.~\ref{injeff_hist2}). Table~\ref{chrom} presents the measured values, from which we can note the chromaticity changes despite the efforts to anticipate and compensate them when applying changes to the sextupoles. It was later realized, due to the success of the optimization experiments throughout 2023, that the undesired changes in chromaticity are probably not related to this compensation scheme itself, but rather by the choice of sextupole families operating close to their saturation strengths. Under such conditions, the applied fields are not repeatable, and the excited fields might not correspond to the correct values required to control chromaticity.
-\begin{table}[h]
-\centering
-\begin{tabular}{@{}ccc@{}}
-\toprule
-machine configuration & $\xi_x$       & $\xi_y$         \\ \midrule
-ref-config   & $2.33\pm0.02$ & $2.531\pm0.008$ \\
-iter 0   & $2.59\pm0.02$ & $3.700\pm0.008$   \\
-iter 2   & $2.72\pm0.04$ & $3.704\pm0.008$ \\
-iter 3   & $2.76\pm0.05$  & $3.510\pm0.01$   \\ \bottomrule
-\end{tabular}
-\caption{Chromaticity measurements for ref-config and sextupole configs. found at the second round of injection optimization}
-\label{chrom}
-\end{table}
-
-In summary, in these early attempts in december 2022 it was realized that beam-loss minimization/kick resilience maximization does not necessarily leads to injection efficiency improvements. The $x-x^\prime$ phase space seems to be ``elastic'' and the dynamic aperture can be deformed preferably along $x$ or $x^\prime$ directions, rather than being uniformily increased, as the experiences in other accelerators suggests.
-
-The injection efficiency optimization was successful, but at the expense of a significant decrease in beam lifetime. Undesired chromaticity changes were  also observed.
-\subsection{Optimization experiments throughout 2023}
-\label{experiments23}
 In 2023, optimzation experiments were carried in the machine configurations with the nominal tunes $(\nu_x,\nu_y)=(49.08, 14.14)$, Working Point 1, as well as in the $(49.20, 14.25)$ and $(49.16, 14.22)$ tunes, Working Points 2 and 3 (WPs 1, 2, 3). Results reported here have also been presented in Ref.\cite{velloso:ipac23-wepl087} (on WPs 1 and 2) and on the presentation  delivered at the Optics Tuning and Corrections for Future Colliders Workshop.
 
 The major differences from the previous experiments consisted on
