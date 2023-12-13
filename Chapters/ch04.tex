@@ -7,7 +7,12 @@ To probe the beam's position along the ring, a diagnostic tool consisting on a s
     x = K_x \frac{(A+D)-(B+C)}{\Sigma}, \quad y = K_y \frac{(A+B)-(C+D)}{\Sigma},
 \end{equation}
 where $A,B, C,D$ refers to the intensity of the induced signal over the corresponding antenna, $\Sigma=A+B+C+D$ is the sum signal, proportional to the beam's current, and $K_x$ and $K_y$ are calibration factors, which depend  on the BPM geometry  and distances between the antennas. SIRIUS has 160 BPMs distributed along the storage ring. They allow for the determination of the centroid's positions at a turn-by-turn acquisition rate, which is needed for probing of the betatron motion. The signal can also be processes in other acquisition rates, which renders an averaging of the singal and allows to probe information about the orbit.
-\missingfigure{BPMS antennas diagram}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/bpm_scheme.pdf}
+    \caption{Schematic representation of BPM button antennas, in solid lines, the vaccum chamber cross-section, in dashed lines, and the transverse positions reference frame.}
+    \label{fig:bpms_scheme}
+\end{figure}
 \subsubsection{Phase-space reconstruction}
 Given that BPMs can record TbT motion of the beam's centroid the $x, y$ positions can be readily acquired. The angles, or momenta, can be obtained by the following simple processing. If two consecutive BPMs are located at the ends of a straight section of length $\ell$, where no bending or focusing happens, we can calulate the beam angle as $x^\prime = \frac{\delta x}{\ell}$, where $\Delta x$ refers to the difference of the position readings from the BPMs. On a turn-by-turn basis, the $x,x^\prime$ and $y, y^\prime$ phase-spaces can be reconstructed, as exemplified by Figures below.
 \missingfigure{phase space reconstructions}
