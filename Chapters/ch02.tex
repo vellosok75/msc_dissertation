@@ -10,23 +10,32 @@ Despite the complicated physics of fully-coupled dynamics involving transverse, 
 In this simplified picture, the electron travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space, identic to the  dynamics of two independent quasi-periodic oscillators.
 
 \section{Motion of charged particles in magnetic fields}
-An electron of charge $e$ and momentum of magnitude $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$ directed perpendicularly to the ortbit plane. In such conditions, the Lorentz force law predicts that the relevant quantities are related by
+An electron of charge $e$ and momentum magnitude $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$ directed perpendicularly to the ortbit plane. In such conditions, the Lorentz force law predicts that the orbit radius reads
 \begin{equation}
-    R(p)\equiv B\rho = \frac{p}{e}.
+    \rho = \frac{p}{Be}.
+    \label{eq:Lorentz}
+\end{equation}
+Rearanging this relation we can define a quantity with units of magnetic field~$\times$ length which characterizes the momentum magnitude per unit charge, the magnetic rigidity:
+\begin{equation}
+    R(p) \equiv B\rho = \frac{p}{e}.
     \label{eq:rigidity}
 \end{equation}
 
-Consider now an electron traveling along a curve parametrized by the arclength $s$ with respect to an arbitrary reference point. The interaction with fields $B_x(x,y,s)$  and $B_y(x,y,s)$, both perpendicular to the electron's motion, results in deflections of the trajectory. The deflection angles are given by
+Consider an electron traveling along a curve parametrized by the arclength $s$ with respect to an arbitrary reference point. Define the normal and bi-normal unit vectors so that we can identify a $x-y$ plane perpendicular to the motion.  Let $B_x(x,y,s)$  and $B_y(x,y,s)$, denote the magnetic field components along the unit vectors. The interaction with the fields results in deflections of the trajectory. The deflection angles $\dd\theta_u$ in the $u=x,y$ plane can be estimated from the local curvature radius $\rho_u$ and infinitesimal displacement $\dd{s}$ with the aid of a local, instantaneous version of equation~\eqref{eq:Lorentz}
     \begin{equation}
         \begin{aligned}
             \dd{\theta_u} & = \frac{\dd{s}}{\rho_u(s)} = \frac{e}{p}B_v(x,y,s)\dd s = \frac{1}{R(p)}B_v(x,y,s)\dd s, \quad u,v=x, y \quad\text{or}\quad y,x.
         \end{aligned}
         \label{eq:deflec_angles}
     \end{equation}
-Where \eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the \textit{magnetic rigity} $R(p)$, which is defined as the product of the uniform field strength needed for a beam with momentum $p$ and charge $e$ to perform circular orbit with radius $\rho$. The rigidity depends solely on the electron's momentum/energy and gives the appropriate normalization to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
+Where eq.~\eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the \textit{magnetic rigity} $R(p)$. The rigidity depends solely on the electron's momentum/energy and gives the appropriate normalization to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
 
-\todo[inline]{Add deflection figures}
-
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{Images/deflections.pdf}
+    \caption{Illustration of trajectory deflection and instantaneous angles of deflection and circulation radius.}
+    \label{fig:deflec_angles}
+\end{figure}
 \section{The coordinate system for storage ring dynamics}
 As sketched by Figure~\ref{fig:storage_ring}, electrons in a storage ring perform a prescribed nearly circular trajectory close to a reference orbit. A convenient coordinate frame to decribe the dynamics in storge rings can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{fig:frenet-serret} shows. The idea is that this particle samples exactly the reference nominal orbit. The particle travels a distance $s$ along the ring, which can be used to parametrize the motion. The triad of direction vectors consists of a vector $\vu{s}$, tangent to the trajectory, a vector $\vu{x}$ normal to it, pointing in the direction at which $\vu{s}$ changes and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame. The deviations from the nominal orbit can be measured in units of the unit vectors in the normal and bi-normal directions, characterizing the transverse dynamics. One may also be concerned with the distance of a given particle from the reference particle itself along the curce. Such differences may arise due to differences in the energy two particles. Since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle are not dynamical quantities, but rather parameters of the dynamics.
 
