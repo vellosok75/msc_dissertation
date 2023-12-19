@@ -1,16 +1,14 @@
-\chapter{Theoretical Background}
-This chapter provides the bare minimum theoretical knowledge on electron storage ring physics and particles dynamics needed to state to the reader the optimization problem and the constraints which are involved. A qualitative description of the physics of electron storage rings is presented, followed by a more detailed and more quantitative treatment of single particle dynamics in storage rings.
+\chapter{Theoretical Background: single-particle dynamics}
+This chapter provides the bare minimum theoretical knowledge on electron storage ring physics and particle dynamics needed to acquaint the reader with the optimization problem and the involved constraints. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameter such as the tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinear motion perturbations. This chapter also aims at introducing the SIRIUS parameters and specifications, magnetic lattice and optics functions. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
 
-Despite the complicated physics of a fully-coupled dynamics involving the transverse and the energy oscillations and also the damping and the excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation, it is sufficient to model the motion of a single electron, negletcting radiation losses (and thus the existence of the RF cavities) and any other collective interactions.
-
-In this picture, the electron travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space which is the  dynamics of two independent quasi-periodic oscillators. These simplfications are justified for our immediate purposes because:
+Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal and energy oscillations, damping and excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation, we model the motion of a single electron, neglecting radiation losses, gains and any other collective interactions. These simplfications are justified for our immediate purposes because:
 \begin{itemize}
-    \item radiation losses/gains and energy oscillations are only significant over a time scale of a couple of turns. Over this period, tens of transverse oscilations take place
-    \item the linear and uncoupled dynamics this modeling renders serves as a building block upon which ellaborate modeling can be carried out, incoporating coupling, nonlinearities and perturbations with perturbation theory
-    \item why is it ok to ignore collective effects and instabilities?
+    \item The beam is injected into the storage ring on-energy: it has no significant energy deviations and thus it does not perform large energy and longitudinal oscillations;
+    \item radiation losses are only significant over a time scale of a couple of turns. Over this period, tens of transverse oscilations take place;
+    \item the linear and uncoupled dynamics this modeling renders serves as a building block upon which ellaborate modeling can be carried out, incoporating coupling, nonlinearities and perturbations as well as collective effects;
 \end{itemize}
+In this simplified picture, the electron travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space, identic to the  dynamics of two independent quasi-periodic oscillators.
 
-Next, the single-particle dynamics is presented with the aim of defining quantitavely the dynamic aperture and the characteristics of the dynamics in electron strorage rings. Throghout the modelling, optical functions and parameter for the SIRIUS storage rings are also presented.
 \section{Motion of charged particles in magnetic fields}
 An electron of charge $e$ and momentum of magnitude $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$ directed perpendicularly to the ortbit plane. In such conditions, the Lorentz force law predicts that the relevant quantities are related by
 \begin{equation}
