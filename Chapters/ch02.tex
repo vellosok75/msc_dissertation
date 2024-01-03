@@ -1,26 +1,27 @@
 \chapter{Theoretical Background: single-particle dynamics}
-This chapter provides the bare minimum theoretical knowledge on electron storage ring physics and particle dynamics needed to acquaint the reader with the optimization problem and the involved constraints. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameter such as the tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinear motion perturbations. This chapter also aims at introducing the SIRIUS parameters and specifications, magnetic lattice and optics functions. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
+This chapter provides the theoretical knowledge on the dynamics of electrons in storage rings needed to acquaint the reader with the online optimization problem and the constraints involved. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameters such as the tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinearities of the motion. This chapter also aims at introducing the SIRIUS parameters and specifications, magnetic lattice and optics functions. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
 
-Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal and energy oscillations, damping and excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation, we model the motion of a single electron, neglecting radiation losses, gains and any other collective interactions. These simplfications are justified for our immediate purposes because:
+Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal and energy oscillations, damping and excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation and the optimization problem at sight, we model the motion of a single electron, neglecting radiation losses and gains and any other collective interactions. These simplfications are justified for our immediate purposes because:
 \begin{itemize}
-    \item The beam is injected into the storage ring on-energy: it has no significant energy deviations and thus it does not perform large energy and longitudinal oscillations;
+    \item The beam is injected into the storage ring on-energy: it has no significant energy deviations and thus it does not perform large energy and longitudinal oscillations once it is injected;
     \item radiation losses are only significant over a time scale of a couple of turns. Over this period, tens of transverse oscilations take place;
     \item the linear and uncoupled dynamics this modeling renders serves as a building block upon which ellaborate modeling can be carried out, incoporating coupling, nonlinearities and perturbations as well as collective effects;
 \end{itemize}
 In this simplified picture, the electron travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space, identic to the  dynamics of two independent quasi-periodic oscillators.
 
 \section{Motion of charged particles in magnetic fields}
+\subsection{Cicular cyclotron motion}
 An electron of charge $e$ and momentum magnitude $p$ follows a circular orbit of radius $\rho$ when interacting with an uniform and time-independent magnetic field of magnitude $B$ directed perpendicularly to the ortbit plane. In such conditions, the Lorentz force law predicts that the orbit radius reads
 \begin{equation}
     \rho = \frac{p}{Be}.
     \label{eq:Lorentz}
 \end{equation}
-Rearanging this relation we can define a quantity with units of magnetic field~$\times$ length which characterizes the momentum magnitude per unit charge, the magnetic rigidity:
+Rearranging this relation we can define a quantity with units of magnetic field~$\times$ length which characterizes the momentum magnitude per unit charge of the beam, the \textit{magnetic rigidity}:
 \begin{equation}
     R(p) \equiv B\rho = \frac{p}{e}.
     \label{eq:rigidity}
 \end{equation}
-
+\subsection{Instantaneous deflection of trajectories}
 Consider an electron traveling along a curve parametrized by the arclength $s$ with respect to an arbitrary reference point. Define the normal and bi-normal unit vectors so that we can identify a $x-y$ plane perpendicular to the motion.  Let $B_x(x,y,s)$  and $B_y(x,y,s)$, denote the magnetic field components along the unit vectors. The interaction with the fields results in deflections of the trajectory. The deflection angles $\dd\theta_u$ in the $u=x,y$ plane can be estimated from the local curvature radius $\rho_u$ and infinitesimal displacement $\dd{s}$ with the aid of a local, instantaneous version of equation~\eqref{eq:Lorentz}
     \begin{equation}
         \begin{aligned}
@@ -28,7 +29,7 @@ Consider an electron traveling along a curve parametrized by the arclength $s$ w
         \end{aligned}
         \label{eq:deflec_angles}
     \end{equation}
-Where eq.~\eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the \textit{magnetic rigity} $R(p)$. The rigidity depends solely on the electron's momentum/energy and gives the appropriate normalization to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
+Where eq.~\eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the magnetic rigity $R(p)$. The rigidity depends solely on the electron's momentum/energy and serves as the appropriate normalization constant to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
 
 \begin{figure}[htb]
     \centering
@@ -37,9 +38,9 @@ Where eq.~\eqref{eq:rigidity} has been used to replace the $p/e$ ratio by the \t
     \label{fig:deflec_angles}
 \end{figure}
 \section{The coordinate system for storage ring dynamics}
-As sketched by Figure~\ref{fig:storage_ring}, electrons in a storage ring perform a prescribed nearly circular trajectory close to a reference orbit. A convenient coordinate frame to decribe the dynamics in storge rings can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{fig:frenet-serret} shows. The idea is that this particle samples exactly the reference nominal orbit. The particle travels a distance $s$ along the ring, which can be used to parametrize the motion. The triad of direction vectors consists of a vector $\vu{s}$, tangent to the trajectory, a vector $\vu{x}$ normal to it, pointing in the direction at which $\vu{s}$ changes and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame. The deviations from the nominal orbit can be measured in units of the unit vectors in the normal and bi-normal directions, characterizing the transverse dynamics. One may also be concerned with the distance of a given particle from the reference particle itself along the curce. Such differences may arise due to differences in the energy two particles. Since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle are not dynamical quantities, but rather parameters of the dynamics.
+As sketched by Figure~\ref{fig:storage_ring}, electrons in a storage ring perform a oscillations close to a nearly circular reference closed orbit. A convenient coordinate frame to decribe the dynamics in this scenario can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{fig:frenet-serret} shows. The idea is that this particle samples exactly the reference nominal orbit. The particle travels a distance $s$ along the ring, which can be used to parametrize the motion. The triad of direction vectors consists of a vector $\vu{s}$, tangent to the trajectory, a vector $\vu{x}$ normal to it, pointing in the direction at which $\vu{s}$ changes and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame. The deviations from the nominal orbit can be measured in units of the unit vectors in the normal and bi-normal directions, characterizing the transverse dynamics. One may also be concerned with the distance of a given particle from the reference particle itself along the curce. Such differences may arise due to differences in the energy two particles. In the full, six-dimensional dynamics, the distance from the reference particle and the energy deviations are conjugate dynamical variables and typically oscillate within an acceptance. As mentioned above, since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle shall be static and will be trated as fixed parameters.
 
-Assuming no curvature in the $y$ plane, i.e. that the accelerator defines a curve whose plane is parallel to the facility flat floor, then the unit vectors defining the frame can be calculated by\cite{lee_accelerator_2004}
+Assuming no curvature in the $y$ plane, i.e. that the accelerator defines a curve whose plane is parallel to the facility flat floor, then the unit tangent, normal and binormal vectors defining the frame can be calculated as \cite{lee_accelerator_2004}
 \begin{equation}
 \vu{s}=\dv{\vb{r}_{0}}{s}, \quad \vu{x}=-\rho\dv{\vu{s}}{s}, \quad \vu{y} =  \vu{x}\times\vu{s}.
 \end{equation}
@@ -47,7 +48,7 @@ where $\rho(s) = \norm{\dv*{\vu{s}}{s}}^{-1}$ is the local curvature radius\foot
 \begin{equation}
 \dv{\vu{s}}{s}=-\frac{1}{\rho(s)}\vu{x}, \quad\dv{\vu{x}}{s}=\frac{1}{\rho(s)}\vu{s}, \quad \dv{\vu{y}}{s}=0,
 \end{equation}
-The frame thus depends solely on the geometry of the specified path. Since the curvature is defined by the dipolar fields $B_0(s)$ in the $y$ direction, then, eq.~\eqref{eq:deflec_angles} leads to
+The frame thus depends solely on the geometry of the specified path: the instantaneous curvature $\rho^{-1}(s)$. Since the curvature is defined by the strengths of the dipolar fields $B_0(s)$ in the $y$ direction, then, eq.~\eqref{eq:deflec_angles} leads to
     \begin{equation}
         \frac{1}{\rho(s)} = \frac{B_0(s)}{R_0},
         \label{eq:G}
@@ -65,12 +66,12 @@ The dynamics of relativistic electrons influenced by electromagnetic fields $(\P
     \begin{equation*}
         H=\sqrt{m^2c^4+(\vb{P}-q\vb{A})^2c^2}+e\Phi,
     \end{equation*}
- $e$ being the elementary charge and $\vb{P}=\vb{p}+e\vb{A}$ the canonical momentum. The following steps are followed to obtain equations of motion for electrons in the storage ring:
+ $e$ being the elementary charge and $\vb{P}=\vb{p}+e\vb{A}$ the canonical momentum, with $\vb{A}$ being the vector potential describing the magnetostatic fields of the lattice as $\vb{B}=\curl \vb{A}$. The following steps are followed to obtain equations of motion for electrons in the storage ring:
  \begin{itemize}
     \item A canonical transformation to change coordinates is applied in order to describe the motion in terms of the Frenet-Serret frame variables $x$, $y$;
     \item Instead of time $t$, the Hamiltonian and the dynamical variables are described as functions of $s$, the longitudinal position along the ring;
-    \item Paraxial approximation: the transverse momenta are assumed to be way smaller than the momentum along the trahectory's tangent direction. This allows the expansion of the the square root in the Hamiltonian as a power series, revealing the expression for an approximate Hamiltonian which can be more easily handled;
-    \item Geometric quantities are used: in the paraxial approximation, the canonical momenta for on-energy particles are identified with the derivatives with respect to the parameter $s$ $x^\prime = \dv*{x}{s}$ and $y^\prime = \dv*{y}{s}$, which represent the divergence angles from the nominal orbit;
+    \item Paraxial approximation: the transverse momenta are assumed to be way smaller than the momentum along the trahectory's tangent direction. This allows the expansion of the the square-root in the Hamiltonian as a power series, revealing the expression for an approximate Hamiltonian which can be more easily handled;
+    \item Geometric quantities are used: in the paraxial approximation, the canonical momenta for on-energy particles are identified with the derivatives with respect to the parameter $s$, i.e., $p_x = x^\prime = \dv*{x}{s}$ and $p_y = y^\prime = \dv*{y}{s}$, which represent the divergence angles from the nominal orbit. For off-energy particles, a correction factor is present;
  \end{itemize}
  All of the transformations and manipulations summarized above can be found in detail in the litereature, such as in Refs.~\cite{lee_accelerator_2004, wiedemann_particle_2015,  wolski_beam_2014}. As mentioned previously, by neglecting RF cavities ($\Phi=0$) and radiation losses, the energy will a constant parameter and the dynamics will consist solely on the transverse degrees of freedom.  In this 4-dimensional dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where the momenta are given by
 \begin{equation} p_{x}= x^\prime(1+\delta),\quad p_{y}=y^\prime (1+\delta)\end{equation}
@@ -111,7 +112,7 @@ In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We the
     G(s) = \frac{B_0(s)}{R_0}, \quad K(s) = \frac{B_1(s)}{R_0}, \quad S(s) = \frac{B_2(s)}{R_0}.
     \label{eq:mag_funcs}
 \end{equation}
-\missingfigure{add plot of the $S$, $K$ and $S$ functions}
+\missingfigure{add plot of the $G$, $K$ and $S$ functions}
 
 \section{Linear Dynamics}
 \subsubsection{The linear equations of motion}
@@ -155,13 +156,13 @@ The motion is oscillatory, non-harmonic and non-periodic. The oscillations envel
     \label{betafunc}
 \end{figure}
 \subsubsection{The tune}
-An important feature of the dynamics is the \textit{tune}: the phase advance over a revolution along the ring
+An important parameter of the dynamics is the \textit{tune}: the phase advance over a revolution along the ring, in units of a complete cylcle
 \begin{equation*}
     \nu_u=\frac{1}{2\pi}\int_{s}^{s+L}\frac{\dd \sigma}{\beta_u(\sigma)}\equiv\frac{1}{2\pi}\oint\frac{\dd s}{\beta_u(s)}.
 \end{equation*}
-The tune reveals the number of transverse oscilations per revolution. The nominual tunes for SIRIUS storage ring are $(\nu_x, \nu_y)=(49.08, 14.14)$.
+The tune reveals the number of transverse oscilations per revolution along the ring. The nominal tunes for SIRIUS storage ring are $(\nu_x, \nu_y)=(49.08, 14.14)$.
 
-When studying the effects of perturbations and nonlinearities acting on the beam, one finds the tunes are a critical variables in determining the beam's response. More specifically, the tunes impact over disturbances amplifiction factors, which are greatest when tunes are close to integer numbers.
+When studying the effects of perturbations and nonlinearities acting on the beam, one finds the tunes are a critical variables in determining the beam's response. More specifically, the tunes impact over disturbances amplifiction factors, which are greatest when tunes are close to integer numbers. We examine the relation of the tunes with distrubances in more detail in the upcoming section.
 
 \subsubsection{Turn-by-turn motion}
 If one keeps track of the time evolution of the the $u, u^\prime$ variables at a fixed position along the ring, plotting them in a phase space, one realizes the the quasi-periodic motion traces out ellipses in such plane. This fact can be analytically verified by calculating the derivative
@@ -171,9 +172,9 @@ If one keeps track of the time evolution of the the $u, u^\prime$ variables at a
     \end{equation}
     defining the functions $\alpha_u = \frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satify the quadratic form
     \begin{equation}
-        2J_u=\gamma_u u^{2}+2\alpha_u u u^{\prime}+\beta_u u^{\prime2}.
+        2J_u=\gamma_u u^{2}+2\alpha_u u u^{\prime}+\beta_u u^{\prime2},
      \end{equation}
-The ellipse properties are ruled by the $\beta_u(s), \alpha_u(s)$ and $\gamma_u(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse. Although different in shape, their areas are proportional to $J_u$, an invariant quantity determined by the particle's initial condition. The areas are thus conserved along the ring \cite{lee_accelerator_2004,wiedemann_particle_2015}.
+which describes an ellips. The ellipse properties are determined by the $\beta_u(s), \alpha_u(s)$ and $\gamma_u(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse. Although different in shape, their areas are proportional to $J_u$, an invariant quantity determined by the particle's initial condition. The ellipse areas are thus conserved along the ring \cite{lee_accelerator_2004,wiedemann_particle_2015}.
 
  Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$, and thus
  sampling the transverse motion at a fixed $s=s_0$ position reveals a harmonic displacement, which at the $j$-th turn reads
