@@ -56,8 +56,8 @@ The frame thus depends solely on the geometry of the specified path: the instant
 where $R_0$ is the rigidity for the beam at the nominal energy.
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/frenetserret.png}
-    \caption{The Frenet-Serret coordinate system. From \cite{huang_beam-based_2019}.}
+    \includegraphics[width=0.9\textwidth]{Images/frenetserret.pdf}
+    \caption{The Frenet-Serret coordinate system. Inspired by ref.~\cite{huang_beam-based_2019}.}
     \label{fig:frenet-serret}
 \end{figure}
 
@@ -112,8 +112,12 @@ In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We the
     G(s) = \frac{B_0(s)}{R_0}, \quad K(s) = \frac{B_1(s)}{R_0}, \quad S(s) = \frac{B_2(s)}{R_0}.
     \label{eq:mag_funcs}
 \end{equation}
-\missingfigure{add plot of the $G$, $K$ and $S$ functions}
-
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{Images/field_functions.pdf}
+    \caption{Normalized field functions for dipoles (top plot), quadrupoles (middle plot) and sextupoles (bottom plot) for a superperiod of SIRIUS lattice, shown at the top.}
+    \label{fig:field_funcs}
+\end{figure}
 \section{Linear Dynamics}
 \subsubsection{The linear equations of motion}
 Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variables leads to \cite{sands_physics_1969}
@@ -188,11 +192,11 @@ which describes an ellips. The ellipse properties are determined by the $\beta_u
 % \end{equation}
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=0.5\textwidth]{Images/ellipse}
-    \caption{Phase space ellipse traced by tur-by-turn (TbT) motion in the $(x,p_x)$ phase space. Optics functions determine the principal axes ratios and the inclination of the ellipse at each longitudinal position along the ring. From \cite{wolski_beam_2014}.}
+    \includegraphics[width=0.9\textwidth]{Images/ellipse.pdf}
+    \caption{Phase space ellipse traced by tur-by-turn (TbT) motion in the $(x,p_x)$ phase space. Optics functions determine the principal axes ratios and the inclination of the ellipse at each longitudinal position along the ring. Inspired by ref.~\cite{wolski_beam_2014}.}
     \label{ellipse}
 \end{figure}
-\section{Dispersive \& Chromatic Effecs and Linear Perturbations}
+\section{Dispersive \& Chromatic Effects and Linear Field Perturbations}
 \subsubsection{Dispersion}
 The equation of motion for off-momentum particles in the horizontal plane, the first of eqs.~\eqref{eq:linearEOM}, is a non-homogeneous Hill's equation. The solution consists on the linear combination of the homogeneous solution (betatron motion)  plus the particular solution: $x=x_\beta+ x_\delta$. Since the non-homogeneous term, $G(s)\delta$, is proportional to $\delta$, we can assume  $x_{\delta} = \eta(s)\delta$ where $\eta(s)$ is the \textit{dispersion function}, which should satisfy
     \begin{equation*}
@@ -276,7 +280,11 @@ The equation of motion for off-momentum particles in the horizontal plane, the f
      \end{equation}
 which is the largest for $2\nu_u$ closest to an integer. This means we must avoid tunes close to half-integers if we want to avoid the coherent build-up of betatron amplitudes, which can eventually lead to beam loss.
 Integer or half-integer tunes are the simplest instances of resonances the beam can be subject to. A more general overview of resonances is presented in section 2.8.
-\missingfigure{Int and HalfInt Ressonances Phase Space Diagrams}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/resonances.png}
+    \caption{!Redo fig: include only dipole and quadrupole! Illustration of phase-space motion under dipolar and quadrupolar perturbations close and away from resonances.}
+\end{figure}
 \subsubsection{Chromaticity}
 We know the bending angles at the dipoles is different for electrons with different energies. This is the origin of dispersive orbits. The energy deviations affect not only the closed orbit by means of the dispersion effect, but affect also the focusing of the trajectories, since a more/less energetic beam has higer/lower rigidity and thus is focused differently when passing through gradient fields.
 %
@@ -324,7 +332,12 @@ Considering the contributions from both the errors induced by energy deviations 
     \label{eq:chromaticity}
 \end{equation}
 with the minus sign for $u=x$ and the plus sign for $u=y$. The chromaticity depends linearly on sextupole strengths, allowing for its correction to desired values. Since the effect of the sextupole field focuses in a given plane but defocuses in the other, at leas two sextupole families are requiered for chromaticity correction: one familiy where $\beta_x > \beta_y$ and other where $\beta_y < \beta_x$. The cost of correcting chromaticity is the insertion of perturbations and nonlinearities in the dynamics. To allow for more control over the nonlinear dynamics effects, usually some families of sextupoles are also placed in non-dispersive sections. They are called acrhomatic families, since they have no effect over chromaticity.
-\missingfigure{show chromatic aberrations and their correction with geometric aberrations }
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/chromaticity.pdf}
+    \caption{Illustration of chromatic aberrations (top), their correction with sextupoles (middle) and examples of geometric aberrations (bottom).}
+    \label{fig:chromaticity}
+\end{figure}
 
 \section{Nonlinear Dynamics, Perturbations, Ressonances and Tune-Shifts}
 
@@ -367,7 +380,11 @@ For which Hamilton's equations read
 \phi_u^\prime = \frac{1}{\beta_u(s)}+\pdv{V(J,\phi)}{J_u}, \quad J_u^\prime = \pdv{V(J,\phi)}{\phi_u}.
 \end{equation}
 The action is no longer an invariant and the phase advance rate deviates from the linear betatron phase advance.
-\missingfigure{Phase space ellipses distortions and phase accumulation deviations}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{Images/nonlinear_dynamics_phase_tunes.pdf}
+    \caption{!MISSING THE LABELS IN SUBPLOTS! Illustration of main characteristis in a nonlinear dynamics. a), b) $x$ and $y$ planes phase-space ellipses distortions, respectively; c) tune-space walks as $x$ (blue) and $y$ (red) plane ellipses increase, and as energy deviations change (purple); d) and e): $x$ and $y$ (respectively) amplitude-dependent tune-shifts, f) energy-dependnet tune-shifts.}
+\end{figure}
 
 Focusing on the effects on the tunes, we can be express the tunes in terms of the nonlinear chromatic and amplitude-dependent tune-shifts
 \begin{equation}

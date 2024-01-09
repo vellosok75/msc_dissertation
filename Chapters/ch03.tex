@@ -55,15 +55,31 @@ For the optimization of noisy objective functions, the line optimizer introduced
 
 During the line search, a parabola is fitted within the brackets, and its minimum is considered as the objective function minimum. The fitting of the parabola incorporates a comparison of the available (previously evaluated) points within the brackets. If any point is identified as an outlier, it is discarded, and the fitting process is repeated without it.
 
-\missingfigure{bracketing and linescan illustrations}
-
+\begin{figure}
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/bracketing.pdf}
+        \caption{Illustration of RCDS bracketing: scan the objective function $f$ downhill, updating the guess for the minimum, until $f$ stops decreasing and increases by more than $3\sigma$ compared to best guess for the minimum.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/linescan.pdf}
+        \caption{Illustration of RCDS line-scan procedure: parabolic fitting over a curated set of points within the brackets (with outliers removed). The parabola vertice is the best guess for $f$'s minimum.}
+    \end{minipage}
+\todo[inline]{To-DO: compatibilize figures with text, introduce the 1-d optimzation problem over $g(\delta)$ and reference it to the figures.}
+\end{figure}
 \subsection{Powell's conjugate direction set}
 % Next we investigate how to optimize a several-variables objective function. We note that a multi-dimensional problem can be reduced to a line-search if we choose to focus on a single direction.
 How could we optimize an objective function $f(\vb{x})\in\mathbb{R}$ depending on the set of $p$ parameters $\{x_i\}_{i=1,\dots,p}$? The simplest idea is to iteratively optimize nudging each knob individually: optimize $f$ by changing $x_1$, while the other knobs remain fixed. Next, optimize by changing $x_2$ only, and so forth. In other words, each one of the knobs defines a direction whose basis vector is $\vu{e}_i$, correspoinding to a unit change of the knob. This is easy to automate with the noise-robust line-optimzer introduced in the previous section.
 
 Formally, we are reducing a multi-dimensional optimzation problem into a series of line-searches. That is, given an intial configuration of the parameters (an initial position) $\vb{x}_0$, and a direction $\vu{n}$, we have the one-dimensional problem to minimize $g(\delta)=f(\vb{x}_0 + \delta \vu{n})$. The minimum is  then $f(\vb{x}_0 + \delta_* \vu{n})$, where $\delta_* = \text{arg min}_\delta g(\delta)$. In the previous paragraph, we specialized to $\vb{n}=\vu{e}_i$, and iterated for $i=1,\dots, p$.
 
-\missingfigure{basis vectors minimization vs conjugate directions}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/powell_loop.pdf}
+    \caption{Comparison of iterated line-searches until $f(x,y)$'s minimum along canonical unit vectors (path from red dot to blue dot) and along vectors chosen according to Powell's procedure of conjugate directions (path from green to blue dot).}
+\end{figure}
 
 As can be seen in figure, scanning along each orthogonal directioon can be time-consuming, specially for some functions with long narrow valleys at some angle with the coordinates basis vectors. This strategy thus is suboptimial when evaluation of the objective function is expensive.
 
