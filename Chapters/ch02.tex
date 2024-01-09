@@ -107,7 +107,7 @@ To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting 
 \end{itemize}
 and zero everywhere else, neglecting the fields of insertion devices. Fields \eqref{eq:dipole}--\eqref{eq:sextupole}  are the so-called \textit{normal multipole fields}. There are also \textit{skew multipole fields}, which couple the horizontal and vertical dynamics. We will neglect skew fields and coupling for now. They can be treated as perturbations in perturbation theory schemes.
 
-In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We therefore define the normalized dipolar, quadrupolar and sextupolar fields as the functions
+In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We therefore define the normalized dipolar, quadrupolar and sextupolar fields functions. For a SIRIUS superperiod, the functions are shown in Fig.~\ref{fig:field_funcs}. A superperiod consists on the basic repetition of four magnetic cells. SIRIUS has 5 superperiods. In other, words, the curves in Fig.~\ref{fig:field_funcs} repeat themselves five times along the $518~\unit{m}$ of the ring. More details on the lattice at the end of this chapter.
 \begin{equation}
     G(s) = \frac{B_0(s)}{R_0}, \quad K(s) = \frac{B_1(s)}{R_0}, \quad S(s) = \frac{B_2(s)}{R_0}.
     \label{eq:mag_funcs}
@@ -418,3 +418,38 @@ The condition for sufficiently rational tunes can be expressed as
     Exceeding the dynamic aperture eventually leads to beam loss. During injection of the beam, if the transverse offsets are larger than the dynamic aperture, the beam is not captured into the storage ring. This is specially important for off-axis injection, such as in the case for SIRIUS.
 
 \todo[inline]{More discussion on DA.}
+
+\section{SIRIUS Magnetic Lattice}
+The Sirius magnetic lattice is comprised of 20 straight sections, categorized into 5 A-type sections, with high horizontal betatron function and 15 B- and P-type sections, with low horizontal and vertical betatron functions. While the B and P sections share identical linear lattice elements, they differ in regards to their sextupoles.
+% Among the 20 straight sections, 17 are allocated for insertion devices (IDs), 2 for machine installations, and 1 for shared use between a small ID and machine installation [21].
+
+The central dipole, the BC, is a permanent magnet with a peak field of 3.2 T. The storage ring accommodates 20 such superbends, which can generate X-rays with a critical energy of 19.2 keV [25]. The other four dipoles per arc, two B1 and two B2, are electromagnets with peak fields of 0.58 T. IN total, the SIRIUS magnetic lattice comprises 100 dipoles: 20 permanent magnets (BC) and 80 electromagnets (B1 and B2).
+
+In the high-beta straight sections, a quadrupole doublet (QFA, QDA) is employed for optics matching. Conversely, low-beta straight sections utilize quadrupole triplets for matching (QFB, QDB1, QDB2) in B-type sections and a different triplet (QFP, QDP1, QDP2) for P-type sections. The arc sections house quadrupoles Q1, Q2, Q3, and Q4, totalling 12 families of quadrupoles, 270 magnets.
+% Notably, the quadrupole and dipole magnets in the arc exhibit mirror symmetry around the BC magnet.
+
+The lattice features 21 families of sextupoles, used for chromatic error correction and nonlinear dynamics optimization. The total count of sextupole magnets in Sirius is 280. The 21 families are, in principle, the available search space for nonlinear dynamics optimization. Some sextupoles families are located where the dispersion function vanishes. These are the achromatic, or harmonic, families, while the families located in where there is non-zero dispersion are the chromatic families. Table presents the names of the sextupoles and their types.
+
+\begin{table}[htb]
+    \caption{SIRIUS sextupole families}
+    \centering
+    \begin{tabular}{cl}
+            \hline
+            achromatic & \begin{tabular}[c]{@{}l@{}}SFA0, SDA0, \\ SFB0, SDB0,\\ SDP0, SFP0\end{tabular}                                                                \\ \hline
+            chromatic  & \begin{tabular}[c]{@{}l@{}}SDA1, SFA1, \\ SDA2, SFA2, \\ SDA3,\\ SDB1, {SFB1}\\ SDB2, SFB2, \\ SDB3, \\ {SFP1}, SDP1,\\ SDP2, SFP2\\ SDP3\end{tabular} \\ \hline
+            \end{tabular}
+            \label{fams}
+\end{table}
+
+For orbit correction, SIRIUS has two types of correction systems: fast orbit correction and slow orbit correction. For the slow orbit correction system, each arc section is equipped with 8 BPMs, resulting in a total of 160 BPMs in the storage ring. Additionally, each section has 6 horizontal correctors (CH) and 7 vertical correctors (CV), both types installed in sextupole magnets. An extra vertical corrector magnet is installed per arc, leading to 120 CHs and 160 CVs in the storage ring.
+
+The fast orbit correction system comprises 4 horizontal and 4 vertical fast correctors (FCH and FCV, respectively) per sector, totaling 80 FCH and 80 FCV (2 FCH and 2 FCV per source point). The Slow Orbit Feedback system and(SOFB) and the Fast Orbit Feedback (FOFB) system currently oversee the slow and fast orbit corrections simultaneously.
+
+The coupling control system incorporates 4 skew quadrupoles (QS) per arc, realized as additional coils in sextupole magnets, and 1 additional QS in one fast corrector per section. Consequently, there are (4 + 1) × 20 = 100 QS in the storage ring. The 80 skew quadrupoles in sextupole magnets suffice for coupling control, and the remaining 20 QS in the fast correctors are utilized for the Beam-Based Alignment (BBA) process. In BBA, the electron beam measures the center offsets between the BPMs and the quadrupoles to correct the orbit as close as possible to the magnet centers. The skew quadrupoles in fast correctors play a crucial role in BBA, positioned very close to the BPMs right next to the BC magnet.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{Images/sirius_arcs.png}
+    \caption{SIRIUS magnetic cells comprising the lattice. The cells differ by theis straight section types: high-beta type (A), or low-beta (B, P). The B and P sections differ only by their sextupoles. The whole lattice is comprised of 5 periods of the A-B-P-B cells sequence.}
+\end{figure}
+
+\todo[inline]{Maybe move the lattice discussion to chapter 4. Then Chap 4 will cover the lattice (the sextupoles specially), the injection scheme and then proceed with the content which is already there: diagnostic tools, and the experimental setups.}
