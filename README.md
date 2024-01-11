@@ -4,7 +4,7 @@ Student: Matheus Melo Santos Velloso (LNLS-CNPEM, IFGW-Unicamp)
 
 Advisor: Dr. Liu Lin (LNLS-CNPEM)
 
-Co-advisor: Dr. Antônio Rubens de Castro Britto (LNLS-CNPEM / IFGW-Unicamp)
+Co-advisor: Dr. Antônio Rubens de Britto de Castro (LNLS-CNPEM / IFGW-Unicamp)
 
 in close collaboration with LNLS Accelerator Physics Group.
 
