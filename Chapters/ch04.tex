@@ -38,23 +38,29 @@ The lattice also features 21 families of sextupoles magnets, used for chromatici
 
 % \todo[inline]{Maybe move the lattice discussion to chapter 4. Then Chap 4 will cover the lattice (the sextupoles specially), the injection scheme and then proceed with the content which is already there: diagnostic tools, and the experimental setups.}
 
+\section{Beam diagnostics and measurements}
+\subsection{Beam Positions}
+To track the beam's position around the ring, a diagnostic tool known as Beam Position Monitor (BPM) employs a set of four pick-up antennas positioned within the vacuum chamber. BPMs are illustrated by Fig~\ref{fig:bpms_scheme}. The antennas collect mirror charges induced as the electron beam passes by which triggers voltage signals. Determining the beam displacements relies on the differential signal induced on the antennas when the beam deviates from the device geometric center, resulting in unequal induced charges. The induced signal undergoes processing in the "Delta/Sigma" scheme, providing horizontal and vertical beam displacements through the following algebraic calculations:
 \begin{equation}
     x = K_x \frac{(A+D)-(B+C)}{\Sigma}, \quad y = K_y \frac{(A+B)-(C+D)}{\Sigma},
 \end{equation}
-where $A,B, C,D$ refers to the intensity of the induced signal over the corresponding antenna, $\Sigma=A+B+C+D$ is the sum signal, proportional to the beam's current, and $K_x$ and $K_y$ are calibration factors, which depend  on the BPM geometry  and distances between the antennas. SIRIUS has 160 BPMs distributed along the storage ring. They allow for the determination of the centroid's positions at a turn-by-turn acquisition rate, which is needed for probing of the betatron motion. The signal can also be processes in other acquisition rates, which renders an averaging of the singal and allows to probe information about the orbit.
+where $A$, $B$, $C$, and $D$ represent the intensity of the induced signal over the corresponding antennas, $\Sigma = A + B + C + D$ is the sum signal, which is proportional to the beam's current. The calibration factors $K_x$ and $K_y$ depend on the BPM geometry and distances between the antennas. SIRIUS is equipped with 160 BPMs distributed along the storage ring. The BPMs allow the determination of the centroid's positions at a turn-by-turn (TbT) acquisition rate, crucial for probing the betatron motion. The signal can also be processed at other acquisition rates, allowing for signal averaging and providing information about the orbit.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/bpm_scheme.pdf}
     \caption{Schematic representation of BPM button antennas, in solid lines, the vaccum chamber cross-section, in dashed lines, and the transverse positions reference frame.}
     \label{fig:bpms_scheme}
 \end{figure}
-\subsubsection{Phase-space reconstruction}
-Given that BPMs can record TbT motion of the beam's centroid the $x, y$ positions can be readily acquired. The angles, or momenta, can be obtained by the following simple processing. If two consecutive BPMs are located at the ends of a straight section of length $\ell$, where no bending or focusing happens, we can calulate the beam angle as $x^\prime = \frac{\delta x}{\ell}$, where $\Delta x$ refers to the difference of the position readings from the BPMs. On a turn-by-turn basis, the $x,x^\prime$ and $y, y^\prime$ phase-spaces can be reconstructed, as exemplified by Figures below.
-\missingfigure{phase space reconstructions}
-\subsubsection{Decoherence}
-At first sight it might seem the transverse postions are being damped. In fact, the radiative damping time is much bigger then the acquired time scale in the figure, which contains about 300 turns. The radiative damping time for the SIRIUS storage ring is about thousands of turns. This apparent damping a manifestation of the beam's \textit{decoherence}.
-Decoherence arises due to the nonlinear tune-shifts and the finite extent of the beam in 6-dimensional phase-space, which implies that there is a spread over transverse amplitudes abd energy deviations. The amplitude-dependent and momentum-dependent tune-shifts render the bunch with a spread in tunes. An initially localized bunch in phase-space quickly filaments and spreads over because of the different frequencies (the tunes). The positions become completely uncorelated and the average of the distribuition, the beam's centroid, goes to zero.
-\missingfigure{phase space decoherence}
+\subsubsection{Phase-space reconstruction and decoherence}
+With BPMs recording the turn-by-turn motion of the beam's centroid, the $x$ and $y$ positions can be readily acquired. The angles or momenta can be obtained through simple processing. For two consecutive BPMs located at the ends of a straight section of length $\ell$, where no bending or focusing occurs, the beam angle can be calculated as $x^\prime = \frac{\Delta x}{\ell}$, where $\Delta x$ refers to the difference in position readings from the BPMs. This allows for the reconstruction of the $x, x^\prime$ and $y, y^\prime$ phase-spaces on a turn-by-turn basis, as exemplified by Fig.~\ref{fig:phase_space_recons}. In the figure, BPM data of the beam was acquired at the TbT rate. The beam initially had an amplitude of in the negative horzitonal direction reaching approximately $-8~\unit{mm}$ and in the first turns circulated the outermost region of the phase portrait (dark blue points). The last turns correspond to light yellow points.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Images/phase_space_recons.pdf}
+    \caption{Phase space reconstruction from TbT BPM data. Data was collected for 300 turns in the storage ring. The color-scheme encodes the turn each point was collected.}
+    \label{fig:phase_space_recons}
+\end{figure}
+
+At first glance, it might seem that the transverse positions are being damped. However, the radiative damping time for the SIRIUS storage ring is of the order of thousands of turns, much more than the acquired time scale in the figure. This apparent damping is a manifestation of \textit{decoherence}. Decoherence arises due to the nonlinear tune-shifts and the finite extent of the beam in 6-dimensional phase space, which have a spread over transverse amplitudes and energy deviations. The cumulative effect of amplitude-dependent and momentum-dependent tune-shifts is rendering the bunch with a spread in tunes. An initially localized bunch in phase space quickly filaments and spreads over due to the different frequencies (the tunes) at which they circulate the ellipses. The positions (and momenta) become completely uncorrelated, and the average of the distribution, the beam's centroid, goes to zero.
 \subsection{Beam Current and Injection Efficiency}
 Direct-Current Current Transformers (DCCTs) enable the measurement of the stored beam current within accelerator rings (booster or storage ring). A DCCT current monitor works by surrounding the the beam of charged particles in the accelerator ring with a magnetic core. The magnetic field induced by the beam current flowing by the core is then measured, allowing for an accurate determination of the current itself.
 
