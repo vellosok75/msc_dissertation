@@ -1,8 +1,43 @@
-\chapter{Diagnostics tools, measurements processes \& experimental setup}
-This is a "methods" chapter. Its first section presents the available beam diagnostics at the storage ring and describes the experimental measurements of relevant quantities such as beam positions, trajectories and orbits, beam current and lifetime, the tunes and chromaticity and how these are dialed at our will during a study. The last two sections discuss the choice of objective functions to probe the Dynamic Aperture and the appropriate selection of sextupole families as the optimzation knobs.
-\section{Diagnostics and measurements at the control room}
-\subsection{Beam Position Monitors}
-To probe the beam's position along the ring, a diagnostic tool consisting on a set of four pick-up antennas placed within the vaccum chamber are used. These are known as Beam-position-monitors (BPMs), and are sketched in the Figure. The antennas are placed in such a manner so the electron beam deposits mirror charges when passing by then and triggers the antenna a certain voltage signal. The determination of the beam displacements is based on the differential signal induced on the antennas when the beam is not at the geometric center, in which case the induced charges are equal. The signal of the antennas is processed in the so-called "Delta/Sigma" scheme, which gives the horizontal and vertical beam displacements according to the following algebra:
+\chapter{Storage ring setup, diagnostics, measurements \& experimental methods}
+In this chapter, we delve into the SIRIUS magnetic lattice, beam diagnostics tools and relevant experimental methods. We emphasize the key parameters for optimizing nonlinear dynamics and detail the experimental measurements encompassing beam trajectories and orbits, current, and lifetime as well as the control and manipulation of tunes and chromaticity during machine studies. The final segments address the selection of objective functions for probing the Dynamic Aperture and the selection of sextupole families as optimization knobs.
+
+\section{SIRIUS Magnetic Lattice}
+SIRIUS storage ring consists on a 20-cell five-bend-achromat (5BA) lattice comprising a 5-fold symmetric configuration with alternating high and low horizontal betatron functions at the straight sections, as Fig.~\ref{fig:5BA_lattice} shows. There are 5 A-type sections, with high horizontal betatron function and 15 B- and P-type sections, with low horizontal and vertical betatron functions \cite{liu_new_2016}.
+% While the B and P sections share identical linear lattice elements (dipoles and quadrupoles\footnote{The quadrupole families are in fact distinct. Their strengths can be changed and this symmetry can be broken. Currently the strengths of the quadrupoles in the B and P sections are the same.}), they differ in their sextupoles.
+A superperiod consists of one high-beta and 3 low-beta sections arranged in the order A-B-P-B.
+% Among the 20 straight sections, 17 are allocated for insertion devices (IDs), 2 for machine installations, and 1 for shared use between a small ID and machine installation [21].
+
+The central dipole, the BC, is a permanent superbend magnet with a peak field of $3.2\unit{T}$. The storage ring accommodates 20 such, which can generate X-rays with a critical energy of $19.2~\unit{keV}$ \cite{liu_new_2016}. The arcs contain additional four dipoles: two B1 and two B2. These are electromagnetic dipoles with peak fields of $0.58~\unit{T}$. In total, the SIRIUS magnetic lattice comprises 100 dipoles: 20 permanent BC magnets and 80 B1 and B2s electromagnets.
+
+In the high-beta straight sections, the quadrupole doublet (QFA, QDA) is employed for optics matching. B-type sections utilize the (QFB, QDB1, QDB2) quadrupole triplet for matching while the (QFP, QDP1, QDP2) triplet is used in the P-type sections. The arc sections contain the Q1, Q2, Q3, and Q4 quadrupole families, totalling 12 families of quadrupoles and 270 magnets.
+
+The lattice also features 21 families of sextupoles magnets, used for chromaticity correction and nonlinear dynamics optimization. They sum up to 280 magnets. Some sextupoles families are located where the dispersion function vanishes. These families are called \textit{achromatic}, or harmonic, while the families located in where there is non-zero dispersion are the \textit{chromatic} families. Table~\ref{tab:sext_fams} lists the sextupoles families and their types. The 21 families are, in principle, the available search space for nonlinear dynamics optimization. The subsection on the choice of knobs, at the end of this chapter, shows how the search space can be reduced down to 13 dimensions once the constant chromaticity requirement and/or other additional constraints are imposed.
+
+\begin{figure}[htb]
+    \includegraphics[width=\textwidth]{Images/sirius_arcs.png}
+    \caption{SIRIUS 5BA cells comprising the lattice. The cells differ by their straight section types: high-beta type (A), or low-beta (B, P). A superperiod consists of one high-beta and 3 low-beta sections arranged in the order A-B-P-B. The storage ring consists on 5 concatenation of superperiods. Source: Wiki-SIRIUS (currently only available on-campus).}
+    \label{fig:5BA_lattice}
+\end{figure}
+
+\begin{table}[htb]
+    \caption{SIRIUS sextupole families}
+    \centering
+        \begin{tabular}{ll}
+        \hline
+        achromatic                                                                      & chromatic                                                                                                                                          \\ \hline
+        \begin{tabular}[c]{@{}l@{}}SFA0, SDA0, SFB0,\\ SDB0, SDP0, SFP0\end{tabular} & \begin{tabular}[c]{@{}l@{}}SDA1, SFA1, SDA2, SFA2,SDA3, SDB1, SFB1,\\ SDB2, SFB2, SDB3, SFP1, SDP1, SDP2, SFP2, SDP3\end{tabular}
+        \end{tabular}
+        \label{tab:sext_fams}
+\end{table}
+
+% For coupling control and the beam-based alignment (BBA) process \cite{cruz_aplicacoes_2022} there are 5 skew quadrupoles (QS) per arc, totaling 100 QS in the storage ring. At each arc, 4 of the QS are realized as additional coils in sextupole magnets and account for coupling, while the other, immediately before the BC, is realized in a dedicated corrector magnet and required for BBA.
+
+% Besides the lattice magnets, SIRIUS has correction dipole magnets distributed among the two types of correction systems available: fast orbit correction and slow orbit correction. Both of them share the same orbit diagnostic device probing the beam's centroid positions: beam position monitors (BPMs). Each arc section is equipped with 8 BPMs, totaling 160 BPMs in the storage ring.  For the slow orbit correction system, each section has 6 horizontal correctors (CH) and 7 vertical correctors (CV), both installed in sextupole magnets. An extra vertical corrector magnet is installed per arc, resulting in 120 CHs and 160 CVs in the storage ring.
+
+% The fast orbit correction system comprises 4 horizontal and 4 vertical fast correctors (FCH and FCV, respectively) per sector, totaling 80 FCH and 80 FCV (2 FCH and 2 FCV per source point). The Slow Orbit Feedback system (SOFB) and the Fast Orbit Feedback (FOFB) system currently oversee the slow and fast orbit corrections simultaneously.
+
+% \todo[inline]{Maybe move the lattice discussion to chapter 4. Then Chap 4 will cover the lattice (the sextupoles specially), the injection scheme and then proceed with the content which is already there: diagnostic tools, and the experimental setups.}
+
 \begin{equation}
     x = K_x \frac{(A+D)-(B+C)}{\Sigma}, \quad y = K_y \frac{(A+B)-(C+D)}{\Sigma},
 \end{equation}
