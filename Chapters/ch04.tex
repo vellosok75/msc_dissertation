@@ -60,20 +60,18 @@ With BPMs recording the turn-by-turn motion of the beam's centroid, the $x$ and 
     \label{fig:phase_space_recons}
 \end{figure}
 
-At first glance, it might seem that the transverse positions are being damped. However, the radiative damping time for the SIRIUS storage ring is of the order of thousands of turns, much more than the acquired time scale in the figure. This apparent damping is a manifestation of \textit{decoherence}. Decoherence arises due to the nonlinear tune-shifts and the finite extent of the beam in 6-dimensional phase space, which have a spread over transverse amplitudes and energy deviations. The cumulative effect of amplitude-dependent and momentum-dependent tune-shifts is rendering the bunch with a spread in tunes. An initially localized bunch in phase space quickly filaments and spreads over due to the different frequencies (the tunes) at which they circulate the ellipses. The positions (and momenta) become completely uncorrelated, and the average of the distribution, the beam's centroid, goes to zero.
-\subsection{Beam Current and Injection Efficiency}
-Direct-Current Current Transformers (DCCTs) enable the measurement of the stored beam current within accelerator rings (booster or storage ring). A DCCT current monitor works by surrounding the the beam of charged particles in the accelerator ring with a magnetic core. The magnetic field induced by the beam current flowing by the core is then measured, allowing for an accurate determination of the current itself.
+At first glance, it might seem that the transverse positions are being damped. However, the radiative damping time for the SIRIUS storage ring is of the order of thousands of turns, much more than the acquired time scale in the figure. This apparent damping is a manifestation of \textit{decoherence}. Decoherence arises due to the nonlinear tune-shifts and the finite extent of the beam in 6-dimensional phase space, which has a spread over the amplitudes. The cumulative effect of amplitude-dependent and momentum-dependent tune-shifts is rendering the bunch with a spread in tunes. An initially localized bunch in phase space quickly filaments and spreads over due to the different frequencies (the tunes) with which they circulate the ellipses. In this scenario, the positions (and momenta) tend towards being completely uncorrelated, and the average of the distribution, the beam's centroid, measured by the BPMs, goes to zero.
+\subsection{Beam current and injection efficiency}
+Direct-Current Current Transformers (DCCTs) enable the measurement of the stored beam current within accelerator rings (booster or storage ring). A DCCT current monitor works by surrounding the beam of charged particles in the accelerator ring with a magnetic core. The magnetic field induced by the beam current flowing through the core is then measured, allowing for an accurate determination of the passing current.
 
- Utilizing the current measurement and the beam revolution period in the respective ring, one can assess the stored charge, and calculate the injection efficiency during storage ring injections. By estimating the charge in the booster or transport line just before injection into the storage ring and the storage ring charge immediately after the injection pulse, is possible to deduce the efficiency of the injection process.The efficiency of the injection can also be estimated from the sum-signal of the BPMs, since it is proportional to the stored current.
-\todo[inline]{what is the accuracy and prcision of the current measurements with the DCCT? what are its limitations? what about the sum-signal}
+Utilizing the current measurement and the beam revolution period in the respective ring, one can assess the stored charge and calculate the injection efficiency during storage ring injections. By estimating the charge in the booster or transport line just before injection into the storage ring and the storage ring charge immediately after the injection pulse, it is possible to deduce the efficiency of the injection process. The efficiency of the injection can also be estimated from the sum signal of the BPMs since it is proportional to the stored current.
 
 \subsection{Tunes measurement \& control}
 When turn-by-turn motion is viewed at a fixed longitudinal position $s$, it consits on the sampling of a harmonic motion. Its fundamental frequency is the tune $\nu$. Any observation of Turn-by-turn (TbT) motion can reveal the tunes upon the appropriate singal processing. For instance, the betatron motion can be Fourier-transformed (discrete Fourier transform via fast-fourier transform algorithm), revealing the BPM signal spectrum. Alternatively the time-domain singal can be fitted to a sinusoid, allowing the determination of the tune as the fundamental frequency.
 
-Precise measurement and online monitoring of the tunes in an accelerator ring can be achieved with the aid of a stripline shaker, which constantly drives the beam with an alternating electric field in a narrow of frquencies, leading to sub-nanometer displacements and inducing small-amplitude, noninterfering with operation betatron motion. The same system also reads back the beam response at that same frequency range. The peak of the beam response signal is identified with the betatron tune.
-\missingfigure{FFT of betatron motion and shaker spectrum}
+Precise measurement and online monitoring of the tunes during operation are achieved with the aid of a stripline shaker, which constantly drives the beam with an alternating electric field in a narrow band of frequencies, leading to sub-nanometer displacements and inducing small-amplitude betatron motion without interfering with the operation. This system also reads back the beam response at that same frequency range. The peak of the beam response signal is identified with the betatron tune.
 
-As for changing and manipulating the tunes, formula~\eqref{eq:delta_nu} reveals that changes in the quadrupoles strengths, specially at the quadrupoles at large $\beta$-function sections, allow for the control of the tunes.  Since the tune response to quadrupole strength changes is linear, a tune-response matrix can be constructed, i.e. the Jacobian of the tunes with respect to changes in quadrupoles, so that tune changes can be expressed as
+Regarding changes and manipulation of the tunes, Formula \eqref{eq:delta_nu} reveals that adjustments in the quadrupole strengths, particularly at the quadrupoles in large $\beta$-function sections, enable control of the tunes. As the tune response to changes in quadrupole strength is linear, a tune-response matrix can be constructed, i.e., the Jacobian of the tunes with respect to changes in quadrupoles, allowing tune changes to be expressed as
 \begin{equation}
     \Delta\boldsymbol{\nu} = \vb{J}_{\boldsymbol{\nu}}\Delta \vb{K},
 \end{equation}
@@ -86,27 +84,30 @@ The system can pseudo-inverted, allowing for the determination of quadrupoles ch
     \Delta \vb{K} = \vb{J}_{\nu}^{+}\Delta \boldsymbol{\nu}
 \end{equation}
 where $\vb{J}_{\nu}^{+} = (\vb{J}_{\nu}^{\intercal}\vb{J}_{\nu})^{-1}\vb{J}_{\nu}^{\intercal}$ is the Moore-Penrose pseudoinverse.
-\todo[inline]{which families are used when changing tunes? add discussion on chaging the optics when changing tunes}
+\todo[inline]{add discussion on how the optics changes when changing tunes}
+
 \subsection{Chromaticity measurements \& control}
 Chromaticity characterizes the energy-dependent tune-shift. To measure it, we need to calculate the numerical derivative
-$$\xi_u = \pdv{\nu_u}{\delta}\approx \frac{\Delta \nu_u}{\delta},$$
-that is, measure the tune-shift $\Delta \nu_u$ induced by the energy-shift $\delta$. A direct manner to induce a particular energy-shift is to change the RF cavities frequency (see anexxes for brief overview of longitudinal dynamics and details about momentum compaction). A relation can be established between energy deviations $\delta$ and relative RF frequency changes with the aid of a quantity $\alpha$, known as \textit{momentum compaction factor} \cite{lee_accelerator_2004,sands_physics_1969}:
+\begin{equation}
+    \xi_u = \pdv{\nu_u}{\delta}\approx \frac{\Delta \nu_u}{\delta},
+    \label{eq:chrom_numerical}
+\end{equation}
+that is, measure the tune-shift $\Delta \nu_u$ induced by the energy-shift $\delta$. A direct manner to induce a particular energy-shift is to change the RF cavities frequency. A relation can be established (see Appendix B) between energy deviations $\delta$ and relative RF frequency changes with the aid of a quantity $\alpha$, known as \textit{momentum compaction factor} \cite{lee_accelerator_2004,sands_physics_1969}:
 \begin{equation}
     \delta = -\frac{1}{\alpha}\frac{\Delta f}{f}.
+    \label{eq:delta_frequency}
 \end{equation}
 The momentum compaction factor relates changes in orbit length with energy deviations and is defined by
 \begin{equation}
     \alpha = \frac{1}{L}\oint G(s) \eta(s) \dd{s}.
 \end{equation}
-Therefore, in practice, when measuring chromaticity we are interested in the numerical derivative
+Therefore, in practice, when measuring chromaticity we are interested in the following numerical derivative, which is a consequence of eqs.~\ref{eq:chrom_numerical} and \ref{eq:delta_frequency}:
 \begin{equation}
 \xi_u = -\frac{f}{\alpha}\frac{\Delta \nu_u}{\Delta f}
 \end{equation}
-which is obtained as the first-degree coefficient (properly normalized by $\alpha/f$) of the polynomial fitting of the tune-shift vs. RF frequency curve. A typical tune-shift curve is shown by Fig.
-\missingfigure{energy tune shift and chromaticity meas}
+The derivative is usually calculated by obtaining the first-degree coefficient (properly normalized by $\alpha/f$) of the polynomial fitting of the curve of measured tune-shifts vs. RF frequency changes.
 
-As eq.~\eqref{eq:chromaticity} shows, chromaticity depends linearly on the chromatic sextupole families strengths. It can thus be dialed to certain desired values according to the same pseudo-inversion procedure described above for the tunes. We relate the chromaticity changes $\Delta \boldsymbol{\xi}\in\mathbb{R}^2$ to the sextupole families strength changes $\Delta \vb{S}\in\mathbb{R}^{d_s}$ by
-\begin{equation}
+Regarding controlling chromaticity, as Equation \eqref{eq:chromaticity} shows, chromaticity depends linearly on the strengths of the chromatic sextupole families. It can thus be adjusted to certain desired values according to the same pseudo-inversion procedure described above for the tunes. We relate the changes in chromaticity $\Delta \boldsymbol{\xi} \in \mathbb{R}^2$ to the changes in the strengths of the sextupole families $\Delta \vb{S} \in \mathbb{R}^{d_s}$ by\begin{equation}
     \Delta\boldsymbol{\xi} = \vb{J}_{\boldsymbol{\xi}}\Delta \vb{S},
 \end{equation}
 where $\Delta\boldsymbol{\xi} = \mqty*[\Delta \xi_x & \Delta \xi_y]^\intercal$ and the Jacobian matrix $\vb{J}\in\mathbb{R}^{2 \times d_s}$ has entries
@@ -120,8 +121,8 @@ If we wish to change chromaticity by a $\Delta\boldsymbol{\xi}$ amount, the jaco
     \Delta \vb{S} = \vb{J}_{\xi}^{+}\Delta \boldsymbol{\xi}.
 \end{equation}
 
-In practice the chromaticity jacobian was never actually measured in the real machine, due to the time-consuming process of varying a single sextupole family, carrying out the chromaticity measurement and repeating the processs for the 15 chromatic families. The "measurement" is instead carried out in the SIRIUS storage ring computer model. The model-calculated jacobian renders a satisfactory correction or tuning of the chromaticity in the actual machine.
-\todo[inline]{which families are used for correctiing}
+In practice the chromaticity jacobian was never measured in the actual machine, due to the time-consuming process of varying each sextupole family individually and carrying out the chromaticity measurement. The "measurement" of the Jacobian is instead carried out in the SIRIUS storage ring computer model. The model-calculated jacobian renders a satisfactory correction or tuning of the chromaticity in the actual machine.
+
 \section{The choice of objective function \& optimzation knobs}
 
 \subsection{The objective function}
