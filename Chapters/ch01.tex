@@ -1,4 +1,5 @@
-\chapter{Introduction}
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
 This dissertation focuses on the work conducted on the SIRIUS storage ring sextupole magnets with the objective of optimizing the ring's Dynamic Aperture (DA) and injection efficiency. The text is structured as follows:
 \begin{itemize}
     \item The current chapter introduces synchrotron light sources, provides an overview of the SIRIUS project, outlines the main components and subsystems present in electron storage rings, and elucidates the problem addressed in this work;
@@ -8,7 +9,9 @@ This dissertation focuses on the work conducted on the SIRIUS storage ring sextu
     \item Chapter 5 presents the results of the online optimization experiments and discusses their significance for the machine operation and stability.
 \end{itemize}
 
-\section{Storage ring-based synchrotron light sources}
+\section*{Storage ring-based synchrotron light sources}
+\addcontentsline{toc}{section}{Storage ring-based synchrotron light sources}
+
 Synchrotron radiation (SR) is the electromagnetic radiation emitted by charged relativistic particles when accelerated perpendicularly to their motion. The phenomenon was theoretically predicted in the early 1900s when Liénard and Wiechert calculated the retarded potentials for point particles. The first experimental observation took place at General Electric's synchrotron accelerator, justifying the adoption of the term "synchrotron" in its name \cite{wiedemann_particle_2015}. Synchrotron light is extremely collimated and has a broad spectral distribution, covering from infrared to hard X-rays. These properties make it ideal for imaging experiments in crystallography and spectroscopy across a wide variety of scientific disciplines.
 
 Modern synchrotron light sources primarily rely on two particle acceleration technologies: free-electron lasers and electron storage rings. Here, we focus on storage ring-based synchrotron light source facilities. In these facilities, ultra-relativistic electron beams are stored for extended periods oscillating around a closed orbits within a chamber in ultra-high vacuum to produce synchrotron light. The beams are maintained in stable orbits by the fields of an array of magnets that provide both bending and focusing of the trajectories. The beam is also periodically influenced by radiofrequency cavities, which replenish the energy radiated away in the form of light.
@@ -28,7 +31,9 @@ Typical emittances for third-generation machines is of the order of units to ten
 
 The era of the fourth-generation of storage rings (4GSR) commenced with the commissioning of the MAX-IV machine in Lund, Sweden, in 2015 \cite{liu_towards_2017,hettel_challenges_2014}. 4GSRs achieved a notable reduction in emittance, reaching sub-$\unit{nm}~\unit{rad}$ values thanks to recent technological advancements in computer simulations, vaccum technology, machining and mechanical alignment \cite{hettel_challenges_2014,liu_towards_2017}. Following MAX-IV, an upgrade of the ESRF facility, the ESRF-EBS, in France, and the launch of SIRIUS, in Campinas, Brazil, marked significant milestones for the fourth-generation. Today, several 4GSR projects are being planned, designed and constructed around the globe.
 
-\section{The SIRIUS project}
+\section*{The SIRIUS project}
+\addcontentsline{toc}{section}{The SIRIUS project}
+
 SIRIUS is a 4GSR synchrotron light source. It was designed, built, and is operated by the Brazilian Synchrotron Light Laboratory (LNLS), on the campus of the Center of Research in Energy and Materials (CNPEM), in Campinas, Brazil. The storage ring has $518~\unit{m}$ in circumference and its operating energy is $3~\unit{GeV}$. The natural emittance of the lattice is $250~\unit{pm}~\unit{rad}$ and it is expected to reach up to $150~\unit{pm}~\unit{rad}$ with the installation of the machine's definitive IDs \cite{liu_synchrotron_2019}\footnote{SIRIUS is currently operating with provisional IDs for providing light to the first users and allowing scientific commissioning of the beamlines}.
 
 SIRIUS succeeded the first synchrotron light source in Brazil, the UVX machine, which opened to users in 1997 and served the community until its shutdown, in the beginning of SIRIUS commissioning, in August 2019\footnote{The UVX project led to the creation of LNLS, which marked a new model for scientific research in Brazil, based on social organizations under contracts with the Ministry of Science Technology and Innovations. LNLS paved the way for national labs (NL), including labs on biosciences (LNBio), nanotechnology (LNNano), and bio-renewables (LNBR), which are also located at the CNPEM campus.}\cite{liu_synchrotron_2019}. The SIRIUS project started in 2009, initially planned and designed as a third-generation machine. By 2012, the project evolved into that of a 4GSR \cite{liu_synchrotron_2019}. Construction was finished in 2018, the LINAC and Booster commissioning soon followed. In november 2019 the first beam was stored in the storage ring.
@@ -38,7 +43,8 @@ SIRIUS finished its Phase-0 commissioning in 2022 and since March 2023 is receiv
 
 Presently, SIRIUS stands as the most complex scientific infrastructure ever consturcted in Brazil, with the ambitious goal of positioning the country at the forefront of global leadership in synchrotron light sources technology. This state-of-the-art synchrotron was meticulously designed to shine as the brightest in its energy category, and has the capacity to host up to 40 beamlines. As of the time of this writing, SIRIUS holds the distinction of being the sole fourth-generation synchrotron light source in the southern hemisphere and one of merely three 4GSRs in operation across the globe.
 
-\section{Physics of electron storage rings: an overview}
+\section*{Physics of electron storage rings: an overview}
+\addcontentsline{toc}{section}{Physics of electron storage rings: an overview}
 
 Typical systems comprising a storage ring synchrotron light source facility include:
 \begin{itemize}
@@ -89,7 +95,9 @@ Because of the nonlinearities introduced by the sextupole magnets, the transvers
 The acceptances and the expected rate at which anomalies in the degrees of freedom can occur define a base rate for the expected beam loss in the ring. The beam is also susceptible to elastic and inelastic collisions with residual gas molecules within the chamber, as well as collisions between electrons within the same bunch, in addition to other interactions with wake-fields \todo{not sure collective effects play a significat role in liefetime} from other bunches. All these effects can lead to beam losses, and the overall beam loss rate resulting from these combined mechanisms defines the characteristic time scale at which a given electron current survives in the ring. This is the beam lifetime and determines the rate at which injections into the storage ring are required to mantain the current within a specified range.
 % \todo[inline]{Maybe add illustrations about the acceptances }
 
-\section{The problem addressed in this work}
+\section*{The problem addressed in this work}
+\addcontentsline{toc}{section}{The problem addressed in this work}
+
 The pursuit of low emittances and high brightness has propelled the accelerator community toward the fourth-generation of storage rings. Achieving such low emittances was made possible by a series of technological advances that enabled the use of the multi-bend achromat (MBA) lattice\cite{liu_towards_2017,hettel_challenges_2014}. MBA lattices require intense gradient fields provided by quadrupole magnets, which, in turn, necessitate the presence of strong sextupolar fields to compensate for chromatic effects. As sextupoles introduce nonlinear fields, the dynamics in fourth-generation storage rings has become increasingly nonlinear\cite{liu_towards_2017}.
 
 A quasi-periodic nonlinear dynamics, when subjected to even the slightest perturbations—such as small field errors stemming from rotation, alignment, or fields excitation errors—can potentially become unstable at large oscillation amplitudes. These instabilities impose constraints on the maximum transverse oscillation amplitudes that the machine can accommodate, the Dynamic Aperture (DA) of the ring. Exceeding the DA results in irregular and often chaotic motion and beam loss.
