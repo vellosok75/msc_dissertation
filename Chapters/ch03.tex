@@ -57,14 +57,14 @@ Next, for the line search, a parabola is fitted within the brackets using the po
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/bracketing.pdf}
-        \caption{Illustration of RCDS bracketing: scan the objective function $f$ downhill, updating the guess for the minimum, until $f$ stops decreasing and increases by more than $3\sigma$ compared to best guess for the minimum.}
+        \caption[Illustration of RCDS bracketing.]{Illustration of RCDS bracketing: scan the objective function $f$ downhill, updating the guess for the minimum, until $f$ stops decreasing and increases by more than $3\sigma$ compared to best guess for the minimum.}
         \label{fig:bracketing}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/linescan.pdf}
-        \caption{Illustration of RCDS line-scan procedure: parabolic fitting over a curated set of points within the brackets (with outliers removed). The parabola vertice is the best guess for $f$'s minimum.}
+        \caption[Illustration of RCDS line-scan procedure.]{Illustration of RCDS line-scan procedure: parabolic fitting over a curated set of points within the brackets (with outliers removed). The parabola vertice is the best guess for $f$'s minimum.}
     \end{minipage}
 \end{figure}
 \todo[inline]{FIX FIGURES: uneven scanning steps along the domain. Steps actually increase progressively, up to $0.1$.}
@@ -77,7 +77,7 @@ Formally, we are reducing a multi-dimensional optimzation problem into a series 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/powell_loop.pdf}
-    \caption{Comparison of iterated line-searches until $f(x,y)$'s minimum along canonical unit vectors (path from red dot to blue dot) and along vectors chosen according to Powell's procedure of conjugate directions (path from green to blue dot).}
+    \caption[Comparison of iterated line-searches until $f(x,y)$'s minimum along canonical unit vectors vs. along vectors chosen according to Powell's method.]{Comparison of iterated line-searches until $f(x,y)$'s minimum along canonical unit vectors (path from red dot to blue dot) vs. along vectors chosen according to Powell's method of conjugate directions (path from green to blue dot).}
 \end{figure}
 
 As can be seen in figure, scanning along each orthogonal directioon can be time-consuming, specially for some functions with long narrow valleys at some angle with the coordinates basis vectors. This strategy thus is suboptimial when evaluation of the objective function is expensive.
