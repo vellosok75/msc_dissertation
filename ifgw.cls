@@ -92,7 +92,7 @@
 \renewcommand{\cleardoublepage}{%
     \clearpage
     \if@twoside
-        \ifodd 
+        \ifodd
             \c@page
         \else
             \vspace*{\fill}
@@ -139,9 +139,9 @@
     \ifx\ifgw@title@english\@empty\relax
     \else
         \ifx\ifgw@subtitle@english\@empty\relax
-            \MakeUppercase{\textbf{\ifgw@title@english}}
+            {\textbf{\ifgw@title@english}}
         \else
-            \MakeUppercase{\textbf{\ifgw@title@english:}}\\\MakeUppercase{\ifgw@subtitle@english}
+            {\textbf{\ifgw@title@english:}}\\\MakeUppercase{\ifgw@subtitle@english}
         \fi
         \vfill
     \fi
@@ -151,9 +151,9 @@
     \ifx\ifgw@title@portuguese\@empty\relax
     \else
         \ifx\ifgw@subtitle@portuguese\@empty\relax
-            \MakeUppercase{\textbf{\ifgw@title@portuguese}}
+            {\textbf{\ifgw@title@portuguese}}
         \else
-            \MakeUppercase{\textbf{\ifgw@title@portuguese:}}\\\MakeUppercase{\ifgw@subtitle@portuguese}
+            {\textbf{\ifgw@title@portuguese:}}\\\MakeUppercase{\ifgw@subtitle@portuguese}
         \fi
         \vfill
     \fi
@@ -241,7 +241,7 @@
             {\MakeUppercase{\ifgw@university@portuguese}}\\~{\ifgw@institute@portuguese}
         \fi
         \vfill
-    \fi 
+    \fi
 }
 %<<<=====================================================<<<
 
@@ -385,7 +385,7 @@
             \footnotesize
             \thepage
             \hfill
-            \rightmark 
+            \rightmark
             \vskip-0.7\baselineskip
             \rule{\textwidth}{0.7pt}
             \relax
@@ -397,7 +397,7 @@
             \footnotesize
             \leftmark
             \hfill
-            \thepage 
+            \thepage
             \vskip-0.7\baselineskip
             \rule{\textwidth}{0.7pt}
             \relax
