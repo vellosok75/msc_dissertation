@@ -1,4 +1,61 @@
-\chapter{Algorithms Pseudocode}
-TO-DO!
+\chapter{Algorithms pseudocode}
+This appendix presents pseudocode for simplified versions of the routines implemented Python during the execution of this work. The code has been simplified for pedagogic reasons, focusing on the main characteristics of each routine composing the RCDS algortihm. In particular, checkings of data consistency and adequacy are not included. The bracketing and linescan routines are presented only for the simpler case of a single parameter (knob) optimization.
+\section{RCDS Bracketing}
+\begin{algorithm}
+    \caption{RCDS bracketing}\label{alg:brackets}
+    \begin{algorithmic}
+    \Function{bracketing min}{pos0, func0, dir, step}
+        % \State\Require func0 $\neq$ NaN
+        \State mins $\gets$ pos0, 0, func0
+        \State delta
+    \EndFunction
+    \end{algorithmic}
+    \end{algorithm}
 
-\lipsum[1-10]
+\section{RCDS linescan}
+In the algortihm below, the RCDS linescan function is presented. The brackets $a, b, c$ must be provided alongside $n$, the number of points inside the brackets that should be used for fitting of the Parabola.
+\begin{algorithm}
+    \caption{RCDS linescan}\label{alg:linescan}
+    \begin{algorithmic}
+    \Function{linescan}{$a$, $b$, $c$, $n$}
+        \State $V$ $\gets$ evenly-spaced $n$-array w/ values $\in$ $(a, c)$
+        \State $f(V)$ $\gets$ $n$-dimensional array with NaNs
+        % \For{$i\in$ indices of deltas}
+        %     \State replace deltas[$i$] by brackets[$j$], the closest entry to it in brackets
+        %     \State funcs[$i$] $\gets$ funcBrackets[$j$]
+        % \EndFor
+        \For{the $i$-th entry of $V$}
+            \State $f(V)$[$i$] $\gets$ ObjectiveFunction($V$[$i$])
+        \EndFor
+        \State $V$, $f(V)$ $\gets$ RemoveOutiler($V$, $f(V)$)
+        \State $c_0$, $c_1$, $c_2$ $\gets$ CalcDeg2PolynomCoefs($V$, $f(V)$)
+        \If{length($V$) $<n$ or $c_2\leq 0$}
+        \LComment{no sufficient points for fitting or wrong parabola concavity}
+            \State \Return $b$, $f(b)$
+        \EndIf
+        \State $V$ $\gets$ evenly spaced 1000-array w/ values $\in(a,c)$
+        \State $f(V)\gets$ empty 1000-array
+        \For{the $i$-th entry of $V$}
+            \State $f(V)[i] \gets$ $c_0+c_1V[i]+c_2V[i]^2$
+        \EndFor
+        \State $f(V)$ = [$f(a),\dots,f(v_i),\dots f(c)$]
+        \State min $\gets V[\text{argmin}(f(V))]$
+        \State $f_\text{min}$ $\gets$ min($f(V)$)
+        \State \Return min, $f_\text{min}$
+    \EndFunction
+    \end{algorithmic}
+    \end{algorithm}
+The function references the externally defined functions "ObjectiveFunction()" and "RemoveOutlier()". The latter is detailed next.
+\section{Outlier Handling and Removal}
+\begin{algorithm}
+    \caption{Outlier Handling}\label{alg:outlier}
+    \begin{algorithmic}
+    \Function{RemoveOutlier}{}
+        % \State\Require func0 $\neq$ NaN
+        \State mins $\gets$ pos0, 0, func0
+        \State delta
+    \EndFunction
+    \end{algorithmic}
+    \end{algorithm}
+
+\section{Powell's conjugate directions}
