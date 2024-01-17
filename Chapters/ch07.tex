@@ -1,13 +1,44 @@
 \chapter{Algorithms pseudocode}
+\label{chap:pseudocode}
 This appendix presents pseudocode for simplified versions of the routines implemented Python during the execution of this work. The code has been simplified for pedagogic reasons, focusing on the main characteristics of each routine composing the RCDS algortihm. In particular, checking of data consistency and adequacy are not included. The bracketing and linescan routines are presented only for the simpler case of a single parameter (knob) optimization.
 \section{RCDS Bracketing}
 \begin{algorithm}
     \caption{RCDS bracketing}\label{alg:brackets}
-    \begin{algorithmic}
-    \Function{bracketing min}{pos0, func0, dir, step}
-        % \State\Require func0 $\neq$ NaN
-        \State mins $\gets$ pos0, 0, func0
-        \State delta
+    \begin{algorithmic}[1]
+    \Function{bracketing min}{$x_0$, $f_0$, step}
+        \State postions $\gets$ list containing $x_0$
+        \State functions $\gets$ list containig $f_0$
+        \State $x_{\text{min}}$, $f_{\text{min}}$ $\gets$ $x_0$, $f_0$
+        \State $f$ $\gets$ ObjectiveFunction($x_0$ + step)
+        \If{$f<f_{\text{min}}$}
+            \State $f_{\text{min}}\gets f$
+        \EndIf
+        \State append $x + \text{step}$ to positions
+        \State append $f$ to functions
+        \While{$f<f_{\text{min}} + 3 \sigma$}:
+            \If{$|\text{step}|<0.1$}
+                \State step $\gets$ step $\times$ (1 + $\phi$)
+            \ElsIf{scanning in $+x$ direction}
+                \State step $\gets$ step + 0.1
+            \Else
+                \State step $\gets$ step - 0.1
+            \EndIf
+            \State $f$ $\gets$ ObjectiveFunction($x + \text{step}$)
+            \If{$f$ is NaN}
+                \State \textbf{break}
+            \EndIf
+            \If{$f<f_{\text{min}}$}
+                \State $x_{\text{min}} \gets$ $x + \text{step}$
+                \State $f_{\text{min}}\gets f$
+            \EndIf
+            \State append $x + \text{step}$ to positions
+            \State append $f$ to functions
+        \EndWhile
+        \If{$f_0\leq f_{\text{min}} + 3 \sigma$}
+        \Comment{if false, no need to scan in the $-x$ direction}
+            \State repeat lines 10 - 22 with step $\gets - \text{step}$
+        \EndIf
+        \State \Return positions, functions, $x_{\text{min}}$, $f_{\text{min}}$
     \EndFunction
     \end{algorithmic}
     \end{algorithm}
@@ -16,7 +47,7 @@ This appendix presents pseudocode for simplified versions of the routines implem
 In the algortihm below, the RCDS linescan function is presented. The brackets $a, b, c$ must be provided alongside $n$, the number of points inside the brackets that should be used for fitting of the Parabola.
 \begin{algorithm}
     \caption{RCDS linescan}\label{alg:linescan}
-    \begin{algorithmic}
+    \begin{algorithmic}[1]
     \Function{linescan}{$a$, $b$, $c$, $n$}
         \State $V$ $\gets$ evenly-spaced $n$-array w/ values $\in$ $(a, c)$
         \State $f(V)$ $\gets$ $n$-dimensional array with NaNs
