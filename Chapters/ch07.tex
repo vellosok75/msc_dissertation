@@ -2,91 +2,117 @@
 \label{chap:pseudocode}
 This appendix presents pseudocode for simplified versions of the routines implemented Python during the execution of this work. The code has been simplified for pedagogic reasons, focusing on the main characteristics of each routine composing the RCDS algortihm. In particular, checking of data consistency and adequacy are not included. The bracketing and linescan routines are presented only for the simpler case of a single parameter (knob) optimization.
 \section{RCDS Bracketing}
+Given the initial point $x_0$, the initial value for the objective function $f_0 = f(x_0)$, and the initial step size, the bracketing routine scans "downhill" until the function stops decreasing and starts to increase by more than the $3\sigma$ threshold. The step size is increased at each evaluation by the golden ratio $\phi=\frac{1+\sqrt{5}}{2}$, as long as it does not exceed one-tenth of the available $x$ range. The use of the golden ratio is inspired by the Golden Section Search bracket routine \cite[sec. 10.2]{press_numerical_2007}. The bracketing function returns a list of $x$ positions, which are the brackets, and the objective function evaluated at those points. Pseudocode is shown in Algorithm~\ref{alg:brackets}.
 \begin{algorithm}
     \caption{RCDS bracketing}\label{alg:brackets}
     \begin{algorithmic}[1]
-    \Function{bracketing min}{$x_0$, $f_0$, step}
-        \State postions $\gets$ list containing $x_0$
-        \State functions $\gets$ list containig $f_0$
+    \Function{BracketingMin}{$x_0$, $f_0$, step}
+        \State positions $\gets$ list containing $x_0$
+        \State functions $\gets$ list containing $f_0$
         \State $x_{\text{min}}$, $f_{\text{min}}$ $\gets$ $x_0$, $f_0$
+        \State dir $\gets$ $+x$
+        \Comment{scan in the positive direction}
         \State $f$ $\gets$ ObjectiveFunction($x_0$ + step)
         \If{$f<f_{\text{min}}$}
             \State $f_{\text{min}}\gets f$
         \EndIf
-        \State append $x + \text{step}$ to positions
+        \State append $x_0 + \text{step}$ to positions
         \State append $f$ to functions
         \While{$f<f_{\text{min}} + 3 \sigma$}:
             \If{$|\text{step}|<0.1$}
                 \State step $\gets$ step $\times$ (1 + $\phi$)
-            \ElsIf{scanning in $+x$ direction}
+            \ElsIf{$\text{dir} = +x$}
                 \State step $\gets$ step + 0.1
             \Else
                 \State step $\gets$ step - 0.1
             \EndIf
-            \State $f$ $\gets$ ObjectiveFunction($x + \text{step}$)
+            \State $f$ $\gets$ ObjectiveFunction($x_0 + \text{step}$)
             \If{$f$ is NaN}
                 \State \textbf{break}
             \EndIf
             \If{$f<f_{\text{min}}$}
-                \State $x_{\text{min}} \gets$ $x + \text{step}$
+                \State $x_{\text{min}} \gets$ $x_0 + \text{step}$
                 \State $f_{\text{min}}\gets f$
             \EndIf
-            \State append $x + \text{step}$ to positions
+            \State append $x_0 + \text{step}$ to positions
             \State append $f$ to functions
         \EndWhile
         \If{$f_0\leq f_{\text{min}} + 3 \sigma$}
-        \Comment{if false, no need to scan in the $-x$ direction}
-            \State repeat lines 10 - 22 with step $\gets - \text{step}$
+        \Comment{if false, no need to scan in the other direction}
+            \State dir $\gets$ $-x$
+            \State step $\gets - \text{step}$
+            \State start again from line 6
+            \Comment{scan in the negative direction}
         \EndIf
+        \State sort positions in ascending order
+        \State sort the corresponding entries of functions in the same ordering as positions
+        % \State subtract each entry of postions by $x_{\text{min}}$
+        % \Comment{translate the origin to the minimum}
         \State \Return positions, functions, $x_{\text{min}}$, $f_{\text{min}}$
     \EndFunction
     \end{algorithmic}
     \end{algorithm}
 
 \section{RCDS linescan}
-In the algortihm below, the RCDS linescan function is presented. The brackets $a, b, c$ must be provided alongside $n$, the number of points inside the brackets that should be used for fitting of the Parabola.
+In algortihm~\ref{alg:linescan}, the RCDS linescan function is presented. The list of positions within the brackets and measured objective functions must be provided alongside $m$, the number of points that should be sampled within the brackets, and $n$, the smallest number of points inside the brackets required for trusting the fit. Notice these are different parameters. If the provided list of positions is already of size $m$, no additional points are sampled, otherwise, additional measurements are carried out. Once $m$ points are available,  the parabola is fitted and the outilier removal routine evaluates the measured points against the model. If any outliers are removed and the remaining number of available points is smaller than $n$, this means we cannot trust the model because too little points remained, according to the user-defined value.
+
 \begin{algorithm}
     \caption{RCDS linescan}\label{alg:linescan}
     \begin{algorithmic}[1]
-    \Function{linescan}{$a$, $b$, $c$, $n$}
-        \State $V$ $\gets$ evenly-spaced $n$-array w/ values $\in$ $(a, c)$
-        \State $f(V)$ $\gets$ $n$-dimensional array with NaNs
-        % \For{$i\in$ indices of deltas}
-        %     \State replace deltas[$i$] by brackets[$j$], the closest entry to it in brackets
-        %     \State funcs[$i$] $\gets$ funcBrackets[$j$]
-        % \EndFor
-        \For{the $i$-th entry of $V$}
+    \Function{linescan}{positions, functions, $x_{\text{min}}$, $f_{\text{min}}$, $n$, $m$}
+        \State $a\gets$ positions first entry
+        \State $c\gets$ positions last entry
+        \Comment{brackets $(a,x_{\text{min}},c)$}
+        \State $V$ $\gets$ evenly spaced $m$-array w/ values $\in$ $[a, c]$
+        \Comment{dense span inside the brackets}
+        \State $f(V)$ $\gets$ $m$-array with NaNs
+        \For{the $i$-th entry of positions}
+        \Comment{reuse previously measured point}
+            \State $j^*\gets \text{argmin}_{j}(|V[j] - \text{position}[i]|)$
+            \State $V[j^*]\gets \text{position}[i]$
+            \State $f(V)[j^*]\gets \text{functions}[i]$
+        \EndFor
+        \For{the $i$-th entry of $V$ which is NaN}
+        \LComment{measure the points not measured yet}
             \State $f(V)$[$i$] $\gets$ ObjectiveFunction($V$[$i$])
         \EndFor
-        \State $V$, $f(V)$ $\gets$ RemoveOutiler($V$, $f(V)$)
         \State $c_0$, $c_1$, $c_2$ $\gets$ CalcDeg2PolynomCoefs($V$, $f(V)$)
-        \If{length($V$) $<n$ or $c_2\leq 0$}
-        \LComment{no sufficient points for fitting or wrong parabola concavity}
-            \State \Return $b$, $f(b)$
+        \State $V$, $f(V)$ $\gets$ RemoveOutiler($V$, $f(V)$)
+        \If{length($V$) $<n$ \textbf{or} $c_2\leq 0$}
+        \LComment{no sufficient points for trusting the fit or wrong parabola concavity}
+            \State \Return $x_{\text{min}}$, $f_{\text{min}}$
         \EndIf
         \State $V$ $\gets$ evenly spaced 1000-array w/ values $\in(a,c)$
         \State $f(V)\gets$ empty 1000-array
         \For{the $i$-th entry of $V$}
+        \LComment{fine scan for min on the parabolic model}
             \State $f(V)[i] \gets$ $c_0+c_1V[i]+c_2V[i]^2$
+            \Comment{$f(V)$ = [$f(a),\dots,f(c)$]}
         \EndFor
-        \State $f(V)$ = [$f(a),\dots,f(v_i),\dots f(c)$]
-        \State min $\gets V[\text{argmin}(f(V))]$
+        \State $x_{\text{min}}$ $\gets V[\text{argmin}(f(V))]$
         \State $f_\text{min}$ $\gets$ min($f(V)$)
-        \State \Return min, $f_\text{min}$
+        \State \Return $x_{\text{min}}$, $f_\text{min}$
     \EndFunction
     \end{algorithmic}
     \end{algorithm}
-The function references the externally defined functions "ObjectiveFunction()" and "RemoveOutlier()". The latter is detailed next.
-\section{Outlier Handling and Removal}
-\begin{algorithm}
-    \caption{Outlier Handling}\label{alg:outlier}
-    \begin{algorithmic}
-    \Function{RemoveOutlier}{}
-        % \State\Require func0 $\neq$ NaN
-        \State mins $\gets$ pos0, 0, func0
-        \State delta
-    \EndFunction
-    \end{algorithmic}
-    \end{algorithm}
+
+The function references the externally defined functions "ObjectiveFunction()" and "RemoveOutlier()". Pseudocode for the RemoveOutlier() function is not essential here, since its implementation is simple and offers small pedagogic value for our purpose. The reader may check our python implementation of  the "remove outlier" function in the RCDSParams class of the "rcds.py" file of the "apsuite" repository. The conceptual idea of the routine is:
+\begin{enumerate}
+    \item calculate the errors as the differences between observed and fitted values.
+    \item sort the errors and compute the differences between consecutive errors.
+    \item if there are less than 5 points evaluated within the brackets, check if the largest and smallest differences are greater than a threshold $3\sigma$. If yes, exclude the corresponding points.
+    \item calculate the avrage of the errors differences (errors standard deviation) within a specified percentile range. Identify outliers based on differences exceeding a threshold $3\sigma$ for both larger and smaller differences. Create a boolean mask to mark outliers and return the filtered array of $x$ positions and objective function measurements.
+\end{enumerate}
+% \section{Outlier Handling and Removal}
+% \begin{algorithm}
+%     \caption{Outlier Handling}\label{alg:outlier}
+%     \begin{algorithmic}
+%     \Function{RemoveOutlier}{positions, functions, fits, factor}
+%         % \State\Require func0 $\neq$ NaN
+%         \State mins $\gets$ pos0, 0, func0
+%         \State delta
+%     \EndFunction
+%     \end{algorithmic}
+%     \end{algorithm}
 
 \section{Powell's conjugate directions}
