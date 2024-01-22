@@ -116,3 +116,69 @@ The function references the externally defined functions "ObjectiveFunction()" a
 %     \end{algorithm}
 
 \section{Powell's conjugate directions}
+\begin{algorithm}
+    \caption{Powell loop}\label{alg:powell}
+    \begin{algorithmic}[1]
+    \Function{Optimize}{n\_evals, search\_dirs, step, tol, max\_iters, $\vb{x}_0$, ortho\_threshold}
+        \State max\_decrease $\gets$ 0
+        \State max\_decrease\_dir $\gets$ 0
+        % \State search\_dirs $\gets$ Normalize(search\_dirs)
+
+        \State $f_0\gets$ ObjectiveFunction($\vb{x}_0$)
+        \State $\vb{x}_{\text{min}}\gets \vb{x}_0$
+        \State $f_{\text{min}}\gets f_0$
+
+        \For{$i$-th direction vector $\vb{u}_i$ in search\_dirs}
+            \State positions, functions, $\vb{x}_{\text{min}}$, $f_{\text{min}}\gets  $ BracketingMin($\vb{x}_0$, $f_0$, step)
+            \State $\vb{x}, f \gets$ LineScan(positions, functions, $\vb{x}_{\text{min}}$, $f_{\text{min}}$)
+
+            \If{$f_{\text{min}} - f > \text{max\_decrease}$}
+                \State $ \text{max\_decrease}\gets f_{\text{min}} - f$
+                \State $ \text{max\_decrease\_dir}\gets i$
+            \EndIf
+
+            \State $\vb{x}_{\text{min}}\gets \vb{x}$
+            \State $f_{\text{min}}\gets f$
+
+            \State $\vb{x}_e\gets 2 \vb{x}_{\text{min}} - \vb{x}_0$
+            \State $f_e \gets$ ObjectiveFunction($\vb{x}_e$)
+            \State $\vb{u}_{\text{new}} \gets \frac{\vb{x}_{\text{min}}-\vb{x}_0}{|\vb{x}_{\text{min}}-\vb{x}_0|}$
+            \State max\_dot $\gets$ 0
+            \For{$j$-th direction vector $\vb{u}_j$ in search\_dirs}
+            \State dot = $\vb{u}_j\cdot \vb{u}_{\text{new}}$
+            \If{dot > max\_dot}:
+                \State max\_dot $\gets$ dot
+            \EndIf
+            \EndFor
+
+            \State cond1 $\gets f_0 \leq f_e$
+            \State cond2lhs $\gets 2(f_0 - 2f_{\text{min}} + f_e)(f_0 - f_{\text{min}} - \text{max\_decrease})^2$
+            \State cond2rhs $\gets \text{max\_decrease}(f_e = f_0)^2$
+            \State cond2 = cond2lhs $\geq$ cond2rhs
+            \If{cond1 \textbf{or} cond2}
+                \State \Output max\_decrease\_dir not replaced
+            \ElsIf{max\_dot < orth\_threshold}
+                \State \Output replacing max\_decrease\_dir
+                \State $\vb{u}_i\gets \vb{u}_{i+1}, i=1, p-1$
+                \State $\vb{u}_p\gets \vb{u}_{\text{new}}$
+                \State positions, functions, $\vb{x}_{\text{min}}$, $f_{\text{min}}\gets  $ BracketingMin($\vb{x}_0$, $f_0$, step)
+                \State $\vb{x}, f \gets$ LineScan(positions, functions, $\vb{x}_{\text{min}}$, $f_{\text{min}}$)
+                \State $\vb{x}_{\text{min}}\gets \vb{x}$
+                \State $f_{\text{min}}\gets f$
+            \Else
+                \State \Output max\_decrease\_dir not replaced
+            \EndIf
+            \State append $\vb{x}_{\text{min}}$ to positions\_history
+            \State append ${f}_{\text{min}}$ to functions\_history
+            \State cond $\gets 2 |f_0 - f_{\text{min}}|\leq \text{tol}(|f_0|  + |f_{\text{min}}|)$
+            \If{}
+            \EndIf
+        \EndFor
+
+
+
+
+
+    \EndFunction
+    \end{algorithmic}
+    \end{algorithm}
