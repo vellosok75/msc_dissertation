@@ -2,7 +2,8 @@
 \label{chap:pseudocode}
 This appendix presents pseudocode for simplified versions of the routines implemented Python during the execution of this work. The code has been simplified for pedagogic reasons, focusing on the main characteristics of each routine composing the RCDS algortihm. In particular, checking of data consistency and adequacy are not included. The bracketing and linescan routines are presented only for the simpler case of a single parameter (knob) optimization.
 \section{RCDS Bracketing}
-Given the initial point $x_0$, the initial value for the objective function $f_0 = f(x_0)$, and the initial step size, the bracketing routine scans "downhill" until the function stops decreasing and starts to increase by more than the $3\sigma$ threshold. The step size is increased at each evaluation by the golden ratio $\phi=\frac{1+\sqrt{5}}{2}$, as long as it does not exceed one-tenth of the available $x$ range. The use of the golden ratio is inspired by the Golden Section Search bracket routine \cite[sec. 10.2]{press_numerical_2007}. The bracketing function returns a list of $x$ positions, which are the brackets, and the objective function evaluated at those points. Pseudocode is shown in Algorithm~\ref{alg:brackets}.
+Given the initial point $x_0$, the initial value for the objective function $f_0 = f(x_0)$, and the initial step size, the bracketing routine scans "downhill" until the function stops decreasing and starts to increase by more than the $3\sigma$ threshold. The step size is increased at each evaluation by the golden ratio $\phi=\frac{1+\sqrt{5}}{2}$, as long as it does not exceed $0.10$. The use of the golden ratio is inspired by the Golden Section Search bracket routine \cite[sec. 10.2]{press_numerical_2007}. The bracketing function returns a list of $x$ positions, which are the brackets, and the objective function evaluated at those points. Pseudocode is shown in Algorithm~\ref{alg:brackets}. The bracketing function calls the externally defined function "ObjectiveFunction()", which implements the evaluation of the figure of merit. This function increases the global variable "n\_evals" whenever it is called. This keeps track of the number of objective function evaluations, which is essential as a stopping condition for Poweel's loop.
+
 \begin{algorithm}
     \caption{RCDS bracketing}\label{alg:brackets}
     \begin{algorithmic}[1]
@@ -96,30 +97,27 @@ In algortihm~\ref{alg:linescan}, the RCDS linescan function is presented. The li
     \end{algorithmic}
     \end{algorithm}
 
-The function references the externally defined functions "ObjectiveFunction()" and "RemoveOutlier()". Pseudocode for the RemoveOutlier() function is not essential here, since its implementation is simple and offers small pedagogic value for our purpose. The reader may check our python implementation of  the "remove outlier" function in the RCDSParams class of the "rcds.py" file of the "apsuite" repository. The conceptual idea of the routine is:
+The function references the externally defined functions "ObjectiveFunction()" "RemoveOutlier()" and "CalcDeg2PolynomCoefs()". Pseudocode for the RemoveOutlier() function is not essential here, since its implementation is simple and offers small pedagogic value for our purpose. The reader may check our python implementation of  the "remove outlier" function in the "RCDSParams" class of the "rcds.py" file of the "apsuite" repository. The conceptual idea of the routine is:
 \begin{enumerate}
     \item calculate the errors as the differences between observed and fitted values.
     \item sort the errors and compute the differences between consecutive errors.
     \item if there are less than 5 points evaluated within the brackets, check if the largest and smallest differences are greater than a threshold $3\sigma$. If yes, exclude the corresponding points.
     \item calculate the avrage of the errors differences (errors standard deviation) within a specified percentile range. Identify outliers based on differences exceeding a threshold $3\sigma$ for both larger and smaller differences. Create a boolean mask to mark outliers and return the filtered array of $x$ positions and objective function measurements.
 \end{enumerate}
-% \section{Outlier Handling and Removal}
-% \begin{algorithm}
-%     \caption{Outlier Handling}\label{alg:outlier}
-%     \begin{algorithmic}
-%     \Function{RemoveOutlier}{positions, functions, fits, factor}
-%         % \State\Require func0 $\neq$ NaN
-%         \State mins $\gets$ pos0, 0, func0
-%         \State delta
-%     \EndFunction
-%     \end{algorithmic}
-%     \end{algorithm}
 
-\section{Powell's conjugate directions}
+The "CalcDeg2PolynomCoefs()" function implements the parabolic fit within the brackets and returs the zeroth, first and second degree coefficients $c_0, c_1, c_2$ for which the polynomial $c_0 + c_1x + c_2 x^2$ best explains, in the least-squares sense, the observed data.
+
+\section{Powell's method}
+Algorithm~\ref{alg:powell} presents the pseudocode for the main loop in the optimization routine. It implements Powell's method for constructing new directions with ref's.~\cite[section 10.7]{press_numerical_2007} criteria for when to replace directions and stop the routine. Stopping conditions can be reached by the maximum number of objective function evaluations the user specifies, or according to a tolerance value for deciding when the objective has changed significantly.
+
+Again we stress that the bracketing and linescan pseudocode presented above were significantly simplified for pedagogic reasons. In particular, 1-dimensional versions were presented, omiting the the extra steps of reducing the high-dimensional minimization problem into a 1-dimensional prolem of minimizing $g(\delta) = f(\vb{x}_0 + \delta \vb{u}_i)$ for a direction $\vb{u}_i$.
+
+Additionaly, RCDS normalizes the knobs in the $[0, 1]$ interval, so the parameter space consists on a unit hypercube. Handling of normalization and de-normalization to evaluate the objective function is also ommited.
+
 \begin{algorithm}
-    \caption{Powell loop}\label{alg:powell}
+    \caption{Powell directions loop}\label{alg:powell}
     \begin{algorithmic}[1]
-    \Function{Optimize}{n\_evals, search\_dirs, step, tol, max\_iters, $\vb{x}_0$, ortho\_threshold}
+    \Function{Optimize}{max\_evals, search\_dirs, step, tol, $\vb{x}_0$, ortho\_threshold}
         \State max\_decrease $\gets$ 0
         \State max\_decrease\_dir $\gets$ 0
         % \State search\_dirs $\gets$ Normalize(search\_dirs)
@@ -141,9 +139,13 @@ The function references the externally defined functions "ObjectiveFunction()" a
             \State $f_{\text{min}}\gets f$
 
             \State $\vb{x}_e\gets 2 \vb{x}_{\text{min}} - \vb{x}_0$
+            \Comment{define exitension point}
             \State $f_e \gets$ ObjectiveFunction($\vb{x}_e$)
+            \Comment{evaluate objective at extension point}
             \State $\vb{u}_{\text{new}} \gets \frac{\vb{x}_{\text{min}}-\vb{x}_0}{|\vb{x}_{\text{min}}-\vb{x}_0|}$
+            \Comment{new proposed direction}
             \State max\_dot $\gets$ 0
+            \Comment{max overlap w/ all the directions}
             \For{$j$-th direction vector $\vb{u}_j$ in search\_dirs}
             \State dot = $\vb{u}_j\cdot \vb{u}_{\text{new}}$
             \If{dot > max\_dot}:
@@ -154,31 +156,35 @@ The function references the externally defined functions "ObjectiveFunction()" a
             \State cond1 $\gets f_0 \leq f_e$
             \State cond2lhs $\gets 2(f_0 - 2f_{\text{min}} + f_e)(f_0 - f_{\text{min}} - \text{max\_decrease})^2$
             \State cond2rhs $\gets \text{max\_decrease}(f_e = f_0)^2$
-            \State cond2 = cond2lhs $\geq$ cond2rhs
+            \State cond2 $\gets$ cond2lhs $\geq$ cond2rhs
             \If{cond1 \textbf{or} cond2}
+            \LComment{Numerical Recipes conditions for direction replacement}
                 \State \Output max\_decrease\_dir not replaced
             \ElsIf{max\_dot < orth\_threshold}
+                \LComment{If conditions are met and new dir sufficiently orthogonal, replace}
                 \State \Output replacing max\_decrease\_dir
-                \State $\vb{u}_i\gets \vb{u}_{i+1}, i=1, p-1$
+                \State $\vb{u}_i\gets \vb{u}_{i+1}$ \textbf{for} $i=1,\dots, p-1$
                 \State $\vb{u}_p\gets \vb{u}_{\text{new}}$
+                \LComment{and minimize along new direction}
                 \State positions, functions, $\vb{x}_{\text{min}}$, $f_{\text{min}}\gets  $ BracketingMin($\vb{x}_0$, $f_0$, step)
-                \State $\vb{x}, f \gets$ LineScan(positions, functions, $\vb{x}_{\text{min}}$, $f_{\text{min}}$)
-                \State $\vb{x}_{\text{min}}\gets \vb{x}$
-                \State $f_{\text{min}}\gets f$
+                \State $\vb{x}_{\text{min}}, f_{\text{min}} \gets$ LineScan(positions, functions, $\vb{x}_{\text{min}}$, $f_{\text{min}}$)
             \Else
                 \State \Output max\_decrease\_dir not replaced
             \EndIf
-            \State append $\vb{x}_{\text{min}}$ to positions\_history
-            \State append ${f}_{\text{min}}$ to functions\_history
+            % \State append $\vb{x}_{\text{min}}$ to positions\_history
+            % \State append ${f}_{\text{min}}$ to functions\_history
             \State cond $\gets 2 |f_0 - f_{\text{min}}|\leq \text{tol}(|f_0|  + |f_{\text{min}}|)$
-            \If{}
+            \If{cond \textbf{and} tol$>0$}
+                \State\Output Stopping condition met. Exiting
+                \State \textbf{break}
+            \ElsIf{n\_evals > max\_evals}
+                \State Maximum number of objective function evaluations reached. Exiting
+                \State\textbf{break}
             \EndIf
+            \State $f_0\gets f_{\text{min}}$
+            \State $\vb{x}_0\gets \vb{x}_{\text{min}}$
+
         \EndFor
-
-
-
-
-
     \EndFunction
     \end{algorithmic}
     \end{algorithm}
