@@ -1,8 +1,8 @@
 \chapter{Algorithms pseudocode}
 \label{chap:pseudocode}
-This appendix presents pseudocode for simplified versions of the routines implemented Python during the execution of this work. The code has been simplified for pedagogic reasons, focusing on the main characteristics of each routine composing the RCDS algortihm. In particular, checking of data consistency and adequacy are not included. The bracketing and linescan routines are presented only for the simpler case of a single parameter (knob) optimization.
+This appendix presents pseudocode for simplified versions of the routines implemented Python during the execution of this work. The code has been simplified for pedagogic reasons, focusing on the main characteristics of each routine composing the RCDS algorithm. In particular, checking of data consistency and adequacy are not included. The bracketing and line scan routines are presented only for the simpler case of a single parameter (knob) optimization.
 \section{RCDS Bracketing}
-Given the initial point $x_0$, the initial value for the objective function $f_0 = f(x_0)$, and the initial step size, the bracketing routine scans "downhill" until the function stops decreasing and starts to increase by more than the $3\sigma$ threshold. The step size is increased at each evaluation by the golden ratio $\phi=\frac{1+\sqrt{5}}{2}$, as long as it does not exceed $0.10$. The use of the golden ratio is inspired by the Golden Section Search bracket routine \cite[sec. 10.2]{press_numerical_2007}. The bracketing function returns a list of $x$ positions, which are the brackets, and the objective function evaluated at those points. Pseudocode is shown in Algorithm~\ref{alg:brackets}. The bracketing function calls the externally defined function "ObjectiveFunction()", which implements the evaluation of the figure of merit. This function increases the global variable "n\_evals" whenever it is called. This keeps track of the number of objective function evaluations, which is essential as a stopping condition for Poweel's loop.
+Given the initial point $x_0$, the initial value for the objective function $f_0 = f(x_0)$, and the initial step size, the bracketing routine scans "downhill" until the function stops decreasing and starts to increase by more than the $3\sigma$ threshold. The step size is increased at each evaluation by the golden ratio $\phi=\frac{1+\sqrt{5}}{2}$, as long as it does not exceed $0.10$. The use of the golden ratio is inspired by the Golden Section Search bracket routine \cite[sec. 10.2]{press_numerical_2007}. The bracketing function returns a list of $x$ positions, which are the brackets, and the objective function evaluated at those points. Pseudocode is shown in Algorithm~\ref{alg:brackets}. The bracketing function calls the externally defined function "ObjectiveFunction()", which implements the evaluation of the figure of merit. This function increases the global variable "n\_evals" whenever it is called. This keeps track of the number of objective function evaluations, which is essential as a stopping condition for Powell's loop.
 
 \begin{algorithm}
     \caption{RCDS bracketing}\label{alg:brackets}
@@ -54,11 +54,11 @@ Given the initial point $x_0$, the initial value for the objective function $f_0
     \end{algorithmic}
     \end{algorithm}
 
-\section{RCDS linescan}
-In algortihm~\ref{alg:linescan}, the RCDS linescan function is presented. The list of positions within the brackets and measured objective functions must be provided alongside $m$, the number of points that should be sampled within the brackets, and $n$, the smallest number of points inside the brackets required for trusting the fit. Notice these are different parameters. If the provided list of positions is already of size $m$, no additional points are sampled, otherwise, additional measurements are carried out. Once $m$ points are available,  the parabola is fitted and the outilier removal routine evaluates the measured points against the model. If any outliers are removed and the remaining number of available points is smaller than $n$, this means we cannot trust the model because too little points remained, according to the user-defined value.
+\section{RCDS line scan}
+In algortihm~\ref{alg:linescan}, the RCDS line scan function is presented. The list of positions within the brackets and measured objective functions must be provided alongside $m$, the number of points that should be sampled within the brackets, and $n$, the smallest number of points inside the brackets required for trusting the fit. Notice these are different parameters. If the provided list of positions is already of size $m$, no additional points are sampled, otherwise, additional measurements are carried out. Once $m$ points are available,  the parabola is fitted and the outlier removal routine evaluates the measured points against the model. If any outliers are removed and the remaining number of available points is smaller than $n$, this means we cannot trust the model because too little points remained, according to the user-defined value.
 
 \begin{algorithm}
-    \caption{RCDS linescan}\label{alg:linescan}
+    \caption{RCDS line scan}\label{alg:linescan}
     \begin{algorithmic}[1]
     \Function{linescan}{positions, functions, $x_{\text{min}}$, $f_{\text{min}}$, $n$, $m$}
         \State $a\gets$ positions first entry
@@ -102,17 +102,17 @@ The function references the externally defined functions "ObjectiveFunction()" "
     \item calculate the errors as the differences between observed and fitted values.
     \item sort the errors and compute the differences between consecutive errors.
     \item if there are less than 5 points evaluated within the brackets, check if the largest and smallest differences are greater than a threshold $3\sigma$. If yes, exclude the corresponding points.
-    \item calculate the avrage of the errors differences (errors standard deviation) within a specified percentile range. Identify outliers based on differences exceeding a threshold $3\sigma$ for both larger and smaller differences. Create a boolean mask to mark outliers and return the filtered array of $x$ positions and objective function measurements.
+    \item calculate the average of the errors differences (errors standard deviation) within a specified percentile range. Identify outliers based on differences exceeding a threshold $3\sigma$ for both larger and smaller differences. Create a boolean mask to mark outliers and return the filtered array of $x$ positions and objective function measurements.
 \end{enumerate}
 
-The "CalcDeg2PolynomCoefs()" function implements the parabolic fit within the brackets and returs the zeroth, first and second degree coefficients $c_0, c_1, c_2$ for which the polynomial $c_0 + c_1x + c_2 x^2$ best explains, in the least-squares sense, the observed data.
+The "CalcDeg2PolynomCoefs()" function implements the parabolic fit within the brackets and returns the zeroth, first and second degree coefficients $c_0, c_1, c_2$ for which the polynomial $c_0 + c_1x + c_2 x^2$ best explains, in the least-squares sense, the observed data.
 
 \section{Powell's method}
 Algorithm~\ref{alg:powell} presents the pseudocode for the main loop in the optimization routine. It implements Powell's method for constructing new directions with ref's.~\cite[section 10.7]{press_numerical_2007} criteria for when to replace directions and stop the routine. Stopping conditions can be reached by the maximum number of objective function evaluations the user specifies, or according to a tolerance value for deciding when the objective has changed significantly.
 
-Again we stress that the bracketing and linescan pseudocode presented above were significantly simplified for pedagogic reasons. In particular, 1-dimensional versions were presented, omiting the the extra steps of reducing the high-dimensional minimization problem into a 1-dimensional prolem of minimizing $g(\delta) = f(\vb{x}_0 + \delta \vb{u}_i)$ for a direction $\vb{u}_i$.
+Again we stress that the bracketing and line scan pseudocode presented above were significantly simplified for pedagogic reasons. In particular, 1-dimensional versions were presented, omitting the the extra steps of reducing the high-dimensional minimization problem into a 1-dimensional problem of minimizing $g(\delta) = f(\vb{x}_0 + \delta \vb{u}_i)$ for a direction $\vb{u}_i$.
 
-Additionaly, RCDS normalizes the knobs in the $[0, 1]$ interval, so the parameter space consists on a unit hypercube. Handling of normalization and de-normalization to evaluate the objective function is also ommited.
+Additionally, RCDS normalizes the knobs in the $[0, 1]$ interval, so the parameter space consists on a unit hypercube. Handling of normalization and de-normalization to evaluate the objective function is also omitted.
 
 \begin{algorithm}
     \caption{Powell directions loop}\label{alg:powell}
@@ -139,7 +139,7 @@ Additionaly, RCDS normalizes the knobs in the $[0, 1]$ interval, so the paramete
             \State $f_{\text{min}}\gets f$
 
             \State $\vb{x}_e\gets 2 \vb{x}_{\text{min}} - \vb{x}_0$
-            \Comment{define exitension point}
+            \Comment{define extension point}
             \State $f_e \gets$ ObjectiveFunction($\vb{x}_e$)
             \Comment{evaluate objective at extension point}
             \State $\vb{u}_{\text{new}} \gets \frac{\vb{x}_{\text{min}}-\vb{x}_0}{|\vb{x}_{\text{min}}-\vb{x}_0|}$
