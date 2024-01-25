@@ -1,4 +1,4 @@
-\chapter{Theoretical Background: single-particle dynamics}
+\chapter{Theoretical background: single-particle dynamics}
 This chapter provides the theoretical knowledge on the dynamics of electrons in storage rings needed to acquaint the reader with the online optimization problem and the constraints involved. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameters such as the tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinearities of the motion. This chapter also aims at introducing the SIRIUS parameters and specifications, magnetic lattice and optics functions. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
 
 Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal and energy oscillations, damping and excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation and the optimization problem at sight, we model the motion of a single electron, neglecting radiation losses and gains and any other collective interactions. These simplifications are justified for our immediate purposes because:
@@ -121,7 +121,7 @@ In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. We the
     \caption[Normalized field functions for dipoles, quadrupoles and sextupoles of a superperiod of SIRIUS lattice]{Normalized field functions for dipoles (top plot), quadrupoles (middle plot) and sextupoles (bottom plot) of a superperiod of SIRIUS lattice, shown at the top. Colored blocks represent the magnets of the accelerator lattice: blue for dipoles, orange for quadrupoles and green for sextupoles. The ring has a 5-fold symmetry, with the cells, fields and optics function repeating the patern shown above five times up to $s=518~\unit{m}$.}
     \label{fig:field_funcs}
 \end{figure}
-\section{Linear Dynamics}
+\section{Linear dynamics}
 Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variables leads to \cite{sands_physics_1969}
     \begin{equation}
         x^{\prime\prime}+(G^2+K)x=G\delta, \quad
@@ -198,7 +198,7 @@ which describes an ellipse. The ellipse properties are determined by the $\beta_
     \caption[Phase space ellipse traced by turn-by-turn (TbT) motion in the $(x,x^\prime)$ phase space.]{Phase space ellipse traced by turn-by-turn (TbT) motion in the $(x,x^\prime)$ phase space. Optics functions determine the principal axes ratio-aspect and the inclination of the ellipse at each longitudinal position along the ring. Inspired by ref.~\cite{wolski_beam_2014}.}
     \label{ellipse}
 \end{figure}
-\section{Dispersive \& Chromatic Effects and Linear Field Perturbations}
+\section{Dispersive \& chromatic effects and linear perturbations}
 \subsection{Dispersion}
 The equation of motion for off-momentum particles in the horizontal plane, the first of eqs.~\eqref{eq:linearEOM}, is a non-homogeneous Hill's equation. The solution consists on the linear combination of the homogeneous solution (betatron motion)  plus the particular solution: $x=x_\beta+ x_\delta$. Since the non-homogeneous term, $G(s)\delta$, is proportional to $\delta$, we can assume  $x_{\delta} = \eta(s)\delta$ where $\eta(s)$ is the \textit{dispersion function}, which should satisfy
     \begin{equation*}
@@ -341,7 +341,7 @@ with the minus sign for $u=x$ and the plus sign for $u=y$. The chromaticity depe
     \label{fig:chromaticity}
 \end{figure}
 
-\section{Nonlinear Dynamics, Perturbations, Resonances and Tune-Shifts}
+\section{Nonlinear dynamics, perturbations, resonances and tune-shifts}
 
 \subsection{Action-Angle Variables}
 The betatron equations of motion, Eqs.~\eqref{eq:Hill}, can be obtained as Hamilton's equations for an effective, linear Hamiltonian
@@ -379,7 +379,7 @@ Linear motion, though, is only a useful first approximation. In reality, in an s
 \end{equation}
 For which Hamilton's equations read
 \begin{equation}
-\phi_u^\prime = \frac{1}{\beta_u(s)}+\pdv{V(J,\phi)}{J_u}, \quad J_u^\prime = \pdv{V(J,\phi)}{\phi_u}.
+\phi_u^\prime = \frac{1}{\beta_u(s)}+\pdv{V(J,\phi)}{J_u}, \quad J_u^\prime = -\pdv{V(J,\phi)}{\phi_u}.
 \end{equation}
 The action is no longer an invariant and the phase advance rate deviates from the linear betatron phase advance.
 \begin{figure}

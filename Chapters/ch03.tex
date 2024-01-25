@@ -26,7 +26,7 @@ The optimization work accounted for the presence of expected errors arising from
 
 In the actual machine, a specific configuration of errors becomes a reality, resulting in a distinct physical magnetic lattice. For this particular lattice, the optimized configuration identified during simulations in the design phase may not necessarily be the one that yields the largest DA or optimal lifetime. However, it is anticipated that optimum sextupole configuration for the realized lattice is not significantly different from the reference configuration chosen and implemented in the machine. Essentially, the assumption is that errors are small and the online optimization procedure, therefore, involves a mere fine-tuning of the strengths of the sextupole lattice to achieve its best-performing configuration, compensating for nonlinear dynamics perturbations and small residual perturbations from linear dynamics. In other words, online optimization consists on tailoring the sextupole strengths to match the realized lattice.
 
-\section{Robust Conjugate Direction Search}
+\section{Robust Conjugate Direction Search Algorith}
 Optimization routines and algorithms are commonly categorized based on whether they involve the calculation of derivatives (gradient-based) or rely solely on the comparison of objective function values (gradient-free). The latter can be further classified into direct- or indirect-search methods, depending on whether the extremum search relies on direct comparisons of the objective function or on a mathematical model of it, respectively \cite{press_numerical_2007}.
 
 Both gradient-based and gradient-free strategies rely on the comparison of the objective function at different points of the parameter space. If the objective function suffers with noise, it can significantly reduce the efficiency of the optimization routine \cite{press_numerical_2007, huang_beam-based_2019}. In Chap. 7, section 7.3.1 of Ref.~\cite{huang_beam-based_2019}, a review of traditional optimization algorithms (e.g. gradient descent, Nelder-Mead simplex method, Powell method) shows how most of them suffer to find minima to, at least, the precision of the noise $\sigma$ the objective function is subjected to.
@@ -35,7 +35,7 @@ The Robust Conjugate Direction Search (RCDS) algorithm is an indirect-search, gr
 
 To this date, the only 4th-generation machine RCDS has been applied to was MAX-IV. The machine has five sextupole families and five octupole families. Selecting combinations of these families, subject to relevant operation constraints, such as keeping chromaticity unchanged, the resulting parameter search space was 6-dimensional \cite{olsson_online_2018}. SIRIUS, on the other hand, has 21-sextupole families. The application of RCDS in a 4GSR with such a large search space, as seen in SIRIUS, is of great interest to the community, especially for upcoming upgrades and new 4GSR projects currently under construction.
 
-\subsection{One-dimensional search optimizers}
+\subsection{One-dimensional optimizers}
 RCDS' distinct noise robustness is due to the cumulative effect of minor modifications of well-known indirect-search routines. To grasp how it works, a brief overview on its predecessors is presented next.
 \subsubsection{Bracketing the minimum}
 
@@ -70,10 +70,10 @@ Next, for the line scan, a parabola is fitted within the brackets using the poin
     \begin{minipage}{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{Images/linescan.pdf}
-        \caption[Illustration of RCDS line-scan procedure.]{Illustration of RCDS line scan procedure: perform a parabolic fitting (red curve) over a curated set of objective function measurements (blue dots) within the brackets. Outliers are removed, if any is present. The parabola vertex is the best guess for $f$'s minimum.}
+        \caption[Illustration of RCDS line scan procedure.]{Illustration of RCDS line scan procedure: perform a parabolic fitting (red curve) over a curated set of objective function measurements (blue dots) within the brackets. Outliers are removed, if any is present. The parabola vertex is the best guess for $f$'s minimum.}
     \end{minipage}
 \end{figure}
-\subsection{Powell's conjugate directions}
+\subsection{Powell's method}
 How could we optimize an objective function $f(\vb{x})\in\mathbb{R}$ depending on the set of $p$ parameters $\{x_i\}_{i=1,\dots,p}$? The simplest idea is to iteratively nudge each knob individually: optimize $f$ by changing $x_1$, while the other knobs remain fixed, then optimize by changing $x_2$ only, and so forth. In other words, since each one of the knobs defines a direction whose basis vector is $\vu{e}_i$, we could scan each direction, one at once, using the noise-robust line-optimizer introduced in the previous section.
 
 Formally, we are reducing a multi-dimensional optimization problem into a series of 1-dimensional searches. That is, given an initial configuration of the parameters (an initial position) $\vb{x}_0$, and a direction $\vu{n}$, we have the one-dimensional problem to minimize $g(\delta)=f(\vb{x}_0 + \delta \vu{n})$. The minimum is  then $f(\vb{x}_0 + \delta_* \vu{n})$, where $\delta_* = \text{argmin}_\delta g(\delta)$. In the scheme of the previous paragraph, we specialized to $\vb{n}=\vu{e}_i$, and iterated for $i=1,\dots, p$.
