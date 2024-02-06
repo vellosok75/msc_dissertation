@@ -171,16 +171,16 @@ The tune reveals the number of transverse oscillations per revolution along the 
 When studying the effects of perturbations and nonlinearities acting on the beam, one finds the tunes are a critical variables in determining the beam's response. More specifically, the tunes impact over disturbances amplification factors, which are greatest when tunes are close to integer numbers. We examine the relation of the tunes with disturbances in more detail in the upcoming section.
 
 \subsection{Turn-by-turn motion}
-If one keeps track of the time evolution of the the $u, u^\prime$ variables at a fixed position along the ring, plotting them in a phase space, one realizes the the quasi-periodic motion traces out ellipses in such plane. This fact can be analytically verified by calculating the derivative
+If one keeps track of the time evolution of the the $u, u^\prime$ variables at a fixed position along the ring, plotting them in a phase space, one realizes  the quasi-periodic motion traces out ellipses. This fact can be analytically verified by calculating the derivative
     \begin{equation}
-        u^{\prime}(s) = - \sqrt{\frac{2J_u}{\beta_u}}\qty[\sin(\phi_u(s) + \phi_0) + \frac{1}{2}\beta_u^\prime(s)\cos(\phi_u(s) + \phi_0)],
+        u^{\prime}(s) = - \sqrt{\frac{2J_u}{\beta_u}}\qty[\sin(\phi_u(s) + \phi_0) - \frac{1}{2}\beta_u^\prime(s)\cos(\phi_u(s) + \phi_0)],
         \label{eq:uprime}
     \end{equation}
-    defining the functions $\alpha_u = \frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satify the quadratic form
+    defining the functions $\alpha_u = -\frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satify the quadratic form
     \begin{equation}
         2J_u=\gamma_u u^{2}+2\alpha_u u u^{\prime}+\beta_u u^{\prime2},
      \end{equation}
-which describes an ellipse. The ellipse properties are determined by the $\beta_u(s), \alpha_u(s)$ and $\gamma_u(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse. Although different in shape, their areas are proportional to $J_u$, an invariant quantity determined by the particle's initial condition. The ellipse areas are thus conserved along the ring \cite{lee_accelerator_2004,wiedemann_particle_2015}.
+which describes the ellipse. The ellipse properties are determined by the $\beta_u(s), \alpha_u(s)$ and $\gamma_u(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters, as Fig.~\ref{fig:ellipse} shows. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse. Although different in shape, their areas are proportional to $J_u$, an invariant quantity determined by the particle's initial condition. The ellipse areas are thus conserved along the ring \cite{lee_accelerator_2004,wiedemann_particle_2015}.
 
  Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$, and thus
  sampling the transverse motion at a fixed $s=s_0$ position reveals a harmonic displacement, which at the $j$-th turn reads
@@ -196,7 +196,7 @@ which describes an ellipse. The ellipse properties are determined by the $\beta_
     \centering
     \includegraphics[width=0.9\textwidth]{Images/ellipse.pdf}
     \caption[Ellipse traced by turn-by-turn (TbT) motion in the $(x,x^\prime)$ phase space.]{Ellipse traced by turn-by-turn (TbT) motion in the $(x,x^\prime)$ phase space. Optics functions $\alpha(s), \beta(s), \gamma(s)$ determine the principal axes aspect-ratio and the ellipse inclination at each longitudinal position along the ring. Figure inspired by ref.~\cite{wolski_beam_2014}.}
-    \label{ellipse}
+    \label{fig:ellipse}
 \end{figure}
 \section{Dispersive \& chromatic effects and linear perturbations}
 \subsection{Dispersion}
