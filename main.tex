@@ -51,7 +51,6 @@
 \usepackage{algorithm}
 \usepackage{algpseudocodex}
 
-\loadglsentries{glossary.tex}
 
 \author{Matheus Melo Santos Velloso}
 \city{Campinas}
@@ -100,6 +99,10 @@
     },
     language=english,
 }
+
+\loadglsentries{glossary.tex}
+\makeglossaries
+
 \begin{document}
 
 \maketitle
@@ -113,10 +116,9 @@
 \include{Chapters/resumo}
 \include{Chapters/abstract}
 
-\printglossary
-% \printglossaries
 \listoffigures
 \listoftables
+\printglossaries
 \tableofcontents
 
 \include{Chapters/ch01}
