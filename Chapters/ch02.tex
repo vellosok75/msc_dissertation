@@ -1,7 +1,7 @@
 \chapter{Theoretical background: single-particle dynamics}
 This chapter provides the theoretical knowledge on the dynamics of electrons in storage rings needed to acquaint the reader with the online optimization problem and the constraints involved. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameters such as the tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinearities of the motion. This chapter also aims at introducing SIRIUS' operation parameters and specifications. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
 
-Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal and energy oscillations, damping and excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation and the optimization problem at sight, we model the motion of a single electron, neglecting radiation losses and gains and any other collective interactions. These simplifications are justified for our immediate purposes because:
+Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal awe have already examined in section effects and instabilities, for the purpose of this dissertation and the optimization problem at sight, we model the motion of a single electron, neglecting radiation losses and gains and any other collective interactions. These simplifications are justified for our immediate purposes because:
 \begin{itemize}
     \item The beam is injected into the storage ring on-energy: it has no significant energy deviations and thus it does not perform large energy and longitudinal oscillations once it is captured into the ring;
     \item radiation losses are only significant over a time scale of a couple of turns. Over this period, tens of transverse oscillations take place. A model neglecting losses is relatively accurate for a small number of turns soon after the injection;
@@ -338,9 +338,11 @@ Considering the contributions from both the errors induced by energy deviations 
     \xi_{u}=-\frac{1}{4\pi}\oint\beta_{u}(K_{u}\mp S\eta)\dd{s},
     \label{eq:chromaticity}
 \end{equation}
-with the minus sign for $u=x$ and the plus sign for $u=y$. The chromaticity depends linearly on sextupole strengths, allowing for its correction to desired values. Since the effect of the sextupole field focuses in a given plane but defocuses in the other, at leas two sextupole families are requiered for chromaticity correction: one familiy where $\beta_x > \beta_y$ and other where $\beta_y < \beta_x$. The cost of correcting chromaticity is the insertion of perturbations and nonlinearities in the dynamics. If on the one-hand, the geometric aberrations are needed to correct the chromatic aberration, on the other hand they also influence particles with orbit deviations arising from factors other than energy deviations and effectively act as additional perturbations.
+with the minus sign for $u=x$ and the plus sign for $u=y$.
 
-To allow for more control over the nonlinear dynamics effects, usually some families of sextupoles are also placed in non-dispersive sections. They are called achromatic families, since they have no effect over chromaticity up to leading order.
+Formula~\eqref{eq:chromaticity} reveals that chromaticity depends linearly on sextupole strengths. This allows for its correction and tuning to desired values. In the SIRIUS storage ring, the operation chromaticity of about $2.5$ for each plane was determined with the objective of mitigating the transverse instabilities induced by resistive-wall effect in the range of currents the storage ring is expected to operate: $100$ to $350~\unit{mA}$ \cite[section 7.3]{sa_study_2018}.
+
+ Since a focusing sextupole field focuses in a given plane and defocuses in the other, at least two sextupole families are requiered for chromaticity correction: one familiy where $\beta_x > \beta_y$ and other where $\beta_y < \beta_x$. The cost of correcting chromaticity with sextupole is the insertion of perturbations and nonlinearities in the dynamics. If on the one-hand, the geometric aberrations are needed to correct the chromatic aberration, on the other hand they also influence particles with orbit deviations arising from factors other than energy deviations, acting as additional perturbations. To allow for more control over the nonlinear dynamics effects, usually some families of sextupoles are also placed in non-dispersive sections. They are called achromatic families, since they have no effect over chromaticity up to leading order.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/chromaticity.pdf}
@@ -365,11 +367,13 @@ The action variable reads
     J_u=-\pdv{F_1}{\phi_u} = \frac{u^2}{2\beta_u}\sec^2\phi_u = \frac{1}{2\beta_u}[u^2 + (\beta_u u^\prime + \alpha_u u^2)],
     \label{eq:action}
 \end{equation}
-from which we can recover the pseudo-harmonic form $u=\sqrt{2\beta_u J_u}\cos(\phi_u(s)+\phi_0)$. In the $J,\phi$ variables, the new Hamiltonian is $H_0(\phi, J)$,  given by
+from which we can recover the pseudo-harmonic form $u=\sqrt{2\beta_u J_u}\cos(\phi_u(s)+\phi_0)$, and identify the constant $J$ we met before as the action and the betatron phase advance as the angle variable.
+
+In the $J,\phi$ variables, the new Hamiltonian is $H_0(\phi, J)$,  given by
 \begin{equation}
     H_u=\mathcal{H}_u+\pdv{F_1}{s} = \frac{J_u}{\beta_u}.
 \end{equation}
-Performing the change to action-angle variable in both the horizontal and vertical planes we find the action-angle Hamiltonian for 4D dynamics
+Performing the change to action-angle variables in both the horizontal and vertical planes we find the action-angle Hamiltonian for 4D dynamics:
 \begin{equation}
     H_0= \frac{J_x}{\beta_x} +  \frac{J_y}{\beta_y}.
 \end{equation}
@@ -378,9 +382,9 @@ Hamilton's equations read
     \phi_u^\prime = \frac{1}{\beta_u(s)},\qquad J_u^\prime=0.
 \end{equation}
 \subsection{Perturbations and tune-shifts}
-Linear motion is integrable, since it can be written in terms of the action variable only (angle-independent Hamiltonian). This leads to the action variable being a constant of motion, and the phase advance behaving just as the pseudo-harmonic motion anticipated.
+Linear motion is integrable, since it can be written in terms of the action variable only (angle-independent Hamiltonian). This means the action variable is a constant of motion.
 
-Linear motion, though, is only a useful first approximation. In reality, in an storage ring, there are higher order multipole magnets, such as sextupole magnets, and also multipole, alignment and excitation errors, all acting as perturbations to linear motion. Generically referring to perturbations as $V(J, \phi)$, we can write the perturbed motion Hamiltonian
+Linear motion, though, is only a useful first approximation. In reality, in an storage ring, there are higher order multipole magnets, such as sextupole magnets, and also multipole, alignment and excitation errors acting as perturbations. Generically referring to perturbations as the potential $V(J, \phi)$, we can write the perturbed Hamiltonian
 \begin{equation}
     H(J,\phi) =H_0 + V(J,\phi),
 \end{equation}
@@ -388,7 +392,11 @@ For which Hamilton's equations read
 \begin{equation}
 \phi_u^\prime = \frac{1}{\beta_u(s)}+\pdv{V(J,\phi)}{J_u}, \quad J_u^\prime = -\pdv{V(J,\phi)}{\phi_u}.
 \end{equation}
-The action is no longer an invariant and the phase advance rate deviates from the linear betatron phase advance.
+The action is no longer an invariant. It changes as prescribed by the rate of change of the potential with respect to the phase. The phase also changes. The phase advance rate deviates from the linear betatron phase advance, which translates directly into tune-shifts. In this scenario, the tunes depend not only on the momentum, via the chromaticity, but also on the amplitudes (actions). In a general form, we can be express the tunes as
+\begin{equation}
+    \nu_u = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v,
+\end{equation}
+where $\xi_u$ represents the energy-dependent tune-shifts (higher order generalization of the linear chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/nonlinear_dynamics_phase_tunes.pdf}
@@ -396,28 +404,24 @@ The action is no longer an invariant and the phase advance rate deviates from th
     \label{fig:tune_shifts}
 \end{figure}
 
-Focusing on the effects on the tunes, we can be express the tunes in terms of the nonlinear chromatic and amplitude-dependent tune-shifts
-\begin{equation}
-    \nu_u = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v
-\end{equation}
-where $\xi_u$ represents the energy-dependent tune-shifts (higher order generalization of the linear chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
-
-Figure~\ref{fig:tune_shifts} shows the main characteristics of the nonlinear dynamics. In the top left and middle plots, particles are simulated in SIRIUS model with increasingly larger initial amplitudes in the $x$ and $y$ planes, respectively. The ellipses are distorted, since the action $J$ is no longer an integral of motion. Immediately below the two plots, the deviations in tunes are shown. That is, in the left-bottom plot, the tune-shifts in the $y$ and $x$ planes are shown for each amplitude in the $x$ plane (simulation in the top-left plot). The same is shown in the bottom-middle plot. In the bottom-right plot, the chromatic (energy-dependent) tune-shifts are shown (chromaticity is the derivative of this curve around $\delta=0$.). In the top-right plot, the blue curve represents the path traced in tune-space as the $x$ amplitude increase, the red curve represents the path as the $y$ amplitudes increase and the purple curve the path as $\delta$ changes.
+Figure~\ref{fig:tune_shifts} highlights the main characteristics of the nonlinear dynamics. In the top left and middle plots, particles are simulated in SIRIUS' computer model with increasingly larger initial amplitudes in the $x$ and $y$ planes, respectively. The large-amplitude ellipses are distorted, since the action $J$ is no longer an integral of motion. Immediately below the two plots, the deviations in tunes are shown. That is, in the left-bottom plot, the tune-shifts in the $y$ and $x$ planes are shown for each amplitude in the $x$ plane (simulation in the top-left plot). The same is shown in the bottom-middle plot. In the bottom-right plot, the chromatic (energy-dependent) tune-shifts are shown (chromaticity is the derivative of this curve around $\delta=0$.). In the top-right plot, the blue curve represents the path traced in tune-space as the $x$ amplitude increase, the red curve represents the path as the $y$ amplitudes increase and the purple curve the path as $\delta$ changes.
 \subsection{Resonances}
 \label{subsec:resons}
 
-4D linear and unperturbed motion consists on the motion of two uncoupled parametric oscillators. As a quasi-periodic, integrable system, the phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori covering phase space, corresponding to the different choices of initial conditions $J_u$.
+4D linear unperturbed motion consists of the motion of two uncoupled parametric oscillators. As a quasi-periodic integrable system, the phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori covering phase space, corresponding to the different choices of initial conditions $J_u$.
 
-Canonical perturbation theory applied to perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational. The Poincare-Birkhoff theorem states that under such conditions, almost all the periodic phase-space orbits disappear. An even number of tori survives, half of which are stable and half unstable. Unstable motion in a storage ring can eventually lead to beam loss.
+Canonical perturbation theory applied to perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational (resonant tori). The Poincare-Birkhoff theorem states that under such conditions almost all the periodic phase-space orbits disappear, i.e. almost all the tori are destroyed. An even number of tori survives, half of which are stable and half unstable \cite[section 10.2]{marcus_mecanica2023}. Unstable motion in a storage ring eventually leads to beam loss.
 
-The condition for sufficiently rational tunes can be expressed as
+The condition for sufficiently rational tunes, i.e, resonant tori, can be expressed as
 \begin{equation}
         m\nu_x + n\nu_y = \ell,
         \label{eq:resonance_condition}
 \end{equation}
-    for $n, m, \ell\in\mathbb{Z}$. This condition defines lines in tune-space corresponding to the locus in which perturbation theory fails and motion can become unstable. These are resonance lines and $|n|+|m|$ is the order of the resonance. Particular resonances arising from linear field errors, such as dipolar errors, $\nu_x, \nu_y = n\in\mathbb{Z}$, and gradient field errors, $2\nu_x, 2nu_y = n\in\mathbb{Z}$, are contained in condition~\eqref{eq:resonance_condition}. Resonances coupling both planes arise when considering perturbations the skew multipole magnets, which can be treated by perturbation theory. Linear coupling resonances are the famous sum and difference resonances $\nu_x + \nu_y = \ell, \nu_x - \nu_y = \ell$, excited by skew quadrupoles magnets.
-\todo[inline]{MISSING: more details on resonances induced by sextupoles}
-    Figure~\ref{resons} shows resonance lines for the resonances up to second, third and fourth order respectively. First order resonances can be excited by dipolar fields, 2nd order resonances can be excited by quadrupole fields and 3rd order resonances can be driven by sextupolar fields.
+    for $n, m, \ell\in\mathbb{Z}$. This condition defines lines in tune-space corresponding to the locus in which perturbation theory fails and motion can become unstable: resonance lines.
+
+    We say $|n|+|m|$ is the order of the resonance, which is related to the order of the multipole field perturbation from which it arises.
+    %  e.g: order 1 resonances can be driven by dipolar fields, as well as quadrupolar and sextupolar gradients; order 2 can be driven by quadrupolar and sextupolar components; and order 3 can be driven by sextupolar fields.
+    Resonances arising from linear field errors, already anticipated in section~\ref{sec:field_err}, are those described by $\nu_x=\ell$ or $\nu_y =\ell, \ell\in\mathbb{Z}$. Normal gradient field errors drive $2\nu_x=\ell$ or $2\nu_y =\ell$ resonances. Skew gradients couple both planes and can drive the famous sum and difference resonances $\nu_x + \nu_y = \ell, \nu_x - \nu_y = \ell$. Sextupoles can drive the $2\nu_x=\ell$, $2\nu_y =\ell$, $2\nu_x\pm\nu_y = \ell$ or $\nu_x\pm 2\nu_y=\ell$ resonances, as well as gradient and dipolar resonances due to feed-down effects. Figure~\ref{resons} depicts resonance lines in tune-space for resonances up to second, third and fourth order, in the left, middle and right plots, respectively.
 \begin{figure}[thb]
     \centering
     \includegraphics[width=\textwidth]{Images/tunes.png}
@@ -425,8 +429,10 @@ The condition for sufficiently rational tunes can be expressed as
     \label{resons}
 \end{figure}
 \subsection{The Dynamic Aperture}
-    Nonlinear dynamics can become sensitive to initial conditions when the amplitudes are large. Because of the tune-shifts, specially the amplitude-dependent tune shifts, the tunes can wander in tune space, eventually crossing resonance conditions that may lead to instabilities, chaotic motion and beam loss. The dynamics can impose limitations to the maximum transverse deviations in which the beam can oscillate while displaying regular and bounded motion. This is a dynamic restriction to the motion known as the \textit{dynamic aperture} (\acrshort*{DA}).
+    Stability of a nonlinear dynamics can become sensitive when the amplitudes are large. In this scenario, the nonlinear fields become more significant and the perturbations are dialed up, breaking down the persistent tori. Even at low amplitudee motion can be dangerous in the long-term due to the phonomenon of Arnold diffusion \cite{wolski_beam_2014, arnold_instability1964}: because of the tune-shifts, specially the amplitude-dependent tune shifts, the tunes can wander in tune space and eventually cross resonance conditions.
 
-    Exceeding the \gls*{DA} eventually leads to beam loss. During injection of the beam, if the transverse offsets are larger than the \gls*{DA}, the beam is not captured into the storage ring. This is specially important for off-axis injection, such as in the case for SIRIUS.
+    Despite the complexity of the task of predicting stability of a nonlinear perturbed dynamics, in electron storage rings we usually observe the existence of an amplitude limit beyond which instabilities increase and the particles are lost, while the particles below the limiting amplitudes survive. In other words, there are limitations to the maximum transverse amplitudes displaying regular and bounded motion. The border of the region of stability is the \textit{dynamic aperture} (\acrshort*{DA}), a term that can be used to refer the limiting amplitudes in any of the dynamical variables of phase-space.
 
-\todo[inline]{More discussion on DA.}
+    In this work, we are mostly concerned with the \gls*{DA} in the $(x, x^\prime)$ phase space because of its importance during the beam injection for accumulation into the storage ring.  During injection, if the horizontal amplitudes  are larger than the \gls*{DA} along $x$ or $x^\prime$ the beam is not captured  efficiently into the storage ring. In this case, would be interesting to increase the \gls*{DA} to accommodate the incoming beam, which is exactly what we aimed at while developing this project.
+
+    Since the \gls*{DA} is ruled by the limiting nonlinear perturbations, it is expected that tuing the nonlinear fields in a particular manner can render an optimium configuration with increased \gls*{DA}.  In the upcoming chapter, this idea is developed in more detail.
