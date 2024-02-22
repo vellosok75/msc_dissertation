@@ -1,21 +1,21 @@
 \chapter{Experiments with Online Optimization of Nonlinear Dynamics}
-This chapter presents the results of the experiments carried out during the this masters project. There are two set of important results: i) those of the experiments carried out in late 2022 and ii) those of the experiments carried out during the first semester of 2023. In i), the early attempts, the experimental method and setup was still being perfected. We tried using the beam kick resilience as objective function and learned it was not the best choice. In ii), we moved on to using instead the \gls*{ie} (\gls*{ie})as objective, which had a better performance.  We started to take more care when choosing the knobs, avoiding the families close to their magnetic nonlinear regime and experimenting with different possibilities of constraints among the sextupole families. We also carried out optimization in different working tunes and performed more detailed characterizations and analysis of the configurations found by optimization.
+This chapter presents the results of the experiments carried out during the this masters project. There are two set of important results: i) those of the experiments carried out in late 2022 and ii) those of the experiments carried out during the first semester of 2023. In i), the early attempts, the experimental method and setup was still being perfected. We tried using the beam kick resilience as objective function and learned it was not the best choice. In ii), we moved on to using instead the injection efficiency (\gls*{ie}) as objective, which had a better performance.  We started to be more cautious when choosing the knobs, avoiding the families close to their magnetic nonlinear regime and experimenting with different possibilities of constraints among the sextupole families. We also carried out optimization in different working tunes and performed  characterizations and analysis of the configurations found by optimization.
 \section{Kick resilience optimization attempt}
 \label{sec:kick_res_opt}
 In the first attempt to online optimize the nonlinear dynamics, we used the beam kick resilience as objective function. As described in subsection~\ref{subsec:objective_function}, we sought to minimize the beam-loss rate at a given fixed dipolar kick from the pinger magnet. The idea was to minimize the rate for a given kick, increase the kick and repeat the process, reaching higher survival rates at stronger kicks.
 \subsection{The knobs}
-The knobs were chosen according to the compensation scheme described in subsection~\ref{subsubsec:compensation}: the achromatic families SDA0, SDB0, SDP0, SFA0, SFB0, SFP0, and the chromatic families SDA1, SDB1, SDP1, SDA3, SDB3, SDP3, SFA1, SFB1, SFP1 varied freely. The SDA2, SDB2, SDP2 and SFA2, SFB2, SFP2 families were the compensation families used to keep chromaticity constant when varying the optimization knobs. In this early attempt, families SFP1 and SFB1 were included as knobs. In later attempts they were avoided because operate close to the magnets nonlinear response regime. The search space was 15-dimensional.
+The knobs were chosen according to the compensation scheme described in subsection~\ref{subsubsec:compensation}: the achromatic families SDA0, SDB0, SDP0, SFA0, SFB0, SFP0, and the chromatic families SDA1, SDB1, SDP1, SDA3, SDB3, SDP3, SFA1, SFB1, SFP1 varied freely. The SDA2, SDB2, SDP2 and SFA2, SFB2, SFP2 families were the compensation families used to keep chromaticity constant when varying the optimization knobs. In this early attempt, families SFP1 and SFB1 were included as knobs. In later attempts they were avoided upon the realization that they operate close to the magnets' nonlinear response regime. The search space was 15-dimensional.
 \subsection{Objective function and setup}
 A small beam current was accumulated into the storage ring, usually $10~\unit{mA}$, localized in a single bunch. At a given moment, we can fire up the kick from a dipole kicker, located close to the injection section. The \glspl*{bpm} acquisition was fired in synchrony with the kick. Since we are interested in optimizing the horizontal \gls*{DA}, the kick was in the horizontal direction.
 % The scheme below sketches the $x,x^\prime$ phase space during the experiment. For small kicks, in the linear approximation, the beam would receive an action-jump along the $x^\prime$ axis and start to rotate along the corresponding ellipse. In the nonlinear regime, the ellipses are distorted, but we expect the same overall behaviour: action jump along the angles which is eventually translated into horizontal oscillations. Thus, the larger the kick resilience, larger the DA.
 
-To evaluate the beam loss we used the \glspl*{bpm} sum-signal, which is proportional to the stored current. The average sum-signal of the first 10 turns was compared to that of the last 10 turns the \glspl*{bpm} acquisition time-series. The kick strength was chosen to render an initial beam rate loss of about 35\% up to 60\%
+To evaluate the beam loss we used the \glspl*{bpm} sum-signal, which is proportional to the stored current. The average sum-signal of the first 10 turns was compared to that of the last 10 turns of the \glspl*{bpm} acquisition time-series. The kick strength was chosen to render an initial beam rate loss of about 35\% up to 60\%
 \subsection{Optimization runs \& results}
-With the compensation scheme for changing strengths in the sextupole families, \gls*{RCDS} was launched to minimize the beam-loss upon the horizontal kick. In the algorithm's first iteration
+With the compensation scheme for changing strengths in the sextupole families, \gls*{RCDS} was launched to minimize the beam-loss resulting from the horizontal kick. In the algorithm's first iteration
 % \footnote{An RCDS iteration is reached upon completing the one-dimensional optimization along all directions in the parameter space. After each iteration, the algorithm constructs a new (conjugate) direction according to Powell's method and may replace existing directions by this new conjugate direction.}
-, beam loss dropped from 60\% to nearly 0\%. In the beginning of the 2nd iteration, the objective function took negative values, which is a numerical artifact, so the optimization run was stopped. The beam-loss minimization significantly improved the beam's resiliency to dipole kicks. After the optimization, it was necessary to kick the beam at approximately $\Delta x^\prime=-0.850~\unit{m rad}$ to achieve the same  30--60\% beam-loss rate previously achieved by a $\Delta x^\prime=-0.760~\unit{m rad}$ kick.
+, beam loss dropped from 60\% to nearly 0\%. In the beginning of the 2nd iteration, the objective function took negative values, which is a numerical artifact, so the optimization run was stopped. The beam-loss minimization significantly improved the beam's resiliency to dipole kicks. After the optimization, it was necessary to kick the beam with a strength of approximately $\Delta x^\prime=-0.850~\unit{m rad}$ to achieve the same  30--60\% beam-loss rate previously achieved by a $\Delta x^\prime=-0.760~\unit{m rad}$ kick.
 
-By the end of this first attempt, the machine magnets were standardized\footnote{Standardizing magnets consists on driving their power suplies with decaying sinusoidal waveform to remove hysteresis effects and bring the magnets yokes to their standard reference magnetization.} and the configurations found during optimization were loaded into the machine sextupoles. This was done to test the repeatability of the configuration found.
+By the end of this first attempt, the machine magnets were standardized\footnote{Standardizing magnets consists of driving their power suplies with different types of waveforms to mitigate hysteresis effects and bring the magnets yokes to their standard reference magnetization.} and the configurations found during optimization were loaded into the machine sextupoles. This was done to test the repeatability of the configuration found.
 
 Given the improvements in the resilience, it was expected the \gls*{ie} would also improve as a result of the \gls*{DA} enlargement, however, when trying to inject for beam accumulation, the efficiency was quite low, indicating no \gls*{DA} improvements in the $-x$ direction.
 
@@ -47,9 +47,9 @@ A significant difference from the early attempt was the exclusion of families SF
 The optimization experiments were conducted in the machine with the nominal tunes $(\nu_x,\nu_y)=(49.08, 14.14)$, referred to as \gls*{WP1}, as well as in the tunes $(49.20, 14.25)$ and $(49.16, 14.22)$, denoted as \gls*{WP2} and \gls*{WP3}, respectively. As mentioned earlier, the goal was to explore a different optics configuration with smaller orbit amplification factors to enhance orbit stability. Part of the results reported below have been presented in ref.~\cite{velloso_online_2023}.
 
 \subsection{Optimization in Working Point 1 (49.08, 14.14)}
-The knob selection scheme followed the 13-dimensional search space of Constraint Scheme I, as detailed in Section~\ref{subsubsec:nullspace}. Three optimization experiments were conducted, resulting in three optimized configurations. In Run 1, the optimization began with the reference sextupole configurations loaded in the machine. The machine underwent linear optics and orbit corrections before initiating each run's optimization process.
+The knob selection scheme followed the 13-dimensional search space of Constraint Scheme I, as detailed in Section~\ref{subsubsec:nullspace}. Three optimization experiments were conducted, resulting in three optimized configurations.
 
-The optimization was launched and once the best \gls*{ie} was achieved and no indication of further improvement was at sight, the run was halted and the best-performing sextupole configuration was saved. These optimal configurations are referred to as "solutions".
+In Run 1, the optimization began with the reference sextupole configurations loaded in the machine. The machine underwent linear optics and orbit corrections before initiating each run's optimization process. Optimization was launched and once the best \gls*{ie} was achieved and no indication of further improvement was at sight, the run was halted and the best-performing sextupole configuration was saved. These optimal configurations are referred to as "solutions".
 
 The magnets were standardized, and the solution from Run 1 was implemented in the machine. Run 2 commenced with the solution from Run 1. Since the Run 1 solution improved the efficiency, the beam's horizontal offset during injection was further increased in the negative direction to reduce the efficiency by shifting the beam toward the border of the expectedly enlarged \gls*{DA}. The same procedure was replicated for Run 3, which initiated from the solution obtained in Run 2. Figure~\ref{fig:wp1_history} shows the history of the objective function (average efficiency of 5 injection pulses) throughout the optimization runs at Working Point 1.
 \begin{figure}[tb]
@@ -75,35 +75,28 @@ For each of the optimal configurations identified in Runs 1, 2, and 3, as well a
         \label{fig:oldtunes_phase}
 \end{figure}
 
-Table~\ref{table1} compiles the injection efficiencies achieved for each configuration during off-axis \gls*{nlk} injection under normal injection conditions ($x\approx -8~\unit{mm}$, $x^\prime\approx 0 $).
+Table~\ref{tb:wp1summary} compiles the injection efficiencies achieved for each configuration during off-axis \gls*{nlk} injection under normal injection conditions ($x\approx -8~\unit{mm}$, $x^\prime\approx 0 $), as well as the lifetime at $60~\unit{mA}$ current for the ref. config. and runs 2.
+
 Once again, we emphasize the apparent elasticity of the phase portrait ellipse deformations: the configuration with the highest kick resilience, observed in Run 1, is not necessarily the one with the largest phase space area and best \gls*{ie} performance. This behavior could be explained if the phase space deformations of the ellipse at the kicker location for this sextupole setting resulted in a larger $x^\prime/x$ ratio, contributing to a greater kick acceptance and poorer injection performance compared to Run 2. In summary, increased kick resilience does not necessarily translate into an increased \gls*{DA}.
 
 Lifetime at $60~\unit{mA}$ was measured at $20~\unit{hr}$ for run 2 solution, the best performing in terms of \gls*{ie}. The measurement revealed no impact of the optimization procedure on lifetime, since lifetime for the same conditions on the reference configuration is $21~\unit{hr}$.
 
 Despite the precautions taken to avoid changing chromaticity during the optimization procedure by selecting the chromaticity Jacobian null space knobs, slight changes were observed. Chromaticity was measured as $(2.33, 2.53)$ in the reference configuration and $(2.24, 2.39)$ in the solution obtained in Run 2. This could be attributed to minor discrepancies between the machine computer model and the actual machine, since the optimization knobs were computed using the storage ring computer model Jacobian. Despite the small deviations in chromaticity, the observed values still fall within acceptable operation ranges for the SIRIUS storage ring, according to the transverse instabilities studies shown in chapter 7, section 3 of ref.~\cite{sa_study_2018}.
 
-In summary, for \gls*{WP1}:
-\begin{itemize}
-    \item the solution found during run 2 rendered $98\%$ \gls*{ie},
-    \item increase in horizontal phase space area and horizontal kick resilience were observed,
-    \item no significant effect was observed on beam lifetime,
-    \item small, acceptable chromaticity changes observed.
-\end{itemize}
-Increase in efficiency and phase space areas and kick resilience are strong indicators of a \gls*{DA} enlargement. The online optimization was extremely succesful on \gls*{WP1}.
+In summary, for \gls*{WP1}: the solution found during run 2 rendered $98\%$ \gls*{ie}; increase in horizontal phase space area and horizontal kick resilience were observed; no significant effect was observed on beam lifetime; small, acceptable chromaticity changes observedIncrease in efficiency, phase space areas and kick resilience are strong indicators of a \gls*{DA} enlargement. The online optimization was extremely succesful on \gls*{WP1}.
 
 \begin{table}[htb]
-    \caption{Injection efficiencies for sextupole configurations found during online optimization at Working Points 1, 2 and 3.}
     \centering
-    \begin{tabular}{cccccc}
+    \caption{Injection efficiency in nominal off-axis conditions \& lifetime for optimized configurations at WP1, with tunes $(49.08, 14.14)$.}
+    \begin{tabular}{ccc}
     \hline
-    \multicolumn{2}{c}{working point 1} & \multicolumn{2}{c}{working point 2}         & \multicolumn{2}{c}{working point 3}         \\ \hline
-    configuration      & IE $[\%]$      & configuration        & IE $[\%]$            & configuration        & IE $[\%]$            \\ \hline
-    ref. config.       & $88\pm8$       & initial              & $51\pm1$             & initial              &                      \\
-    run 1              & $91\pm1$       & run 1                & $79\pm3$             & optimized            & $93\pm3$             \\
-    run 2              & $98\pm1$       & run 2                & $65\pm1    $         &                      &                      \\
-    run 3              & $87\pm3$       & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} \\ \hline
+    configuration & injection efficiency $[\%]$ & lifetime @ $\unit{60~\milli\ampere}$ \\ \hline
+    ref-config    & $88\pm8$                    & 21 hrs    \\
+    run 1         & $91\pm1$                    &           \\
+    run 2         & $98\pm1$                    &  20 hrs   \\
+    run 3         & $87\pm3$                    &           \\ \hline
     \end{tabular}
-    \label{table1}
+    \label{tb:wp1summary}
     \end{table}
 
 \subsection{Optimization in Working Point 2 (49.20, 14.25)}
@@ -118,9 +111,9 @@ Two optimization runs were carried out: run 1 and run 2. The sextupoles were opt
     \label{fig:wp_2_history}
 \end{figure}
 \subsubsection{Characterization of solutions}
-\gls*{ie}  achieved for the solutions of \gls*{WP2} in nominal injection conditions is highlighted in Table~\ref{table1}. Despite the observed improvements, the best performing configuration, the solution found in run 1, still provides unsatisfactory efficiency for operation.
+% \gls*{ie}  achieved for the solutions of \gls*{WP2} in nominal injection conditions is highlighted in Table~\ref{table1}. Despite the observed improvements, the best performing configuration, the solution found in run 1, still provides unsatisfactory efficiency for operation.
 
-\gls*{tbt} \gls*{bpm} data of the kicked stored beam  in the initial configuration (non-optimized) and in each run's best solution was acquired and allowed the determination of current losses vs. kicks, shown in Fig.~\ref{fig:loss_kicks_newtunes}, and the reconstruction of phase space, shown in Fig. ~\ref{fig:newtunes_phase}. Improvements on the resilience and the phase space area can be observed in the optimized solutions.
+\gls*{tbt} \gls*{bpm} data of the kicked stored beam  in the initial configuration (non-optimized) and in each run's best solution was acquired and allowed the determination of current losses vs. kicks, shown in Fig.~\ref{fig:loss_kicks_newtunes}, and the reconstruction of phase space, shown in Fig.~\ref{fig:newtunes_phase}. Improvements on the resilience and the phase space area can be observed in the optimized solutions.
 \begin{figure}[tb]
     \centering
     \includegraphics[width=0.6\columnwidth]{Images/WEPL087_f3.pdf}
@@ -133,9 +126,21 @@ Two optimization runs were carried out: run 1 and run 2. The sextupoles were opt
     \label{fig:newtunes_phase}
 \end{figure}
 
-The configuration found during run 1 rendered the best \gls*{ie}, the largest kick resilience. It also displayed larger lifetime than the initial configuration ($21~\unit{hrs}$, run 1 vs. $18~\unit{hrs}$, initial, at $60~\unit{mA}$) which is comparable to the reference configuration lifetime at \gls*{WP1}. The largest phase space area increase was also observed for this solution. Still, the \gls*{ie} delivered by the best performing solution on this working point was quite unsatisfactory. The overall impression was that optimizing in this working point was quite difficult, as the objective function history of Fig.~\ref{fig:wp_2_history} shows. The objective rise was slow and seemed to have the $35\%$ mark as upper limit when the injection was deliberately worsened during the runs. In other words, the \gls*{DA} seemed more rigid. For this reason, another working point was sought. If the idea is to increase the fraction parts of the tunes, and $(0.20, 0.25)$ seemed like overshooting towards unknown regions, optimization in the intermediate tunes between \gls*{WP1} and \gls*{WP2}, with fractional tunes $(0.16, 0.22)$, seemed reasonable.
+Table~\ref{tb:wp2summary} compiles the \glspl*{ie} in nominal injection conditions for each run, as well as the beam lifetime for the non-optimized configuration and run 1 configuration. Run 1 configuration rendered the best \gls*{ie}, the largest kick resilience. It also displayed larger lifetime than the initial configuration, reaching a value comparable to the reference configuration lifetime at \gls*{WP1}. The largest phase space area increase was also observed for this solution. Still, the \gls*{ie} it delivered was quite unsatisfactory and the overall impression was that optimizing in this working point was quite difficult, as the objective function history of Fig.~\ref{fig:wp_2_history} shows. The objective rise was slow and seemed to have the $35\%$ mark as upper limit when the injection was deliberately worsened during the runs. In other words, the \gls*{DA} seemed more rigid. For this reason, another working point was sought. If the idea is to increase the fraction parts of the tunes, and $(0.20, 0.25)$ seemed like overshooting towards unknown regions, optimization in the intermediate tunes between \gls*{WP1} and \gls*{WP2}, with fractional tunes $(0.16, 0.22)$, seemed reasonable.
+\begin{table}[htb]
+    \centering
+    \caption{Injection efficiency in nominal off-axis conditions \& lifetime for optimized configurations at WP2, with tunes $(49.20, 14.25)$.}
+    \begin{tabular}{ccc}
+    \hline
+    configuration & injection efficiency $[\%]$ & lifetime @ $\unit{60~\milli\ampere}$ \\ \hline
+    non-optimized    & $51\pm1$                 &  18 hrs \\
+    run 1            & $79\pm3$                 &  21 hrs  \\
+    run 2            & $65\pm1$                 &           \\ \hline
+    \end{tabular}
+    \label{tb:wp2summary}
+    \end{table}
 \subsection{Optimization in Working Point 3 (49.16, 14.22)}
-From the reference configuration with corrected linear optics and orbit, the tunes were adjusted to the desired working point $(\nu_x, \nu_y)=(49.16, 13.22)$. The \gls*{ie} was again lower, indicating, as in \gls*{WP2}, deterioration of the \gls*{DA} when changing tunes.
+From the reference configuration with corrected linear optics and orbit, the tunes were adjusted to the desired working point $(\nu_x, \nu_y)=(49.16, 14.22)$.\gls*{ie} in nominal conditions was low, indicating, as in \gls*{WP2}, deterioration of the \gls*{DA} when changing tunes.
 
 The objective function was the average \gls*{ie} of 5 injection pulses in the same conditions as in \gls*{WP1} and \gls*{WP2} experiments. The optimization knobs were those of the Compensation Scheme described in section \ref{subsec:knobs}. Families SFP1 and SFB1 were not used and the search space was 13-dimensional.
 
@@ -147,7 +152,7 @@ Two optimization runs were carried out, starting from sextupole settings of the 
     \label{fig:wp3_history}
 \end{figure}
 \subsubsection{Characterization of the solution}
-The optimized solution was characterized in terms of kick resilience, phase space area, \gls*{ie} and whether it preserved chromaticity and lifetime.  Lifetime at $60~\unit{mA}$ was measured at $19.5~\unit{hrs}$, so no significant reductions were observed. No significant chromaticity changes were observed as well. Phase space area increased, compared to the initial non-optimized configuration, and reached similar value to that of the WP1 nominal tunes reference configuration, as Fig.~\ref{fig:wp3_phase_space} shows. Kick resilience, shown in Fig.~\ref{fig:wp3_kick_res}, also improved, with a larger fraction of the beam surviving to large kicks in the range  $700-770~\unit{\mu rad}$. Finally, and most importantly, run 2 solution displayed \gls*{ie} of $93\pm3\%$ during nominal off-axis injection, which is acceptable for operating with this configuration.
+The optimized solution was characterized in terms of kick resilience, phase space area, \gls*{ie} during nominal injection conditions and whether it preserved chromaticity and lifetime.  Lifetime at $60~\unit{mA}$ was measured at $19.5~\unit{hrs}$, so no significant reductions compared to the \gls*{WP1} reference configuration were observed. No significant chromaticity changes were observed as well. Phase space area increased, compared to the initial non-optimized configuration, and reached similar value to that of the \gls*{WP1} nominal tunes reference configuration, as Fig.~\ref{fig:wp3_phase_space} shows. Kick resilience, shown in Fig.~\ref{fig:wp3_kick_res}, also improved, with a larger fraction of the beam surviving to large kicks in the range  $700-770~\unit{\mu rad}$. Finally, and most importantly, run 2 solution displayed \gls*{ie} of $93\pm3\%$ during nominal off-axis injection, which is acceptable for operating with this configuration.
 \begin{figure}[tb]
     \centering
     \includegraphics[width=0.6\columnwidth]{Images/wp3_kick_resilience.pdf}
@@ -161,10 +166,37 @@ The optimized solution was characterized in terms of kick resilience, phase spac
     \label{fig:wp3_phase_space}
 
 \end{figure}
+% \begin{table}[htb]
+%     \centering
+%     \caption{Injection efficiency in nominal off-axis conditions \& lifetime for optimized configurations at WP2, with tunes $(49.20, 14.25)$.}
+%         \begin{tabular}{ccc}
+%         \hline
+%         configuration & injection efficiency $[\%]$  & lifetime @ $\unit{60~\milli\ampere}$  \\ \hline
+%         non-optimized        &                       &          \\
+%         optimized            & $93\pm3$              &    19.5 hrs   \\ \hline
+%         \end{tabular}
+%         \label{tb:wp3summary}
+% \end{table}
+\subsubsection{Summary of results}
+Table~\ref{tb:summary} summarizes the injection efficiencies achieved for the best configurations of each run and WP during nominal conditions for off-axis injection. Run 2 from \gls*{WP1} and the optimzed configuration at \gls*{WP3} were the best performing configurations of their corresponding WPs and successfully met the standards to be used during operation. Currently, \gls*{WP3} is SIRIUS' working point and the optimized sextupole configuration identified in the online optimization experiments is deployed in the machine.
+\begin{table}[htb]
+    \centering
+    \caption{Injection efficiencies (\gls*{ie}) for sextupole configurations found during online optimization at Working Points 1, 2 and 3.}
+    \begin{tabular}{cccccc}
+    \hline
+    \multicolumn{2}{c}{\gls*{WP1} (49.08, 14.14)} & \multicolumn{2}{c}{\gls*{WP2} (49.20, 14.25)}         & \multicolumn{2}{c}{\gls*{WP3} (49.16, 14.22)}         \\ \hline
+    configuration      & IE $[\%]$      & configuration        & IE $[\%]$            & configuration        & IE $[\%]$            \\ \hline
+    ref. config.       & $88\pm8$       & initial              & $51\pm1$             & initial              &                      \\
+    run 1              & $91\pm1$       & run 1                & $79\pm3$             & optimized            & $93\pm3$             \\
+    run 2              & $98\pm1$       & run 2                & $65\pm1    $         &                      &                      \\
+    run 3              & $87\pm3$       & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} \\ \hline
+    \end{tabular}
+    \label{tb:summary}
+    \end{table}
 \subsubsection{Orbit stability improvements}
-The motivation for exploring higher tunes was the desirable effect of reducing orbit amplification factors to improve the overall orbit stability. Orbit stability improvements in \gls*{WP3} tunes were confirmed by the orbit integrated spectrum density of the orbit data collected with \glspl*{bpm}. The spectrum decreased by a factor of approximately 2, as Fig.~\ref{fig:integrated_spec}, from Ref.~\cite{liu_status_2023} shows.
+The motivation for exploring higher tunes was the desirable effect of reducing orbit amplification factors to improve the overall orbit stability. Orbit stability improvements in \gls*{WP3} tunes were confirmed by the orbit integrated spectrum density of the orbit data collected with \glspl*{bpm}. The spectrum decreased by a factor of approximately 2, as Fig.~\ref{fig:integrated_spec}, presented in Ref.~\cite{liu_status_2023}, shows.
 
-Leveraging \gls*{WP3}, which is at the time of this writing the working point in operation at the SIRIUS storage ring, and the recent improvements of the Fast Orbit Feedback System, orbit rms variations reached the record values of less than $1\%$ of the horizontal beam size, in the horizontal plane, and less than $4\%$ of the vertical beam size in the vertical plane. Employing this WP routinely in the machine was made possible only after achieving high and reproducible injection efficiencies attending the operation demands.
+Leveraging \gls*{WP3}, and the recent improvements of the Fast Orbit Feedback System, orbit \gls*{rms} variations reached the record values of less than $1\%$ of the horizontal beam size, in the horizontal plane, and less than $4\%$ of the vertical beam size in the vertical plane.
 
 \begin{figure}[htb]
     \centering
@@ -184,13 +216,13 @@ The common feature among the curves of the best performing configurations for ea
 
 The same procedure can be done kicking the beam in the vertical direction and calculating the vertical motion tunes, giving the curve of $\Delta \nu_y$ vs. $J_y$. However, this experiment has not yet been carried out due to schedule limitations.
 
-With the horizontal kicks data, attempts were also made to extract vertical tune shifts $\Delta \nu_y$ vs horizontal action $J_x$. However, due to coupling, it is difficult (and in most cases impossible) to extract the vertical tune from the $y$ \gls*{tbt} \gls*{bpm} data, because the time-series gets contaminated with the horizontal tune signal and the vertical tune signal has a low signal-to-noise ratio. 
+With the horizontal kicks data, attempts were also made to extract vertical tune shifts $\Delta \nu_y$ vs horizontal action $J_x$. However, due to coupling, it is difficult (and in most cases impossible) to extract the vertical tune from the $y$ \gls*{tbt} \gls*{bpm} data, because the time-series gets contaminated with the horizontal tune signal and the vertical tune signal has a low signal-to-noise ratio.
 
 One way to overcome these limitations is to change the experimental acquisition slightly: first, the beam must be kicked in the vertical direction  once to induce a significant betatron motion and, consequently, increase the $\nu_y$ peak in the spectrum. This addresses the low signal-to-noise ratio limitation. After the vertical kick, the beam is then kicked in the horizontal direction with the kicks in the desired nonlinear dynamics range. This last step takes the beam to the large horizontal amplitudes optics, changing the vertical tune of the vertical motion induced in the first step according to what is prescribed by the nonlinear effects.
 
 Characterizing the $\Delta \nu_x$ vs. $J_x$ and the $\Delta \nu_y$ vs. $J_x$ or $\Delta \nu_x$ vs $J_y$ curves, one can reconstruct the path traced in the tune-space at large amplitudes. If the observed path avoids particular regions of the tune-space or particular resonance lines, the enhanced performance would be justified: the best-performing sextupole configurations are those rendering beneficial behaviour in tune-space. Consequently, the dynamics is less irregular, less chaotic, specially close to the border of the \gls*{DA}, explaining the observed improvements in the \gls*{ie}, beam kick-resilience and phase space area.
 
-Unfortunately, due to schedule limitations, these additional data acquisitions and processing attempts could not be carried out before the completion of this dissertation. These tasks stands out as required next-steps if one wishes to understand and explain why these configurations rendered the improvements they did and also to verify the hypothesis that the optimized configurations render the dynamics with beneficial behaviour in tune-space. 
+Unfortunately, due to schedule limitations, these additional data acquisitions and processing attempts could not be carried out before the completion of this dissertation. These tasks stands out as required next-steps if one wishes to understand and explain why these configurations rendered the improvements they did and also to verify the hypothesis that the optimized configurations render the dynamics with beneficial behaviour in tune-space.
 \begin{figure}[tb]
     \includegraphics[width=\columnwidth]{Images/adts.png}
     \caption[Horizontal tune-shifts vs. horizontal betatron actions for the RCDS solutions and for the computer model in WPs 1, 2, and 3.]{Horizontal tune-shifts vs. horizontal betatron actions for the \gls*{RCDS} solutions and for the computer model in WPs 1, 2, and 3.}
