@@ -281,7 +281,7 @@ where the closed integration sign refers to a complete circulation along the rin
     %  Besides calculating the tune-shift, the resulting transfer-matrix for the lattice with errors allows for the identification of the new optics $\alpha, \beta, \gamma$, which can then be propagated to anywhere in the ring. In particular we can identify $\beta$ and its fractional deviation from the nominal value along $s$, a parameter known as \textit{beta-beating}
     As for the induced error on the beta-functions, it is possible to show that the relative error, known as beta-beat, can be expressed as
      \begin{equation}
-        \frac{\Delta \beta_u(s)}{\beta_u(s)} = - \frac{1}{2\sin(2\pi\nu_u)}\int_{s}^{s+L}\Delta K_u(\sigma)\cos[2(\phi_u(\sigma)-\phi_u(s)-\pi\nu)]\dd\sigma.
+        \frac{\Delta \beta_u(s)}{\beta_u(s)} = - \frac{1}{2\sin(2\pi\nu_u)}\int_{s}^{s+L}\beta(\sigma)\Delta K_u(\sigma)\cos[2(\phi_u(\sigma)-\phi_u(s)-\pi\nu)]\dd\sigma.
         \label{eq:beta_beat}
      \end{equation}
 which is the largest for $2\nu_u$ closest to an integer. This means we must avoid tunes close to half-integers if we want to avoid the coherent build-up of betatron amplitudes, which can eventually lead to beam loss.
