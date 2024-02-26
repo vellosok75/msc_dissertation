@@ -37,7 +37,7 @@ Consider an electron traveling along a curve parameterized by the arc-length $s$
     \end{equation}
 Where eq.~\eqref{eq:rigidity} has been used to identify the $p/e$ ratio as the magnetic rigidity $R(p)$. These considerations are illustrated in Fig.~\ref{fig:deflec_angles}. The rigidity depends solely on the electron's momentum/energy and serves as the appropriate normalization constant to evaluate the instantaneous angular deflections in the electron's trajectory caused by magnetic fields.
 \section{The coordinate system for storage ring dynamics}
-As sketched by Fig.~\ref{fig:storage_ring}, electrons in a storage ring perform a oscillations close to a nearly circular reference closed orbit. A convenient coordinate frame to describe the dynamics in this scenario can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{fig:frenet-serret} shows. This particle samples exactly the reference nominal orbit and travels a distance $s$ along the ring, which can be used to parameterize the motion. The triad of direction vectors for the co-moving coordinate frame consists of the vector $\vu{s}$, tangent to the trajectory, the vector $\vu{x}$, normal to the trajectory, pointing in the direction at which $\vu{s}$ changes, and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame.
+As sketched by Fig.~\ref{fig:storage_ring}, electrons in a storage ring perform oscillations close to a nearly circular reference closed orbit. A convenient coordinate frame to describe the dynamics in this scenario can be constructed by imagining a reference particle traveling along a curve drawn by the tip of a vector $\vb{r}_0$, as Fig.~\ref{fig:frenet-serret} shows. This particle samples exactly the reference nominal orbit and travels a distance $s$ along the ring, which can be used to parameterize the motion. The triad of direction vectors for the co-moving coordinate frame consists of the vector $\vu{s}$, tangent to the trajectory, the vector $\vu{x}$, normal to the trajectory, pointing in the direction at which $\vu{s}$ changes, and a vector $\vu{y}=\vu{x}\cross\vu{s}$, bi-normal to the trajectory. This construction leads to a Frenet-Serret reference frame.
 
 Assuming no curvature in the $y$ plane, i.e. that the accelerator defines a curve whose plane is parallel to the facility flat floor, then the tangent, normal and binormal unit vectors defining the frame can be calculated as \cite{lee_accelerator_2004}
 \begin{equation}
@@ -52,10 +52,10 @@ The frame depends solely on the geometry of the specified path: the instantaneou
         \frac{1}{\rho(s)} = \frac{B_0(s)}{R_0},
         \label{eq:G}
     \end{equation}
-where $R_0$ is the rigidity for the beam at the nominal energy.
-%As a starting point for designing the magnetic lattice of an accelerator, given the desired energy range for the beam and its rigidity, and the desired radius of curvature, the required integrated strength of the dipoles must satisfy the above relation.
+where $R_0$ is the rigidity of the beam at the nominal energy.
+%As a starting point for designing the magnetic lattice of an accelerator, given the desired energy range for the beam and its rigidity and the desired radius of curvature, the required integrated strength of the dipoles must satisfy the above relation.
 
-The transverse deviations from the nominal orbit can be measured in units of the unit vectors $\vu{x}$, $\vu{y}$ in the normal and bi-normal directions. These deviations characterize the transverse dynamics of the electron. One may also be concerned with the distance of a given particle from the reference particle along the curve. Such differences arise due to differences in the energy two particles. In the full, six-dimensional dynamics, the longitudinal distance from the reference particle and the energy deviations are conjugate dynamical variables characterizing the longitudinal dynamics. They typically oscillate within a range of stable values characterizing the energy acceptance. As mentioned above, since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle shall be static and treated as fixed parameters.
+The transverse deviations from the nominal orbit can be measured in units of the unit vectors $\vu{x}$, $\vu{y}$ in the normal and bi-normal directions. These deviations characterize the transverse dynamics of the electron. One may also be concerned with the distance of a given particle from the reference particle along the curve. Such differences arise due to differences in the energy of two particles. In the full, six-dimensional dynamics, the longitudinal distance from the reference particle and the energy deviations are conjugate dynamical variables characterizing the longitudinal dynamics. They typically oscillate within a range of stable values, characterizing the energy acceptance. As mentioned above, since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle shall be static and treated as fixed parameters.
 
 \begin{figure}[htb]
     \centering
@@ -69,14 +69,14 @@ The dynamics of relativistic electrons influenced by electromagnetic fields $(\P
     \begin{equation*}
         H=\sqrt{m^2c^4+(\vb{P}-q\vb{A})^2c^2}+e\Phi,
     \end{equation*}
- $e$ being the elementary charge and $\vb{P}=\vb{p}+e\vb{A}$ the canonical momentum, with $\vb{A}$ being the vector potential describing the magnetostatic fields of the lattice,. i.e. $\vb{B}=\curl \vb{A}$. To obtain equations of motion for electrons in the storage ring, one usually follows the steps below:
+ $e$ being the elementary charge and $\vb{P}=\vb{p}+e\vb{A}$ the canonical momentum, with $\vb{A}$ being the vector potential describing the magnetostatic fields of the lattice, i.e. $\vb{B}=\curl \vb{A}$. To obtain equations of motion for electrons in the storage ring, one usually follows the steps below:
  \begin{itemize}
     \item A canonical transformation to change coordinates is applied in order to describe the motion in terms of the Frenet-Serret frame variables $x$, $y$;
     \item Instead of time $t$, the Hamiltonian and the dynamical variables are described as functions of $s$, the longitudinal position along the ring;
-    \item Paraxial approximation: the transverse momenta are assumed to be way smaller than the momentum along the trajectory's tangent direction. This allows the expansion of the the square-root in the Hamiltonian as a power series, revealing the expression for an approximate Hamiltonian which can be more easily handled;
+    \item Paraxial approximation: the transverse momenta are assumed to be way smaller than the momentum along the trajectory's tangent direction. This allows the expansion of the square-root in the Hamiltonian as a power series, revealing the expression for an approximate Hamiltonian, which can be more easily handled;
     \item Geometric quantities are used: in the paraxial approximation, the canonical momenta for on-energy particles are identified with the derivatives with respect to the parameter $s$, i.e., $p_x = x^\prime = \dv*{x}{s}$ and $p_y = y^\prime = \dv*{y}{s}$, which represent the divergence angles from the nominal orbit. For off-energy particles, a correction factor is present;
  \end{itemize}
- All of the transformations and manipulations summarized above can be found in detail in the literature, such as in Refs.~\cite{lee_accelerator_2004, wiedemann_particle_2015,  wolski_beam_2014}. As mentioned previously, by neglecting RF cavities ($\Phi=0$) and radiation losses, the energy will a constant parameter and the dynamics will consist solely of the transverse degrees of freedom.  In this 4-dimensional dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where the momenta are given by
+ All of the transformations and manipulations summarized above can be found in detail in the literature, such as in Refs.~\cite{lee_accelerator_2004, wiedemann_particle_2015,  wolski_beam_2014}. As mentioned previously, by neglecting RF cavities ($\Phi=0$) and radiation losses, the energy will be a constant parameter, and the dynamics will consist solely of the transverse degrees of freedom.  In this 4-dimensional dynamics, the set of canonical variables are $(x,p_{x},y , p_{y})$, where the momenta are given by
 \begin{equation} p_{x}= x^\prime(1+\delta),\quad p_{y}=y^\prime (1+\delta)\end{equation}
 and $\delta$ is the relative deviation from the nominal energy-momentum:
 \begin{equation}
@@ -94,7 +94,7 @@ y^{\prime \prime}=\frac{(1+G x)^{2}}{1+\delta} \frac{B_{x}}{R_0},
 where $R_0 = p_0/e$ is the magnetic rigidity of the beam at the nominal energy and $G(s)\equiv\rho^{-1}(s)$ is the inverse local radius of curvature, related to the dipole fields as in Eq.~\eqref{eq:G}.
 
 \section{The magnetic fields}
-To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting on the beam. Since in a storage ring the magnets are arranged as periodic arrays of dipoles, quadrupoles and sextupoles, the $B_x(s)$ and $B_y(s)$ functions are generally periodic. The magnetic fields are sectionally defined and have the following functional forms
+To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting on the beam. Since in a storage ring the magnets are arranged as periodic arrays of dipoles, quadrupole, and sextupoles, the $B_x(s)$ and $B_y(s)$ functions are generally periodic. The magnetic fields are sectionally defined and have the following functional forms
 \begin{itemize}
     \item Horizontal Dipole
            \begin{equation} B_x(s) = 0, \quad B_y(s) = B_0, \quad \text{inside dipoles},
@@ -111,16 +111,16 @@ To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting 
 \end{itemize}
 and zero everywhere else, in drift sections. Fields \eqref{eq:dipole}--\eqref{eq:sextupole}  are the so-called \textit{normal multipole fields}, in contrast with \textit{skew multipole fields}, which couple the horizontal and vertical dynamics. We will neglect skew fields and coupling for now. They can be treated as perturbations in perturbation theory schemes.
 
-In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. Thus, we define the normalized dipolar, quadrupolar and sextupolar field functions, $G(s), K(s), S(s)$:
+In eqs.~\eqref{eq:EOMs}, the magnetic rigidity normalizes all the fields. Thus, we define the normalized dipolar, quadrupolar and sextupolar field strengths, $G(s), K(s), S(s)$:
 \begin{equation}
     G(s) = \frac{B_0(s)}{R_0}, \quad K(s) = \frac{B_1(s)}{R_0}, \quad S(s) = \frac{B_2(s)}{R_0}.
     \label{eq:mag_funcs}
 \end{equation}
-For a SIRIUS superperiod, the functions are shown in Fig.~\ref{fig:field_funcs}. A superperiod consists on the basic repetition of four magnetic cells. SIRIUS has 5 superperiods. In other, words, the curves in Fig.~\ref{fig:field_funcs} repeat themselves five times along the $518~\unit{m}$ of the ring. More details on the magnetic lattice at section~\ref{sec:mag_latt}.
+For a SIRIUS superperiod, the functions are shown in Fig.~\ref{fig:field_funcs}. A superperiod consists of the basic repetition of four magnetic cells. SIRIUS has 5 superperiods. In other words, the curves in Fig.~\ref{fig:field_funcs} repeat themselves five times along the $518~\unit{m}$ of the ring. More details on the magnetic lattice are in section~\ref{sec:mag_latt}.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=\textwidth]{Images/field_functions.pdf}
-    \caption[Normalized field functions for dipoles, quadrupoles and sextupoles of a superperiod of SIRIUS lattice]{Normalized field functions for dipoles (top plot), quadrupoles (middle plot) and sextupoles (bottom plot) of a superperiod of SIRIUS lattice, shown at the top. Colored blocks represent the magnets of the accelerator lattice: blue for dipoles, orange for quadrupoles and green for sextupoles. The ring has a 5-fold symmetry, with the cells, fields and optics function repeating the patern shown above five times up to $s=518~\unit{m}$.}
+    \caption[Normalized field functions for dipoles, quadrupoles and sextupoles of a superperiod of SIRIUS lattice]{Normalized field functions for dipoles (top plot), quadrupoles (middle plot) and sextupoles (bottom plot) of a superperiod of SIRIUS lattice, shown at the top. Colored blocks represent the magnets of the accelerator lattice: blue for dipoles, orange for quadrupoles and green for sextupoles. The ring has a 5-fold symmetry, with the cells, fields, and optics function repeating the pattern shown above five times up to $s=518~\unit{m}$.}
     \label{fig:field_funcs}
 \end{figure}
 \section{Linear dynamics}
@@ -137,9 +137,9 @@ Expansion of eqs.~\eqref{eq:EOMs} up to first order in the $x, y, \delta$ variab
     \end{equation}
    i.e, a pair of parametric oscillators for $u=x,y$, with $s$-dependent and periodic focusing functions
          $$K_x(s) = G^2(s) + K(s), \quad K_y(s) = - K(s),$$
-    the analogues to an oscillator's spring force per unit mass. Motion in the linear approximation thus consists of oscillations around the closed orbit, known as \textit{betatron oscillations}.
+    the analogs to an oscillator's spring force per unit mass. Motion in the linear approximation thus consists of oscillations around the closed orbit, known as \textit{betatron oscillations}.
 \subsection{Pseudoharmonic description}
-Betatron motion can be cast in a amplitude-phase form. One can show that
+Betatron motion can be cast in an amplitude-phase form. One can show that
 \begin{equation}
     u(s) = \sqrt{2\beta_u(s) J_u}\cos(\phi_u(s) + \phi_0),\quad u=x,y,
     \label{eq:pseudo_harmon}
@@ -156,7 +156,7 @@ and the phase advance is given by
     \begin{equation}
         \phi_u(s) = \int_{0}^{s}\frac{1}{\beta_u(\sigma)}\dd\sigma.
    \end{equation}
-The motion is oscillatory, non-harmonic and non-periodic. The oscillations envelope is the square-root of the beta functions $\beta_u(s)$, which for the SIRIUS storage ring are shown in Fig.~\ref{betafunc}.
+The motion is oscillatory, non-harmonic, and non-periodic. The oscillations envelope is the square root of the beta functions $\beta_u(s)$, which for the SIRIUS storage ring are shown in Fig.~\ref{betafunc}.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=\textwidth]{Images/beta_functions.pdf}
@@ -164,21 +164,21 @@ The motion is oscillatory, non-harmonic and non-periodic. The oscillations envel
     \label{betafunc}
 \end{figure}
 \subsection{The tune}
-An important parameter of the dynamics is the \textit{tune}: the phase advance over a revolution along the ring, in units of a complete cylcle:
+An important parameter of the dynamics is the \textit{tune}: the phase advance over a revolution along the ring, in units of a complete cycle:
 \begin{equation*}
     \nu_u=\frac{1}{2\pi}\int_{s}^{s+L}\frac{\dd \sigma}{\beta_u(\sigma)}\equiv\frac{1}{2\pi}\oint\frac{\dd s}{\beta_u(s)}.
 \end{equation*}
-The tune reveals the number of transverse oscillations per revolution along the ring. The nominal tunes for SIRIUS storage ring are $(\nu_x, \nu_y)=(49.08, 14.14)$.
+The tune reveals the number of transverse oscillations per revolution along the ring. The optimized tunes during design phase for SIRIUS storage ring are $(\nu_x, \nu_y)=(49.08, 14.14)$. These were the machine tunes prior to this work.
 
-When studying the effects of perturbations and nonlinearities acting on the beam, one realizes the tunes are critical variables in determining the beam's response. More specifically, the tunes impact over disturbances amplification factors, which are greatest when tunes are close to integer numbers. Ideally, it is desired the tunes to be far from the integers, but also far from the half-integers. We examine the relation  between the tunes and the effects of disturbances in more detail in section \ref{sec:field_err}.
+When studying the effects of perturbations and nonlinearities acting on the beam, one realizes that tunes are critical variables in determining the beam's response. More specifically, the tunes impact over disturbances amplification factors, which are greatest when tunes are close to integer numbers. Ideally, it is desired for the tunes to be far from the integers, but also far from the half-integers. We examine the relation between the tunes and the effects of disturbances in more detail in section \ref{sec:field_err}.
 
 \subsection{Turn-by-turn motion}
-If one keeps track of the time evolution of the the $u, u^\prime$ variables at a fixed position along the ring, plotting them in a phase space, one realizes  the quasi-periodic motion traces out ellipses. This fact can be analytically verified by calculating the derivative
+If one keeps track of the time evolution of the $u, u^\prime$ variables at a fixed position along the ring, plotting them in a phase space, one realizes the quasi-periodic motion traces out ellipses. This fact can be analytically verified by calculating the derivative
     \begin{equation}
         u^{\prime}(s) = - \sqrt{\frac{2J_u}{\beta_u}}\qty[\sin(\phi_u(s) + \phi_0) - \frac{1}{2}\beta_u^\prime(s)\cos(\phi_u(s) + \phi_0)],
         \label{eq:uprime}
     \end{equation}
-    defining the functions $\alpha_u = -\frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satify the quadratic form
+    defining the functions $\alpha_u = -\frac{\beta_u^\prime}{2}$  and $\gamma_u = \frac{(1+\alpha_u^2)}{\beta_u}$ and checking that $u, u^\prime$ satisfy the quadratic form
     \begin{equation}
         2J_u=\gamma_u u^{2}+2\alpha_u u u^{\prime}+\beta_u u^{\prime2},
      \end{equation}
@@ -190,7 +190,7 @@ which describes the ellipse. The ellipse properties are determined by the $\beta
     u_j(s_0)=\sqrt{2\beta_u(s_0) J_u}\cos(2\pi\nu_u j+\phi_u(s_0)).
     \label{eq:TbT_motion}
 \end{equation}
-Knowledge of this formula allows the determination of the tunes (mod $2\pi$) from the observation of \gls*{tbt} motion of the beam. The time-series of postions can be fitted to eq.~\eqref{eq:TbT_motion} in the time domain, or the signal cam be processed in the frequency domain for the identification of the harmonic corresponding to $\nu_u$.
+Knowledge of this formula allows the determination of the tunes (mod $2\pi$) from the observation of \gls*{tbt} motion of the beam. The time-series of positions can be fitted to eq.~\eqref{eq:TbT_motion} in the time domain, or the signal can be processed in the frequency domain for the identification of the harmonic corresponding to $\nu_u$.
 % Time of flight during a complete turn is $L/c$ so, for the $j$th turn, $t_j=\frac{L}{c} j$. With a revolution frequency of $\omega_r=2\pi/(L/c)$, we see that $2\pi j= \omega_r t_j$. As a function of the time elapsed over the $j$ turns, the displacements reads
 % \begin{equation}
 %     x_j=\sqrt{2\beta_0J}\cos(\omega_r\nu t_j+\phi_0).
@@ -203,7 +203,7 @@ Knowledge of this formula allows the determination of the tunes (mod $2\pi$) fro
 \end{figure}
 \section{Dispersive \& chromatic effects and linear perturbations}
 \subsection{Dispersion}
-The equation of motion for off-momentum particles in the horizontal plane, the first of eqs.~\eqref{eq:linearEOM}, is a non-homogeneous Hill's equation. The solution consists on the linear combination of the homogeneous solution (betatron motion) and the particular solution: $x=x_\beta+ x_\delta$, which represents an additional deviation from the nominal orbit. Since the non-homogeneous term, $G(s)\delta$, is proportional to $\delta$, we can assume  $x_{\delta} = \eta(s)\delta$, where $\eta(s)$ is the \textit{dispersion function}. For this to be the solution, the disperion should satisfy
+The equation of motion for off-momentum particles in the horizontal plane, the first of eqs.~\eqref{eq:linearEOM}, is a non-homogeneous Hill's equation. The solution consists of the linear combination of the homogeneous solution (betatron motion) and the particular solution: $x=x_\beta+ x_\delta$, which represents an additional deviation from the nominal orbit. Since the non-homogeneous term, $G(s)\delta$, is proportional to $\delta$, we can assume  $x_{\delta} = \eta(s)\delta$, where $\eta(s)$ is the \textit{dispersion function}. For this to be the solution, the dispersion should satisfy
     \begin{equation*}
         \eta^{\prime\prime}+(G^2+K)\eta=G,\quad
         \begin{cases}
@@ -251,7 +251,7 @@ In the presence of additional dipolar and quadrupolar fields representing field 
         u_{\text{co}}(s) = \frac{\sqrt{\beta_u(s)}}{2\sin\pi\nu_u}\int_{s}^{s+L} \Delta G_u(\sigma)\sqrt{\beta_u(\sigma)}\cos(\pi\nu_u + \phi_u(s) - \phi_u(\sigma))\dd{\sigma}.
         \label{eq:co_dist}
     \end{equation}
-    The prefactor involving the sine of the tune shows how $\nu_{u}$ close to an integer can amplify the effects of the dipolar perturbations on orbit distortions. At first sight, aiming for tunes half-integer tunes $\nu=k/2, k\in\mathbb{Z}$ might seem desirable to minimize the distortions. Choosing so, however, increases the sensitivity to gradient errors, which we examine next.
+    The prefactor involving the sine of the tune shows how $\nu_{u}$ close to an integer can amplify the effects of the dipolar perturbations on orbit distortions. At first, aiming for tunes half-integer tunes $\nu=k/2, k\in\mathbb{Z}$ might seem desirable to minimize the distortions. Choosing so, however, increases the sensitivity to gradient errors, which we examine next.
     % Knowledge of the beam-response to perturbations allows for the inversion of the problem. We can use specified small dipole kicks to correct the orbit, bringing it closer to the nominal one. These small dipole fields are generated by corrector magnets (CM's) abd orbit correction consists on linear problem of seeking CMs strength that minimze orbit distortions.
 
     % A quadrupole error can be represented by a thin-lens quadrupole transfer matrix \cite{Courant:1958wbj}
@@ -320,12 +320,12 @@ for the $u=x,y$ planes. We can define the \textit{linear chromaticity} in the $u
 \begin{equation}
     \xi_u=\dv{\nu_u}{\delta}.
 \end{equation}
-This uncorrected chromaticity is also called natural chromaticity. Using expression \eqref{eq:energy_delta_tune} for the tune-shift, the natural chromaticity reads
+ The chromaticity created by the linear lattice is also called natural chromaticity. Using expression \eqref{eq:energy_delta_tune} for the tune-shift, the natural chromaticity reads
 \begin{equation}
 \xi_{u, \text {nat }} =-\frac{1}{4 \pi} \oint K_u \beta_u \dd{s}.
 \end{equation}
 
-This chromatic aberration effect needs to be corrected to guarantee energy-independent focusing. Correction can be attained with the insertion of geometric aberrations provided by sextupolar fields, specifically in the dispersive sections of the storage ring. In such regions, off-energy particles follow a dispersive orbit, and their position reads $x(s)=x_{\beta}(s)+\eta(s) \delta$, where $x_{\beta}(s)$ consists on the betatron oscillations. Since sextupolar fields are of the form
+This chromatic aberration effect needs to be corrected to guarantee energy-independent focusing. Correction can be attained with the insertion of sextupolar fields, specifically in the dispersive sections of the storage ring. In such regions, off-energy particles follow a dispersive orbit, and their position reads $x(s)=x_{\beta}(s)+\eta(s) \delta$, where $x_{\beta}(s)$ consists on the betatron oscillations. Since sextupolar fields are of the form
 $$B_{x}=B_{2} x y, \quad B_{y}= \frac{B_{2}}{2}(x^{2}-y^{2}),$$
 then, the off-momentum particles "see" the fields
 $$B_{x}=B_{2}(x_\beta y + \eta \delta y), \quad B_{y}=\frac{B_{2}}{2}({x_\beta^{2}-y^{2}})+B_2 x_\beta \eta \delta + \frac{B_2}{2}(\eta \delta)^2.$$
@@ -340,9 +340,9 @@ Considering the contributions from both the errors induced by energy deviations 
 \end{equation}
 with the minus sign for $u=x$ and the plus sign for $u=y$.
 
-Formula~\eqref{eq:chromaticity} reveals that chromaticity depends linearly on sextupole strengths. This allows for its correction and tuning to desired values. In the SIRIUS storage ring, the operation chromaticity of about $2.5$ for each plane was determined with the objective of mitigating the transverse instabilities induced by resistive-wall effect in the range of currents the storage ring is expected to operate: $100$ to $350~\unit{mA}$ \cite[section 7.3]{sa_study_2018}.
+Formula~\eqref{eq:chromaticity} reveals that chromaticity depends linearly on sextupole strengths. This allows for its correction and tuning to desired values. In the SIRIUS storage ring, the operation chromaticity of about $+2.5$ for each plane was determined with the objective of mitigating the transverse instabilities induced by the resistive-wall effect in the range of currents the storage ring is expected to operate: $100$ to $350~\unit{mA}$ \cite[section 7.3]{sa_study_2018}.
 
- Since a focusing sextupole field focuses in a given plane and defocuses in the other, at least two sextupole families are requiered for chromaticity correction: one familiy where $\beta_x > \beta_y$ and other where $\beta_y < \beta_x$. The cost of correcting chromaticity with sextupole is the insertion of perturbations and nonlinearities in the dynamics. If on the one-hand, the geometric aberrations are needed to correct the chromatic aberration, on the other hand they also influence particles with orbit deviations arising from factors other than energy deviations, acting as additional perturbations. To allow for more control over the nonlinear dynamics effects, usually some families of sextupoles are also placed in non-dispersive sections. They are called achromatic families, since they have no effect over chromaticity up to leading order.
+ Since a focusing sextupole field focuses in a given plane and defocuses in the other, at least two sextupole families are required for chromaticity correction. To optimize the sextupole strengths required for correction, one family must be placed where $\beta_x > \beta_y$ and another where $\beta_y < \beta_x$. The cost of correcting chromaticity with sextupole is the insertion of nonlinearities in the dynamics. If on the one-hand, amplitude-dependent focusing is needed to correct the energy-dependent focusing (chromaticity), on the other hand it also influence particles with large amplitudes with nonlinearities. To allow for more control over the nonlinear effects and optimization of the dynamics, some families of sextupoles are also placed in non-dispersive sections. They are called achromatic families, since they have no effect over chromaticity up to leading order.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/chromaticity.pdf}
@@ -351,7 +351,7 @@ Formula~\eqref{eq:chromaticity} reveals that chromaticity depends linearly on se
 \end{figure}
 
 \section{Nonlinear dynamics, perturbations, resonances and tune-shifts}
-The fields of sextupoles make the dynamics intrinsically nonlinear. To understand the effects of nonlinearities in a generic manner, we develop a basic hamiltonian perturbation theory in the upcoming sections. However, this requires us to step back momentarily to review linear dynamics in the action-agle variables formalism, upon which we proceed with canonical perturbation theory.
+The fields of sextupoles make the dynamics intrinsically nonlinear. To understand the effects of nonlinearities in a generic manner, we develop a basic Hamiltonian perturbation theory in the upcoming sections. However, this requires us to step back momentarily to review linear dynamics in the action-angle variables formalism, upon which we proceed with canonical perturbation theory.
 \subsection{Action-Angle Variables}
 The betatron equations of motion, Eqs.~\eqref{eq:Hill}, can be obtained as Hamilton's equations for an effective, linear Hamiltonian
 \begin{equation}
@@ -373,7 +373,7 @@ In the $J,\phi$ variables, the new Hamiltonian is $H_0(\phi, J)$,  given by
 \begin{equation}
     H_u=\mathcal{H}_u+\pdv{F_1}{s} = \frac{J_u}{\beta_u}.
 \end{equation}
-Performing the change to action-angle variables in both the horizontal and vertical planes we find the action-angle Hamiltonian for 4D dynamics:
+Performing the change to action-angle variables in both the horizontal and vertical planes, we find the action-angle Hamiltonian for 4D dynamics:
 \begin{equation}
     H_0= \frac{J_x}{\beta_x} +  \frac{J_y}{\beta_y}.
 \end{equation}
@@ -382,9 +382,9 @@ Hamilton's equations read
     \phi_u^\prime = \frac{1}{\beta_u(s)},\qquad J_u^\prime=0.
 \end{equation}
 \subsection{Perturbations and tune-shifts}
-Linear motion is integrable, since it can be written in terms of the action variable only (angle-independent Hamiltonian). This means the action variable is a constant of motion.
+Linear motion is integrable since it can be written in terms of the action variable only (angle-independent Hamiltonian). This means the action variable is a constant of motion.
 
-Linear motion, though, is only a useful first approximation. In reality, in an storage ring, there are higher order multipole magnets, such as sextupole magnets, and also multipole, alignment and excitation errors acting as perturbations. Generically referring to perturbations as the potential $V(J, \phi)$, we can write the perturbed Hamiltonian
+Linear motion, though, is only a useful first approximation. In reality, in a storage ring, there are higher-order multipole magnets, such as sextupole magnets, and also multipole, alignment and excitation errors acting as perturbations. Generically referring to perturbations as the potential $V(J, \phi)$, we can write the perturbed Hamiltonian
 \begin{equation}
     H(J,\phi) =H_0 + V(J,\phi),
 \end{equation}
@@ -396,23 +396,23 @@ The action is no longer an invariant. It changes as prescribed by the rate of ch
 \begin{equation}
     \nu_u = \nu_{u0} + \xi_u(\delta) \delta + \alpha_{uu} J_u + \alpha_{uv} J_v,
 \end{equation}
-where $\xi_u$ represents the energy-dependent tune-shifts (higher order generalization of the linear chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
+where $\xi_u$ represents the energy-dependent tune-shifts (higher-order generalization of the linear chromaticity), and the other components consist on the amplitude-dependent tune-shifts, up to first order in the actions.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/nonlinear_dynamics_phase_tunes.pdf}
-    \caption[Illustration of main characteristics in a nonlinear dynamics]{Illustration of main characteristics in a nonlinear dynamics. a) \& b): Poincaré sections for motion with increasing horizontal \& vertical amplitudes, respectively; c) Path traced in tune-space for each ellipse of a) in blue, for b) in red, and for each $\delta$ in f), in putple. d) \& e): $x$ and $y$ amplitude-dependent tune-shifts for each ellipse of a) \& b), respectively; f) energy-dependent tune-shifts}
+    \caption[Illustration of main characteristics in nonlinear dynamics]{Illustration of main characteristics in nonlinear dynamics. a) \& b): Poincaré sections for motion with increasing horizontal \& vertical amplitudes, respectively; c) Path traced in tune-space for each ellipse of a) in blue, for b) in red, and for each $\delta$ in f), in purple. d) \& e): $x$ and $y$ amplitude-dependent tune-shifts for each ellipse of a) \& b), respectively; f) energy-dependent tune-shifts}
     \label{fig:tune_shifts}
 \end{figure}
 
-Figure~\ref{fig:tune_shifts} highlights the main characteristics of the nonlinear dynamics. In a) and b) particles are simulated in SIRIUS' computer model with increasingly larger initial amplitudes in the $x$ and $y$ planes, respectively. The large-amplitude ellipses are distorted, since the action $J$ is no longer an integral of motion. Some large-amplitude particles do not survive. In d) and e), the deviations in horizontal and vertical tunes are shown for the simulations of a) and b), respectively. That is, in d), the tune-shifts in the $y$ and $x$ planes are shown for each initial $x$ amplitude. In e), the tune-shifts for each initial $y$ amplitude in b) is shown. These plots outline the distortion of phase space ellipses, the existance of limiting amplitudes under which regular motion occurs and the dependence of the tunes with the amplitudes.
+Figure~\ref{fig:tune_shifts} highlights the main characteristics of the nonlinear dynamics. In a) and b) particles are simulated in SIRIUS' computer model with increasingly larger initial amplitudes in the $x$ and $y$ planes, respectively. The large-amplitude ellipses are distorted, since the action $J$ is no longer an integral of motion. Some large-amplitude particles do not survive. In d) and e), the deviations in horizontal and vertical tunes are shown for the a) and b) simulations, respectively. In d), the tune-shifts in the $y$ and $x$ planes are shown for each initial $x$ amplitude. In e), the tune-shifts for each initial $y$ amplitude in b) is shown. These plots outline the distortion of phase space ellipses, the existence of limiting amplitudes under which regular motion occurs, and the dependence of the tunes with the amplitudes.
 
-In plot e) of Fig.~\ref{fig:tune_shifts}, the chromatic (energy-dependent) tune-shifts are shown: the tune-shifts of particle simulated with energy deviations in the range of $-5\%$ to $5\%$. Linear chromaticity is the derivative of this curve around $\delta=0$. In c), the blue curve represents the path traced in tune-space as the $x$ amplitude increase, i.e. the tunes for each initial condition of the simulations in a); the red curve represents the path traced as the $y$ amplitudes increase,  i.e. the tunes for each initial condition of the simulations in b). The purple curve is the path traced for each $\delta$ in the simulations shown at f).
+In plot e) of Fig.~\ref{fig:tune_shifts}, the chromatic (energy-dependent) tune-shifts are shown: the tune-shifts of particle simulated with energy deviations in the range of $-5\%$ to $5\%$. Linear chromaticity is the derivative of this curve around $\delta=0$. In c), the blue curve represents the path traced in tune-space as the $x$ amplitude increase, i.e., the tunes for each initial condition of the simulations in a); the red curve represents the path traced as the $y$ amplitudes increase,  i.e., the tunes for each initial condition of the simulations in b). The purple curve is the path traced for each $\delta$ in the simulations shown at f).
 \subsection{Resonances}
 \label{subsec:resons}
 
 4D linear unperturbed motion consists of the motion of two uncoupled parametric oscillators. As a quasi-periodic integrable system, the phase-space is diffeomorphic to the 2-Torus, $\mathbb{T}^2$, and there are an infinite number of such tori covering phase space, corresponding to the different choices of initial conditions $J_u$.
 
-Canonical perturbation theory applied to perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational (resonant tori). The Poincare-Birkhoff theorem states that under such conditions almost all the periodic phase-space orbits disappear, i.e. almost all the tori are destroyed. An even number of tori survives, half of which are stable and half unstable \cite[section 10.2]{marcus_mecanica2023}. Unstable motion in a storage ring eventually leads to beam loss.
+Canonical perturbation theory applied to perturbed motion fails to converge whenever the ratio of tunes is sufficiently rational (resonant tori). The Poincare-Birkhoff theorem states that under such conditions, almost all the periodic phase-space orbits disappear, i.e., almost all the tori are destroyed. An even number of tori survive, half stable and half unstable \cite[section 10.2]{marcus_mecanica2023}. Unstable motion in a storage ring eventually leads to beam loss.
 
 The condition for sufficiently rational tunes, i.e, resonant tori, can be expressed as
 \begin{equation}
@@ -431,12 +431,12 @@ The condition for sufficiently rational tunes, i.e, resonant tori, can be expres
     \label{fig:resons}
 \end{figure}
 \subsection{The Dynamic Aperture}
-    Stability of a nonlinear dynamics can become sensitive when amplitudes are large. In this scenario, the effects of the nonlinear fields become more significant and the perturbations are dialed up, breaking down the stable tori. Even low-amplitude motion can be dangerous in the long-term due to the phenomenon of Arnold diffusion \cite{wolski_beam_2014, arnold_instability1964}: because of the tune-shifts, specially the amplitude-dependent tune shifts, the tunes can wander in tune space and eventually cross resonance conditions.
+    The stability of nonlinear dynamics can become sensitive when amplitudes are large. In this scenario, the effects of the nonlinear fields become more significant and the perturbations are dialed up, breaking down the stable tori. Even low-amplitude motion can be dangerous in the long-term due to the phenomenon of Arnold diffusion \cite{wolski_beam_2014, arnold_instability1964}: because of the tune-shifts, especially the amplitude-dependent tune shifts, the tunes can wander in tune space and eventually cross resonance conditions.
 
-    Despite the complexity of predicting stability of a nonlinear perturbed dynamics, in electron storage rings we usually observe the existence of an amplitude limit beyond which instabilities increase and the particles are lost, while the particles below the limiting amplitudes survive. In other words, there are limitations to the maximum transverse amplitudes displaying regular and bounded motion. This behavior was anticipated by the simulations shown at the plots a) and b) of Fig.~\ref{fig:tune_shifts} and is also verified in the actual machine during experiments.
+    Despite the complexity of predicting stability of nonlinear perturbed dynamics, in electron storage rings, we usually observe the existence of an amplitude limit beyond which instabilities increase and the particles are lost, while the particles below the limiting amplitudes survive. In other words, there are limitations to the maximum transverse amplitudes displaying regular and bounded motion. This behavior was anticipated by the simulations shown in plots a) and b) of Fig.~\ref{fig:tune_shifts} and is also verified in the actual machine during experiments.
 
-The border of the region of stability is the \textit{dynamic aperture} (\acrshort*{DA}), a term that can be used to refer the limiting amplitudes in any of the dynamical variables of phase-space. In this work, we are mostly concerned with the \gls*{DA} in the $(x, x^\prime)$ phase space because of its importance during the beam injection for accumulation into the storage ring.
+The border of the region of stability is the \textit{dynamic aperture} (\acrshort*{DA}). This term can be used to refer to the limiting amplitudes in any of the dynamical variables of phase-space. In this work, we are mostly concerned with the \gls*{DA} in the $(x, x^\prime)$ phase space because of its importance during the beam injection for accumulation into the storage ring.
 
-During injection, if the horizontal amplitudes  are larger than the \gls*{DA} along $x$ or $x^\prime$ the beam is not captured  efficiently into the storage ring. In this case, would be interesting to increase the \gls*{DA} to accommodate the incoming beam, which is exactly what we aimed at while developing this project.
+During injection, if the horizontal amplitudes are larger than the \gls*{DA} along $x$ or $x^\prime$, the beam is not captured efficiently into the storage ring. In this case, increasing the \gls*{DA} to accommodate the incoming beam would be interesting, which is exactly what we aimed at while developing this project.
 
-Since the \gls*{DA} determined by the nonlinear perturbations, it is possibile that tuning the nonlinear fields in a particular manner can render an optimium configuration with increased \gls*{DA}.  In the upcoming chapter, this idea is developed in more detail.
+Since the \gls*{DA} is determined by the nonlinear perturbations, it is possible that tuning the nonlinear fields in a particular manner can render an optimum configuration with increased \gls*{DA}.  In the upcoming chapter, this idea is developed in more detail.

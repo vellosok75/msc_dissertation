@@ -10,7 +10,7 @@ A superperiod consists of one high-beta and 3 low-beta sections arranged in the 
 
 The central dipole, the BC, is a permanent superbend magnet with a peak field of $3.2~\unit{T}$. The storage ring accommodates 20 such. The arcs contain additional four dipoles: two B1 and two B2. These are electromagnetic dipoles with peak fields of $0.58~\unit{T}$. In total, the SIRIUS magnetic lattice comprises 100 dipoles: 20 permanent BC magnets and 80 B1 and B2s electromagnets.
 
-In the high-beta straight sections, the quadrupole doublet (QFA, QDA) is employed for optics matching. B-type sections utilize the (QFB, QDB1, QDB2) quadrupole triplet for matching while the (QFP, QDP1, QDP2) triplet is used in the P-type sections. The arc sections contain the Q1, Q2, Q3, and Q4 quadrupole families, totalling 12 families of quadrupoles and 270 magnets.
+In the high-beta straight sections, the quadrupole doublet (QFA, QDA) is employed for optics matching. B-type sections utilize the (QDB1, QFB, QDB2) quadrupole triplet for matching while the (QDP1, QFP, QDP2) triplet is used in the P-type sections. The arc sections contain the Q1, Q2, Q3, and Q4 quadrupole families, totalling 12 families of quadrupoles and 270 magnets.
 
 The lattice also features 21 families of sextupoles magnets, used for chromaticity correction and nonlinear dynamics optimization. They sum up to 280 magnets. Some sextupoles families are located where the dispersion function vanishes and are called \textit{achromatic}, or harmonic, while other families, located where there is non-zero dispersion, are called \textit{chromatic} families.
 
@@ -41,13 +41,13 @@ Table~\ref{tab:sext_fams} lists the sextupoles families and their types in the s
 
 \section{Beam diagnostics and measurements}
 \subsection{Beam positions}
-To track the beam's position along the ring, a diagnostic tool known as \gls*{bpm} employs a set of four pick-up antennas positioned within the vacuum chamber, as illustrated by Fig~\ref{fig:bpms_scheme}. The mirror charges induced by the electron beam are collected by the antennas. The determination of beam displacements relies on the differential signal induced on the antennas when the beam deviates from the device's geometric center. The induced voltage signal undergoes processing in the "partial-Delta/Sigma" scheme, providing horizontal and vertical beam displacements through the following algebraic calculations:
+To track the beam's position along the ring, a diagnostic tool known as \gls*{bpm} employs a set of four pick-up antennas positioned within the vacuum chamber, as illustrated by Fig~\ref{fig:bpms_scheme}. The mirror charges induced by the electron beam are collected by the antennas. The determination of beam displacements relies on the differential signal induced on the antennas when the beam deviates from the device's geometric and electric center. The induced voltage signal undergoes processing in the "partial-Delta/Sigma" scheme, providing horizontal and vertical beam displacements through the following algebraic calculations:
 \begin{equation}
     x = K_x \qty[\frac{A-C}{A+C}+\frac{D - B}{D+B}], \quad y = K_y \qty[\frac{A-C}{A+C}-\frac{D - B}{D+B}],
 \end{equation}
-where $A$, $B$, $C$, and $D$ represent the intensity of the induced signal over the corresponding antennas. The calibration factors $K_x$ and $K_y$ are determined to correct the discrepancy between the measured values and the actual positions of the beam. 
+where $A$, $B$, $C$, and $D$ represent the intensity of the induced signal over the corresponding antennas and $K_x$ and $K_y$ calibration factors. 
 
-SIRIUS is equipped with 160 \gls*{bpm} distributed along the storage ring. The \glspl*{bpm} allow the determination of the centroid's displacements at a turn-by-turn (\gls*{tbt}) acquisition rate for probing the betatron motion. The signal can also be processed at other acquisition rates, allowing for signal averaging and providing information about the orbit.
+SIRIUS is equipped with 160 \gls*{bpm} distributed along the storage ring. The \glspl*{bpm} allow the determination of the centroid's (beam electric center) displacements at a turn-by-turn (\gls*{tbt}) acquisition rate for probing the betatron motion. The signal can also be processed at other acquisition rates, allowing for signal averaging and providing information about the orbit.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{Images/bpm_scheme.pdf}
@@ -65,13 +65,16 @@ With \gls*{bpm} recording the \gls*{tbt} motion of the beam's centroid, the $x$ 
 
 At first glance, in Fig.~\ref{fig:phase_space_recons}, it might seem that the transverse positions are being damped. However, the radiative damping time for the SIRIUS storage ring is of the order of thousands of turns, much more than the acquired time scale in the figure. This apparent damping is a manifestation of \textit{decoherence}. Decoherence arises due to the nonlinear tune-shifts and the finite extent of the beam in 6-dimensional phase space, which has a spread over amplitudes. The cumulative effect of amplitude-dependent and momentum-dependent tune-shifts renders the bunch with a spread in tunes. This results in the filamentation and spreading of an initially localized bunch in phase space due to the different frequencies (the tunes) with which they circulate the ellipses. In this scenario, the positions (and momenta) tend to become uncorrelated, and the average of the electrons distribution, which is the beam's centroid measured by the \glspl*{bpm}, goes to zero, justifying the apparent damping.
 \subsection{Beam current and injection efficiency}
-\glspl*{dcct} enable the measurement of the stored beam current within accelerator rings (booster or storage ring). A \glspl*{dcct} current monitor works by surrounding the beam of charged particles in the accelerator ring with a magnetic core. The magnetic field induced by the beam current flowing through the core is then measured, allowing for an accurate determination of the passing current.
+\glspl*{dcct} enable the measurement of the stored beam current within accelerator rings (booster or storage ring). The \glspl*{bpm} sum-signal, which is proportional to the beam current, can also be used to measure currents and calculate current variations. In transport lines, there are also Integrated Current Transformers (ICTs) which allow measuring the integrated current (charge) per pulse.
+% A \glspl*{dcct} current monitor works by surrounding the beam of charged particles in the accelerator ring with a magnetic core. The magnetic field induced by the beam current flowing through the core is then measured, allowing for an accurate determination of the passing current.
 
-Utilizing the current measurement and the beam revolution period in the respective ring, one can assess the stored charge and calculate the injection efficiency (\gls*{ie}) during storage ring injections. By estimating the charge in the booster or transport line just before injection into the storage ring and the storage ring charge immediately after the injection pulse, it is possible to deduce the efficiency of the injection process.
+Utilizing the current measurement and the beam revolution period in the respective ring, one can assess the stored charge and calculate the injection efficiency (\gls*{ie}) during storage ring injections. By measuring the charge in the booster or transport line just before injection into the storage ring and the storage ring charge immediately after the injection pulse, it is possible to deduce the efficiency of the injection process.
 \subsection{Tunes measurement \& control}
-When \gls*{tbt} motion is viewed at a fixed longitudinal position $s$, it consits on the sampling of a harmonic motion, for which the fundamental frequency is the tune $\nu$. Thus, observation of \gls*{tbt} data can reveal the tunes upon the appropriate singal processing. For instance, the betatron motion can be Fourier-transformed (discrete Fourier transform via fast-Fourier transform algorithm), revealing the \gls*{bpm} signal spectrum. Alternatively the time-domain signal can be fitted to a sinusoid, allowing the determination of the tune as the fundamental frequency.
+When \gls*{tbt} motion is viewed at a fixed longitudinal position $s$, it consists of the sampling of a harmonic motion, for which the fundamental frequency is the fractional part of the tune $\nu$. Thus, observation of \gls*{tbt} data can reveal the tunes upon the appropriate signal processing. For instance, the betatron motion can be Fourier-transformed (discrete Fourier transform via fast-Fourier transform algorithm), revealing the \gls*{bpm} signal spectrum. Alternatively the time-domain signal can be fitted to a sinusoid, allowing the determination of the tune as the fundamental frequency.
 
-Extracting tunes from \gls*{tbt} data requires inducing betatron oscillations by kicking and interfering in the beam, which can be incompatible with user's shift operation. Precise  monitoring of the tunes during operation is achieved with the aid of a strip-line shaker, which constantly drives the beam with an alternating electric field in a narrow band of frequencies, leading to sub-nanometer displacements and inducing small-amplitude betatron motion without interfering significantly with the operation. This system also reads back the beam response at that same frequency range. The peak of the beam response signal is identified with the betatron tune.
+Despite being simple, the process described above is incompatible with user's shift operation, and mostly used during machine experiments for measuring the tunes of large-amplitude motion or for precise determination of changes in tune due to relevant changes in operation parameters. The main incompatibility with user's operation is that extracting tunes from \gls*{tbt} data requires inducing betatron oscillations by kicking and the beam and operating with the \glspl*{bpm} in the \gls*{tbt} acquisition rate. This means the control loops of the \gls*{fofb} and \gls*{sofb}, which guarantee the orbit stability required by the beamlines, must be turned-off. 
+
+Precise  monitoring of the tunes during operation is achieved with the aid of a strip-line shaker, which constantly drives the beam with an alternating electric field in a narrow band of frequencies, leading to sub-nanometer displacements and inducing small-amplitude betatron motion without interfering significantly with the operation. This system also reads back the beam response at that same frequency range. The peak of the beam response signal is identified with the betatron tune.
 
 Regarding changes and manipulation of the tunes, formula~\eqref{eq:delta_nu} reveals that adjustments in the quadrupole strengths, particularly at the quadrupoles in large $\beta$-function sections, enable control of the tunes. As the tune response to changes in quadrupole strength is linear, a tune-response matrix can be constructed, i.e., the Jacobian of the tunes with respect to changes in quadrupoles, allowing tune changes to be expressed as
 \begin{equation}
@@ -80,15 +83,15 @@ Regarding changes and manipulation of the tunes, formula~\eqref{eq:delta_nu} rev
 \end{equation}
 where $\Delta\boldsymbol{\nu} = \mqty*[\Delta \nu_x & \Delta \nu_y]^\intercal$ is the tune-shifts vector, $\Delta \vb{K}$ is the vector containing the changes in strengths across all the quadrupole families, and the Jacobian or response matrix has entries
 \begin{equation}
-    (\vb{J}_{\boldsymbol{\nu}})_{ij} = \pdv{\nu_{i}}{K_j} \approx \frac{\Delta \nu_{i}}{\Delta K_j}, \quad i=x, y,\quad j\in\text{quadrupole families}.
+    (\vb{J}_{\boldsymbol{\nu}})_{ij} = \pdv{\nu_{i}}{K_j} \approx \frac{\Delta \nu_{i}}{\Delta K_j}, \quad i=x, y,\quad j\in\text{tune-correction quadrupole families}.
 \end{equation}
 The system~\eqref{eq:delta_nu_jac} can pseudo-inverted, allowing for the determination of quadrupoles changes required for a desired change in tune
 \begin{equation}
     \Delta \vb{K} = \vb{J}_{\nu}^{+}\Delta \boldsymbol{\nu}
 \end{equation}
-where $\vb{J}_{\nu}^{+} = (\vb{J}_{\nu}^{\intercal}\vb{J}_{\nu})^{-1}\vb{J}_{\nu}^{\intercal}$ is the Moore-Penrose pseudoinverse.
-
-\todo[inline]{add discussion on how the optics changes when changing tunes}
+where $\vb{J}_{\nu}^{+} = (\vb{J}_{\nu}^{\intercal}\vb{J}_{\nu})^{-1}\vb{J}_{\nu}^{\intercal}$ is the Moore-Penrose pseudoinverse. 
+The tune-correction quadrupole families are located in non-dispersive sections 
+% \todo[inline]{add discussion on how the optics changes when changing tunes}
 \subsection{Chromaticity measurements \& control}
 Chromaticity characterizes the energy-dependent tune-shift. To measure it, we need to calculate the numerical derivative
 \begin{equation}
@@ -120,7 +123,7 @@ Regarding chromaticity control, eq.~\eqref{eq:chromaticity} shows that chromatic
 \end{equation}
 where $\Delta\boldsymbol{\xi} = \mqty*[\Delta \xi_x & \Delta \xi_y]^\intercal$ and the Jacobian matrix $\vb{J}\in$ has entries
 \begin{equation}
-    (\vb{J}_{\boldsymbol{\xi}})_{ij} = \pdv{\xi_{i}}{S_j} \approx \frac{\Delta \xi_{i}}{\Delta S_j},\quad i=x, y, \quad j\in\text{sextupole families}.
+    (\vb{J}_{\boldsymbol{\xi}})_{ij} = \pdv{\xi_{i}}{S_j} \approx \frac{\Delta \xi_{i}}{\Delta S_j},\quad i=x, y, \quad j\in\text{chromaticity correction sextupole families}.
 \end{equation}
 % $d_s$ refers to cardinality of the set of sextupole families used in the chromaticity change process.In principle, at least two families are required for correcting/tuning chromaticity in the machine: one family for each plane. Since the chromatic sextupole families are the only ones effectively changing chromaticity to leading order, then, at most, $d_s=15$.
 
@@ -170,7 +173,7 @@ The \gls*{DA} is determined by the quality of the beam dynamics in terms of pert
 
 If the limitation of the \gls*{DA} is likely associated with nonlinear dynamics, the actuation knobs must unexpectedly be composed of the controllable nonlinear magnets available at the SIRIUS storage ring, namely the sextupoles. However, it is important to note that sextupole strengths cannot be changed arbitrarily.
 
-Sextupoles are originally introduced into the lattices as actuators for correcting chromaticity, which refers to the energy-dependent aberrations in the focusing of the beam. Care must be taken when varying the sextupole strengths, as it can alter the chromaticity.
+Sextupoles are originally introduced into the lattices as actuators for correcting chromaticity, which refers to the energy-dependent aberrations in the focusing of the beam, and optimizing \gls*{DA}. Care must be taken when varying the sextupole strengths, as it can alter the chromaticity.
 
 A strategy needs to be devised to select the sextupole family in a way that allows for the simultaneous correction of chromaticity and the online tuning of magnet strengths to optimize the \gls*{DA}. In simpler terms, the optimization processes for \gls*{DA} should be conducted while preserving the machine's chromaticity. The natural question that arises is how to implement these isochromatic changes to the sextupoles.
 
