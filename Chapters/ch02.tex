@@ -1,11 +1,11 @@
 \chapter{Theoretical background: single-particle dynamics}
 This chapter provides the theoretical knowledge on the dynamics of electrons in storage rings needed to acquaint the reader with the online optimization problem and the constraints involved. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameters such as the tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinearities of the motion. This chapter also aims at introducing SIRIUS' operation parameters and specifications. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
 
-Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal awe have already examined in section effects and instabilities, for the purpose of this dissertation and the optimization problem at sight, we model the motion of a single electron, neglecting radiation losses and gains and any other collective interactions. These simplifications are justified for our immediate purposes because:
+Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal and energy oscillations, damping and excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation and the optimization problem at sight, we model the motion of a single electron,  focusing on the transverse dynamics at fixed energy, neglecting radiation losses and gains and any other collective interactions. These simplifications are justified for our immediate purposes because:
 \begin{itemize}
-    \item The beam is injected into the storage ring on-energy: it has no significant energy deviations and thus it does not perform large energy and longitudinal oscillations once it is captured into the ring;
+    \item the beam is injected into the storage ring on-energy: it has no significant energy deviations and thus it does not perform large energy and longitudinal oscillations once it is captured into the ring;
     \item radiation losses are only significant over a time scale of a couple of turns. Over this period, tens of transverse oscillations take place. A model neglecting losses is relatively accurate for a small number of turns soon after the injection;
-    \item the linear and uncoupled dynamics this simpler modeling renders serves as an initial building block upon which elaborate modeling can be carried out, incorporating coupling, nonlinearities and perturbations, as well as collective effects;
+    \item the linear and uncoupled dynamics this simpler modeling renders serves as an initial building block, which captures the hierarchically more important features of the dynamics and upon which elaborate modeling can be carried out, incorporating coupling, nonlinearities and perturbations, as well as collective effects;
 \end{itemize}
 In this simplified picture, the electron travels along the ring at the speed of light and executes transverse oscillations in two orthogonal planes. The dynamics takes place in a 4-dimensional phase space, identical to that of two independent quasi-periodic oscillators.
 
@@ -55,7 +55,7 @@ The frame depends solely on the geometry of the specified path: the instantaneou
 where $R_0$ is the rigidity of the beam at the nominal energy.
 %As a starting point for designing the magnetic lattice of an accelerator, given the desired energy range for the beam and its rigidity and the desired radius of curvature, the required integrated strength of the dipoles must satisfy the above relation.
 
-The transverse deviations from the nominal orbit can be measured in units of the unit vectors $\vu{x}$, $\vu{y}$ in the normal and bi-normal directions. These deviations characterize the transverse dynamics of the electron. One may also be concerned with the distance of a given particle from the reference particle along the curve. Such differences arise due to differences in the energy of two particles. In the full, six-dimensional dynamics, the longitudinal distance from the reference particle and the energy deviations are conjugate dynamical variables characterizing the longitudinal dynamics. They typically oscillate within a range of stable values, characterizing the energy acceptance. As mentioned above, since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle shall be static and treated as fixed parameters.
+The transverse deviations from the nominal orbit can be measured as projections along the unit vectors $\vu{x}$, $\vu{y}$ in the normal and bi-normal directions. These deviations characterize the transverse dynamics of the electron. One may also be concerned with the distance of a given particle from the reference particle along the curve. Such differences arise due to differences in the energy of the two particles. In the full, six-dimensional dynamics, the longitudinal distance from the reference particle and the energy deviations are conjugate dynamical variables characterizing the longitudinal dynamics. They typically oscillate within a range of stable values, characterizing the energy acceptance. As mentioned above, since no radiation loss nor gain will be considered in our modeling, the energy and longitudinal deviations from the reference particle shall be static and treated as fixed parameters.
 
 \begin{figure}[htb]
     \centering
@@ -65,9 +65,9 @@ The transverse deviations from the nominal orbit can be measured in units of the
 \end{figure}
 
 \section{Hamiltonian for the relativistic electron}
-The dynamics of relativistic electrons influenced by electromagnetic fields $(\Phi, \vb{A})$ is encapsulated by the Hamiltonian \cite{landau_classical_1975}
+To the derive equations of motion for the electron in a storage ring, the Lorentz equation in the Frenet-Serret frame could be further developed. However, a more formal, systematic and rigorous derivation can be obtained via the canonical formalism. The dynamics of relativistic electrons influenced by electromagnetic fields $(\Phi, \vb{A})$ is encapsulated by the Hamiltonian \cite{landau_classical_1975}
     \begin{equation*}
-        H=\sqrt{m^2c^4+(\vb{P}-q\vb{A})^2c^2}+e\Phi,
+        H=\sqrt{m^2c^4+(\vb{P}-e\vb{A})^2c^2}+e\Phi,
     \end{equation*}
  $e$ being the elementary charge and $\vb{P}=\vb{p}+e\vb{A}$ the canonical momentum, with $\vb{A}$ being the vector potential describing the magnetostatic fields of the lattice, i.e. $\vb{B}=\curl \vb{A}$. To obtain equations of motion for electrons in the storage ring, one usually follows the steps below:
  \begin{itemize}
@@ -94,7 +94,7 @@ y^{\prime \prime}=\frac{(1+G x)^{2}}{1+\delta} \frac{B_{x}}{R_0},
 where $R_0 = p_0/e$ is the magnetic rigidity of the beam at the nominal energy and $G(s)\equiv\rho^{-1}(s)$ is the inverse local radius of curvature, related to the dipole fields as in Eq.~\eqref{eq:G}.
 
 \section{The magnetic fields}
-To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting on the beam. Since in a storage ring the magnets are arranged as periodic arrays of dipoles, quadrupole, and sextupoles, the $B_x(s)$ and $B_y(s)$ functions are generally periodic. The magnetic fields are sectionally defined and have the following functional forms
+To study the motion, we need to specify the fields $B_x(s)$ and $B_y(s)$ acting on the beam. Since in a storage ring the magnets are arranged as periodic arrays of dipoles, quadrupole, and sextupoles, the $B_x(s)$ and $B_y(s)$ functions are periodic. The magnetic fields are sectionally defined and have the following functional forms
 \begin{itemize}
     \item Horizontal Dipole
            \begin{equation} B_x(s) = 0, \quad B_y(s) = B_0, \quad \text{inside dipoles},
@@ -170,7 +170,7 @@ An important parameter of the dynamics is the \textit{tune}: the phase advance o
 \end{equation*}
 The tune reveals the number of transverse oscillations per revolution along the ring. The optimized tunes during design phase for SIRIUS storage ring are $(\nu_x, \nu_y)=(49.08, 14.14)$. These were the machine tunes prior to this work.
 
-When studying the effects of perturbations and nonlinearities acting on the beam, one realizes that tunes are critical variables in determining the beam's response. More specifically, the tunes impact over disturbances amplification factors, which are greatest when tunes are close to integer numbers. Ideally, it is desired for the tunes to be far from the integers, but also far from the half-integers. We examine the relation between the tunes and the effects of disturbances in more detail in section \ref{sec:field_err}.
+When studying the effects of perturbations and nonlinearities acting on the beam, one realizes that tunes are global parameters in determining the beam's response. More specifically, the tunes impact over disturbances amplification factors, which are greatest when tunes are close to integer numbers. Ideally, it is desired for the tunes to be far from the integers, but also far from the half-integers. We examine the relation between the tunes and the effects of disturbances in more detail in section \ref{sec:field_err}.
 
 \subsection{Turn-by-turn motion}
 If one keeps track of the time evolution of the $u, u^\prime$ variables at a fixed position along the ring, plotting them in a phase space, one realizes the quasi-periodic motion traces out ellipses. This fact can be analytically verified by calculating the derivative
@@ -333,7 +333,7 @@ So, to lowest order in eqs.~\eqref{eq:EOMs}, they feel a dipolar perturbation (w
 $$\Delta K_{x,y}(\delta)=\pm S\eta \delta,$$
 recalling that $S(s) = B_2 / R_0$.
 
-Considering the contributions from both the errors induced by energy deviations and also the lowest order sextupole gradient effect, we have a total error of $\Delta K_u = -(K_u \mp S\eta)\delta$ to be inserted in eq.~\eqref{eq:delta_nu_dist}. The chromaticity in a lattice with sextupoles thus reads
+Considering the contributions from both the errors induced by energy deviations and also the lowest order sextupole gradient effect, we have a  gradient shift of $\Delta K_u = -(K_u \mp S\eta)\delta$ to be inserted in eq.~\eqref{eq:delta_nu_dist}. The chromaticity in a lattice with sextupoles thus reads
 \begin{equation}
     \xi_{u}=-\frac{1}{4\pi}\oint\beta_{u}(K_{u}\mp S\eta)\dd{s},
     \label{eq:chromaticity}
