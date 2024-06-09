@@ -1,5 +1,5 @@
 \chapter{Theoretical background: single-particle dynamics}
-This chapter provides the theoretical knowledge on the dynamics of electrons in storage rings needed to acquaint the reader with the online optimization problem and the constraints involved. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameters such as the tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinearities of the motion. This chapter also aims at introducing SIRIUS' operation parameters and specifications. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
+This chapter provides the theoretical knowledge on the dynamics of electrons in storage rings needed to acquaint the reader with the online optimization problem and the constraints involved. The main objective is to introduce the linear dynamics theory, the optics functions, the operation parameters such as the betatron tunes and chromaticity and to conceptualize the amplitudes limitations due to the nonlinearities of the motion. This chapter also aims at introducing SIRIUS' operation parameters and specifications. We claim no original contribution. All the content presented here can be found in the accelerator physics and engineering literature, in particular, refs.~\cite{sands_physics_1969,lee_accelerator_2004,wiedemann_particle_2015,wolski_beam_2014}.
 
 Despite the complicated physics of fully-coupled dynamics involving transverse, longitudinal and energy oscillations, damping and excitation of amplitudes, collective effects and instabilities, for the purpose of this dissertation and the optimization problem at sight, we model the motion of a single electron,  focusing on the transverse dynamics at fixed energy, neglecting radiation losses and gains and any other collective interactions. These simplifications are justified for our immediate purposes because:
 \begin{itemize}
@@ -47,7 +47,7 @@ where $\rho(s) = \norm{\dv*{\vu{s}}{s}}^{-1}$ is the local curvature radius\foot
 \begin{equation}
 \dv{\vu{s}}{s}=-\frac{1}{\rho(s)}\vu{x}, \quad\dv{\vu{x}}{s}=\frac{1}{\rho(s)}\vu{s}, \quad \dv{\vu{y}}{s}=0.
 \end{equation}
-The frame depends solely on the geometry of the specified path: the instantaneous curvature $\rho^{-1}(s)$. Since the curvature is defined by the strengths of the dipolar fields $B_0(s)$ in the $y$ direction, then, eq.~\eqref{eq:deflec_angles} leads to1. Theoretical background: single-particle dynamics
+The frame depends solely on the geometry of the specified path: the instantaneous curvature $\rho^{-1}(s)$. Since the curvature is defined by the strengths of the dipolar fields $B_0(s)$ in the $y$ direction, then, eq.~\eqref{eq:deflec_angles} leads to
     \begin{equation}
         \frac{1}{\rho(s)} = \frac{B_0(s)}{R_0},
         \label{eq:G}
@@ -156,7 +156,7 @@ and the phase advance is given by
     \begin{equation}
         \phi_u(s) = \int_{0}^{s}\frac{1}{\beta_u(\sigma)}\dd\sigma.
    \end{equation}
-The motion is oscillatory, non-harmonic, and non-periodic. The oscillations envelope is the square root of the beta functions $\beta_u(s)$, which for the SIRIUS storage ring are shown in Fig.~\ref{betafunc}.
+The motion is oscillatory, non-harmonic, and non-periodic. The oscillations envelope is the square-root of the beta functions $\beta_u(s)$, which for the SIRIUS storage ring are shown in Fig.~\ref{betafunc}.
 \begin{figure}[htb]
     \centering
     \includegraphics[width=\textwidth]{Images/beta_functions.pdf}
@@ -184,7 +184,7 @@ If one keeps track of the time evolution of the $u, u^\prime$ variables at a fix
      \end{equation}
 which describes the ellipse. The ellipse properties are determined by the $\beta_u(s), \alpha_u(s)$ and $\gamma_u(s)$ functions, also known as Courant-Snyder (C-S) parameters or Twiss parameters, as Fig.~\ref{fig:ellipse} shows. Since the parameters are functions of the position $s$, then, at each point along the accelerator, the Poincaré Section $u, u^\prime$ displays a different ellipse. Although different in shape, their areas are proportional to $J_u$, an invariant quantity determined by the particle's initial condition. The ellipse areas are thus conserved along the ring \cite{lee_accelerator_2004,wiedemann_particle_2015}.
 
- Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$, and thus
+ Since the phase advance over a turn is $2\pi \nu+\phi_0$, the phase advance after the $j$-th turn is $2\pi\nu j+\phi_0$. Therefore,
  sampling the transverse motion at a fixed $s=s_0$ position reveals a harmonic displacement, which at the $j$-th turn reads
 \begin{equation}
     u_j(s_0)=\sqrt{2\beta_u(s_0) J_u}\cos(2\pi\nu_u j+\phi_u(s_0)).
@@ -423,7 +423,7 @@ The condition for sufficiently rational tunes, i.e, resonant tori, can be expres
 
     We say $|n|+|m|$ is the order of the resonance, which is related to the order of the multipole field perturbation from which it arises.
     %  e.g: order 1 resonances can be driven by dipolar fields, as well as quadrupolar and sextupolar gradients; order 2 can be driven by quadrupolar and sextupolar components; and order 3 can be driven by sextupolar fields.
-    Resonances arising from linear field errors, already anticipated in section~\ref{sec:field_err}, are those described by $\nu_x=\ell$ or $\nu_y =\ell, \ell\in\mathbb{Z}$. Normal gradient field errors drive $2\nu_x=\ell$ or $2\nu_y =\ell$ resonances. Skew gradients couple both planes and can drive the famous sum and difference resonances $\nu_x + \nu_y = \ell, \nu_x - \nu_y = \ell$. Sextupoles, up to first-order in perturbation theory, can drive the $3\nu_x=\ell$, resonance, as well as $nu_x \pm 2\nu_y = \ell$ and $\nu_x =\ell$ resonances \cite[section 11.2.4]{wolski_beam_2014}. Figure~\ref{fig:resons} depicts resonance lines in tune-space for resonances up to second, third and fourth order, in the left, middle and right plots, respectively.
+    Resonances arising from linear field errors, already anticipated in section~\ref{sec:field_err}, are those described by $\nu_x=\ell$ or $\nu_y =\ell, \ell\in\mathbb{Z}$. Normal gradient field errors drive $2\nu_x=\ell$ or $2\nu_y =\ell$ resonances. Skew gradients couple both planes and can drive the famous sum and difference resonances $\nu_x + \nu_y = \ell, \nu_x - \nu_y = \ell$. Sextupoles, up to first-order in perturbation theory, can drive the $3\nu_x=\ell$, resonance, as well as $\nu_x \pm 2\nu_y = \ell$ and $\nu_x =\ell$ resonances \cite[section 11.2.4]{wolski_beam_2014}. Figure~\ref{fig:resons} depicts resonance lines in tune-space for resonances up to second, third and fourth order, in the left, middle and right plots, respectively.
 \begin{figure}[thb]
     \centering
     \includegraphics[width=\textwidth]{Images/tunes.png}
@@ -433,7 +433,7 @@ The condition for sufficiently rational tunes, i.e, resonant tori, can be expres
 \subsection{The Dynamic Aperture}
     The stability of nonlinear dynamics can become sensitive when amplitudes are large. In this scenario, the effects of the nonlinear fields become more significant and the perturbations are dialed up, breaking down the stable tori. Even low-amplitude motion can be dangerous in the long-term due to the phenomenon of Arnold diffusion \cite{wolski_beam_2014, arnold_instability1964}: because of the tune-shifts, especially the amplitude-dependent tune shifts, the tunes can wander in tune space and eventually cross resonance conditions.
 
-    Despite the complexity of predicting stability of nonlinear perturbed dynamics, in electron storage rings, we usually observe the existence of an amplitude limit beyond which instabilities increase and the particles are lost, while the particles below the limiting amplitudes survive. In other words, there are limitations to the maximum transverse amplitudes displaying regular and bounded motion. This behavior was anticipated by the simulations shown in plots a) and b) of Fig.~\ref{fig:tune_shifts} and is also verified in the actual machine during experiments.
+    Despite the complexity of predicting the stability of nonlinear perturbed dynamics theoretically, in electron storage rings, we usually observe the existence of an amplitude limit beyond which instabilities increase and the particles are lost, while the particles below the limiting amplitudes survive. In other words, there are limitations to the maximum transverse amplitudes displaying regular and bounded motion. This behavior was anticipated by the simulations shown in plots a) and b) of Fig.~\ref{fig:tune_shifts} and is also verified in the actual machine during experiments.
 
 The border of the region of stability is the \textit{dynamic aperture} (\acrshort*{DA}). This term can be used to refer to the limiting amplitudes in any of the dynamical variables of phase-space. In this work, we are mostly concerned with the \gls*{DA} in the $(x, x^\prime)$ phase space because of its importance during the beam injection for accumulation into the storage ring.
 
