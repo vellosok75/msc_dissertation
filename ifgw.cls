@@ -441,6 +441,14 @@
     \oldbackmatter\pagestyle{headings}
 }
 %<<<=====================================================<<<
+%>>>=================== Appendix ========================>>>
+\newif\ifinappendix
+\let\oldappendix\appendix
+\renewcommand{\appendix}{%
+  \oldappendix%
+  \inappendixtrue%
+}
+%<<<=====================================================<<<
 
 %>>>=================== Chapter =========================>>>
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.~#1}{}}
@@ -460,17 +468,27 @@
     \refstepcounter{chapter}
     \def\chtext{#1}
     \ifx\chtext\@empty\relax\renewcommand{\chtext}{#2}\fi
-    \addcontentsline{toc}{chapter}{\scshape\bfseries\thechapter.~#2}
-    \@mkboth{\thechapter.~\chtext}{}
+    \ifinappendix
+        \addcontentsline{toc}{chapter}{\scshape\bfseries\appendixname~\thechapter.~#2}%
+        \@mkboth{\appendixname~\thechapter~-~\chtext}{}%
+    \else
+        \addcontentsline{toc}{chapter}{\scshape\bfseries\thechapter.~#2}%
+        \@mkboth{\thechapter.~\chtext}{}%
+    \fi
     \begingroup
-        \selectfont\huge\scshape\noindent\@chapapp~\thechapter
-        \vskip\baselineskip
-        \linespread{1.5}\noindent{\bfseries#2}
-        \vskip5\p@
-        \noindent\rule{\textwidth}{\chapterrulewidth}
+        \noindent%
+        \selectfont\LARGE\scshape\bfseries
+        \ifinappendix
+            \appendixname~\thechapter~-~\parbox[t]{11.5cm}{#2\newline}%
+        \else
+            \thechapter~~\parbox[t]{14.5cm}{#2\newline}%
+        \fi
     \endgroup
-    \vskip 35\p@
-    \par
+    \vspace{-0.5\baselineskip}%
+    \newline%
+    \parbox[t]{\textwidth}{\rule{\textwidth}{\chapterrulewidth}}%
+    \vskip 2\baselineskip%
+    \par%
 }
 
 \newcounter{chapterstar}
@@ -478,14 +496,19 @@
     \cleardoublepage
     \@mkboth{}{}
     \begingroup
-        \selectfont\huge\bfseries\scshape
+        \selectfont\LARGE\bfseries\scshape
         \linespread{1.5}\noindent#1
     \endgroup
     \refstepcounter{chapterstar}
     \vskip 30\p@
     \par
 }
-%<<<=====================================================<<<
+
+\newcommand{\plainchapter}[1]{
+    \chapter*{#1}
+    \thispagestyle{plain}
+    \pagestyle{headings}
+}
 
 %>>>================== Abstract =========================>>>
 \define@key{abstract}{header}{\def\ifgw@abstract@header{#1}}
