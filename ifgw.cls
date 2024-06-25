@@ -303,20 +303,23 @@
     \hspace*{7.5cm}
     \begin{minipage}{8.5cm}
         \singlespacing
-        \if\ifgw@backcover@portuguese@declaration\@empty\relax
-        \else
-            \ifgw@backcover@portuguese@declaration
-            \vskip\baselineskip
-        \fi
-        \ifx\ifgw@language@pt\ifgw@backcover@language
-            \relax
-        \else
-            \if\ifgw@backcover@english@declaration\@empty
-                \relax
-            \else
-                \ifgw@backcover@english@declaration
-            \fi
-        \fi
+        % \if\ifgw@backcover@portuguese@declaration\@empty\relax
+        % \else
+        %     \ifgw@backcover@portuguese@declaration
+        %     \vskip\baselineskip
+        % \fi
+        % \ifx\ifgw@language@pt\ifgw@backcover@language
+        %     \relax
+        % \else
+        %     \if\ifgw@backcover@english@declaration\@empty
+        %         \relax
+        %     \else
+        %         \ifgw@backcover@english@declaration
+        %     \fi
+        % \fi
+        \ifgw@backcover@english@declaration
+        \vskip\baselineskip
+        \ifgw@backcover@portuguese@declaration
     \end{minipage}
     \vfill
 }
