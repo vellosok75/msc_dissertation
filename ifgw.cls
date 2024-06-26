@@ -82,9 +82,11 @@
 \renewcommand{\bibliography}[1]{%
     \cleardoublepage
     \thispagestyle{plain}
-    \oldbibliography{#1}
+    \refstepcounter{chapterstar}
     \addcontentsline{toc}{chapter}{\bfseries\scshape\bibname}
+    \oldbibliography{#1}
     \markboth{\bibname}{\bibname}
+    \par
 }
 %<<<=====================================================<<<
 
